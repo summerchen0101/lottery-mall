@@ -1,0 +1,137 @@
+/* ------------------------------_footer-------------------------- */
+.footer {
+    z-index: 10;
+    padding: 0 4%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 60px;
+    box-shadow: 0px -3px 8px #0000000D;
+    border-top: 1px solid $base-bd;
+}
+
+.footer-list {
+    padding: 6px 0 5px 0;
+    list-style-type: none;
+    display: flex;
+
+    .footer-list-item {
+        text-align: center;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+        a {
+            color: $light-text-color;
+            display: block;
+            font-size: 12px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            &.active {
+                color: $primary-color;
+            }
+        }
+    }
+
+    .market {
+        a {
+            &::before {
+                content: "";
+                display: block;
+                width: 28px;
+                height: 28px;
+                margin-bottom: 3px;
+                background: url(../images/ft_market.svg) no-repeat center;
+                background-size: 100%;
+            }
+
+            &.active::before {
+                background: url(../images/ft_market_a.svg) no-repeat center;
+                background-size: 100%;
+            }
+        }
+    }
+
+    .detail {
+        a {
+            &::before {
+                content: "";
+                display: block;
+                width: 28px;
+                height: 28px;
+                margin-bottom: 3px;
+                background: url(../images/ft_detail.svg) no-repeat center;
+                background-size: 100%;
+            }
+
+            &.active::before {
+                background: url(../images/ft_detail_a.svg) no-repeat center;
+                background-size: 100%;
+            }
+        }
+    }
+
+    .index {
+        a {
+            &::before {
+                content: "";
+                display: block;
+                width: 28px;
+                height: 28px;
+                margin-bottom: 3px;
+                background: url(../images/ft_index.svg) no-repeat center;
+                background-size: 100%;
+            }
+
+            &.active::before {
+                background: url(../images/ft_index_a.svg) no-repeat center;
+                background-size: 100%;
+            }
+        }
+    }
+
+    .history {
+        a {
+            &::before {
+                content: "";
+                display: block;
+                width: 28px;
+                height: 28px;
+                margin-bottom: 3px;
+                background: url(../images/ft_history.svg) no-repeat center;
+                background-size: 100%;
+            }
+
+            &.active::before {
+                background: url(../images/ft_history_a.svg) no-repeat center;
+                background-size: 100%;
+            }
+        }
+    }
+
+    .my {
+        a {
+            &::before {
+                content: "";
+                display: block;
+                width: 28px;
+                height: 28px;
+                margin-bottom: 3px;
+                background: url(../images/ft_my.svg) no-repeat center;
+                background-size: 100%;
+            }
+
+            &.active::before {
+                background: url(../images/ft_my_a.svg) no-repeat center;
+                background-size: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<svg id="Group_789" data-name="Group 789" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30.282" height="27.17" viewBox="0 0 30.282 27.17">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fd6d2c"/>
+      <stop offset="1" stop-color="#fed08e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="1.01" x2="0.5" y2="0.075" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="0.5" y1="1.484" x2="0.5" y2="-0.47" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="Group_788" data-name="Group 788" transform="translate(24.663)">
+    <path id="Path_494" data-name="Path 494" d="M1091.567,976.95v2.369h-5.619V976.95a2.805,2.805,0,0,1,2.8-2.81h.014a2.8,2.8,0,0,1,2.8,2.8Z" transform="translate(-1085.948 -974.14)" fill="url(#linear-gradient)"/>
+  </g>
+  <path id="Path_495" data-name="Path 495" d="M1068.544,974.14h20.2a2.805,2.805,0,0,0-2.8,2.81h0v20.587a3.775,3.775,0,0,1-3.777,3.773h-.011a2.508,2.508,0,0,1-.26-.009,3.775,3.775,0,0,1-3.512-3.77v-2.446h-12.65v-.034l.133-18.266a2.656,2.656,0,0,1,2.665-2.645Z" transform="translate(-1061.285 -974.14)" fill="url(#linear-gradient-2)"/>
+  <path id="Path_496" data-name="Path 496" d="M1081.9,1001.3v.009h-16.839a3.776,3.776,0,0,1-3.776-3.772v-2.45h17.1v2.442A3.775,3.775,0,0,0,1081.9,1001.3Z" transform="translate(-1061.285 -974.14)" fill="url(#linear-gradient-3)"/>
+  <path id="Path_497" data-name="Path 497" d="M1081.47,983.516h-10.916a.84.84,0,0,1,0-1.679h10.916a.84.84,0,1,1,.058,1.679A.54.54,0,0,1,1081.47,983.516Z" transform="translate(-1061.285 -974.14)" fill="#ffdebd" style="isolation: isolate"/>
+  <path id="Path_498" data-name="Path 498" d="M1081.47,991.913h-10.916a.84.84,0,0,1-.058-1.679h10.974a.84.84,0,0,1,0,1.679Z" transform="translate(-1061.285 -974.14)" fill="#ffdebd" style="isolation: isolate"/>
+  <path id="Path_499" data-name="Path 499" d="M1077.831,987.714h-7.277a.84.84,0,0,1-.058-1.679h7.335a.84.84,0,0,1,0,1.679Z" transform="translate(-1061.285 -974.14)" fill="#ffdebd" style="isolation: isolate"/>
+</svg>
