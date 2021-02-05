@@ -4,14 +4,12 @@ import BettingSummaryInfo from '../../components/BettingSummaryInfo'
 import FooterNavBar from '../../components/FooterNavBar'
 import HeaderTitleBar from '../../components/HeaderTitleBar'
 import Layout from '../../components/Layout'
+import UserBalance from '../../components/UserBalance'
 
 const HistoryDetailPage: React.FC = () => {
   return (
     <Layout>
-      <HeaderTitleBar
-        title="账务明细"
-        extra={<span className="user-wallet">¥ 20,849.55</span>}
-      />
+      <HeaderTitleBar title="账务明细" extra={<UserBalance />} />
       <BettingSummaryInfo date="2020-08-26" />
       <div className="main-content background-gray" style={{ paddingTop: 105 }}>
         <div className="list-container">

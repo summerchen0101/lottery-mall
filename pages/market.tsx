@@ -9,14 +9,12 @@ import NoticeBar from '../components/NoticeBar'
 import Tab from '../components/Tab'
 import TabGroup from '../components/TabGroup'
 import FooterNavBar from '../components/FooterNavBar'
+import UserBalance from '../components/UserBalance'
 
 const MarketPage: React.FC = () => {
   return (
     <Layout>
-      <HeaderTitleBar
-        title="市场列表"
-        extra={<span className="user-wallet">¥ 20,849.55</span>}
-      />
+      <HeaderTitleBar title="市场列表" extra={<UserBalance />} />
       <div className="main-content">
         {/* 公告 */}
         <NoticeBar />
