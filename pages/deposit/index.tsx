@@ -3,6 +3,7 @@ import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import cs from 'classnames'
+import { useRouter } from 'next/dist/client/router'
 
 const paywayOpts = [
   { label: '银行卡转卡', value: 1 },
@@ -11,14 +12,22 @@ const paywayOpts = [
   { label: 'ATM转账', value: 4 },
 ]
 
-const DepositPage: React.FC = () => {
+const deposit: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(1)
+  const router = useRouter()
   return (
     <Layout>
       <HeaderTitleBar
         back
         title="充值"
-        extra={<button className="s-btn">充值记录</button>}
+        extra={
+          <button
+            className="s-btn"
+            onClick={() => router.push('/deposit/record')}
+          >
+            充值记录
+          </button>
+        }
       />
       <>
         <div className="pintop-section d-flex justify-content-between fixed">
@@ -132,4 +141,4 @@ const DepositPage: React.FC = () => {
   )
 }
 
-export default DepositPage
+export default deposit

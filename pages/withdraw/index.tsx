@@ -7,14 +7,21 @@ import { Select } from '@chakra-ui/select'
 import TradeRankPopup from '@/components/popups/TradeRankPopup'
 import TradePassPopup from '@/components/popups/TradePassPopup'
 
-const WithdrawPage: React.FC = () => {
+const withdraw: React.FC = () => {
   const router = useRouter()
   return (
     <Layout>
       <HeaderTitleBar
         back
         title="提领"
-        extra={<button className="s-btn">提领记录</button>}
+        extra={
+          <button
+            className="s-btn"
+            onClick={() => router.push('/withdraw/record')}
+          >
+            提领记录
+          </button>
+        }
       />
       <>
         <div className="pintop-section fixed">
@@ -102,4 +109,4 @@ const WithdrawPage: React.FC = () => {
   )
 }
 
-export default WithdrawPage
+export default withdraw
