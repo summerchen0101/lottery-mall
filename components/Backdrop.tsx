@@ -1,7 +1,8 @@
+import { Box } from '@chakra-ui/layout'
 import React from 'react'
 
 function Backdrop() {
-  return <div className="mask" id="mask" />
+  return <Box className="mask" id="mask" />
 }
 
 export default Backdrop
