@@ -8,7 +8,7 @@ const PromotionPage: React.FC = () => {
   const router = useRouter()
   return (
     <Layout>
-      <HeaderTitleBar title="优惠活动" />
+      <HeaderTitleBar back title="优惠活动" />
       <div className="main-content section-padding">
         <div className="list-container">
           {[...Array(5)].map((_, i) => (

@@ -53,7 +53,10 @@ const Home: React.FC = () => {
               提领
             </li>
             <li className="divider" />
-            <li className="menu-list-item ic_promotion">
+            <li
+              className="menu-list-item ic_promotion"
+              onClick={() => router.push('/promotion')}
+            >
               <img src="/images/ic_promotion.svg" />
               优惠
             </li>
