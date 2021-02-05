@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
+import DateTabGroup from '@/components/DateTabGroup'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import $ from 'jquery'
-import { Select } from '@chakra-ui/select'
-import { dateOpts, beforeDateRangeOpts } from '@/lib/options'
-import DateTabGroup from '@/components/DateTabGroup'
+import React, { useEffect } from 'react'
 
 const jqEffectFunc = function (e) {
   if ($(e.target).is('.show')) {

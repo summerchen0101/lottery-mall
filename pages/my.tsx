@@ -113,10 +113,7 @@ const MyPage: React.FC = () => {
         {/* 下方List選單 */}
         <div className="bottom-section section-padding">
           <ul className="bottom-menu-list list-group">
-            <li
-              className="menu-list-item"
-              // onClick="location.href = 'notification.html'"
-            >
+            <li className="menu-list-item" onClick={() => router.push('/news')}>
               <img src="images/ic_notification.svg" />
               <div className="item-title">公告</div>
               <i className="iconfont iconallow-right" />
