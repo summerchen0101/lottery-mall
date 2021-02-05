@@ -5,12 +5,17 @@ const HeaderTitleBar: React.FC<{
   title?: ReactNode
   extra?: ReactNode
   back?: boolean
-}> = ({ back, title, extra }) => {
+  backPath?: string
+}> = ({ back, backPath, title, extra }) => {
   const router = useRouter()
   return (
     <nav className="main_nav">
       <div className="nav-bar">
-        <a hidden={!back} className="left-item" onClick={() => router.back()}>
+        <a
+          hidden={!back}
+          className="left-item"
+          onClick={() => (backPath ? router.push(backPath) : router.back())}
+        >
           <i className="iconfont iconallow-left"></i>
         </a>
         <div className="nav-title">{title}</div>

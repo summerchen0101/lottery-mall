@@ -19,6 +19,7 @@ const deposit: React.FC = () => {
     <Layout>
       <HeaderTitleBar
         back
+        backPath="/my"
         title="充值"
         extra={
           <button

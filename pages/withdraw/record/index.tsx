@@ -10,6 +10,7 @@ function withdrawRecord() {
     <Layout>
       <HeaderTitleBar
         back
+        backPath="/my"
         title="提领记录"
         extra={
           <button

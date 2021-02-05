@@ -9,28 +9,10 @@ import DateTabGroup from '@/components/DateTabGroup'
 const CashRecordPage: React.FC = () => {
   return (
     <Layout>
-      <HeaderTitleBar back title="交易明细" />
-      {/* navigation */}
-      <nav className="main_nav">
-        <div className="nav-bar">
-          <a className="left-item">
-            <i className="iconfont iconallow-left" />
-          </a>
-          {/* <div class="nav-title"><img class="logo" src="images/logo.png"></div> */}
-          <div className="nav-title">资金明细</div>
-          {/* <div class="right-item">
-          <button class="s-btn">充值记录</button>
-      </div> */}
-          {/* <div class="right-item"><i class="iconfont iconmail"></i><span class="red-dot"></span></div> */}
-        </div>
-      </nav>
+      <HeaderTitleBar back title="资金明细" />
 
       <div className="main-content">
         <DateTabGroup />
-        {/* 暂无数据 */}
-        {/* <div class="data_null"><img src="images/data_null.svg">
-              <p>暂无数据</p>
-          </div> */}
         <div className="list-container pt-2 section-padding">
           {Array(10)
             .fill('')

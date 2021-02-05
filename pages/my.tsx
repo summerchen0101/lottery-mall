@@ -4,6 +4,7 @@ import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { Avatar } from '@chakra-ui/avatar'
+import { Box } from '@chakra-ui/layout'
 
 const MyPage: React.FC = () => {
   const router = useRouter()
@@ -13,7 +14,10 @@ const MyPage: React.FC = () => {
         title="我的"
         extra={
           <>
-            <i className="iconfont iconmail" />
+            <i
+              className="iconfont iconmail"
+              onClick={() => router.push('/message')}
+            />
             <span className="red-dot" />
           </>
         }
@@ -82,10 +86,10 @@ const MyPage: React.FC = () => {
             </li>
             <li
               className="menu-list-item"
-              onClick={() => router.push('/cash-record')}
+              onClick={() => router.push('/deposit/record')}
             >
               <img src="images/ic_cashhistory.svg" />
-              资金明细
+              充提记录
             </li>
             <li
               className="menu-list-item"
