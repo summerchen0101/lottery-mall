@@ -3,7 +3,8 @@ import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { Select } from '@chakra-ui/select'
-import { dateOpts } from '@/lib/options'
+import { dateOpts, longDateRangeOpts } from '@/lib/options'
+import DateTabGroup from '@/components/DateTabGroup'
 
 const CashRecordPage: React.FC = () => {
   return (
@@ -23,17 +24,9 @@ const CashRecordPage: React.FC = () => {
           {/* <div class="right-item"><i class="iconfont iconmail"></i><span class="red-dot"></span></div> */}
         </div>
       </nav>
-      <div className="pintop-section d-flex align-items-center fixed">
-        <Select>
-          {dateOpts.map((t, i) => (
-            <option key={i} value={t.value}>
-              {t.label}
-            </option>
-          ))}
-        </Select>
-      </div>
 
-      <div className="main-content" style={{ paddingTop: 105 }}>
+      <div className="main-content">
+        <DateTabGroup />
         {/* 暂无数据 */}
         {/* <div class="data_null"><img src="images/data_null.svg">
               <p>暂无数据</p>

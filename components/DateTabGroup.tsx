@@ -1,37 +1,21 @@
-import React from 'react'
+import { longDateRangeOpts } from '@/lib/options'
+import React, { useState } from 'react'
+import Tab from './Tab'
+import TabGroup from './TabGroup'
 
 function DateTabGroup() {
+  const [current, setCurrent] = useState(1)
   return (
-    <ul
-      className="nav nav-tabs d-flex justify-content-between section-padding"
-      role="tablist"
-    >
-      <li className="nav-item">
-        <a
-          className="nav-link active"
-          data-toggle="tab"
-          href="#tabs-1"
-          role="tab"
-        >
-          本週
-        </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
-          上週
-        </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
-          本月
-        </a>
-      </li>
-      <li className="nav-item">
-        <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
-          上月
-        </a>
-      </li>
-    </ul>
+    <TabGroup justifyContent="space-between">
+      {longDateRangeOpts.map((t, i) => (
+        <Tab
+          key={i}
+          label={t.label}
+          active={t.value === current}
+          onClick={() => setCurrent(t.value)}
+        />
+      ))}
+    </TabGroup>
   )
 }
 
