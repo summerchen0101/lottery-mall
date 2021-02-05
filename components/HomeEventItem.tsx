@@ -1,8 +1,10 @@
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 
 const HomeEventItem = () => {
+  const router = useRouter()
   return (
-    <div className="team-item">
+    <div className="team-item" onClick={() => router.push('/event')}>
       <div className="info-col">
         <div className="time">
           <i className="iconfont iconcalendar"></i>2021-02-03 07:20
