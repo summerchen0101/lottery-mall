@@ -44,7 +44,7 @@ const BankCardPage: React.FC = () => {
             type="button"
             className="btnbase primary_btn mt-2 mb-2"
             data-toggle="modal"
-            // onClick="location.href = 'bankcard-add.html'"
+            onClick={() => router.push('/bankcard-add')}
           >
             添加帳戶
           </button>
