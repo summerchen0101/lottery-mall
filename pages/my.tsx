@@ -128,7 +128,7 @@ const MyPage: React.FC = () => {
             </li>
             <li
               className="menu-list-item"
-              // onClick="location.href = 'invite.html'"
+              onClick={() => router.push('/invite')}
             >
               <img src="images/ic_invite.svg" />
               <div className="item-title">会员推广</div>
