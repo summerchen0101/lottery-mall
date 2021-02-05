@@ -12,8 +12,8 @@ const HomeEventItem = () => {
         <div className="league-col">瑞典北部甲组联赛</div>
       </div>
       <div className="chart-col">
+        <div className="count text-blue">800M</div>
         <span>總搶購量</span>
-        <div className="donut-chart" id="donut-chart" />
       </div>
     </div>
   )

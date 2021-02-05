@@ -2514,20 +2514,36 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  text-align: center;
+  border-radius: 50%;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(14%, #fff), color-stop(54%, #ecefff), color-stop(94%, #fafbff));
+  background-image: linear-gradient(180deg, #fff 14%, #ecefff 54%, #fafbff 94%);
+  border: 1px solid #f1f1f1;
+  -webkit-box-shadow: #f7fdff 0px 1px 0px 0px inset;
+          box-shadow: #f7fdff 0px 1px 0px 0px inset;
 }
 
-.team-item .chart-col .donut-chart {
-  width: 72px;
-  height: 72px !important;
+.team-item .chart-col .count {
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
 }
 
 .team-item .chart-col span {
+  position: relative;
   font-size: 11px;
-  position: absolute;
-  top: 50%;
+  display: block;
 }
 
 .section-title-bar {

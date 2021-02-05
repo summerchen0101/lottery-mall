@@ -632,17 +632,33 @@ body {
     height: 72px;
     position: relative;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    text-align: center;
+    @include border-radius(50%);
+    background-image: linear-gradient(180deg, #fff 14%, #ecefff 54%,#fafbff 94% );
+    border: 1px solid #f1f1f1;
+    box-shadow: #f7fdff 0px 1px 0px 0px inset;
 
-    .donut-chart {
-      width: 72px;
-      height: 72px !important;
+    .count {
+      position: relative;
+      font-size: 16px;
+      font-weight: bold;
+      display: block;
     }
 
+    // .donut-chart {
+    //   width: 72px;
+    //   height: 72px !important;
+    // }
+
     span {
+      position: relative;
       font-size: 11px;
-      position: absolute;
-      top: 50%;
+      display: block;
+      // position: absolute;
+      // top: 50%;
     }
   }
 }
