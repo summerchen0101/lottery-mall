@@ -3,7 +3,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-
+import { Image } from '@chakra-ui/react'
 const invite: React.FC = () => {
   const router = useRouter()
   return (
@@ -12,7 +12,7 @@ const invite: React.FC = () => {
       <div className="main-content">
         <div className="about-section section-padding">
           <div className="w-100 text-center py-3 mt-5">
-            <img src="images/about_ag.png" width="90%" height="auto" />
+            <Image src="images/about_ag.png" w="90%" m="auto" />
           </div>
           <div className="w-100 mt-2">
             <span className="text-blue">AG</span>
