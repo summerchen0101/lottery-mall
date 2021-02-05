@@ -2175,9 +2175,6 @@ body {
   width: 100%;
   height: 100%;
   padding: 4%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
   overflow-y: hidden;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
