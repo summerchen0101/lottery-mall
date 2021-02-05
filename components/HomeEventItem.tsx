@@ -4,7 +4,9 @@ const HomeEventItem = () => {
   return (
     <div className="team-item">
       <div className="info-col">
-        <div className="time">2021-02-03 07:20</div>
+        <div className="time">
+          <i className="iconfont iconcalendar"></i>2021-02-03 07:20
+        </div>
         <div className="team-col">富山胜利(主)VS熊本深红</div>
         <div className="league-col">瑞典北部甲组联赛</div>
       </div>

@@ -10,7 +10,7 @@ const EventItem = () => {
             00时22分19秒
           </div> */}
           <div className="time">
-            <i className="iconfont iconcalendar"></i>00时22分19秒
+            <i className="iconfont iconcalendar"></i>2021-02-04 12:22
           </div>
           <div className="tricks-num">99+</div>
         </div>

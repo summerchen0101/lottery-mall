@@ -20,8 +20,8 @@ function LeagueFilterPopup() {
               联盟筛选
             </h5>
             <button
-              type="button"
-              className="close icon_btn"
+              type="button icon_btn"
+              className="close"
               data-dismiss="modal"
               aria-hidden="true"
             ></button>
@@ -115,11 +115,7 @@ function LeagueFilterPopup() {
             </form>
           </div>
           <div className="modal-footer d-flex flex-row justify-content-between flex-nowrap">
-            <button
-              type="button"
-              className="btnbase outline_btn color-blue"
-              data-dismiss="modal"
-            >
+            <button type="button" className="btnbase outline_btn color-blue">
               关闭视窗
             </button>
             <button

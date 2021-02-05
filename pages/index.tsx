@@ -77,8 +77,6 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <LeagueFilterPopup />
-
       <FooterNavBar />
     </Layout>
   )
