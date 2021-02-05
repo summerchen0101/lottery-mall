@@ -3,6 +3,7 @@ import React from 'react'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import { Avatar } from '@chakra-ui/avatar'
 
 const MyPage: React.FC = () => {
   const router = useRouter()
@@ -22,9 +23,12 @@ const MyPage: React.FC = () => {
         <div className="top-section">
           <div className="user-card">
             <div className="d-flex">
-              <div className="avatar d-flex align-items-center justify-content-center">
-                <img src="/images/avatar.jpg" />
-              </div>
+              <Avatar
+                size="md"
+                border="2px solid  #fff"
+                p="2px"
+                bg="transparent"
+              />
               <div className="user-info d-flex flex-column justify-content-center">
                 <div className="user-id-col d-flex">
                   bet8888
@@ -40,11 +44,6 @@ const MyPage: React.FC = () => {
               </div>
             </div>
             <ul className="acc-inner mt-3">
-              <li className="acc-item text-white">
-                <p>6%</p>
-                <span>提领手续费</span>
-              </li>
-              <li className="divider" />
               <li className="acc-item text-white">
                 <p className="user-wallet">20,849.55</p>
                 <span>可用余额</span>

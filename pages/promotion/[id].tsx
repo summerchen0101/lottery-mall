@@ -27,6 +27,9 @@ const PromotionDetailPage: React.FC = () => {
               符合活動要求的會員，請於北京時間次日15:00至23:59之間點擊搶紅包活動輸入會員賬號參與搶紅包，中獎的紅包金額系統將在30分鐘內派發至您的遊戲賬號內；
               逾期認為自動放棄該優惠！
             </p>
+            <button type="button" className="btnbase primary_btn mt-4">
+              活动申请
+            </button>
           </div>
         </div>
         <div className="mask" id="mask" />
