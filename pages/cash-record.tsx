@@ -3,7 +3,7 @@ import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { Select } from '@chakra-ui/select'
-import { dateOpts, longDateRangeOpts } from '@/lib/options'
+import { dateOpts, beforeDateRangeOpts } from '@/lib/options'
 import DateTabGroup from '@/components/DateTabGroup'
 
 const CashRecordPage: React.FC = () => {

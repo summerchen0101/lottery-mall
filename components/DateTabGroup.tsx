@@ -1,4 +1,4 @@
-import { longDateRangeOpts } from '@/lib/options'
+import { beforeDateRangeOpts } from '@/lib/options'
 import React, { useState } from 'react'
 import Tab from './Tab'
 import TabGroup from './TabGroup'
@@ -7,7 +7,7 @@ function DateTabGroup() {
   const [current, setCurrent] = useState(1)
   return (
     <TabGroup justifyContent="space-between">
-      {longDateRangeOpts.map((t, i) => (
+      {beforeDateRangeOpts.map((t, i) => (
         <Tab
           key={i}
           label={t.label}

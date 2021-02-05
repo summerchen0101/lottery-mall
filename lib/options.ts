@@ -7,9 +7,15 @@ export const dateOpts = [
   { label: '上月', value: 'lastMonth' },
 ]
 
-export const longDateRangeOpts = [
+export const beforeDateRangeOpts = [
   { label: '本週', value: 1 },
   { label: '上週', value: 2 },
   { label: '本月', value: 3 },
   { label: '上月', value: 4 },
+]
+export const afterDateRangeOpts = [
+  { label: '今日', value: 1 },
+  { label: '明日', value: 2 },
+  { label: '本週', value: 3 },
+  { label: '下週', value: 4 },
 ]

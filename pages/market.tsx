@@ -10,12 +10,8 @@ import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
 import Tab from '@/components/Tab'
 import TabGroup from '@/components/TabGroup'
 import React, { useState } from 'react'
+import { afterDateRangeOpts } from '@/lib/options'
 
-const tabs = [
-  { label: '今日', value: 1 },
-  { label: '本週', value: 2 },
-  { label: '下週', value: 3 },
-]
 const MarketPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(1)
   return (
@@ -34,7 +30,7 @@ const MarketPage: React.FC = () => {
         </div>
         {/* 日期頁籤 */}
         <TabGroup justifyContent="space-between">
-          {tabs.map((t, i) => (
+          {afterDateRangeOpts.map((t, i) => (
             <Tab
               key={i}
               label={t.label}

@@ -4,7 +4,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import $ from 'jquery'
 import { Select } from '@chakra-ui/select'
-import { dateOpts, longDateRangeOpts } from '@/lib/options'
+import { dateOpts, beforeDateRangeOpts } from '@/lib/options'
 import DateTabGroup from '@/components/DateTabGroup'
 
 const jqEffectFunc = function (e) {
