@@ -120,7 +120,7 @@ const MyPage: React.FC = () => {
             </li>
             <li
               className="menu-list-item"
-              // onClick="location.href = 'agent.html'"
+              onClick={() => router.push('/agent')}
             >
               <img src="images/ic_agent.svg" />
               <div className="item-title">合营计划</div>
