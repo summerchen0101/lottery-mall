@@ -9,6 +9,7 @@ import LeagueFilterBtn from '@/components/LeagueFilterBtn'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import NoticeBar from '@/components/NoticeBar'
 import FooterNavBar from '@/components/FooterNavBar'
+import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
 
 const Home: React.FC = () => {
   return (
@@ -64,7 +65,7 @@ const Home: React.FC = () => {
           <div className="section-title-bar d-flex justify-content-between align-items-center">
             <ColumnTitle>热门赛事</ColumnTitle>
             <div className="d-flex group-btn">
-              <LeagueFilterBtn />
+              {/* <LeagueFilterBtn /> */}
               <CountDownReloadBtn />
             </div>
           </div>
@@ -75,87 +76,9 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      {/* 彈窗 */}
-      <div
-        className="modal fade"
-        id="leagueModal"
-        tabIndex={-1}
-        role="dialog"
-        aria-labelledby="myModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button className="icon_btn">
-                <i className="iconfont iconreload" />
-              </button>
-              <h5 className="modal-titlemodal-header" id="myModalLabel">
-                联盟筛选
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-hidden="true"
-              >
-                ×
-              </button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="main-sort-col">
-                  <div>
-                    热门排序
-                    <input type="radio" name="sort" value="pupular" />
-                    <label></label>
-                  </div>
-                  <div>
-                    <input type="radio" name="sort" value="time" />
-                    <label>时间排序</label>
-                  </div>
-                  <div>
-                    <input type="checkbox" id="checkall" value="all" />
-                    <label>全选</label>
-                  </div>
-                </div>
-                <div className="league-filter">
-                  <ul className="check-list">
-                    <li className="check-item w-50">
-                      <input type="checkbox" name="Checkbox[]" />
-                      <label>葡超(10)</label>
-                    </li>
-                    <li className="check-item w-50">
-                      <input type="checkbox" name="Checkbox[]" />
-                      <label>波超(30)</label>
-                    </li>
-                    <li className="check-item w-50">
-                      <input type="checkbox" name="Checkbox[]" />
-                      <label>瑞典超(51)</label>
-                    </li>
-                    <li className="check-item w-50">
-                      <input type="checkbox" name="Checkbox[]" />
-                      <label>英冠(25)</label>
-                    </li>
-                  </ul>
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer d-flex flex-row justify-content-between flex-nowrap">
-              <button type="button" className="btnbase outline_btn color-blue">
-                关闭视窗
-              </button>
-              <button
-                type="button"
-                className="btnbase primary_btn"
-                data-dismiss="modal"
-              >
-                确认搜寻
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <LeagueFilterPopup />
+
       <FooterNavBar />
     </Layout>
   )
