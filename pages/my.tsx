@@ -136,23 +136,20 @@ const MyPage: React.FC = () => {
             </li>
             <li
               className="menu-list-item"
-              // onClick="location.href = 'profile.html'"
+              onClick={() => router.push('/profile')}
             >
               <img src="images/ic_profile.svg" />
               <div className="item-title">个人资料</div>
               <i className="iconfont iconallow-right" />
             </li>
-            <li
-              className="menu-list-item"
-              // onClick="location.href = 'help.html'"
-            >
+            <li className="menu-list-item" onClick={() => router.push('/faq')}>
               <img src="images/ic_help.svg" />
               <div className="item-title">帮助中心</div>
               <i className="iconfont iconallow-right" />
             </li>
             <li
               className="menu-list-item"
-              // onClick="location.href = 'about.html'"
+              onClick={() => router.push('/about')}
             >
               <img src="images/ic_about.svg" />
               <div className="item-title">关于AG</div>
