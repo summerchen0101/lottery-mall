@@ -4,6 +4,7 @@ import DateTabGroup from '@/components/DateTabGroup'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import { Select } from '@chakra-ui/select'
 
 const HistoryPage: React.FC = () => {
   return (
@@ -46,7 +47,7 @@ const HistoryPage: React.FC = () => {
             </tbody>
           </table>
         </div>
-        <div className="pinbottom-section">
+        {/* <div className="pinbottom-section">
           <ul className="acc-inner mt-1">
             <li className="acc-item px-5">
               <p>400.00</p>
@@ -58,7 +59,7 @@ const HistoryPage: React.FC = () => {
               <span className="text-lighgray">总收益</span>
             </li>
           </ul>
-        </div>
+        </div> */}
       </>
 
       <FooterNavBar />

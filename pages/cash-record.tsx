@@ -2,6 +2,8 @@ import React from 'react'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import { Select } from '@chakra-ui/select'
+import { dateOpts } from '@/lib/options'
 
 const CashRecordPage: React.FC = () => {
   return (
@@ -22,10 +24,13 @@ const CashRecordPage: React.FC = () => {
         </div>
       </nav>
       <div className="pintop-section d-flex align-items-center fixed">
-        <div className="form-select-s search-date-type">
-          选择日期
-          <i className="iconallow-down iconfont" />
-        </div>
+        <Select>
+          {dateOpts.map((t, i) => (
+            <option key={i} value={t.value}>
+              {t.label}
+            </option>
+          ))}
+        </Select>
       </div>
 
       <div className="main-content" style={{ paddingTop: 105 }}>
@@ -48,7 +53,7 @@ const CashRecordPage: React.FC = () => {
                     <div className="record-title">充值</div>
                     <div className="time ml-2">2020-06-30 11:19</div>
                   </div>
-                  <div className="status text-red">未通知付款</div>
+                  <div className="status text-green">已完成</div>
                 </div>
                 <div>交易类型:充值</div>
                 <div>交易金额:100</div>
