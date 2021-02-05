@@ -9,12 +9,12 @@ function login() {
     <Layout>
       <Box h="100vh" w="100vw">
         <div className="login-content">
-          {/* <div className="lang-select">
-            <img className="flag" src="images/lang_cn.png" />
-          </div> */}
-          <div className="logo">
+          <Box className="lang-select">
+            <Image className="flag" src="/images/lang_cn.png" m="auto" />
+          </Box>
+          <Box className="logo">
             <Image src="images/logo.png" m="auto" />
-          </div>
+          </Box>
           <form className="form" style={{ minHeight: 400 }}>
             <div className="form-title">欢迎登入</div>
             <div className="form-group">

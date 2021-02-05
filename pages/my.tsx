@@ -160,7 +160,10 @@ const MyPage: React.FC = () => {
               <i className="iconfont iconallow-right" />
             </li>
           </ul>
-          <button type="submit" className="btnbase outline_btn color-blue mt-4">
+          <button
+            className="btnbase outline_btn color-blue mt-4"
+            onClick={() => router.push('/login')}
+          >
             登出
           </button>
           <div className="version my-2">V.1.01</div>
