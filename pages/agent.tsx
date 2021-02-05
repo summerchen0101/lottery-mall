@@ -2,9 +2,11 @@ import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { Box, Image, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 
 const agent: React.FC = () => {
+  const router = useRouter()
   return (
     <Layout>
       <HeaderTitleBar back title="合營計畫" />
@@ -13,7 +15,7 @@ const agent: React.FC = () => {
         <button
           type="submit"
           className="btnbase primary_btn my-3 "
-          // onClick="location.href = 'agent-join.html'"
+          onClick={() => router.push('/agent-join')}
         >
           申请加入
         </button>
