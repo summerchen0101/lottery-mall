@@ -1,24 +1,27 @@
-import React from 'react'
 import BettingItem from '@/components/BettingItem'
-import BettingSummaryInfo from '@/components/BettingSummaryInfo'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import UserBalance from '@/components/UserBalance'
+import React from 'react'
 
 const BettingsPage: React.FC = () => {
   return (
     <Layout>
-      <HeaderTitleBar title="交易明細" extra={<UserBalance />} />
+      <HeaderTitleBar title="當日交易明細" />
       <div className="pintop-section d-flex flex-column justify-content-center fixed">
         <ul className="acc-inner mt-1">
-          <li className="acc-item px-5">
-            <p>400.00</p>
+          <li className="acc-item px-2">
+            <p>5</p>
+            <span className="text-lighgray">筆數</span>
+          </li>
+          <li className="divider" />
+          <li className="acc-item px-2">
+            <p>1800.00</p>
             <span className="text-lighgray">金額統計</span>
           </li>
           <li className="divider" />
-          <li className="acc-item px-5">
-            <p className="text-green">76.00</p>
+          <li className="acc-item px-2">
+            <p className="text-green">276.00</p>
             <span className="text-lighgray">預估獲利</span>
           </li>
         </ul>

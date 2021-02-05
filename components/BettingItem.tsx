@@ -1,9 +1,13 @@
+import { useDisclosure } from '@chakra-ui/hooks'
+import { Box } from '@chakra-ui/layout'
 import React from 'react'
 import BettingDetail from './BettingDetail'
+import cs from 'classnames'
 
 const BettingItem: React.FC = () => {
+  const { onToggle, isOpen } = useDisclosure()
   return (
-    <div className="detail-item">
+    <Box className={cs('detail-item', { show: isOpen })} onClick={onToggle}>
       <div className="detail-header">
         <div className="d-flex justify-content-between">
           <div className="team-col">富山胜利(主)VS熊本深红</div>
@@ -21,7 +25,7 @@ const BettingItem: React.FC = () => {
       <div className="icon-col">
         <i className="iconfont iconallow-down" />
       </div>
-    </div>
+    </Box>
   )
 }
 

@@ -24,8 +24,8 @@ const MetaHead = () => {
       <script src="/js/jquery-3.5.1.min.js"></script>
       <script src="/js/bootstrap.min.js"></script>
       <script src="/js/swiper-bundle.min.js"></script>
-      <script src="/js/main.js"></script>
-      <script src="/js/echarts.min.js"></script>
+      {/* <script src="/js/main.js"></script>
+      <script src="/js/echarts.min.js"></script> */}
     </Head>
   )
 }

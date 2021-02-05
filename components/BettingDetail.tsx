@@ -1,8 +1,9 @@
+import { Box } from '@chakra-ui/layout'
 import React from 'react'
 
 const BettingDetail: React.FC = () => {
   return (
-    <div className="detail-content">
+    <Box className="detail-content" display="block">
       <ul className="title-inner">
         <li className="title-item">单号</li>
         <li className="title-item">开赛时间</li>
@@ -42,7 +43,7 @@ const BettingDetail: React.FC = () => {
           <span className="text-yellow ml-3">已扣除手续费5%</span>
         </li>
       </ul>
-    </div>
+    </Box>
   )
 }
 
