@@ -4,6 +4,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import cs from 'classnames'
 import { useRouter } from 'next/dist/client/router'
+import { Box, Text } from '@chakra-ui/layout'
 
 const paywayOpts = [
   { label: '银行卡转卡', value: 1 },
@@ -33,8 +34,13 @@ const deposit: React.FC = () => {
       <>
         <div className="pintop-section d-flex justify-content-between fixed">
           <div className="info-col d-flex flex-column">
-            <div className="user-id-col">bet8888</div>
-            <div className="user-wallet-col">可用余额: 20,849.55</div>
+            {/* <div className="user-id-col">bet8888</div> */}
+            <Box className="user-wallet-col" mt="3">
+              <Text color="gray" d="inline-block" mr="2">
+                账户余额
+              </Text>
+              20,849.55
+            </Box>
           </div>
           <button className="icon_btn reload-btn">
             <i className="iconfont iconreload"></i>
