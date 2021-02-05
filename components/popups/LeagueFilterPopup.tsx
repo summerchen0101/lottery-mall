@@ -20,8 +20,8 @@ function LeagueFilterPopup() {
               联盟筛选
             </h5>
             <button
-              type="button icon_btn"
-              className="close"
+              type="button"
+              className="close icon_btn"
               data-dismiss="modal"
               aria-hidden="true"
             ></button>

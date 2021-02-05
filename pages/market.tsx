@@ -1,18 +1,23 @@
-import React from 'react'
 import ColumnTitle from '@/components/ColumnTitle'
 import CountDownReloadBtn from '@/components/CountDownReloadBtn'
 import EventItem from '@/components/EventItem'
+import FooterNavBar from '@/components/FooterNavBar'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import LeagueFilterBtn from '@/components/LeagueFilterBtn'
-import HeaderTitleBar from '@/components/HeaderTitleBar'
 import NoticeBar from '@/components/NoticeBar'
+import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
 import Tab from '@/components/Tab'
 import TabGroup from '@/components/TabGroup'
-import FooterNavBar from '@/components/FooterNavBar'
-import UserBalance from '@/components/UserBalance'
-import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
+import React, { useState } from 'react'
 
+const tabs = [
+  { label: '今日', value: 1 },
+  { label: '本週', value: 2 },
+  { label: '下週', value: 3 },
+]
 const MarketPage: React.FC = () => {
+  const [currentTab, setCurrentTab] = useState(1)
   return (
     <Layout>
       <HeaderTitleBar title="市场列表" />
@@ -28,10 +33,15 @@ const MarketPage: React.FC = () => {
           </div>
         </div>
         {/* 日期頁籤 */}
-        <TabGroup>
-          <Tab label="今日(10)" active />
-          <Tab label="本週(40)" />
-          <Tab label="下週(40)" />
+        <TabGroup justifyContent="space-between">
+          {tabs.map((t, i) => (
+            <Tab
+              key={i}
+              label={t.label}
+              active={currentTab === t.value}
+              onClick={() => setCurrentTab(t.value)}
+            />
+          ))}
         </TabGroup>
         {/* Tab panes */}
         <div className="tab-content pt-2 section-padding">

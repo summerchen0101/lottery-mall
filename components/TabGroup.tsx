@@ -1,13 +1,11 @@
+import { Box, BoxProps } from '@chakra-ui/layout'
 import React from 'react'
 
-const TabGroup: React.FC = ({ children }) => {
+const TabGroup: React.FC<BoxProps> = ({ children, ...props }) => {
   return (
-    <ul
-      className="nav nav-tabs d-flex justify-content-between section-padding"
-      role="tablist"
-    >
+    <Box className="nav nav-tabs d-flex section-padding" {...props}>
       {children}
-    </ul>
+    </Box>
   )
 }
 
