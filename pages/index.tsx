@@ -11,6 +11,7 @@ import NoticeBar from '@/components/NoticeBar'
 import FooterNavBar from '@/components/FooterNavBar'
 import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
 import { useRouter } from 'next/dist/client/router'
+import MessageBadge from '@/components/MessageBadge'
 
 const Home: React.FC = () => {
   const router = useRouter()
@@ -18,12 +19,7 @@ const Home: React.FC = () => {
     <Layout>
       <HeaderTitleBar
         title={<img className="logo" src="/images/logo.png" />}
-        extra={
-          <>
-            <i className="iconfont iconmail" />
-            <span className="red-dot" />
-          </>
-        }
+        extra={<MessageBadge />}
       />
       <div className="main-content">
         {/* 輪撥BANNER */}

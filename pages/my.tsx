@@ -5,23 +5,13 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { Avatar } from '@chakra-ui/avatar'
 import { Box } from '@chakra-ui/layout'
+import MessageBadge from '@/components/MessageBadge'
 
 const MyPage: React.FC = () => {
   const router = useRouter()
   return (
     <Layout>
-      <HeaderTitleBar
-        title="我的"
-        extra={
-          <>
-            <i
-              className="iconfont iconmail"
-              onClick={() => router.push('/message')}
-            />
-            <span className="red-dot" />
-          </>
-        }
-      />
+      <HeaderTitleBar title="我的" extra={<MessageBadge />} />
       <div className="main-content">
         {/* 個人資訊 */}
         <div className="top-section">
