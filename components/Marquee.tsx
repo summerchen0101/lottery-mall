@@ -1,10 +1,13 @@
+import { Box, Text } from '@chakra-ui/layout'
 import React, { useEffect } from 'react'
 
 const Marquee: React.FC = ({ children }) => {
   return (
-    <div className="marquee-box">
-      <p>{children}</p>
-    </div>
+    <Box className="marquee-box" py="2" ml="2">
+      <Text color="gray.700" fontSize="13px">
+        {children}
+      </Text>
+    </Box>
   )
 }
 
