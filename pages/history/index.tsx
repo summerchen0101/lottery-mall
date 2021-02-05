@@ -1,87 +1,50 @@
+import Link from 'next/link'
 import React from 'react'
+import DateTabGroup from '../../components/DateTabGroup'
 import FooterNavBar from '../../components/FooterNavBar'
 import HeaderTitleBar from '../../components/HeaderTitleBar'
 import Layout from '../../components/Layout'
-import WeeklyBettingList from '../../components/WeeklyBettingList'
 
 const HistoryPage: React.FC = () => {
   return (
     <Layout>
-      <HeaderTitleBar
-        title="帐务历史"
-        extra={<span className="user-wallet">¥ 20,849.55</span>}
-      />
+      <HeaderTitleBar back title="帐务历史" />
       <>
         <div className="main-content">
-          <ul
-            className="nav nav-tabs d-flex justify-content-between section-padding"
-            role="tablist"
-          >
-            <li className="nav-item">
-              <a
-                className="nav-link active"
-                data-toggle="tab"
-                href="#tabs-1"
-                role="tab"
-              >
-                本週
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                data-toggle="tab"
-                href="#tabs-2"
-                role="tab"
-              >
-                本月
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                data-toggle="tab"
-                href="#tabs-3"
-                role="tab"
-              >
-                上个月
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                data-toggle="tab"
-                href="#tabs-4"
-                role="tab"
-              >
-                一年
-              </a>
-            </li>
-          </ul>
-          {/* Tab panes */}
-          <div className="tab-content">
-            <div className="tab-pane active" id="tabs-1" role="tabpanel">
-              <WeeklyBettingList />
-            </div>
-            <div className="tab-pane" id="tabs-2" role="tabpanel">
-              <WeeklyBettingList />
-              <WeeklyBettingList />
-            </div>
-            <div className="tab-pane" id="tabs-3" role="tabpanel">
-              {/* 暫無數據 */}
-              <div className="data_null">
-                <img src="images/data_null.svg" />
-                <p>暂无数据</p>
-              </div>
-            </div>
-            <div className="tab-pane" id="tabs-4" role="tabpanel">
-              {/* 暫無數據 */}
-              <div className="data_null">
-                <img src="images/data_null.svg" />
-                <p>暂无数据</p>
-              </div>
-            </div>
-          </div>
+          <DateTabGroup />
+          <table className="table table-borderless">
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th>笔数</th>
+                <th>下注金额</th>
+                <th>总收益</th>
+                <th>明细</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...Array(7)].map((_, i) => (
+                <tr key={i}>
+                  <td>2020-09-30</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>
+                    <Link href="/history/1">
+                      <img src="images/ic_history.svg" />
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td>合計</td>
+                <td>10</td>
+                <td>530</td>
+                <td className="text-green">7.65</td>
+                <td />
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div className="pinbottom-section">
           <ul className="acc-inner mt-1">
