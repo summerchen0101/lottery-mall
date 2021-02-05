@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import cs from 'classnames'
+
+const paywayOpts = [
+  { label: '银行卡转卡', value: 1 },
+  { label: 'ATM充值', value: 2 },
+  { label: '超商代码', value: 3 },
+  { label: 'ATM转账', value: 4 },
+]
 
 const DepositPage: React.FC = () => {
+  const [currentTab, setCurrentTab] = useState(1)
   return (
     <Layout>
       <HeaderTitleBar
@@ -12,12 +21,14 @@ const DepositPage: React.FC = () => {
         extra={<button className="s-btn">充值记录</button>}
       />
       <>
-        <div className="pintop-section d-flex flex-column justify-content-center fixed">
-          <div className="user-id-col">bet8888</div>
-          <div className="user-wallet-col">可用余额: 20,849.55</div>
-          <div className="reload-btn">
-            <i className="iconfont iconreload" />
+        <div className="pintop-section d-flex justify-content-between fixed">
+          <div className="info-col d-flex flex-column">
+            <div className="user-id-col">bet8888</div>
+            <div className="user-wallet-col">可用余额: 20,849.55</div>
           </div>
+          <button className="icon_btn reload-btn">
+            <i className="iconfont iconreload"></i>
+          </button>
         </div>
         <div
           className="main-content section-padding"
@@ -26,12 +37,17 @@ const DepositPage: React.FC = () => {
           <form>
             <label className="form-label2">支付方式</label>
             <div className="method-btn-wrap">
-              <div className="outline_btn color-gray active">转账汇款</div>
-              <div className="outline_btn color-gray">银行卡转卡</div>
-              <div className="outline_btn color-gray">支付宝</div>
-              <div className="outline_btn color-gray">银联快捷</div>
-              <div className="outline_btn color-gray">支付宝转卡</div>
-              <div className="outline_btn color-gray">网银支付</div>
+              {paywayOpts.map((t, i) => (
+                <div
+                  key={i}
+                  className={cs('outline_btn color-gray', {
+                    active: currentTab === t.value,
+                  })}
+                  onClick={() => setCurrentTab(t.value)}
+                >
+                  {t.label}
+                </div>
+              ))}
             </div>
             <label className="form-label2">汇款姓名</label>
             <div className="form-group">
@@ -44,12 +60,12 @@ const DepositPage: React.FC = () => {
               <a className="iconfont iconclear btn_cancel" />
             </div>
             <label className="form-label2">存款金额</label>
-            <div className="method-btn-wrap">
+            {/* <div className="method-btn-wrap">
               <div className="outline_btn color-gray">+50</div>
               <div className="outline_btn color-gray">+100</div>
               <div className="outline_btn color-gray">+1000</div>
               <div className="outline_btn color-gray">+5000</div>
-            </div>
+            </div> */}
             <div className="form-group">
               <input
                 type="number"

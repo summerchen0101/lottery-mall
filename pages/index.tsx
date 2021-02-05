@@ -10,8 +10,10 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import NoticeBar from '@/components/NoticeBar'
 import FooterNavBar from '@/components/FooterNavBar'
 import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
+import { useRouter } from 'next/dist/client/router'
 
 const Home: React.FC = () => {
+  const router = useRouter()
   return (
     <Layout>
       <HeaderTitleBar
@@ -39,7 +41,10 @@ const Home: React.FC = () => {
             </div>
           </div>
           <ul className="menu-list">
-            <li className="menu-list-item ic_recharge">
+            <li
+              className="menu-list-item ic_recharge"
+              onClick={() => router.push('/deposit')}
+            >
               <img src="/images/ic_recharge.svg" />
               充值
             </li>
