@@ -4,7 +4,7 @@ import React from 'react'
 const EventItem = () => {
   const router = useRouter()
   return (
-    <div className="team-item" onClick={() => router.push('/trick')}>
+    <div className="team-item" onClick={() => router.push('/event')}>
       <div className="info-col ">
         <div className="d-flex justify-content-between align-items-center bdb pb">
           {/* <div className="time text-red">
