@@ -1,8 +1,8 @@
 import Axios, { AxiosRequestConfig } from 'axios'
 import httpStatus from 'http-status'
 import { useRouter } from 'next/dist/client/router'
-import { useAlertProvider } from '../context/AlertProvider'
-import errCodes from '../lib/errCodes'
+import { useAlertProvider } from '@/context/AlertProvider'
+import errCodes from '@/lib/errCodes'
 import {
   BaseListRequest,
   BaseListResponse,
@@ -16,7 +16,7 @@ import {
   RegisterRequest,
   ResponseBase,
   UserInfo,
-} from '../lib/types'
+} from '@/lib/types'
 
 const config: AxiosRequestConfig = {
   withCredentials: true,

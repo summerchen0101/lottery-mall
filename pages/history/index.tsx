@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import React from 'react'
-import DateTabGroup from '../../components/DateTabGroup'
-import FooterNavBar from '../../components/FooterNavBar'
-import HeaderTitleBar from '../../components/HeaderTitleBar'
-import Layout from '../../components/Layout'
+import DateTabGroup from '@/components/DateTabGroup'
+import FooterNavBar from '@/components/FooterNavBar'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
+import Layout from '@/components/Layout'
 
 const HistoryPage: React.FC = () => {
   return (

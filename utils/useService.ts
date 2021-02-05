@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router'
-import { useAlertProvider } from '../context/AlertProvider'
-import { useGlobalProvider } from '../context/GlobalProvider'
-import { useLoaderProvider } from '../context/LoaderProvider'
+import { useAlertProvider } from '@/context/AlertProvider'
+import { useGlobalProvider } from '@/context/GlobalProvider'
+import { useLoaderProvider } from '@/context/LoaderProvider'
 import useRequest from './useRequest'
 
 const useService = () => {

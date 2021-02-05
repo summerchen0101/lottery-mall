@@ -1,8 +1,8 @@
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import FooterNavBar from '../../components/FooterNavBar'
-import HeaderTitleBar from '../../components/HeaderTitleBar'
-import Layout from '../../components/Layout'
+import FooterNavBar from '@/components/FooterNavBar'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
+import Layout from '@/components/Layout'
 
 const PromotionPage: React.FC = () => {
   const router = useRouter()

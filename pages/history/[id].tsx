@@ -1,10 +1,10 @@
 import React from 'react'
-import BettingItem from '../../components/BettingItem'
-import BettingSummaryInfo from '../../components/BettingSummaryInfo'
-import FooterNavBar from '../../components/FooterNavBar'
-import HeaderTitleBar from '../../components/HeaderTitleBar'
-import Layout from '../../components/Layout'
-import UserBalance from '../../components/UserBalance'
+import BettingItem from '@/components/BettingItem'
+import BettingSummaryInfo from '@/components/BettingSummaryInfo'
+import FooterNavBar from '@/components/FooterNavBar'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
+import Layout from '@/components/Layout'
+import UserBalance from '@/components/UserBalance'
 
 const HistoryDetailPage: React.FC = () => {
   return (

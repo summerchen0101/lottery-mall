@@ -1,7 +1,7 @@
 import React from 'react'
-import FooterNavBar from '../../components/FooterNavBar'
-import HeaderTitleBar from '../../components/HeaderTitleBar'
-import Layout from '../../components/Layout'
+import FooterNavBar from '@/components/FooterNavBar'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
+import Layout from '@/components/Layout'
 
 const PromotionDetailPage: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
-import { UserInfo } from '../lib/types'
+import { UserInfo } from '@/lib/types'
 
 type ContextState = {
   user: UserInfo
