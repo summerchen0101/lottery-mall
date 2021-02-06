@@ -9,17 +9,30 @@ import NoticeBar from '@/components/NoticeBar'
 import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
 import Tab from '@/components/Tab'
 import TabGroup from '@/components/TabGroup'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { afterDateRangeOpts } from '@/lib/options'
+import { useRouter } from 'next/dist/client/router'
+import useService from '@/utils/useService'
+import { useGlobalProvider } from '@/context/GlobalProvider'
 
 const MarketPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(1)
+  const router = useRouter()
+  const { fetchMarquee, marquee } = useService()
+  const { user } = useGlobalProvider()
+
+  useEffect(() => {
+    Promise.all([fetchMarquee()])
+    return () => {
+      // slider.removeAllSlides()
+    }
+  }, [])
   return (
     <Layout>
       <HeaderTitleBar title="市场列表" />
       <div className="main-content">
         {/* 公告 */}
-        <NoticeBar />
+        <NoticeBar msgs={marquee} />
         {/* 熱門賽事 */}
         <div className="section-title-bar d-flex justify-content-between section-padding">
           <ColumnTitle>赛事列表</ColumnTitle>
