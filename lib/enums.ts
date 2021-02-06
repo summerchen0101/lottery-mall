@@ -5,8 +5,7 @@ export enum ProcessStatus {
 }
 
 export enum NewsType {
-  系統 = 1,
-  賽事公告 = 2,
-  活動優惠 = 3,
-  其他 = 4,
+  System = 1,
+  Game = 2,
+  Activity = 3,
 }

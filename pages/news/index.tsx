@@ -4,34 +4,29 @@ import Layout from '@/components/Layout'
 import Tab from '@/components/Tab'
 import TabGroup from '@/components/TabGroup'
 import { useLoaderProvider } from '@/context/LoaderProvider'
+import { NewsType } from '@/lib/enums'
+import { newsTypeOpts } from '@/lib/options'
 import { News } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useTransfer from '@/utils/useTransfer'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import _ from 'lodash'
 
-const tabs = [
-  { label: '系統通知', value: 1 },
-  { label: '賽事資訊', value: 2 },
-  { label: '優惠活動', value: 3 },
-]
 const news: React.FC = () => {
   const [current, setCurrent] = useState(1)
   const router = useRouter()
   const [isEmpty, setIsEmpty] = useState(false)
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const API = useRequest()
-  const { toDateTime } = useTransfer()
+  const { toDate } = useTransfer()
   const [news, setNews] = useState<News[]>([])
+  const newsGroups = useMemo(() => _.groupBy(news, 'news_type'), [news])
   const fetchNews = async () => {
     loadingStart()
-    setIsEmpty(false)
     try {
       const res = await API.getNewsList()
       setNews(res.data.list)
-      if (res.data.list.length === 0) {
-        setIsEmpty(true)
-      }
     } catch (err) {}
     loadingEnd()
   }
@@ -42,8 +37,8 @@ const news: React.FC = () => {
     <Layout>
       <HeaderTitleBar back title="公告" />
       <div className="main-content">
-        {/* <TabGroup justifyContent="space-between">
-          {tabs.map((t, i) => (
+        <TabGroup justifyContent="space-between">
+          {newsTypeOpts.map((t, i) => (
             <Tab
               key={i}
               label={t.label}
@@ -51,20 +46,17 @@ const news: React.FC = () => {
               onClick={() => setCurrent(t.value)}
             />
           ))}
-        </TabGroup> */}
+        </TabGroup>
 
         {/* Tab panes */}
         <div className="tab-content section-padding">
-          {/* 暫無數據 */}
-          {isEmpty && (
-            <div className="data_null">
-              <img src="images/data_null.svg" />
-              <p>暂无数据</p>
-            </div>
-          )}
           <div className="tab-pane active" id="tabs-1" role="tabpanel">
             <ul className="list-container list-group">
-              {news.map((t, i) => (
+              {/* <div className="data_null">
+                <img src="images/data_null.svg" />
+                <p>暂无数据</p>
+              </div> */}
+              {newsGroups[current]?.map((t, i) => (
                 <li
                   key={i}
                   className="message-item"
@@ -74,10 +66,10 @@ const news: React.FC = () => {
                     <div className="title-col">
                       <div className="message-title">{t.title}</div>
                       <div className="message-time text-right">
-                        {toDateTime(t.updated_at)}
+                        {toDate(t.updated_at)}
                       </div>
                     </div>
-                    <div className="message-content-col">...</div>
+                    <div className="message-content-col">{t.content}</div>
                   </div>
                 </li>
               ))}

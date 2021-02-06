@@ -1,3 +1,4 @@
+import { OptionType } from '@/lib/types'
 import moment from 'moment'
 import numeral from 'numeral'
 
@@ -10,6 +11,13 @@ const useTransfer = () => {
     moment(unixTime * 1000).isBefore(moment(), 'day')
 
   const toCurrency = (num: number) => numeral(num).format('0,0')
+
+  const toOptionName = function (
+    options: OptionType[],
+    code: number | string,
+  ): string {
+    return options.find((t) => t.value === code)?.label
+  }
 
   const toDateRange = (rangeType: string) => {
     switch (rangeType) {
@@ -47,7 +55,14 @@ const useTransfer = () => {
     return { start: 0, end: 0 }
   }
 
-  return { toDate, toDateTime, isBeforeDay, toCurrency, toDateRange }
+  return {
+    toDate,
+    toDateTime,
+    isBeforeDay,
+    toCurrency,
+    toDateRange,
+    toOptionName,
+  }
 }
 
 export default useTransfer

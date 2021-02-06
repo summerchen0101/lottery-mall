@@ -38,12 +38,21 @@ export interface CheckLoginResponseData {
   member: Member
 }
 
+export type OptionType = {
+  label: string
+  value: string | number
+}
+
 export interface News {
+  content: string
+  created_at: number
+  end_at: number
   id: number
+  is_active: boolean
   news_type: NewsType
+  start_at: number
   title: string
   updated_at: number
-  created_at: number
 }
 
 export interface NewsDetail {

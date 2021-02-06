@@ -27,9 +27,9 @@ const newsDetail: React.FC = () => {
     <Layout>
       <HeaderTitleBar back title="公告" />
       <div className="main-content section-padding">
-        <div className="message-title w-100 my-3">{news.title}</div>
-        <div className="message-time w-100">{toDateTime(news.updated_at)}</div>
-        <div className="message-content-col w-100 mt-4">{news.content}</div>
+        <div className="message-title w-100 my-3">{news?.title}</div>
+        <div className="message-time w-100">{toDateTime(news?.updated_at)}</div>
+        <div className="message-content-col w-100 mt-4">{news?.content}</div>
       </div>
 
       <FooterNavBar />
