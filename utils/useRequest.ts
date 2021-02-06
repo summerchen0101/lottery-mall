@@ -17,6 +17,7 @@ import {
   ResponseBase,
   UserInfo,
   CaptchaResponse,
+  Banner,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -75,6 +76,9 @@ const useRequest = () => {
   const getMarqueeList = () =>
     post<BaseListResponse<Marquee>>('marquee/list', { page: 1, perpage: 100 })
 
+  const getBannerList = () =>
+    post<BaseListResponse<Banner>>('banner/list', { page: 1, perpage: 100 })
+
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
 
@@ -94,6 +98,7 @@ const useRequest = () => {
     getNewsList,
     getNewsDetail,
     getMarqueeList,
+    getBannerList,
     checkLogin,
     getCaptcha,
     updatePw,

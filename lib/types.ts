@@ -64,6 +64,17 @@ export interface Marquee {
   start_at: number
   end_at: number
 }
+export interface Banner {
+  id: number
+  title: string
+  url: string
+  img: string
+  img_mobile: string
+  is_blank: boolean
+  is_active: boolean
+  start_at: number
+  end_at: number
+}
 
 export interface PwUpdateRequest {
   pass: string

@@ -56,7 +56,12 @@ const news: React.FC = () => {
         {/* Tab panes */}
         <div className="tab-content section-padding">
           {/* 暫無數據 */}
-          {/* <div class="data_null"><img src="images/data_null.svg"><p>暂无数据</p></div> */}
+          {isEmpty && (
+            <div className="data_null">
+              <img src="images/data_null.svg" />
+              <p>暂无数据</p>
+            </div>
+          )}
           <div className="tab-pane active" id="tabs-1" role="tabpanel">
             <ul className="list-container list-group">
               {news.map((t, i) => (
@@ -78,12 +83,6 @@ const news: React.FC = () => {
               ))}
             </ul>
           </div>
-          {/* <div className="tab-pane" id="tabs-2" role="tabpanel">
-            <div className="data_null">
-              <img src="images/data_null.svg" />
-              <p>暂无数据</p>
-            </div>
-          </div> */}
         </div>
       </div>
 

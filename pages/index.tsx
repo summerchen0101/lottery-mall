@@ -1,20 +1,24 @@
-import React from 'react'
 import CarouselBanner from '@/components/CarouselBanner'
 import CarouselSlide from '@/components/CarouselSlide'
 import ColumnTitle from '@/components/ColumnTitle'
 import CountDownReloadBtn from '@/components/CountDownReloadBtn'
+import FooterNavBar from '@/components/FooterNavBar'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
 import HomeEventItem from '@/components/HomeEventItem'
 import Layout from '@/components/Layout'
-import LeagueFilterBtn from '@/components/LeagueFilterBtn'
-import HeaderTitleBar from '@/components/HeaderTitleBar'
-import NoticeBar from '@/components/NoticeBar'
-import FooterNavBar from '@/components/FooterNavBar'
-import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
-import { useRouter } from 'next/dist/client/router'
 import MessageBadge from '@/components/MessageBadge'
+import NoticeBar from '@/components/NoticeBar'
+import useService from '@/utils/useService'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect } from 'react'
 
 const Home: React.FC = () => {
   const router = useRouter()
+  const { fetchMarquee, fetchBanners, marquee, banners } = useService()
+
+  useEffect(() => {
+    Promise.all([fetchMarquee(), fetchBanners()])
+  }, [])
   return (
     <Layout>
       <HeaderTitleBar
@@ -24,11 +28,16 @@ const Home: React.FC = () => {
       <div className="main-content">
         {/* 輪撥BANNER */}
         <CarouselBanner>
-          <CarouselSlide image="/images/banner/banner-1.jpg" />
-          <CarouselSlide image="/images/banner/banner-2.jpg" />
+          {banners.map((t, i) => (
+            <CarouselSlide
+              key={i}
+              image={t.img_mobile}
+              onClick={() => router.push(t.url)}
+            />
+          ))}
         </CarouselBanner>
         {/* 公告 */}
-        <NoticeBar />
+        <NoticeBar msgs={marquee} />
         <div className="middle-menu-section">
           <div className="user-info d-flex justify-content-between">
             <div className="user-id">bet8888</div>
