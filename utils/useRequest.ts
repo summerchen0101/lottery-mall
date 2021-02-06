@@ -18,34 +18,38 @@ import {
   UserInfo,
   CaptchaResponse,
 } from '@/lib/types'
-
-const config: AxiosRequestConfig = {
-  withCredentials: true,
-  baseURL: process.env.apiBaseUrl,
-  validateStatus: (status) => {
-    return true
-  },
-}
+import { useGlobalProvider } from '@/context/GlobalProvider'
+import { useToast } from '@chakra-ui/toast'
 
 const useRequest = () => {
   const router = useRouter()
+  const { token } = useGlobalProvider()
+  const config: AxiosRequestConfig = {
+    withCredentials: true,
+    baseURL: process.env.apiBaseUrl,
+    validateStatus: (status) => {
+      return true
+    },
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
   const AxiosInstance = Axios.create(config)
-  const { showAlert } = useAlertProvider()
+  const toast = useToast()
   AxiosInstance.interceptors.response.use((res) => {
     let errorMsg = ''
     if (res.data.code) {
       errorMsg = errCodes[res.data.code]
-    } else if (res.data.error) {
-      errorMsg = '操作錯誤'
-      console.error(res.data.message)
     } else if (res.status === 401) {
-      router.push('/login')
+      // router.push('/login')
       errorMsg = httpStatus[401]
     } else if (res.status === 500) {
       errorMsg = '系統錯誤'
+    } else if (res.data.error) {
+      errorMsg = '操作錯誤'
     }
     if (errorMsg) {
-      showAlert(errorMsg)
+      toast({ status: 'error', title: errorMsg })
       throw new Error(errorMsg)
     }
     return res.data

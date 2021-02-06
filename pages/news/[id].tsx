@@ -5,7 +5,6 @@ import { useLoaderProvider } from '@/context/LoaderProvider'
 import { NewsDetail } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useTransfer from '@/utils/useTransfer'
-import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
 
 const newsDetail: React.FC = () => {
