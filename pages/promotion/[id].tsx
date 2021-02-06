@@ -32,14 +32,22 @@ const PromotionDetailPage: React.FC = () => {
             <img src="/images/banner/banner-1.jpg" className="img-fluid" />
           </div>
           <div className="w-100 mt-2">
-            <h5 className="text-blue font-weight-bold">{activity.title}</h5>
+            <h5 className="text-blue font-weight-bold">{activity?.title}</h5>
             <div className="text-lighgray">
               <small>
-                有效时间:{toDate(activity.start_at)}至{toDate(activity.end_at)}
+                活动时间:
+                {activity?.start_at ? (
+                  <>
+                    {toDate(activity?.start_at)}至{toDate(activity?.end_at)}
+                  </>
+                ) : (
+                  '-'
+                )}
               </small>
             </div>
+
             <div className="activity_title font-weight-bold">活动内容</div>
-            <p>{activity.content_mobile}</p>
+            <p>{activity?.content_mobile}</p>
 
             {/* <button type="button" className="btnbase primary_btn mt-4">
               活动申请
