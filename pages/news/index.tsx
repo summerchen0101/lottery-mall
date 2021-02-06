@@ -3,8 +3,12 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import Tab from '@/components/Tab'
 import TabGroup from '@/components/TabGroup'
+import { useLoaderProvider } from '@/context/LoaderProvider'
+import { News } from '@/lib/types'
+import useRequest from '@/utils/useRequest'
+import useTransfer from '@/utils/useTransfer'
 import { useRouter } from 'next/dist/client/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const tabs = [
   { label: '系統通知', value: 1 },
@@ -14,11 +18,31 @@ const tabs = [
 const news: React.FC = () => {
   const [current, setCurrent] = useState(1)
   const router = useRouter()
+  const [isEmpty, setIsEmpty] = useState(false)
+  const { loadingStart, loadingEnd } = useLoaderProvider()
+  const API = useRequest()
+  const { toDateTime } = useTransfer()
+  const [news, setNews] = useState<News[]>([])
+  const fetchNews = async () => {
+    loadingStart()
+    setIsEmpty(false)
+    try {
+      const res = await API.getNewsList()
+      setNews(res.data.list)
+      if (res.data.list.length === 0) {
+        setIsEmpty(true)
+      }
+    } catch (err) {}
+    loadingEnd()
+  }
+  useEffect(() => {
+    fetchNews()
+  }, [])
   return (
     <Layout>
       <HeaderTitleBar back title="公告" />
       <div className="main-content">
-        <TabGroup justifyContent="space-between">
+        {/* <TabGroup justifyContent="space-between">
           {tabs.map((t, i) => (
             <Tab
               key={i}
@@ -27,7 +51,7 @@ const news: React.FC = () => {
               onClick={() => setCurrent(t.value)}
             />
           ))}
-        </TabGroup>
+        </TabGroup> */}
 
         {/* Tab panes */}
         <div className="tab-content section-padding">
@@ -35,43 +59,31 @@ const news: React.FC = () => {
           {/* <div class="data_null"><img src="images/data_null.svg"><p>暂无数据</p></div> */}
           <div className="tab-pane active" id="tabs-1" role="tabpanel">
             <ul className="list-container list-group">
-              {Array(8)
-                .fill('')
-                .map((t, i) => (
-                  <li
-                    key={i}
-                    className="message-item"
-                    onClick={() => router.push(`/news/${i + 1}`)}
-                  >
-                    <div className="message-container d-flex flex-column">
-                      <div className="title-col">
-                        <div className="message-title">會員首儲優惠</div>
-                        <div className="message-time text-right">
-                          2021-02-10
-                        </div>
-                      </div>
-                      <div className="message-content-col">
-                        尊敬的会员您好，因应近日支付宝提升安全机制，部分会员限制转账，如遇无法打款至本平台支付宝帐号。
+              {news.map((t, i) => (
+                <li
+                  key={i}
+                  className="message-item"
+                  onClick={() => router.push(`/news/${t.id}`)}
+                >
+                  <div className="message-container d-flex flex-column">
+                    <div className="title-col">
+                      <div className="message-title">{t.title}</div>
+                      <div className="message-time text-right">
+                        {toDateTime(t.updated_at)}
                       </div>
                     </div>
-                  </li>
-                ))}
+                    <div className="message-content-col">...</div>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
-          <div className="tab-pane" id="tabs-2" role="tabpanel">
-            {/* 暫無數據 */}
+          {/* <div className="tab-pane" id="tabs-2" role="tabpanel">
             <div className="data_null">
               <img src="images/data_null.svg" />
               <p>暂无数据</p>
             </div>
-          </div>
-          <div className="tab-pane" id="tabs-3" role="tabpanel">
-            {/* 暫無數據 */}
-            <div className="data_null">
-              <img src="images/data_null.svg" />
-              <p>暂无数据</p>
-            </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
