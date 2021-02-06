@@ -16,6 +16,7 @@ import {
   RegisterRequest,
   ResponseBase,
   UserInfo,
+  CaptchaResponse,
 } from '@/lib/types'
 
 const config: AxiosRequestConfig = {
@@ -71,6 +72,7 @@ const useRequest = () => {
     post<BaseListResponse<Marquee>>('marquee/list', { page: 1, perpage: 100 })
 
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
+  const getCaptcha = () => get<CaptchaResponse>('captcha')
 
   const updatePw = (req: PwUpdateRequest) => post<null>('member/pass')
   const updateTradePw = (req: PwUpdateRequest) => post<null>('member/sec_pass')
@@ -88,7 +90,7 @@ const useRequest = () => {
     getNewsDetail,
     getMarqueeList,
     checkLogin,
-
+    getCaptcha,
     updatePw,
     updateTradePw,
     checkAcc,

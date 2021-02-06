@@ -83,16 +83,23 @@ export interface LoginRequest {
   acc: string
   pass: string
   code: string
+  token: string
 }
 
 export interface LoginResponse {
   acc: string
   id: number
   name: string
+  token: string
 }
 
 export interface UserInfo {
   id: number
   name: string
   acc: string
+}
+
+export interface CaptchaResponse {
+  img: string
+  token: string
 }

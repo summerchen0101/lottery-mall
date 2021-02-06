@@ -18,7 +18,16 @@ const useHelper = () => {
       })
       .filter((m) => m.format('dddd') !== 'Sunday')
   }
-  return { createAutoNums, createDateOpts }
+
+  const copyToClipboard = (text) => {
+    const input = document.body.appendChild(document.createElement('input'))
+    input.value = text
+    input.focus()
+    input.select()
+    document.execCommand('copy')
+    input.parentNode.removeChild(input)
+  }
+  return { createAutoNums, createDateOpts, copyToClipboard }
 }
 
 export default useHelper
