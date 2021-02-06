@@ -18,6 +18,9 @@ import {
   UserInfo,
   CaptchaResponse,
   Banner,
+  Activity,
+  ActivityDetail,
+  Faq,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -73,6 +76,22 @@ const useRequest = () => {
 
   const getNewsDetail = (id: number) => get<NewsDetail>(`news/view/${id}`)
 
+  const getActivityList = (req?: BaseListRequest) =>
+    post<BaseListResponse<Activity>>('activity/list', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
+
+  const getActivityDetail = (id: number) =>
+    get<ActivityDetail>(`activity/view/${id}`)
+
+  const getFaqList = (req?: BaseListRequest) =>
+    post<BaseListResponse<Faq>>('qa/list', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
   const getMarqueeList = () =>
     post<BaseListResponse<Marquee>>('marquee/list', { page: 1, perpage: 100 })
 
@@ -97,8 +116,11 @@ const useRequest = () => {
     getUserInfo,
     getNewsList,
     getNewsDetail,
+    getActivityList,
+    getActivityDetail,
     getMarqueeList,
     getBannerList,
+    getFaqList,
     checkLogin,
     getCaptcha,
     updatePw,

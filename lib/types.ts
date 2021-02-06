@@ -55,6 +55,41 @@ export interface NewsDetail {
   created_at: number
 }
 
+export interface Activity {
+  id: number
+  title: string
+  img: string
+  img_mobile: string
+  start_at: number
+  end_at: number
+  bonus: number
+}
+
+export interface ActivityDetail {
+  id: number
+  title: string
+  content: string
+  content_mobile: string
+  img: string
+  img_mobile: string
+  start_at: number
+  end_at: number
+  bonus: number
+}
+
+export interface Faq {
+  id: number
+  catalogue: {
+    id: number
+    name: string
+  }
+  title: string
+  content: string
+  content_mobile: string
+  created_at: number
+  updated_at: number
+}
+
 export interface Marquee {
   id: number
   content: string
