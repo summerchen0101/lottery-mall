@@ -27,7 +27,7 @@ const useService = () => {
     }
   }
 
-  const getUserInfo = async () => {
+  const fetchUserInfo = async () => {
     try {
       const res = await API.getUserInfo()
       setUser(res.data)
@@ -61,7 +61,7 @@ const useService = () => {
   return {
     handleSendPhoneCode,
     doLogout,
-    getUserInfo,
+    fetchUserInfo,
     fetchMarquee,
     fetchBanners,
     banners,

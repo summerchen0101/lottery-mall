@@ -107,6 +107,7 @@ export interface UserInfo {
   id: number
   name: string
   acc: string
+  balance: number
 }
 
 export interface CaptchaResponse {

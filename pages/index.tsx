@@ -8,16 +8,25 @@ import HomeEventItem from '@/components/HomeEventItem'
 import Layout from '@/components/Layout'
 import MessageBadge from '@/components/MessageBadge'
 import NoticeBar from '@/components/NoticeBar'
+import UserBalance from '@/components/UserBalance'
+import { useGlobalProvider } from '@/context/GlobalProvider'
 import useService from '@/utils/useService'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 
 const Home: React.FC = () => {
   const router = useRouter()
-  const { fetchMarquee, fetchBanners, marquee, banners } = useService()
+  const {
+    fetchMarquee,
+    fetchBanners,
+    fetchUserInfo,
+    marquee,
+    banners,
+  } = useService()
+  const { user } = useGlobalProvider()
 
   useEffect(() => {
-    Promise.all([fetchMarquee(), fetchBanners()])
+    Promise.all([fetchMarquee(), fetchBanners(), fetchUserInfo()])
   }, [])
   return (
     <Layout>
@@ -40,9 +49,9 @@ const Home: React.FC = () => {
         <NoticeBar msgs={marquee} />
         <div className="middle-menu-section">
           <div className="user-info d-flex justify-content-between">
-            <div className="user-id">bet8888</div>
+            <div className="user-id">{user?.acc}</div>
             <div>
-              账户余额<span className="user-wallet">¥ 20,849.55</span>
+              账户余额 <UserBalance />
             </div>
           </div>
           <ul className="menu-list">
