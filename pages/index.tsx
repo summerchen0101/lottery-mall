@@ -13,7 +13,22 @@ import { useGlobalProvider } from '@/context/GlobalProvider'
 import useService from '@/utils/useService'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
+import Swiper from 'swiper'
 
+const createSlider = () => {
+  return new Swiper('.swiper-container', {
+    direction: 'horizontal',
+    spaceBetween: 0,
+    speed: 500,
+    autoplay: {
+      delay: 3000,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  })
+}
 const Home: React.FC = () => {
   const router = useRouter()
   const {
@@ -26,7 +41,11 @@ const Home: React.FC = () => {
   const { user } = useGlobalProvider()
 
   useEffect(() => {
+    const slider = createSlider()
     Promise.all([fetchMarquee(), fetchBanners(), fetchUserInfo()])
+    return () => {
+      // slider.removeAllSlides()
+    }
   }, [])
   return (
     <Layout>

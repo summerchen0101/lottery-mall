@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import { UserInfo } from '@/lib/types'
+import useStorage from '@/utils/useStorage'
 
 type ContextState = {
   user: UserInfo
@@ -12,7 +13,7 @@ const GlobalContext = createContext<ContextState>(null)
 
 const GlobalProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<UserInfo>(null)
-  const [token, setToken] = useState<string>('')
+  const [token, setToken] = useStorage<string>('token', '')
   return (
     <GlobalContext.Provider
       value={{

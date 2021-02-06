@@ -119,6 +119,7 @@ export interface PwUpdateRequest {
 export interface RegisterRequest {
   promo_code: string
   acc: string
+  name: string
   pass: string
   mobile: string
   email: string

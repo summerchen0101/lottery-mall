@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form'
 type FormData = {
   promo_code: string
   acc: string
+  name: string
   pass: string
   pass_confirm: string
   mobile: string
@@ -37,6 +38,7 @@ const register: React.FC = () => {
     try {
       const res = await API.register({
         acc: d.acc,
+        name: d.name,
         pass: d.pass,
         mobile: d.mobile,
         email: d.email,
@@ -44,9 +46,7 @@ const register: React.FC = () => {
       })
       setToken(res.data.token)
       router.push('/')
-    } catch (err) {
-      toast({ status: 'error', title: err.message })
-    }
+    } catch (err) {}
   })
   const handleAccCheck = async () => {
     if (!getValues('acc')) {
@@ -55,23 +55,21 @@ const register: React.FC = () => {
     }
     try {
       await API.checkAcc(getValues('acc'))
-      toast({ status: 'success', title: '帳號/手機可用' })
+      toast({ status: 'success', title: '帳號可用' })
+    } catch (err) {}
+  }
+  const handleNameCheck = async () => {
+    if (!getValues('name')) {
+      toast({ status: 'info', title: '請先填寫暱稱' })
+      return
+    }
+    try {
+      await API.checkName(getValues('name'))
+      toast({ status: 'success', title: '暱稱可用' })
     } catch (err) {
       toast({ status: 'error', title: err.message })
     }
   }
-  // const handleNameCheck = async () => {
-  //   if (!getValues('name')) {
-  //     toast({ status: 'info', title: '請先填寫暱稱' })
-  //     return
-  //   }
-  //   try {
-  //     await API.checkName(getValues('name'))
-  //     toast({ status: 'info', title: '暱稱可用' })
-  //   } catch (err) {
-  //     toast({ status: 'error', title: err.message })
-  //   }
-  // }
   return (
     <Layout>
       <Box className="login-content" h="100vh" w="100vw" overflowY="auto">
@@ -79,12 +77,13 @@ const register: React.FC = () => {
           <Image className="flag" src="/images/lang_cn.png" m="auto" />
         </Box>
         <Box className="logo" mt="0">
-          <Image src="images/logo.png" m="auto" />
+          <Image src="/images/logo.png" m="auto" />
         </Box>
         <Box as="form" className="form" onSubmit={onSubmit} noValidate>
           <div className="form-title">注册</div>
-          <HStack>
-            <div className="form-group">
+
+          <div className="form-group">
+            <HStack>
               <input
                 type="text"
                 className="form-input account-input"
@@ -98,11 +97,38 @@ const register: React.FC = () => {
                   },
                 })}
               />
-              <i className="iconfont iconclear btn_cancel" />
-              <FieldValidateMessage error={errors.acc} />
-            </div>
-            <Button onClick={handleAccCheck}>是否可用？</Button>
-          </HStack>
+              <Button
+                onClick={handleAccCheck}
+                fontSize="sm"
+                w="130px"
+                color="gray"
+              >
+                帳號可用？
+              </Button>
+            </HStack>
+            <FieldValidateMessage error={errors.acc} />
+          </div>
+
+          <div className="form-group">
+            <HStack>
+              <input
+                type="text"
+                className="form-input"
+                placeholder="請輸入暱稱"
+                name="name"
+                ref={register({ required: '不可為空' })}
+              />
+              <Button
+                onClick={handleNameCheck}
+                fontSize="sm"
+                w="130px"
+                color="gray"
+              >
+                暱稱可用？
+              </Button>
+            </HStack>
+            <FieldValidateMessage error={errors.name} />
+          </div>
 
           <div className="form-group">
             <input

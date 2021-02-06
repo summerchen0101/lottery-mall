@@ -1,3 +1,4 @@
+import FieldValidateMessage from '@/components/FieldValidateMessage'
 import Layout from '@/components/Layout'
 import { useAlertProvider } from '@/context/AlertProvider'
 import { useGlobalProvider } from '@/context/GlobalProvider'
@@ -51,7 +52,7 @@ function login() {
           <Image className="flag" src="/images/lang_cn.png" m="auto" />
         </Box>
         <Box className="logo">
-          <Image src="images/logo.png" m="auto" />
+          <Image src="/images/logo.png" m="auto" />
         </Box>
         <Box as="form" className="form" minH="400px" onSubmit={onSubmit}>
           <div className="form-title">欢迎登入</div>
@@ -65,14 +66,12 @@ function login() {
                 ref={register({
                   required: '不可為空',
                   pattern: {
-                    value: pattern.twPhone,
+                    value: pattern.acc,
                     message: '格式有誤',
                   },
                 })}
               />
-              <i className="iconfont iconclear btn_cancel" />
-
-              {/* <small class="text-red"><i class="iconfont iconerror mr-1"></i>輸入帳號错误</small> */}
+              <FieldValidateMessage error={errors.acc} />
             </Box>
             <Image src={captchaImg} onClick={() => fetchCaptcha()} />
           </HStack>

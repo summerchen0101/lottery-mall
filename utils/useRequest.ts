@@ -45,7 +45,7 @@ const useRequest = () => {
     if (res.data.code) {
       errorMsg = errCodes[res.data.code]
     } else if (res.status === 401) {
-      // router.push('/login')
+      router.push('/login')
       errorMsg = httpStatus[401]
     } else if (res.status === 500) {
       errorMsg = '系統錯誤'
