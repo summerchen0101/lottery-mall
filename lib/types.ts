@@ -71,12 +71,11 @@ export interface PwUpdateRequest {
 }
 
 export interface RegisterRequest {
-  name: string
   promo_code: string
   acc: string
   pass: string
-  sec_pass: string
-  code: string
+  mobile: string
+  email: string
 }
 
 export interface LoginRequest {

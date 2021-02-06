@@ -79,7 +79,8 @@ const useRequest = () => {
   const checkAcc = (acc: string) => post<null>('check_acc', { acc })
   const checkName = (name: string) => post<null>('check_name', { name })
   const sendSmsCode = (mobile: string) => post<null>('sms_code', { mobile })
-  const register = (req: RegisterRequest) => post<null>('register', req)
+  const register = (req: RegisterRequest) =>
+    post<{ token: string }>('register', req)
   const login = (req: LoginRequest) => post<LoginResponse>('login', req)
   const logout = () => get<null>('logout')
 
