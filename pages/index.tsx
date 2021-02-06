@@ -15,20 +15,6 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 import Swiper from 'swiper'
 
-const createSlider = () => {
-  return new Swiper('.swiper-container', {
-    direction: 'horizontal',
-    spaceBetween: 0,
-    speed: 500,
-    autoplay: {
-      delay: 3000,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  })
-}
 const Home: React.FC = () => {
   const router = useRouter()
   const {
@@ -41,7 +27,6 @@ const Home: React.FC = () => {
   const { user } = useGlobalProvider()
 
   useEffect(() => {
-    const slider = createSlider()
     Promise.all([fetchMarquee(), fetchBanners(), fetchUserInfo()])
     return () => {
       // slider.removeAllSlides()
@@ -55,15 +40,7 @@ const Home: React.FC = () => {
       />
       <div className="main-content">
         {/* 輪撥BANNER */}
-        <CarouselBanner>
-          {banners.map((t, i) => (
-            <CarouselSlide
-              key={i}
-              image={t.img_mobile}
-              onClick={() => router.push(t.url)}
-            />
-          ))}
-        </CarouselBanner>
+        <CarouselBanner banners={banners} />
         {/* 公告 */}
         <NoticeBar msgs={marquee} />
         <div className="middle-menu-section">
