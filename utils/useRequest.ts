@@ -75,11 +75,17 @@ const useRequest = () => {
     return AxiosInstance.post(url, data)
   }
 
+  /**
+   * 最新公告
+   */
   const getNewsList = (req?: BaseListRequest) =>
     post<BaseListResponse<News>>('news/list', { page: 1, perpage: 100, ...req })
 
   const getNewsDetail = (id: number) => get<NewsDetail>(`news/view/${id}`)
 
+  /**
+   * 優惠活動
+   */
   const getActivityList = (req?: BaseListRequest) =>
     post<BaseListResponse<Activity>>('activity/list', {
       page: 1,
@@ -90,24 +96,43 @@ const useRequest = () => {
   const getActivityDetail = (id: number) =>
     get<ActivityDetail>(`activity/view/${id}`)
 
+  /**
+   * 常見問題
+   */
   const getFaqList = (req?: BaseListRequest) =>
     post<BaseListResponse<Faq>>('qa/list', {
       page: 1,
       perpage: 100,
       ...req,
     })
+
+  /**
+   * 跑馬燈
+   */
   const getMarqueeList = () =>
     post<BaseListResponse<Marquee>>('marquee/list', { page: 1, perpage: 100 })
 
+  /**
+   * 輪播圖
+   */
   const getBannerList = () =>
     post<BaseListResponse<Banner>>('banner/list', { page: 1, perpage: 100 })
 
+  /**
+   * 站內信
+   */
   const getMessageList = () =>
     post<BaseListResponse<Message>>('inbox_message/list', {
       page: 1,
       perpage: 100,
     })
 
+  const getMessageDetail = (id: number) =>
+    get<Message>(`inbox_message/view/${id}`)
+
+  /**
+   * 銀行卡
+   */
   const getMemberBankList = (req?: BaseListRequest) =>
     post<BaseListResponse<MemberBank>>('member_bank/list', {
       page: 1,
@@ -157,6 +182,7 @@ const useRequest = () => {
     setDefaultMemberBank,
     removeMemberBank,
     getMessageList,
+    getMessageDetail,
     getNewsList,
     getNewsDetail,
     getActivityList,

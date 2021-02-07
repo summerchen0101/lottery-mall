@@ -49,7 +49,14 @@ const PromotionPage: React.FC = () => {
                 <div className="ft-16 promotion-title mb-1">{t.title}</div>
                 <div className="d-flex justify-content-between align-items-center">
                   <span className="ft-13 text-lighgray">
-                    {toDate(t.start_at)} 至 {toDate(t.end_at)}
+                    <span>活动时间:</span>
+                    {t.start_at ? (
+                      <span>
+                        {toDate(t.start_at)} 至 {toDate(t.end_at)}
+                      </span>
+                    ) : (
+                      '無限期'
+                    )}
                   </span>
                   <button className="mini_btn color-blue">查看详情</button>
                 </div>

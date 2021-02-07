@@ -54,12 +54,12 @@ const message: React.FC = () => {
               <i className="iconfont iconmail" />
               <div className="message-container d-flex flex-column">
                 <div className="title-col">
-                  <div className="message-title">保本活动重要通知</div>
-                  <div className="message-time text-right">2021-02-23</div>
+                  <div className="message-title">{t.title}</div>
+                  <div className="message-time text-right">
+                    {toDate(t.updated_at)}
+                  </div>
                 </div>
-                <div className="message-content-col">
-                  尊敬的会员您好，因应近日支付宝提升安全机制，部分会员限制转账，如遇无法打款至本平台支付宝帐号，
-                </div>
+                <div className="message-content-col">{t.content}</div>
               </div>
             </li>
           ))}

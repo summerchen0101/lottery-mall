@@ -124,11 +124,23 @@ export interface Banner {
   end_at: number
 }
 
+export interface Withdraw {
+  id: number
+  bank_id: number
+  amount: number
+}
+export interface WithdrawCreateRequest {
+  bank_id: number
+  amount: number
+  sec_pass: string
+}
+
 export interface Message {
   id: number
   content: string
   created_at: number
   title: string
+  sender: string
   updated_at: number
 }
 export interface MemberBank {
