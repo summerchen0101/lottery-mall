@@ -112,10 +112,10 @@ const useRequest = () => {
       page: 1,
       perpage: 100,
     })
-  const setDefaultMemberBank = (id: number, is_active: boolean) =>
+  const setDefaultMemberBank = (id: number) =>
     post<null>('member_bank/default', {
       id,
-      is_active,
+      is_active: true,
     })
   const removeMemberBank = (id: number) =>
     post<null>('member_bank/remove', { id })

@@ -7,15 +7,35 @@ import { Box } from '@chakra-ui/layout'
 import useRequest from '@/utils/useRequest'
 import { MemberBank } from '@/lib/types'
 import classNames from 'classnames'
+import AlertPopup from '@/components/popups/AlertPopup'
+import { useDisclosure } from '@chakra-ui/hooks'
+import { useAlertProvider } from '@/context/AlertProvider'
+import { useToast } from '@chakra-ui/toast'
 
 const BankCardPage: React.FC = () => {
   const [memberBanks, setMemberBanks] = useState<MemberBank[]>([])
+  const { onOpen, onClose } = useAlertProvider()
   const router = useRouter()
   const API = useRequest()
+  const toast = useToast()
   const fetchMemberBankList = async () => {
     try {
       const res = await API.getMemberBankList()
       setMemberBanks(res.data.list)
+    } catch (err) {}
+  }
+  const onRemoveConfirmed = async (id: number) => {
+    try {
+      await API.removeMemberBank(id)
+      await fetchMemberBankList()
+      onClose()
+      toast({ status: 'success', title: '銀行卡刪除成功' })
+    } catch (err) {}
+  }
+  const onSetDefault = async (id: number) => {
+    try {
+      await API.setDefaultMemberBank(id)
+      await fetchMemberBankList()
     } catch (err) {}
   }
   useEffect(() => {
@@ -32,7 +52,7 @@ const BankCardPage: React.FC = () => {
               data-target="#realnameModal">添加账户</button>
           <div class="ft-13 text-lighgray mt-3 text-left">注意：帐户最多只能设置5个，如需新增帐户請刪減帐户後再進行添加</div>
       </div> */}
-        <form>
+        <Box>
           <ul className="bank-list list-group">
             {memberBanks.map((t, i) => (
               <li
@@ -51,10 +71,16 @@ const BankCardPage: React.FC = () => {
                       'mr-1 w-50',
                       t.is_default ? 'primary_btn' : 'second_btn',
                     )}
+                    onClick={() => onSetDefault(t.id)}
                   >
                     預設
                   </button>
-                  <button className="second_btn w-50">刪除</button>
+                  <button
+                    className="second_btn w-50"
+                    onClick={() => onOpen(t.id)}
+                  >
+                    刪除
+                  </button>
                 </div>
                 <span className="focus">
                   <i className="iconcheck iconfont" />
@@ -63,6 +89,7 @@ const BankCardPage: React.FC = () => {
             ))}
           </ul>
           <button
+            hidden={memberBanks.length >= 5}
             type="button"
             className="btnbase primary_btn mt-2 mb-2"
             data-toggle="modal"
@@ -73,9 +100,9 @@ const BankCardPage: React.FC = () => {
           <div className="ft-13 text-lighgray mt-3">
             注意：提款帐户最多只能綁定5个，如需綁定新帐户請刪減舊帐户後再進行添加
           </div>
-        </form>
+        </Box>
       </div>
-
+      <AlertPopup onOk={onRemoveConfirmed} />
       <FooterNavBar />
     </Layout>
   )
