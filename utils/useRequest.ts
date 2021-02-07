@@ -24,6 +24,7 @@ import {
   MemberBank,
   OptionBasic,
   MemberBankCreateRequest,
+  Message,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -101,6 +102,12 @@ const useRequest = () => {
   const getBannerList = () =>
     post<BaseListResponse<Banner>>('banner/list', { page: 1, perpage: 100 })
 
+  const getMessageList = () =>
+    post<BaseListResponse<Message>>('inbox_message/list', {
+      page: 1,
+      perpage: 100,
+    })
+
   const getMemberBankList = (req?: BaseListRequest) =>
     post<BaseListResponse<MemberBank>>('member_bank/list', {
       page: 1,
@@ -149,6 +156,7 @@ const useRequest = () => {
     createMemberBank,
     setDefaultMemberBank,
     removeMemberBank,
+    getMessageList,
     getNewsList,
     getNewsDetail,
     getActivityList,

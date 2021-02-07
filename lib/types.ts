@@ -123,6 +123,14 @@ export interface Banner {
   start_at: number
   end_at: number
 }
+
+export interface Message {
+  id: number
+  content: string
+  created_at: number
+  title: string
+  updated_at: number
+}
 export interface MemberBank {
   id: number
   acc: string
