@@ -1,33 +1,35 @@
 import React, { createContext, useContext, useState } from 'react'
-import { Modal } from 'react-bootstrap'
 
 type ContextState = {
-  visible: boolean
-  showAlert: (msg: string) => void
+  isOpen: boolean
+  onOpen: (id: number) => void
+  onClose: () => void
+  id: number
 }
 
 const AlertContext = createContext<ContextState>(null)
 
 const AlertProvider: React.FC = ({ children }) => {
-  const [visible, setVisible] = useState(false)
-  const [content, setContent] = useState('')
-
-  const showAlert = (msg: string) => {
-    setContent(msg)
+  const [isOpen, setVisible] = useState(false)
+  const [id, setId] = useState<number>(null)
+  const onOpen = (id: number) => {
+    setId(id)
     setVisible(true)
-    setTimeout(() => setVisible(false), 1000)
+  }
+  const onClose = () => {
+    setId(null)
+    setVisible(false)
   }
   return (
     <AlertContext.Provider
       value={{
-        visible,
-        showAlert,
+        isOpen,
+        onOpen,
+        onClose,
+        id,
       }}
     >
       {children}
-      <Modal show={visible} onHide={() => setVisible(false)} backdrop={false}>
-        <Modal.Body>{content}</Modal.Body>
-      </Modal>
     </AlertContext.Provider>
   )
 }
