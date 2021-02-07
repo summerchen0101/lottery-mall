@@ -1,22 +1,12 @@
 import moment from 'moment'
 
 const useHelper = () => {
-  const createAutoNums = (count: number = 5, max: number = 39): number[] => {
-    const setNums = new Set(
-      [...Array(count)].map((t) => Math.ceil(Math.random() * max)),
-    )
-    const nums = Array.from(setNums)
-    if (nums.length < count) {
-      return createAutoNums()
-    }
-    return nums
-  }
-  const createDateOpts = (startDate?: any) => {
-    return [...Array(30)]
-      .map((_, i) => {
-        return moment(startDate).add(i, 'day')
-      })
-      .filter((m) => m.format('dddd') !== 'Sunday')
+  function getBase64(file) {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader()
+      reader.addEventListener('load', () => resolve(reader.result as string))
+      reader.readAsDataURL(file)
+    })
   }
 
   const copyToClipboard = (text) => {
@@ -27,7 +17,7 @@ const useHelper = () => {
     document.execCommand('copy')
     input.parentNode.removeChild(input)
   }
-  return { createAutoNums, createDateOpts, copyToClipboard }
+  return { getBase64, copyToClipboard }
 }
 
 export default useHelper

@@ -42,6 +42,10 @@ export type OptionType = {
   label: string
   value: string | number
 }
+export type OptionBasic = {
+  id: number
+  name: string
+}
 
 export interface News {
   content: string
@@ -118,6 +122,28 @@ export interface Banner {
   is_active: boolean
   start_at: number
   end_at: number
+}
+export interface MemberBank {
+  id: number
+  acc: string
+  branch: string
+  confirmed_at: number
+  created_at: number
+  img: string
+  is_confirm: boolean
+  is_default: boolean
+  name: string
+  person: string
+  updated_at: number
+}
+
+export interface MemberBankCreateRequest {
+  name: string
+  branch: string
+  acc: string
+  person: string
+  img: string
+  is_default: boolean
 }
 
 export interface PwUpdateRequest {

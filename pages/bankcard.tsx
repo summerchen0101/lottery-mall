@@ -1,12 +1,26 @@
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { Box } from '@chakra-ui/layout'
+import useRequest from '@/utils/useRequest'
+import { MemberBank } from '@/lib/types'
+import classNames from 'classnames'
 
 const BankCardPage: React.FC = () => {
+  const [memberBanks, setMemberBanks] = useState<MemberBank[]>([])
   const router = useRouter()
+  const API = useRequest()
+  const fetchMemberBankList = async () => {
+    try {
+      const res = await API.getMemberBankList()
+      setMemberBanks(res.data.list)
+    } catch (err) {}
+  }
+  useEffect(() => {
+    fetchMemberBankList()
+  }, [])
   return (
     <Layout>
       <HeaderTitleBar back title="銀行卡帳戶" />
@@ -20,25 +34,33 @@ const BankCardPage: React.FC = () => {
       </div> */}
         <form>
           <ul className="bank-list list-group">
-            {Array(3)
-              .fill('')
-              .map((t, i) => (
-                <li key={i} className="bank-item">
-                  <div className="d-flex justify-content-between">
-                    <div className="bank-name w-50">台灣土地銀行 005</div>
-                    <div className="user-name w-50 ">王*明</div>
-                  </div>
-                  <div className="bank-num">**** **** **** 54321</div>
-                  <div className="check-mask">审核中，请耐心等候</div>
-                  <div className="btn-wrap">
-                    <button className="second_btn mr-1 w-50">刪除</button>
-                    <button className="second_btn w-50">編輯</button>
-                  </div>
-                  <span className="focus">
-                    <i className="iconcheck iconfont" />
-                  </span>
-                </li>
-              ))}
+            {memberBanks.map((t, i) => (
+              <li
+                key={i}
+                className={classNames('bank-item', { check: !t.is_confirm })}
+              >
+                <div className="d-flex justify-content-between">
+                  <div className="bank-name w-100">{t.name}</div>
+                  <div className="user-name w-50 ">{t.person}</div>
+                </div>
+                <div className="bank-num">**** **** **** {t.acc.slice(-5)}</div>
+                <div className="check-mask">审核中，请耐心等候</div>
+                <div className="btn-wrap">
+                  <button
+                    className={classNames(
+                      'mr-1 w-50',
+                      t.is_default ? 'primary_btn' : 'second_btn',
+                    )}
+                  >
+                    預設
+                  </button>
+                  <button className="second_btn w-50">刪除</button>
+                </div>
+                <span className="focus">
+                  <i className="iconcheck iconfont" />
+                </span>
+              </li>
+            ))}
           </ul>
           <button
             type="button"

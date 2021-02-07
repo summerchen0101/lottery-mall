@@ -1,4 +1,10 @@
 import { NewsType } from './enums'
+import bankCodes from './bankCodes'
+
+export const bankCodeOpts = bankCodes.map((t) => ({
+  label: `${t.name}(${t.code})`,
+  value: t.code,
+}))
 
 export const dateOpts = [
   { label: '今日', value: 'today' },

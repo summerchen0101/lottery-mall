@@ -21,6 +21,9 @@ import {
   Activity,
   ActivityDetail,
   Faq,
+  MemberBank,
+  OptionBasic,
+  MemberBankCreateRequest,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -98,6 +101,32 @@ const useRequest = () => {
   const getBannerList = () =>
     post<BaseListResponse<Banner>>('banner/list', { page: 1, perpage: 100 })
 
+  const getMemberBankList = (req?: BaseListRequest) =>
+    post<BaseListResponse<MemberBank>>('member_bank/list', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
+  const getMemberBankOptions = () =>
+    post<BaseListResponse<OptionBasic>>('member_bank/options', {
+      page: 1,
+      perpage: 100,
+    })
+  const setDefaultMemberBank = (id: number, is_active: boolean) =>
+    post<null>('member_bank/default', {
+      id,
+      is_active,
+    })
+  const removeMemberBank = (id: number) =>
+    post<null>('member_bank/remove', { id })
+
+  const createMemberBank = (req: MemberBankCreateRequest) =>
+    post<null>('member_bank/add', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
+
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
 
@@ -112,8 +141,14 @@ const useRequest = () => {
   const logout = () => get<null>('logout')
 
   const getUserInfo = () => get<UserInfo>('member/view')
+
   return {
     getUserInfo,
+    getMemberBankList,
+    getMemberBankOptions,
+    createMemberBank,
+    setDefaultMemberBank,
+    removeMemberBank,
     getNewsList,
     getNewsDetail,
     getActivityList,
