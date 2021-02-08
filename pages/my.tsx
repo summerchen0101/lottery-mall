@@ -93,13 +93,13 @@ const MyPage: React.FC = () => {
               <img src="images/ic_cashhistory.svg" />
               充提记录
             </li>
-            <li
+            {/* <li
               className="menu-list-item"
               onClick={() => router.push('/game-result')}
             >
               <img src="images/ic_gameresult.svg" />
               比赛结果
-            </li>
+            </li> */}
             <li
               className="menu-list-item"
               onClick={() => router.push('/scores')}
