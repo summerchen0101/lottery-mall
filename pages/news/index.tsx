@@ -12,23 +12,26 @@ import useTransfer from '@/utils/useTransfer'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
+import EmptyHolder from '@/components/EmptyHolder'
 
 const news: React.FC = () => {
   const [current, setCurrent] = useState(1)
   const router = useRouter()
-  const [isEmpty, setIsEmpty] = useState(false)
   const { loadingStart, loadingEnd } = useLoaderProvider()
+  const [isLoaded, setIsLoaded] = useState(false)
   const API = useRequest()
   const { toDate } = useTransfer()
   const [news, setNews] = useState<News[]>([])
   const newsGroups = useMemo(() => _.groupBy(news, 'news_type'), [news])
   const fetchNews = async () => {
     loadingStart()
+    setIsLoaded(false)
     try {
       const res = await API.getNewsList()
       setNews(res.data.list)
     } catch (err) {}
     loadingEnd()
+    setIsLoaded(true)
   }
   useEffect(() => {
     fetchNews()
@@ -52,10 +55,7 @@ const news: React.FC = () => {
         <div className="tab-content section-padding">
           <div className="tab-pane active" id="tabs-1" role="tabpanel">
             <ul className="list-container list-group">
-              {/* <div className="data_null">
-                <img src="images/data_null.svg" />
-                <p>暂无数据</p>
-              </div> */}
+              {!newsGroups[current] && isLoaded && <EmptyHolder />}
               {newsGroups[current]?.map((t, i) => (
                 <li
                   key={i}
