@@ -169,6 +169,13 @@ export interface Handicap {
   }
 }
 
+export interface BetRecordSummary {
+  date: string
+  count: number
+  amount: string
+  result: string
+}
+
 export interface BetRecord {
   accounting_status: number
   amount: number

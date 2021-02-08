@@ -36,6 +36,7 @@ import {
   DateRangeRequest,
   BetCreateRequest,
   PageContent,
+  BetRecordSummary,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -220,8 +221,12 @@ const useRequest = () => {
       ...req,
     })
   const createBet = (req: BetCreateRequest) => post<null>('bet_rec/add', req)
+
+  /**
+   * 單日注單資訊
+   */
   const getBetRecordSummary = (req?: DateRangeRequest) =>
-    post<null>('bet_rec/summary', {
+    post<BaseListResponse<BetRecordSummary>>('bet_rec/summary', {
       page: 1,
       perpage: 100,
       ...req,

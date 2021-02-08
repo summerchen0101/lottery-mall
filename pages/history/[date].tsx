@@ -12,6 +12,7 @@ import useTransfer from '@/utils/useTransfer'
 import { BetRecord } from '@/lib/types'
 import _ from 'lodash'
 import moment from 'moment'
+import MessageBadge from '@/components/MessageBadge'
 
 const HistoryDetailPage: React.FC = () => {
   const [current, setCurrent] = useState(1)
@@ -39,7 +40,7 @@ const HistoryDetailPage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar title="账务明细" extra={<UserBalance />} />
+      <HeaderTitleBar back title="账务明细" extra={<MessageBadge />} />
       <BettingSummaryInfo
         date={date}
         sum={_.sumBy(betReocrds, 'amount')}

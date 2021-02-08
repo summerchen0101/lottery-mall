@@ -8,47 +8,60 @@ import { Select } from '@chakra-ui/select'
 import { useRouter } from 'next/dist/client/router'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import useTransfer from '@/utils/useTransfer'
-import { BetRecord } from '@/lib/types'
+import { BetRecord, BetRecordSummary } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import _ from 'lodash'
+import TabGroup from '@/components/TabGroup'
+import Tab from '@/components/Tab'
+import { beforeDateRangeOpts } from '@/lib/options'
+import classNames from 'classnames'
 const HistoryPage: React.FC = () => {
-  const [current, setCurrent] = useState(1)
+  const [currentTab, setCurrentTab] = useState('thisWeek')
   const router = useRouter()
   const [isEmpty, setIsEmpty] = useState(false)
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const API = useRequest()
-  const { toDate, toCurrency, amountToCanWin } = useTransfer()
-  const [betReocrds, setBetRecords] = useState<BetRecord[]>([])
-  const betReocrdsByDate = useMemo(
-    () => _.groupBy(betReocrds, (t) => toDate(t.created_at)),
-    [betReocrds],
-  )
-  const fetchBetRecord = async () => {
-    loadingStart()
-    try {
-      const res = await API.getBetRecordList()
-      setBetRecords(res.data.list)
-    } catch (err) {}
-    loadingEnd()
-  }
+  const { toDate, toCurrency, toDateRange } = useTransfer()
+  const [summaries, setSummaries] = useState<BetRecordSummary[]>([])
+  const totalInfo = useMemo(() => {
+    return {
+      count: _.sumBy(summaries, 'count'),
+      amount: _.sumBy(summaries, (t) => +t.amount),
+      result: _.sumBy(summaries, (t) => +t.result),
+    }
+  }, [summaries])
+  const start_at = useMemo(() => toDateRange(currentTab).start, [currentTab])
+  const end_at = useMemo(() => toDateRange(currentTab).end, [currentTab])
+
   const fetchBetRecordSummary = async () => {
     loadingStart()
     try {
-      const res = await API.getBetRecordSummary()
-      // setBetRecords(res.data.list)
+      const res = await API.getBetRecordSummary({
+        start_at,
+        end_at,
+      })
+      setSummaries(res.data.list)
     } catch (err) {}
     loadingEnd()
   }
   useEffect(() => {
-    fetchBetRecord()
     fetchBetRecordSummary()
-  }, [])
+  }, [currentTab])
   return (
     <Layout>
       <HeaderTitleBar back title="帐务历史" />
       <>
         <div className="main-content">
-          {/* <DateTabGroup /> */}
+          <TabGroup justifyContent="space-between">
+            {beforeDateRangeOpts.map((t, i) => (
+              <Tab
+                key={i}
+                label={t.label}
+                active={t.value === currentTab}
+                onClick={() => setCurrentTab(t.value)}
+              />
+            ))}
+          </TabGroup>
           <table className="table table-borderless">
             <thead>
               <tr>
@@ -60,14 +73,14 @@ const HistoryPage: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.entries(betReocrdsByDate).map(([date, bets], i) => (
+              {summaries.map((t, i) => (
                 <tr key={i}>
-                  <td>{date}</td>
-                  <td>{bets.length}</td>
-                  <td>{toCurrency(_.sumBy(bets, 'amount'))}</td>
-                  <td>-</td>
+                  <td>{t.date}</td>
+                  <td>{t.count}</td>
+                  <td>{toCurrency(+t.amount)}</td>
+                  <td>{toCurrency(+t.result)}</td>
                   <td>
-                    <Link href={`/history/${date}`}>
+                    <Link href={`/history/${t.date}`}>
                       <img src="images/ic_history.svg" />
                     </Link>
                   </td>
@@ -75,9 +88,16 @@ const HistoryPage: React.FC = () => {
               ))}
               <tr>
                 <td>合計</td>
-                <td>10</td>
-                <td>530</td>
-                <td className="text-green">7.65</td>
+                <td>{totalInfo.count}</td>
+                <td>{toCurrency(totalInfo.amount)}</td>
+                <td
+                  className={classNames({
+                    'text-success': totalInfo.result > 0,
+                    'text-danger': totalInfo.result < 0,
+                  })}
+                >
+                  {toCurrency(totalInfo.result)}
+                </td>
                 <td />
               </tr>
             </tbody>
