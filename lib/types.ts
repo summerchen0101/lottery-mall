@@ -312,6 +312,8 @@ export interface UserInfo {
   id: number
   name: string
   promo_code: string
+  email: string
+  mobile: string
 }
 
 export interface CaptchaResponse {
