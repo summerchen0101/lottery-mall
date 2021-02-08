@@ -306,10 +306,12 @@ export interface LoginResponse {
 }
 
 export interface UserInfo {
-  id: number
-  name: string
   acc: string
   balance: number
+  bet_sum: number
+  id: number
+  name: string
+  promo_code: string
 }
 
 export interface CaptchaResponse {

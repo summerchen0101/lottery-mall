@@ -9,12 +9,14 @@ import MessageBadge from '@/components/MessageBadge'
 import useService from '@/utils/useService'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import useTransfer from '@/utils/useTransfer'
+import useHelper from '@/utils/useHelper'
 
 const MyPage: React.FC = () => {
   const router = useRouter()
   const { fetchUserInfo } = useService()
   const { user } = useGlobalProvider()
   const { toCurrency } = useTransfer()
+  const { copyToClipboard } = useHelper()
 
   useEffect(() => {
     fetchUserInfo()
@@ -42,19 +44,19 @@ const MyPage: React.FC = () => {
                   />
                 </div>
                 {/* <div className="last-login-col">
-                  上次登入时间
-                  <span className="last-time ml-1">2020/06/08 15:50:16</span>
+                  複製推廣碼
+                  <span className=" ml-1">{user.promo_code}</span>
                 </div> */}
               </div>
             </div>
             <ul className="acc-inner mt-3">
               <li className="acc-item text-white">
-                <p className="user-wallet">{toCurrency(user.balance)}</p>
+                <p className="user-wallet">{toCurrency(user?.balance)}</p>
                 <span>可用余额</span>
               </li>
               <li className="divider" />
               <li className="acc-item text-white">
-                <p>-</p>
+                <p>{toCurrency(user?.bet_sum)}</p>
                 <span>交易中金额</span>
               </li>
             </ul>
