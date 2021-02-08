@@ -106,7 +106,9 @@ const MarketPage: React.FC = () => {
           <div className="section-title-bar d-flex justify-content-between align-items-center">
             <div className="vol-col">
               交易累計：
-              <span className="text-blue">{toCurrency(eventInfo.bet_sum)}</span>
+              <span className="text-blue">
+                {toCurrency(eventInfo?.bet_sum)}
+              </span>
             </div>
             {/* <div className="d-flex">
               <button className="title-bar-btn icon_btn">
