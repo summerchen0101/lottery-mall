@@ -56,37 +56,23 @@ function login() {
         </Box>
         <Box as="form" className="form" minH="400px" onSubmit={onSubmit}>
           <div className="form-title">欢迎登入</div>
-          <HStack>
-            <Box className="form-group" w="80%">
-              <input
-                type="text"
-                className="form-input account-input"
-                name="acc"
-                placeholder="請輸入帳號"
-                ref={register({
-                  required: '不可為空',
-                  pattern: {
-                    value: pattern.acc,
-                    message: '格式有誤',
-                  },
-                })}
-              />
-              <FieldValidateMessage error={errors.acc} />
-            </Box>
-            <Image src={captchaImg} onClick={() => fetchCaptcha()} />
-          </HStack>
-
-          <div className="form-group">
+          <Box className="form-group">
             <input
               type="text"
-              className="form-input"
-              name="code"
-              placeholder="請輸入驗證碼"
-              ref={register({ required: '不可為空' })}
+              className="form-input account-input"
+              name="acc"
+              placeholder="請輸入帳號"
+              ref={register({
+                required: '不可為空',
+                pattern: {
+                  value: pattern.acc,
+                  message: '格式有誤',
+                },
+              })}
             />
-            <i className="iconfont iconclear btn_cancel" />
-            {/* <small class="text-red"><i class="iconfont iconerror mr-1"></i>輸入帳號错误</small> */}
-          </div>
+            <FieldValidateMessage error={errors.acc} />
+          </Box>
+
           <div className="form-group">
             <input
               type="password"
@@ -97,6 +83,19 @@ function login() {
             />
             {/* <i className="iconfont iconeye-close btn_eye" /> */}
           </div>
+          <HStack>
+            <Box className="form-group" w="80%">
+              <input
+                type="text"
+                className="form-input"
+                name="code"
+                placeholder="請輸入驗證碼"
+                ref={register({ required: '不可為空' })}
+              />
+              <FieldValidateMessage error={errors.code} />
+            </Box>
+            <Image src={captchaImg} onClick={() => fetchCaptcha()} />
+          </HStack>
           {/* <label className="form-checkbox ">
             <input className="input-check" name="sort" type="checkbox" />
             <span className="checkmark" />
