@@ -32,7 +32,7 @@ import {
   DateRangeListRequest,
   OddsListRequest,
   Odds,
-  Bet,
+  BetRecord,
   DateRangeRequest,
   BetCreateRequest,
 } from '@/lib/types'
@@ -213,7 +213,7 @@ const useRequest = () => {
    * 注單
    */
   const getBetRecordList = (req?: DateRangeRequest) =>
-    post<BaseListResponse<Bet>>('bet_rec/list', {
+    post<BaseListResponse<BetRecord>>('bet_rec/list', {
       page: 1,
       perpage: 100,
       ...req,

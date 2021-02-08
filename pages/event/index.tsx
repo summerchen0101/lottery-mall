@@ -36,10 +36,10 @@ const eventList: React.FC = () => {
         {/* 熱門賽事 */}
         <div className="section-title-bar d-flex justify-content-between section-padding">
           <ColumnTitle>赛事列表</ColumnTitle>
-          <div className="d-flex group-btn">
+          {/* <div className="d-flex group-btn">
             <LeagueFilterBtn />
             <CountDownReloadBtn />
-          </div>
+          </div> */}
         </div>
         {/* 日期頁籤 */}
         <TabGroup justifyContent="space-between">

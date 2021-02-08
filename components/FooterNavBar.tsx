@@ -9,7 +9,7 @@ const FooterNavBar: React.FC = () => {
           <ActiveLink href="/event" label="市場" />
         </li>
         <li className="footer-list-item detail">
-          <ActiveLink href="/bettings" label="明细" />
+          <ActiveLink href="/bet-record" label="明细" />
         </li>
         <li className="footer-list-item index">
           <ActiveLink href="/" label="首页" />

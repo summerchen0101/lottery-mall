@@ -1,6 +1,7 @@
 import { OptionType } from '@/lib/types'
 import moment from 'moment'
 import numeral from 'numeral'
+import { useCallback } from 'react'
 
 const useTransfer = () => {
   const toDateTime = (unixTime: number) =>
@@ -19,7 +20,7 @@ const useTransfer = () => {
     return options.find((t) => t.value === code)?.label
   }
 
-  const toDateRange = (rangeType: string) => {
+  const toDateRange = useCallback((rangeType: string) => {
     switch (rangeType) {
       case 'today':
         return {
@@ -53,7 +54,14 @@ const useTransfer = () => {
         }
     }
     return { start: 0, end: 0 }
-  }
+  }, [])
+
+  const amountToCanWin = useCallback((amount, odds) => {
+    if (amount && odds) {
+      return numeral(amount).multiply(odds).value()
+    }
+    return 0
+  }, [])
 
   return {
     toDate,
@@ -62,6 +70,7 @@ const useTransfer = () => {
     toCurrency,
     toDateRange,
     toOptionName,
+    amountToCanWin,
   }
 }
 

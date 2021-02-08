@@ -161,11 +161,44 @@ export interface Handicap {
   }
 }
 
-export interface Bet {
-  id: number
-  odds_id: number
-  odds: number
+export interface BetRecord {
+  accounting_status: number
   amount: number
+  away_percent: number
+  away_point: number
+  bet_item: string
+  created_at: number
+  fee: number
+  game_code: string
+  handicap: {
+    id: number
+    league: {
+      game_code: string
+      group_code: string
+      id: number
+      name: string
+    }
+    play_at: number
+    team_away: {
+      id: number
+      league_id: number
+      name: string
+      name_en: string
+    }
+    team_home: {
+      id: number
+      league_id: number
+      name: string
+      name_en: string
+    }
+  }
+  home_percent: number
+  home_point: number
+  id: number
+  odds: number
+  rebate: number
+  result: number
+  section_code: string
 }
 
 export interface BetCreateRequest {

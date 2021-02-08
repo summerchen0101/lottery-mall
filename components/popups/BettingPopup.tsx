@@ -14,14 +14,9 @@ type BettingForm = {
 
 function BettingPopup() {
   const { bettingInfo, eventInfo, userBalance } = useGlobalProvider()
-  const { toDateTime, toOptionName } = useTransfer()
+  const { toDateTime, toOptionName, amountToCanWin } = useTransfer()
   const [amount, setAmount] = useState<number>()
   const [visible, setVisible] = usePopupContext('betting')
-
-  const canWinAmount = useMemo(() => {
-    if (!amount) return 0
-    return (bettingInfo?.odds * 10000 * amount) / 10000
-  }, [amount, bettingInfo])
 
   const API = useRequest()
   const toast = useToast()
@@ -81,7 +76,7 @@ function BettingPopup() {
           <input
             type="number"
             className="method-input w-50"
-            placeholder={`可赢 $${canWinAmount}`}
+            placeholder={`可赢 $${amountToCanWin(amount, bettingInfo?.odds)}`}
             disabled
           />
         </div>
