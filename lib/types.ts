@@ -161,6 +161,19 @@ export interface Handicap {
   }
 }
 
+export interface Bet {
+  id: number
+  odds_id: number
+  odds: number
+  amount: number
+}
+
+export interface BetCreateRequest {
+  odds_id: number
+  odds: number
+  amount: number
+}
+
 export interface Odds {
   id: number
   away_percent: number

@@ -32,6 +32,9 @@ import {
   DateRangeListRequest,
   OddsListRequest,
   Odds,
+  Bet,
+  DateRangeRequest,
+  BetCreateRequest,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -174,6 +177,8 @@ const useRequest = () => {
       perpage: 100,
       ...req,
     })
+  const createWithdraw = (req: WithdrawCreateRequest) =>
+    post<null>('withdraw_rec/add', req)
 
   /**
    * 盤口
@@ -202,8 +207,16 @@ const useRequest = () => {
   const getScoreList = () =>
     post<BaseListResponse<Score>>('score/list', { game_code: 'SC' })
 
-  const createWithdraw = (req: WithdrawCreateRequest) =>
-    post<null>('withdraw_rec/add', req)
+  /**
+   * 注單
+   */
+  const getBetRecordList = (req?: DateRangeRequest) =>
+    post<BaseListResponse<Bet>>('bet_rec/list', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
+  const createBet = (req: BetCreateRequest) => post<null>('bet_rec/add', req)
 
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
@@ -241,6 +254,8 @@ const useRequest = () => {
     getScoreList,
     getOddsList,
     getFaqList,
+    getBetRecordList,
+    createBet,
     checkLogin,
     getCaptcha,
     updatePw,

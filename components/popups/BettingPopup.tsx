@@ -1,6 +1,9 @@
+import { useGlobalProvider } from '@/context/GlobalProvider'
 import React from 'react'
 
 function BettingPopup() {
+  const { bettingInfo } = useGlobalProvider()
+  if (!bettingInfo) return <></>
   return (
     <div
       className="modal fade"
@@ -23,6 +26,7 @@ function BettingPopup() {
               aria-hidden="true"
             ></button>
           </div>
+          <pre>{JSON.stringify(bettingInfo)}</pre>
           <div className="modal-body">
             <div className="league-col text-center text-lighgray">
               瑞典北部甲组联赛

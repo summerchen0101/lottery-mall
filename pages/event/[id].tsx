@@ -15,6 +15,7 @@ import useTransfer from '@/utils/useTransfer'
 import { Odds } from '@/lib/types'
 import EmptyHolder from '@/components/EmptyHolder'
 import { Box } from '@chakra-ui/layout'
+import { useGlobalProvider } from '@/context/GlobalProvider'
 
 const tabs = [
   { label: '全場反波膽', value: 'F' },
@@ -24,8 +25,9 @@ const MarketPage: React.FC = () => {
   const [currentSection, setCurrentSection] = useState('F')
   const [isEmpty, setIsEmpty] = useState(false)
   const { loadingStart, loadingEnd } = useLoaderProvider()
+  const { setBettingInfo, eventInfo } = useGlobalProvider()
   const API = useRequest()
-  const { toCurrency } = useTransfer()
+  const { toCurrency, toDateTime } = useTransfer()
   const [odds, setOdds] = useState<Odds[]>([])
   const router = useRouter()
   const id = useMemo(() => +router.query?.id, [router.query])
@@ -58,12 +60,12 @@ const MarketPage: React.FC = () => {
           <a className="left-item">
             <i className="iconfont iconallow-left" />
           </a>
-          <div className="league-col">瑞典北部甲组联赛</div>
-          <div className="time-col">2020-09-02 14:00</div>
+          <div className="league-col">{eventInfo.league.name}</div>
+          <div className="time-col">{toDateTime(eventInfo.play_at)}</div>
           <div className="team-col">
-            <div className="t1">富山胜利(主)</div>
+            <div className="t1">{eventInfo.team_home.name}(主)</div>
             <div className="icon_vs">VS</div>
-            <div className="t2">熊本深红</div>
+            <div className="t2">{eventInfo.team_away.name}</div>
           </div>
           <div className="score-col">22:19</div>
         </div>
@@ -109,6 +111,7 @@ const MarketPage: React.FC = () => {
                     className="tricks-item"
                     data-toggle="modal"
                     data-target="#betlistModal"
+                    onClick={() => setBettingInfo(t)}
                   >
                     <div className="score">
                       {t.home_point}-{t.away_point}

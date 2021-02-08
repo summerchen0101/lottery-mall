@@ -2,15 +2,18 @@ import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { Handicap } from '@/lib/types'
 import useTransfer from '@/utils/useTransfer'
+import { useGlobalProvider } from '@/context/GlobalProvider'
 
 function EventItem({ event }: { event: Handicap }) {
   const router = useRouter()
   const { toDateTime } = useTransfer()
+  const { setEventInfo } = useGlobalProvider()
+  const handleEventClicked = () => {
+    setEventInfo(event)
+    router.push(`/event/${event.id}`)
+  }
   return (
-    <div
-      className="team-item"
-      onClick={() => router.push(`/event/${event.id}`)}
-    >
+    <div className="team-item" onClick={handleEventClicked}>
       <div className="info-col ">
         <div className="d-flex justify-content-between align-items-center bdb pb">
           {/* <div className="time text-red">
