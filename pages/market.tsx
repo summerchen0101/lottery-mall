@@ -18,11 +18,18 @@ import { useGlobalProvider } from '@/context/GlobalProvider'
 const MarketPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(1)
   const router = useRouter()
-  const { fetchMarquee, marquee } = useService()
+  const {
+    fetchMarquee,
+    fetchHandicaps,
+    fetchScores,
+    marquee,
+    scores,
+    handicaps,
+  } = useService()
   const { user } = useGlobalProvider()
 
   useEffect(() => {
-    Promise.all([fetchMarquee()])
+    Promise.all([fetchMarquee(), fetchHandicaps(), fetchScores()])
     return () => {
       // slider.removeAllSlides()
     }
@@ -60,8 +67,8 @@ const MarketPage: React.FC = () => {
                               <p>暂无数据</p>
                           </div> */}
             <div className="list-container">
-              {[...Array(5)].map((_, i) => (
-                <EventItem key={i} />
+              {handicaps.map((t, i) => (
+                <EventItem key={i} event={t} />
               ))}
             </div>
           </div>

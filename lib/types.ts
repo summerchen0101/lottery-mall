@@ -135,6 +135,36 @@ export interface WithdrawCreateRequest {
   sec_pass: string
 }
 
+export interface Handicap {
+  bet_amount_limit: number
+  bet_sum: number
+  game_code: string
+  id: number
+  league: {
+    game_code: string
+    group_code: string
+    id: number
+    name: string
+  }
+  play_at: number
+  team_away: {
+    id: number
+    league_id: number
+    name: string
+    name_en: string
+  }
+  team_home: {
+    id: number
+    league_id: number
+    name: string
+    name_en: string
+  }
+}
+
+export interface Score {
+  id: number
+}
+
 export interface Message {
   id: number
   title: string

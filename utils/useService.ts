@@ -3,12 +3,14 @@ import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import useRequest from './useRequest'
 import { useCallback, useState } from 'react'
-import { Banner, Marquee } from '@/lib/types'
+import { Banner, Handicap, Marquee, Score } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 
 const useService = () => {
   const [marquee, setMarquee] = useState<Marquee[]>([])
   const [banners, setBanners] = useState<Banner[]>([])
+  const [handicaps, setHandicaps] = useState<Handicap[]>([])
+  const [scores, setScores] = useState<Score[]>([])
   const toast = useToast()
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const API = useRequest()
@@ -56,14 +58,32 @@ const useService = () => {
     } catch (err) {}
   }, [])
 
+  const fetchHandicaps = useCallback(async () => {
+    try {
+      const { data } = await API.getHandicapList()
+      setHandicaps(data.list)
+    } catch (err) {}
+  }, [])
+
+  const fetchScores = useCallback(async () => {
+    try {
+      const { data } = await API.getScoreList()
+      setScores(data.list)
+    } catch (err) {}
+  }, [])
+
   return {
     handleSendPhoneCode,
     doLogout,
     fetchUserInfo,
     fetchMarquee,
     fetchBanners,
+    fetchHandicaps,
+    fetchScores,
     banners,
     marquee,
+    handicaps,
+    scores,
   }
 }
 

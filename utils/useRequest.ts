@@ -27,6 +27,8 @@ import {
   Message,
   Withdraw,
   WithdrawCreateRequest,
+  Handicap,
+  Score,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -170,6 +172,18 @@ const useRequest = () => {
       ...req,
     })
 
+  /**
+   * 盤口
+   */
+  const getHandicapList = () =>
+    post<BaseListResponse<Handicap>>('handicap/list', { page: 1, perpage: 100 })
+
+  /**
+   * 比分
+   */
+  const getScoreList = () =>
+    post<BaseListResponse<Score>>('score/list', { game_code: 'SC' })
+
   const createWithdraw = (req: WithdrawCreateRequest) =>
     post<null>('withdraw_rec/add', req)
 
@@ -205,6 +219,8 @@ const useRequest = () => {
     getActivityDetail,
     getMarqueeList,
     getBannerList,
+    getHandicapList,
+    getScoreList,
     getFaqList,
     checkLogin,
     getCaptcha,

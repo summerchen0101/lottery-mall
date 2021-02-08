@@ -21,13 +21,20 @@ const Home: React.FC = () => {
     fetchMarquee,
     fetchBanners,
     fetchUserInfo,
+    fetchHandicaps,
     marquee,
     banners,
+    handicaps,
   } = useService()
   const { user } = useGlobalProvider()
 
   useEffect(() => {
-    Promise.all([fetchMarquee(), fetchBanners(), fetchUserInfo()])
+    Promise.all([
+      fetchMarquee(),
+      fetchBanners(),
+      fetchUserInfo(),
+      fetchHandicaps(),
+    ])
     return () => {
       // slider.removeAllSlides()
     }
