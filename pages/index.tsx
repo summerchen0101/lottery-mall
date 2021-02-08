@@ -33,7 +33,7 @@ const Home: React.FC = () => {
       fetchMarquee(),
       fetchBanners(),
       fetchUserInfo(),
-      fetchHandicaps(),
+      fetchHandicaps({ perpage: 20 }),
     ])
     return () => {
       // slider.removeAllSlides()
@@ -98,8 +98,8 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className="list-container">
-            {[...Array(5)].map((_, i) => (
-              <HomeEventItem key={i} />
+            {handicaps.map((event, i) => (
+              <HomeEventItem key={i} event={event} />
             ))}
           </div>
         </div>

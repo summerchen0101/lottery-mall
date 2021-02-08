@@ -17,8 +17,8 @@ export interface BaseListRequest {
 }
 
 export interface DateRangeRequest {
-  start_at: number
-  end_at: number
+  start_at?: number
+  end_at?: number
 }
 
 export type DateRangeListRequest = BaseListRequest & DateRangeRequest
