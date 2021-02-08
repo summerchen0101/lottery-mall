@@ -7,6 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import theme from '@/lib/theme'
 import 'swiper/swiper.scss'
 import '@/style/global.scss'
+import PopupProvider from '@/context/PopupContext'
 
 const MyApp = ({ Component, props }) => {
   return (
@@ -14,9 +15,11 @@ const MyApp = ({ Component, props }) => {
       <DateProvider>
         <ChakraProvider theme={theme}>
           <LoaderProvider>
-            <AlertProvider>
-              <Component {...props} />
-            </AlertProvider>
+            <PopupProvider>
+              <AlertProvider>
+                <Component {...props} />
+              </AlertProvider>
+            </PopupProvider>
           </LoaderProvider>
         </ChakraProvider>
       </DateProvider>

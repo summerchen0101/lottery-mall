@@ -12,10 +12,11 @@ import _ from 'lodash'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import useRequest from '@/utils/useRequest'
 import useTransfer from '@/utils/useTransfer'
-import { Odds } from '@/lib/types'
+import { Bet, Odds } from '@/lib/types'
 import EmptyHolder from '@/components/EmptyHolder'
 import { Box } from '@chakra-ui/layout'
 import { useGlobalProvider } from '@/context/GlobalProvider'
+import { usePopupContext } from '@/context/PopupContext'
 
 const tabs = [
   { label: '全場反波膽', value: 'F' },
@@ -26,6 +27,7 @@ const MarketPage: React.FC = () => {
   const [isEmpty, setIsEmpty] = useState(false)
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const { setBettingInfo, setEventInfo, eventInfo } = useGlobalProvider()
+  const [, setBettingVisible] = usePopupContext('betting')
   const { fetchUserInfo } = useService()
   const API = useRequest()
   const { toCurrency, toDateTime } = useTransfer()
@@ -53,6 +55,11 @@ const MarketPage: React.FC = () => {
       }
     } catch (err) {}
     loadingEnd()
+  }
+
+  const handleBetting = (odds: Odds) => {
+    setBettingInfo(odds)
+    setBettingVisible(true)
   }
 
   useEffect(() => {
@@ -124,9 +131,7 @@ const MarketPage: React.FC = () => {
                   <div
                     key={i}
                     className="tricks-item"
-                    data-toggle="modal"
-                    data-target="#betlistModal"
-                    onClick={() => setBettingInfo(t)}
+                    onClick={() => handleBetting(t)}
                   >
                     <div className="score">
                       {t.home_point}-{t.away_point}
