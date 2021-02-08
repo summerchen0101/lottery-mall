@@ -219,6 +219,8 @@ const useRequest = () => {
       ...req,
     })
   const createBet = (req: BetCreateRequest) => post<null>('bet_rec/add', req)
+  const getBetRecordSummary = (req: DateRangeRequest) =>
+    post<null>('bet_rec/summary', req)
 
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
@@ -258,6 +260,7 @@ const useRequest = () => {
     getOddsList,
     getFaqList,
     getBetRecordList,
+    getBetRecordSummary,
     createBet,
     checkLogin,
     getCaptcha,

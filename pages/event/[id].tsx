@@ -37,8 +37,8 @@ const MarketPage: React.FC = () => {
 
   const fetchEvent = async () => {
     try {
-      const res = await API.getHandicapList()
-      setEventInfo(res.data.list.find((t) => t.id === id))
+      const res = await API.getHandicapDetail(id)
+      setEventInfo(res.data)
     } catch (err) {}
   }
   const fetchOdds = async () => {
@@ -88,7 +88,7 @@ const MarketPage: React.FC = () => {
             <div className="icon_vs">VS</div>
             <div className="t2">{eventInfo?.team_away?.name}</div>
           </div>
-          <div className="score-col">22:19</div>
+          {/* <div className="score-col">22:19</div> */}
         </div>
 
         <div className="main-section section-padding">
@@ -105,9 +105,10 @@ const MarketPage: React.FC = () => {
 
           <div className="section-title-bar d-flex justify-content-between align-items-center">
             <div className="vol-col">
-              成交量：<span className="text-blue">42,823,114</span>
+              交易累計：
+              <span className="text-blue">{toCurrency(eventInfo.bet_sum)}</span>
             </div>
-            <div className="d-flex">
+            {/* <div className="d-flex">
               <button className="title-bar-btn icon_btn">
                 <i
                   className="iconfont iconbillboard"
@@ -116,7 +117,7 @@ const MarketPage: React.FC = () => {
                 />
               </button>
               <CountDownReloadBtn />
-            </div>
+            </div> */}
           </div>
           {/* Tab panes */}
           {!isEmpty ? (
