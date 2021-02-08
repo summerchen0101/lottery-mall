@@ -117,6 +117,7 @@ const useRequest = () => {
       perpage: 100,
       ...req,
     })
+  const getFaqDetail = (id: number) => get<Faq>(`qa/view/${id}`)
 
   /**
    * 跑馬燈
@@ -276,6 +277,7 @@ const useRequest = () => {
     getScoreList,
     getOddsList,
     getFaqList,
+    getFaqDetail,
     getBetRecordList,
     getBetRecordSummary,
     createBet,
