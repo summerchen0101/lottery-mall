@@ -25,6 +25,8 @@ import {
   OptionBasic,
   MemberBankCreateRequest,
   Message,
+  Withdraw,
+  WithdrawCreateRequest,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -47,7 +49,7 @@ const useRequest = () => {
   AxiosInstance.interceptors.response.use((res) => {
     let errorMsg = ''
     if (res.data.code) {
-      errorMsg = errCodes[res.data.code]
+      errorMsg = errCodes[res.data.code] || `錯誤代碼 ${res.data.code}`
     } else if (res.status === 401) {
       router.push('/login')
       errorMsg = httpStatus[401]
@@ -139,25 +141,37 @@ const useRequest = () => {
       perpage: 100,
       ...req,
     })
+
   const getMemberBankOptions = () =>
     post<BaseListResponse<OptionBasic>>('member_bank/options', {
       page: 1,
       perpage: 100,
     })
+
   const setDefaultMemberBank = (id: number) =>
     post<null>('member_bank/default', {
       id,
       is_active: true,
     })
+
   const removeMemberBank = (id: number) =>
     post<null>('member_bank/remove', { id })
 
   const createMemberBank = (req: MemberBankCreateRequest) =>
-    post<null>('member_bank/add', {
+    post<null>('member_bank/add', req)
+
+  /**
+   * 提領
+   */
+  const getWithdrawList = (req?: BaseListRequest) =>
+    post<BaseListResponse<Withdraw>>('withdraw_rec/list', {
       page: 1,
       perpage: 100,
       ...req,
     })
+
+  const createWithdraw = (req: WithdrawCreateRequest) =>
+    post<null>('withdraw_rec/add', req)
 
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
@@ -183,6 +197,8 @@ const useRequest = () => {
     removeMemberBank,
     getMessageList,
     getMessageDetail,
+    getWithdrawList,
+    createWithdraw,
     getNewsList,
     getNewsDetail,
     getActivityList,

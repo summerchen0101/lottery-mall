@@ -4,7 +4,6 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 const CarouselBanner: React.FC<{ banners: Banner[] }> = ({ banners }) => {
-  console.log(banners)
   const router = useRouter()
   return (
     <div className="banner-section">
