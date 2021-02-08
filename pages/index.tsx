@@ -82,7 +82,10 @@ const Home: React.FC = () => {
               优惠
             </li>
             <li className="divider" />
-            <li className="menu-list-item ic_score">
+            <li
+              className="menu-list-item ic_score"
+              onClick={() => router.push('/scores')}
+            >
               <img src="/images/ic_score.svg" />
               比分
             </li>

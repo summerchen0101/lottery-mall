@@ -102,7 +102,7 @@ const MyPage: React.FC = () => {
             </li>
             <li
               className="menu-list-item"
-              // onClick="location.href = 'score.html'"
+              onClick={() => router.push('/scores')}
             >
               <img src="images/ic_score.svg" />
               即时比分

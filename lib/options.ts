@@ -50,3 +50,11 @@ export const processStatusOpts = [
   { label: '已完成', value: ProcessStatus.Finish },
   { label: '已取消', value: ProcessStatus.Cancel },
 ]
+
+export const gameStatusOpts = [
+  { label: '盤前', value: 1 },
+  { label: '走地', value: 2 },
+  { label: '完賽', value: 3 },
+  { label: '取消', value: 4 },
+  { label: '延期', value: 5 },
+]

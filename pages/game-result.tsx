@@ -2,8 +2,12 @@ import DateTabGroup from '@/components/DateTabGroup'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import Tab from '@/components/Tab'
+import TabGroup from '@/components/TabGroup'
+import { beforeDateRangeOpts } from '@/lib/options'
+import useRequest from '@/utils/useRequest'
 import $ from 'jquery'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const jqEffectFunc = function (e) {
   if ($(e.target).is('.show')) {
@@ -16,8 +20,16 @@ const jqEffectFunc = function (e) {
 }
 
 const GameResultPage: React.FC = () => {
+  const [currentTab, setCurrentTab] = useState('thisWeek')
+  const API = useRequest()
+  const fetchScores = async () => {
+    try {
+      await API.getScoreList()
+    } catch (err) {}
+  }
   useEffect(() => {
     $('.result-title').on('click', jqEffectFunc)
+    fetchScores()
     return () => {
       $('.result-title').off()
     }
@@ -26,7 +38,16 @@ const GameResultPage: React.FC = () => {
     <Layout>
       <HeaderTitleBar back title="比賽結果" />
       <div className="main-content">
-        <DateTabGroup />
+        <TabGroup justifyContent="space-between">
+          {beforeDateRangeOpts.map((t, i) => (
+            <Tab
+              key={i}
+              label={t.label}
+              active={t.value === currentTab}
+              onClick={() => setCurrentTab(t.value)}
+            />
+          ))}
+        </TabGroup>
         <div className="list-container">
           {Array(4)
             .fill('')
