@@ -4,7 +4,7 @@ import Tab from './Tab'
 import TabGroup from './TabGroup'
 
 function DateTabGroup() {
-  const [current, setCurrent] = useState(1)
+  const [current, setCurrent] = useState('today')
   return (
     <TabGroup justifyContent="space-between">
       {beforeDateRangeOpts.map((t, i) => (

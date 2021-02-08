@@ -1,14 +1,24 @@
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { Avatar } from '@chakra-ui/avatar'
 import { Box } from '@chakra-ui/layout'
 import MessageBadge from '@/components/MessageBadge'
+import useService from '@/utils/useService'
+import { useGlobalProvider } from '@/context/GlobalProvider'
+import useTransfer from '@/utils/useTransfer'
 
 const MyPage: React.FC = () => {
   const router = useRouter()
+  const { fetchUserInfo } = useService()
+  const { user } = useGlobalProvider()
+  const { toCurrency } = useTransfer()
+
+  useEffect(() => {
+    fetchUserInfo()
+  }, [])
   return (
     <Layout>
       <HeaderTitleBar title="我的" extra={<MessageBadge />} />
@@ -25,26 +35,26 @@ const MyPage: React.FC = () => {
               />
               <div className="user-info d-flex flex-column justify-content-center">
                 <div className="user-id-col d-flex">
-                  bet8888
+                  {user?.acc} [{user?.name}]
                   <i
                     className="iconfont iconedit ml-2"
                     onClick={() => router.push('/profile')}
                   />
                 </div>
-                <div className="last-login-col">
+                {/* <div className="last-login-col">
                   上次登入时间
                   <span className="last-time ml-1">2020/06/08 15:50:16</span>
-                </div>
+                </div> */}
               </div>
             </div>
             <ul className="acc-inner mt-3">
               <li className="acc-item text-white">
-                <p className="user-wallet">20,849.55</p>
+                <p className="user-wallet">{toCurrency(user.balance)}</p>
                 <span>可用余额</span>
               </li>
               <li className="divider" />
               <li className="acc-item text-white">
-                <p>1,849.55</p>
+                <p>-</p>
                 <span>交易中金额</span>
               </li>
             </ul>

@@ -126,8 +126,16 @@ export interface Banner {
 
 export interface Withdraw {
   id: number
-  bank_id: number
   amount: number
+  balance: number
+  bank_acc: string
+  bank_branch: string
+  bank_name: string
+  bank_person: string
+  created_at: number
+  sn: string
+  status: number
+  updated_at: number
 }
 export interface WithdrawCreateRequest {
   bank_id: number

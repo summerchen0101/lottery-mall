@@ -3,9 +3,11 @@ import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import UserBalance from '@/components/UserBalance'
+import { useGlobalProvider } from '@/context/GlobalProvider'
 import pattern from '@/lib/pattern'
 import { OptionBasic } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
+import useService from '@/utils/useService'
 import { Box } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { useToast } from '@chakra-ui/toast'
@@ -24,6 +26,8 @@ const withdraw: React.FC = () => {
   const router = useRouter()
   const API = useRequest()
   const toast = useToast()
+  const { fetchUserInfo } = useService()
+  const { userBalance } = useGlobalProvider()
   const { register, handleSubmit, errors, watch } = useForm<WithdrawForm>()
   const fetchBankCardOpts = async () => {
     try {
@@ -47,11 +51,22 @@ const withdraw: React.FC = () => {
     } catch (err) {}
   })
   useEffect(() => {
-    fetchBankCardOpts()
+    Promise.all([fetchBankCardOpts(), fetchUserInfo()])
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar back title="提领" extra={<UserBalance />} />
+      <HeaderTitleBar
+        back
+        title="提领"
+        extra={
+          <button
+            className="s-btn"
+            onClick={() => router.push('/withdraw/record')}
+          >
+            提领记录
+          </button>
+        }
+      />
       {/* <div className="pintop-section fixed">
         <ul className="acc-inner mt-1 px-2">
           <li className="acc-item">
@@ -93,7 +108,10 @@ const withdraw: React.FC = () => {
             </Select>
             <FieldValidateMessage error={errors.bank_id} />
           </div>
-          <label className="form-label2">提领金额</label>
+          <label className="form-label2">
+            提领金额
+            <span className="user-wallet text-blue ml-3">¥ {userBalance}</span>
+          </label>
           <div className="form-group">
             <input
               type="number"

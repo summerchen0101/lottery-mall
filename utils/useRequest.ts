@@ -171,7 +171,7 @@ const useRequest = () => {
   /**
    * 提領
    */
-  const getWithdrawList = (req?: BaseListRequest) =>
+  const getWithdrawList = (req?: DateRangeListRequest) =>
     post<BaseListResponse<Withdraw>>('withdraw_rec/list', {
       page: 1,
       perpage: 100,
