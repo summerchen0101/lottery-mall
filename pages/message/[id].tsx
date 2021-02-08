@@ -35,7 +35,7 @@ const messageDetail: React.FC = () => {
         <div className="main-content section-padding">
           <div className="message-title w-100 my-3">{message.title}</div>
           <div className="message-time w-100">{toDate(message.created_at)}</div>
-          <div className="message-content-col w-100 mt-4">
+          <div className="message-content-col w-100 mt-3">
             {message.content}
           </div>
         </div>

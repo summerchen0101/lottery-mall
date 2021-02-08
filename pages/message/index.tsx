@@ -6,6 +6,7 @@ import { Message } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useTransfer from '@/utils/useTransfer'
 import { Box } from '@chakra-ui/layout'
+import classNames from 'classnames'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
 
@@ -51,12 +52,17 @@ const message: React.FC = () => {
                 <span className="checkmark" />
               </label>
               {/* <input type="checkbox" class="message-select"> */}
-              <i className="iconfont iconmail" />
+              <i
+                className={classNames(
+                  'iconfont',
+                  t.is_read ? 'iconmail-open' : 'iconmail',
+                )}
+              />
               <div className="message-container d-flex flex-column">
                 <div className="title-col">
                   <div className="message-title">{t.title}</div>
                   <div className="message-time text-right">
-                    {toDate(t.updated_at)}
+                    {toDate(t.created_at)}
                   </div>
                 </div>
                 <div className="message-content-col">{t.content}</div>

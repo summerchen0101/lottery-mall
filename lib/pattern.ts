@@ -3,6 +3,7 @@ const pattern = {
   pass: /^\w{4,12}$/,
   acc: /^\w{4,12}$/,
   email: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/,
+  positiveInt: /^\+?[1-9][0-9]*$/,
 }
 
 export default pattern

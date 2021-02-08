@@ -137,11 +137,10 @@ export interface WithdrawCreateRequest {
 
 export interface Message {
   id: number
+  title: string
   content: string
   created_at: number
-  title: string
-  sender: string
-  updated_at: number
+  is_read: boolean
 }
 export interface MemberBank {
   id: number
