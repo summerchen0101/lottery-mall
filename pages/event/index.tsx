@@ -9,24 +9,32 @@ import NoticeBar from '@/components/NoticeBar'
 import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
 import Tab from '@/components/Tab'
 import TabGroup from '@/components/TabGroup'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { afterDateRangeOpts } from '@/lib/options'
 import { useRouter } from 'next/dist/client/router'
 import useService from '@/utils/useService'
 import { useGlobalProvider } from '@/context/GlobalProvider'
+import useTransfer from '@/utils/useTransfer'
 
 const eventList: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState(1)
+  const [currentTab, setCurrentTab] = useState('today')
   const router = useRouter()
   const { fetchMarquee, fetchHandicaps, marquee, handicaps } = useService()
   const { user } = useGlobalProvider()
+  const { toDateRange } = useTransfer()
+  const start_at = useMemo(() => toDateRange(currentTab).start, [currentTab])
+  const end_at = useMemo(() => toDateRange(currentTab).end, [currentTab])
 
   useEffect(() => {
-    Promise.all([fetchMarquee(), fetchHandicaps()])
-    return () => {
-      // slider.removeAllSlides()
-    }
+    fetchMarquee()
   }, [])
+
+  useEffect(() => {
+    fetchHandicaps({
+      start_at,
+      end_at,
+    })
+  }, [currentTab])
   return (
     <Layout>
       <HeaderTitleBar title="市场列表" />

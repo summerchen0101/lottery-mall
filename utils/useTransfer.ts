@@ -27,6 +27,11 @@ const useTransfer = () => {
           start: moment().startOf('day').unix(),
           end: moment().endOf('day').unix(),
         }
+      case 'tomorrow':
+        return {
+          start: moment().add(1, 'day').startOf('day').unix(),
+          end: moment().add(1, 'day').endOf('day').unix(),
+        }
       case 'yesterday':
         return {
           start: moment().subtract(1, 'day').startOf('day').unix(),
@@ -41,6 +46,11 @@ const useTransfer = () => {
         return {
           start: moment().subtract(1, 'week').startOf('week').unix(),
           end: moment().subtract(1, 'week').endOf('week').unix(),
+        }
+      case 'nextWeek':
+        return {
+          start: moment().add(1, 'week').startOf('week').unix(),
+          end: moment().add(1, 'week').endOf('week').unix(),
         }
       case 'thisMonth':
         return {

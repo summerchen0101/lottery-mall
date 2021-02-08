@@ -3,7 +3,13 @@ import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import useRequest from './useRequest'
 import { useCallback, useState } from 'react'
-import { Banner, Handicap, Marquee, Score } from '@/lib/types'
+import {
+  Banner,
+  DateRangeListRequest,
+  Handicap,
+  Marquee,
+  Score,
+} from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 
 const useService = () => {
@@ -58,9 +64,9 @@ const useService = () => {
     } catch (err) {}
   }, [])
 
-  const fetchHandicaps = useCallback(async () => {
+  const fetchHandicaps = useCallback(async (req?: DateRangeListRequest) => {
     try {
-      const { data } = await API.getHandicapList()
+      const { data } = await API.getHandicapList(req)
       setHandicaps(data.list)
     } catch (err) {}
   }, [])

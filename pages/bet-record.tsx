@@ -34,7 +34,7 @@ const BettingsPage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar title="當日交易明細" />
+      <HeaderTitleBar title="交易明細" />
       <div className="pintop-section d-flex flex-column justify-content-center fixed">
         <ul className="acc-inner mt-1">
           <li className="acc-item px-2">
