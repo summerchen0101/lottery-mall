@@ -1,3 +1,6 @@
+import { Box, Center } from '@chakra-ui/layout'
+import { Spinner } from '@chakra-ui/spinner'
+import { Fade } from '@chakra-ui/transition'
 import React, { createContext, useContext, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 
@@ -22,24 +25,11 @@ const LoaderProvider: React.FC = ({ children }) => {
       }}
     >
       {children}
-      <Modal
-        show={isLoading}
-        onHide={() => {}}
-        backdrop={false}
-        className="loader"
-        contentClassName="bg-transparent"
-      >
-        <div className="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </Modal>
+      <Fade in={isLoading} unmountOnExit>
+        <Center p="40px" h="full" w="full" pos="fixed" top="0" zIndex="99">
+          <Spinner size="xl" color="rgba(0,0,0,0.3)" thickness="3px" />
+        </Center>
+      </Fade>
     </LoaderContext.Provider>
   )
 }

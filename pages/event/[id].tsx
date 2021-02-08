@@ -73,7 +73,7 @@ const MarketPage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar title="賽事詳情" />
+      <HeaderTitleBar back title="賽事詳情" />
 
       <div className="main-content">
         {/* 賽事資訊 */}

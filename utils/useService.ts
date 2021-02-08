@@ -22,6 +22,7 @@ const useService = () => {
   const API = useRequest()
   const router = useRouter()
   const { setUser } = useGlobalProvider()
+
   const handleSendPhoneCode = async (acc: string) => {
     if (!acc) {
       toast({ status: 'info', title: '請先填寫帳號/手機' })
@@ -65,17 +66,21 @@ const useService = () => {
   }, [])
 
   const fetchHandicaps = useCallback(async (req?: DateRangeListRequest) => {
+    loadingStart()
     try {
       const { data } = await API.getHandicapList(req)
       setHandicaps(data.list)
     } catch (err) {}
+    loadingEnd()
   }, [])
 
   const fetchScores = useCallback(async () => {
+    loadingStart()
     try {
       const { data } = await API.getScoreList()
       setScores(data.list)
     } catch (err) {}
+    loadingEnd()
   }, [])
 
   return {

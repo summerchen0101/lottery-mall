@@ -9,7 +9,7 @@ function MessageBadge() {
         className="iconfont iconmail"
         onClick={() => router.push('/message')}
       />
-      <span className="red-dot" />
+      {/* <span className="red-dot" /> */}
     </>
   )
 }

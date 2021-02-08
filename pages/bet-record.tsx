@@ -57,7 +57,7 @@ const BettingsPage: React.FC = () => {
           </li>
         </ul>
       </div>
-      <Box className="main-content background-gray" pt="105px">
+      <Box className="main-content background-gray" pt="105px" h="100vh">
         <div className="list-container">
           {betReocrds.map((bet, i) => (
             <BettingItem key={i} bet={bet} />

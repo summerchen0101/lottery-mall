@@ -26,7 +26,7 @@ const ProfilePage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar title="个人资料" />
+      <HeaderTitleBar back title="个人资料" />
       <Box className="main-content background-gray" h="100vh" overflowY="auto">
         <ul className="list-group col-list">
           <li className="thead col-list-item section-padding pointer">

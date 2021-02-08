@@ -11,18 +11,22 @@ import AlertPopup from '@/components/popups/AlertPopup'
 import { useDisclosure } from '@chakra-ui/hooks'
 import { useAlertProvider } from '@/context/AlertProvider'
 import { useToast } from '@chakra-ui/toast'
+import { useLoaderProvider } from '@/context/LoaderProvider'
 
 const BankCardPage: React.FC = () => {
   const [memberBanks, setMemberBanks] = useState<MemberBank[]>([])
   const { onOpen, onClose } = useAlertProvider()
+  const { loadingStart, loadingEnd } = useLoaderProvider()
   const router = useRouter()
   const API = useRequest()
   const toast = useToast()
   const fetchMemberBankList = async () => {
+    loadingStart()
     try {
       const res = await API.getMemberBankList()
       setMemberBanks(res.data.list)
     } catch (err) {}
+    loadingEnd()
   }
   const onRemoveConfirmed = async (id: number) => {
     try {
