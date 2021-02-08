@@ -219,8 +219,12 @@ const useRequest = () => {
       ...req,
     })
   const createBet = (req: BetCreateRequest) => post<null>('bet_rec/add', req)
-  const getBetRecordSummary = (req: DateRangeRequest) =>
-    post<null>('bet_rec/summary', req)
+  const getBetRecordSummary = (req?: DateRangeRequest) =>
+    post<null>('bet_rec/summary', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
 
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
