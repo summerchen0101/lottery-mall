@@ -26,6 +26,7 @@ const MarketPage: React.FC = () => {
   const [isEmpty, setIsEmpty] = useState(false)
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const { setBettingInfo, eventInfo } = useGlobalProvider()
+  const { fetchUserInfo } = useService()
   const API = useRequest()
   const { toCurrency, toDateTime } = useTransfer()
   const [odds, setOdds] = useState<Odds[]>([])
@@ -50,25 +51,31 @@ const MarketPage: React.FC = () => {
   useEffect(() => {
     id && fetchOdds()
   }, [id, currentSection])
+  useEffect(() => {
+    fetchUserInfo()
+  }, [])
   return (
     <Layout>
       <HeaderTitleBar title="賽事詳情" />
 
       <div className="main-content">
         {/* 賽事資訊 */}
-        <div className="teaminfo-section background-red">
-          <a className="left-item">
-            <i className="iconfont iconallow-left" />
-          </a>
-          <div className="league-col">{eventInfo.league.name}</div>
-          <div className="time-col">{toDateTime(eventInfo.play_at)}</div>
-          <div className="team-col">
-            <div className="t1">{eventInfo.team_home.name}(主)</div>
-            <div className="icon_vs">VS</div>
-            <div className="t2">{eventInfo.team_away.name}</div>
+        {eventInfo && (
+          <div className="teaminfo-section background-red">
+            <a className="left-item">
+              <i className="iconfont iconallow-left" />
+            </a>
+            <div className="league-col">{eventInfo.league.name}</div>
+            <div className="time-col">{toDateTime(eventInfo.play_at)}</div>
+            <div className="team-col">
+              <div className="t1">{eventInfo.team_home.name}(主)</div>
+              <div className="icon_vs">VS</div>
+              <div className="t2">{eventInfo.team_away.name}</div>
+            </div>
+            <div className="score-col">22:19</div>
           </div>
-          <div className="score-col">22:19</div>
-        </div>
+        )}
+
         <div className="main-section section-padding">
           <TabGroup justifyContent="center">
             {tabs.map((t, i) => (

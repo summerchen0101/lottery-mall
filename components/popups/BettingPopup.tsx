@@ -1,9 +1,12 @@
 import { useGlobalProvider } from '@/context/GlobalProvider'
+import { sectionOpts } from '@/lib/options'
+import useTransfer from '@/utils/useTransfer'
 import React from 'react'
+import { HStack, Text } from '@chakra-ui/react'
 
 function BettingPopup() {
-  const { bettingInfo } = useGlobalProvider()
-  if (!bettingInfo) return <></>
+  const { bettingInfo, eventInfo, userBalance } = useGlobalProvider()
+  const { toDateTime, toOptionName } = useTransfer()
   return (
     <div
       className="modal fade"
@@ -26,23 +29,41 @@ function BettingPopup() {
               aria-hidden="true"
             ></button>
           </div>
-          <pre>{JSON.stringify(bettingInfo)}</pre>
           <div className="modal-body">
-            <div className="league-col text-center text-lighgray">
-              瑞典北部甲组联赛
-            </div>
-            <div className="text-center ft-15 my-2">富山胜利(主)VS熊本深红</div>
-            <div className="time-col text-center ft-13 mb-2">
-              2020-09-02 14:00
-            </div>
-            <div className="background-gray ft15 text-center py-3">
-              您正在<span className="text-red">反对</span>这场赛事结果为
-              <br />
-              全场 波胆 0-0 <span className="text-blue">@4.2</span>
-            </div>
+            {eventInfo && (
+              <>
+                <div className="league-col text-center text-lighgray">
+                  {eventInfo.league.name}
+                </div>
+                <div className="text-center ft-15 my-2">
+                  {eventInfo.team_home.name}(主) VS {eventInfo.team_away.name}
+                </div>
+                <div className="time-col text-center ft-13 mb-2">
+                  {toDateTime(eventInfo.play_at)}
+                </div>
+              </>
+            )}
+            {bettingInfo && (
+              <div className="background-gray ft15 text-center py-3">
+                您正在<span className="text-red">反对</span>这场赛事结果为
+                <HStack justifyContent="center">
+                  <Text>
+                    {toOptionName(sectionOpts, bettingInfo.section_code)}
+                  </Text>
+                  <Text>波胆</Text>
+                  <Text>
+                    {bettingInfo.home_point}-{bettingInfo.away_point}
+                  </Text>
+                </HStack>
+                <span className="text-blue">
+                  @{(bettingInfo.odds * 100).toFixed(2)}
+                </span>
+              </div>
+            )}
+
             <div className="d-flex justify-content-between py-3">
-              <div className="user-wallet">余额 20,849.55</div>
-              <div className="handling-charge">手续费5%</div>
+              <div className="user-wallet">余额 ¥ {userBalance}</div>
+              {/* <div className="handling-charge">手续费5%</div> */}
             </div>
             <div className="method-btn-wrap">
               <input
@@ -79,6 +100,7 @@ function BettingPopup() {
             </div> */}
             {/* <P class="w-100 text-yellow"><i class="iconremind iconfont mr-1"></i>盘口、赔率已产生变化</P> */}
           </div>
+
           <div className="modal-footer d-flex flex-row justify-content-between flex-nowrap">
             <button
               type="button"
