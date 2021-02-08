@@ -25,7 +25,7 @@ const MarketPage: React.FC = () => {
   const [currentSection, setCurrentSection] = useState('F')
   const [isEmpty, setIsEmpty] = useState(false)
   const { loadingStart, loadingEnd } = useLoaderProvider()
-  const { setBettingInfo, eventInfo } = useGlobalProvider()
+  const { setBettingInfo, setEventInfo, eventInfo } = useGlobalProvider()
   const { fetchUserInfo } = useService()
   const API = useRequest()
   const { toCurrency, toDateTime } = useTransfer()
@@ -33,6 +33,12 @@ const MarketPage: React.FC = () => {
   const router = useRouter()
   const id = useMemo(() => +router.query?.id, [router.query])
 
+  const fetchEvent = async () => {
+    try {
+      const res = await API.getHandicapList()
+      setEventInfo(res.data.list.find((t) => t.id === id))
+    } catch (err) {}
+  }
   const fetchOdds = async () => {
     loadingStart()
     setIsEmpty(false)
@@ -48,11 +54,15 @@ const MarketPage: React.FC = () => {
     } catch (err) {}
     loadingEnd()
   }
+
   useEffect(() => {
-    id && fetchOdds()
+    if (id) {
+      Promise.all([fetchOdds(), fetchEvent()])
+    }
   }, [id, currentSection])
+
   useEffect(() => {
-    fetchUserInfo()
+    Promise.all([fetchUserInfo()])
   }, [])
   return (
     <Layout>
@@ -60,21 +70,19 @@ const MarketPage: React.FC = () => {
 
       <div className="main-content">
         {/* 賽事資訊 */}
-        {eventInfo && (
-          <div className="teaminfo-section background-red">
-            <a className="left-item">
-              <i className="iconfont iconallow-left" />
-            </a>
-            <div className="league-col">{eventInfo.league.name}</div>
-            <div className="time-col">{toDateTime(eventInfo.play_at)}</div>
-            <div className="team-col">
-              <div className="t1">{eventInfo.team_home.name}(主)</div>
-              <div className="icon_vs">VS</div>
-              <div className="t2">{eventInfo.team_away.name}</div>
-            </div>
-            <div className="score-col">22:19</div>
+        <div className="teaminfo-section background-red">
+          <a className="left-item">
+            <i className="iconfont iconallow-left" />
+          </a>
+          <div className="league-col">{eventInfo?.league?.name}</div>
+          <div className="time-col">{toDateTime(eventInfo?.play_at)}</div>
+          <div className="team-col">
+            <div className="t1">{eventInfo?.team_home?.name}(主)</div>
+            <div className="icon_vs">VS</div>
+            <div className="t2">{eventInfo?.team_away?.name}</div>
           </div>
-        )}
+          <div className="score-col">22:19</div>
+        </div>
 
         <div className="main-section section-padding">
           <TabGroup justifyContent="center">

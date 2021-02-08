@@ -1,12 +1,37 @@
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { sectionOpts } from '@/lib/options'
 import useTransfer from '@/utils/useTransfer'
-import React from 'react'
-import { HStack, Text } from '@chakra-ui/react'
+import React, { useMemo, useState } from 'react'
+import { HStack, Text, useToast } from '@chakra-ui/react'
+import { useForm } from 'react-hook-form'
+import useRequest from '@/utils/useRequest'
+
+type BettingForm = {
+  amount: number
+}
 
 function BettingPopup() {
   const { bettingInfo, eventInfo, userBalance } = useGlobalProvider()
   const { toDateTime, toOptionName } = useTransfer()
+  const [amount, setAmount] = useState<number>()
+
+  const canWinAmount = useMemo(() => {
+    if (!amount) return 0
+    return (bettingInfo?.odds * 10000 * amount) / 10000
+  }, [amount, bettingInfo])
+
+  const API = useRequest()
+  const toast = useToast()
+  const onSubmit = async () => {
+    try {
+      await API.createBet({
+        odds_id: bettingInfo.id,
+        odds: bettingInfo.odds,
+        amount: +amount,
+      })
+      toast({ status: 'success', title: '下注成功' })
+    } catch (err) {}
+  }
   return (
     <div
       className="modal fade"
@@ -30,19 +55,15 @@ function BettingPopup() {
             ></button>
           </div>
           <div className="modal-body">
-            {eventInfo && (
-              <>
-                <div className="league-col text-center text-lighgray">
-                  {eventInfo.league.name}
-                </div>
-                <div className="text-center ft-15 my-2">
-                  {eventInfo.team_home.name}(主) VS {eventInfo.team_away.name}
-                </div>
-                <div className="time-col text-center ft-13 mb-2">
-                  {toDateTime(eventInfo.play_at)}
-                </div>
-              </>
-            )}
+            <div className="league-col text-center text-lighgray">
+              {eventInfo?.league?.name}
+            </div>
+            <div className="text-center ft-15 my-2">
+              {eventInfo?.team_home?.name}(主) VS {eventInfo?.team_away?.name}
+            </div>
+            <div className="time-col text-center ft-13 mb-2">
+              {toDateTime(eventInfo?.play_at)}
+            </div>
             {bettingInfo && (
               <div className="background-gray ft15 text-center py-3">
                 您正在<span className="text-red">反对</span>这场赛事结果为
@@ -50,7 +71,6 @@ function BettingPopup() {
                   <Text>
                     {toOptionName(sectionOpts, bettingInfo.section_code)}
                   </Text>
-                  <Text>波胆</Text>
                   <Text>
                     {bettingInfo.home_point}-{bettingInfo.away_point}
                   </Text>
@@ -69,30 +89,23 @@ function BettingPopup() {
               <input
                 type="number"
                 className="method-input w-50"
-                id="capital"
-                required
                 placeholder="本金"
+                value={amount}
+                onChange={(e) => setAmount(+e.target.value)}
               />
               <input
                 type="number"
                 className="method-input w-50"
-                id="profit"
-                required
-                placeholder="可赢 $0"
+                placeholder={`可赢 $${canWinAmount}`}
                 disabled
               />
             </div>
-            <div className="method-btn-wrap">
-              {/* <input
-                type="number"
-                className="outline_btn color-gray trans-input"
-                defaultValue={50}
-              /> */}
+            {/* <div className="method-btn-wrap">
               <div className="outline_btn color-gray trans-input">+50</div>
               <div className="outline_btn color-gray trans-input">+100</div>
               <div className="outline_btn color-gray trans-input">+1000</div>
               <div className="outline_btn color-gray trans-input">+5000</div>
-            </div>
+            </div> */}
             {/* <div className="method-btn-wrap">
               <div className="outline_btn color-gray">清除</div>
               <div className="outline_btn color-gray">修改</div>
@@ -112,9 +125,7 @@ function BettingPopup() {
             <button
               type="button"
               className="btnbase primary_btn"
-              id="bet_btn"
-              data-dismiss="modal"
-              // disabled
+              onClick={() => onSubmit()}
             >
               立即投注
             </button>

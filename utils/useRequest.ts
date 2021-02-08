@@ -190,6 +190,8 @@ const useRequest = () => {
       ...req,
     })
 
+  const getHandicapDetail = (id: number) => get<Handicap>(`handicap/view/${id}`)
+
   /**
    * 賠率
    */
@@ -250,6 +252,7 @@ const useRequest = () => {
     getActivityDetail,
     getMarqueeList,
     getBannerList,
+    getHandicapDetail,
     getHandicapList,
     getScoreList,
     getOddsList,
