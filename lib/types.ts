@@ -318,3 +318,16 @@ export interface CaptchaResponse {
   img: string
   token: string
 }
+
+export interface PageContent {
+  id: number
+  title: string
+  code: string
+  content: string
+  content_mobile: string
+  is_active: boolean
+
+  editor: string
+  created_at: number
+  updated_at: number
+}

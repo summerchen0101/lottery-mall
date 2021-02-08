@@ -12,13 +12,13 @@ const agent: React.FC = () => {
       <HeaderTitleBar back title="合營計畫" />
       <div className="main-content section-padding agent-section">
         <img src="./images/agent.jpg" className="w-100" />
-        <button
+        {/* <button
           type="submit"
           className="btnbase primary_btn my-3 "
           onClick={() => router.push('/agent-join')}
         >
           申请加入
-        </button>
+        </button> */}
         <Text className="font-weight-bold text-center my-4">AG的优势</Text>
         <div className="agent-content">
           <Box className="item">

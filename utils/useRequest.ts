@@ -35,6 +35,7 @@ import {
   BetRecord,
   DateRangeRequest,
   BetCreateRequest,
+  PageContent,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -226,6 +227,12 @@ const useRequest = () => {
       ...req,
     })
 
+  /**
+   * 頁面內容
+   */
+
+  const getAboutContent = () => get<PageContent>('page/view/ABOUT')
+
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
 
@@ -242,6 +249,7 @@ const useRequest = () => {
   const getUserInfo = () => get<UserInfo>('member/view')
 
   return {
+    getAboutContent,
     getUserInfo,
     getMemberBankList,
     getMemberBankOptions,
