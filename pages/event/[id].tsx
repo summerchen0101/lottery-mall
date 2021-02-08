@@ -5,14 +5,49 @@ import Layout from '@/components/Layout'
 import TradeRankPopup from '@/components/popups/TradeRankPopup'
 import Tab from '@/components/Tab'
 import TabGroup from '@/components/TabGroup'
-import React, { useState } from 'react'
+import useService from '@/utils/useService'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect, useMemo, useState } from 'react'
+import _ from 'lodash'
+import { useLoaderProvider } from '@/context/LoaderProvider'
+import useRequest from '@/utils/useRequest'
+import useTransfer from '@/utils/useTransfer'
+import { Odds } from '@/lib/types'
+import EmptyHolder from '@/components/EmptyHolder'
+import { Box } from '@chakra-ui/layout'
 
 const tabs = [
-  { label: '全場反波膽', value: 'tab1' },
-  { label: '半場反波膽', value: 'tab2' },
+  { label: '全場反波膽', value: 'F' },
+  { label: '半場反波膽', value: 'FH' },
 ]
 const MarketPage: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState('tab1')
+  const [currentSection, setCurrentSection] = useState('F')
+  const [isEmpty, setIsEmpty] = useState(false)
+  const { loadingStart, loadingEnd } = useLoaderProvider()
+  const API = useRequest()
+  const { toCurrency } = useTransfer()
+  const [odds, setOdds] = useState<Odds[]>([])
+  const router = useRouter()
+  const id = useMemo(() => +router.query?.id, [router.query])
+
+  const fetchOdds = async () => {
+    loadingStart()
+    setIsEmpty(false)
+    try {
+      const res = await API.getOddsList({
+        handicap_id: id,
+        section_code: currentSection,
+      })
+      setOdds(res.data.list)
+      if (res.data.list.length === 0) {
+        setIsEmpty(true)
+      }
+    } catch (err) {}
+    loadingEnd()
+  }
+  useEffect(() => {
+    id && fetchOdds()
+  }, [id, currentSection])
   return (
     <Layout>
       <HeaderTitleBar title="賽事詳情" />
@@ -32,15 +67,14 @@ const MarketPage: React.FC = () => {
           </div>
           <div className="score-col">22:19</div>
         </div>
-        {/* 日期頁籤 */}
         <div className="main-section section-padding">
           <TabGroup justifyContent="center">
             {tabs.map((t, i) => (
               <Tab
                 key={i}
                 label={t.label}
-                active={currentTab === t.value}
-                onClick={() => setCurrentTab(t.value)}
+                active={currentSection === t.value}
+                onClick={() => setCurrentSection(t.value)}
               />
             ))}
           </TabGroup>
@@ -61,43 +95,37 @@ const MarketPage: React.FC = () => {
             </div>
           </div>
           {/* Tab panes */}
-          <div className="tab-content">
-            <div className="tab-pane active" id="tabs-1" role="tabpanel">
-              {/* 暫無數據 */}
-              {/* <div class="data_null"><img src="images/data_null.svg">
-                  <p>暂无数据</p>
-              </div> */}
-              {/* 表頭 */}
+          {!isEmpty ? (
+            <Box>
               <div className="tricks-item-thead d-flex">
                 <div className="tricks-item-title">比分</div>
                 <div className="tricks-item-title">获利</div>
                 <div className="tricks-item-title">可交易</div>
               </div>
               <div className="list-container">
-                {Array(10)
-                  .fill('')
-                  .map((t, i) => (
-                    <div
-                      key={i}
-                      className="tricks-item"
-                      data-toggle="modal"
-                      data-target="#betlistModal"
-                    >
-                      <div className="score">0-{i}</div>
-                      <div className="profit text-red">5.41%</div>
-                      <div className="price">￥ 500000</div>
+                {odds.map((t, i) => (
+                  <div
+                    key={i}
+                    className="tricks-item"
+                    data-toggle="modal"
+                    data-target="#betlistModal"
+                  >
+                    <div className="score">
+                      {t.home_point}-{t.away_point}
                     </div>
-                  ))}
+                    <div className="profit text-red">
+                      {(t.odds * 100).toFixed(2)}%
+                    </div>
+                    <div className="price">
+                      ￥ {toCurrency(t.bet_amount_limit)}
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className="tab-pane" id="tabs-2" role="tabpanel">
-              {/* 暫無數據 */}
-              <div className="data_null">
-                <img src="images/data_null.svg" />
-                <p>暂无数据</p>
-              </div>
-            </div>
-          </div>
+            </Box>
+          ) : (
+            <EmptyHolder />
+          )}
         </div>
       </div>
       <TradeRankPopup />

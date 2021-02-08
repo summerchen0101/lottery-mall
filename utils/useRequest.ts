@@ -29,6 +29,9 @@ import {
   WithdrawCreateRequest,
   Handicap,
   Score,
+  DateRangeListRequest,
+  OddsListRequest,
+  Odds,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -175,8 +178,23 @@ const useRequest = () => {
   /**
    * 盤口
    */
-  const getHandicapList = () =>
-    post<BaseListResponse<Handicap>>('handicap/list', { page: 1, perpage: 100 })
+  const getHandicapList = (req?: DateRangeListRequest) =>
+    post<BaseListResponse<Handicap>>('handicap/list', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
+
+  /**
+   * 賠率
+   */
+  const getOddsList = (req?: OddsListRequest) =>
+    post<BaseListResponse<Odds>>('odds/list', {
+      page: 1,
+      perpage: 100,
+      section_code: 'F',
+      ...req,
+    })
 
   /**
    * 比分
@@ -221,6 +239,7 @@ const useRequest = () => {
     getBannerList,
     getHandicapList,
     getScoreList,
+    getOddsList,
     getFaqList,
     checkLogin,
     getCaptcha,

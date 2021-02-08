@@ -9,3 +9,8 @@ export enum NewsType {
   Game = 2,
   Activity = 3,
 }
+
+export enum Section {
+  Full = 'F',
+  FirstHalf = 'FH',
+}

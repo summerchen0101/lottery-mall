@@ -161,8 +161,36 @@ export interface Handicap {
   }
 }
 
-export interface Score {
+export interface Odds {
   id: number
+  away_percent: number
+  away_point: number
+  bet_amount_limit: number
+  bet_sum: number
+  game_code: string
+  home_percent: number
+  home_point: number
+  odds: number
+  play_code: string
+  section_code: string
+}
+
+export interface OddsListRequest extends BaseListRequest {
+  handicap_id?: number
+  section_code?: string
+}
+
+export interface Score {
+  away_half_score: number
+  away_score: number
+  away_team: string
+  game_code: string
+  game_status: number
+  home_half_score: number
+  home_score: number
+  home_team: string
+  id: number
+  play_time: string
 }
 
 export interface Message {

@@ -1,4 +1,4 @@
-import { NewsType } from './enums'
+import { NewsType, Section } from './enums'
 import bankCodes from './bankCodes'
 
 export const bankCodeOpts = bankCodes.map((t) => ({
@@ -32,4 +32,8 @@ export const newsTypeOpts = [
   { label: '系統通知', value: NewsType.System },
   { label: '賽事公告', value: NewsType.Game },
   { label: '活動優惠', value: NewsType.Activity },
+]
+export const sectionOpts = [
+  { label: '全場', value: Section.Full },
+  { label: '半場', value: Section.FirstHalf },
 ]
