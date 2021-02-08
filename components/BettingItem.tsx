@@ -5,7 +5,7 @@ import BettingDetail from './BettingDetail'
 import cs from 'classnames'
 import { BetRecord } from '@/lib/types'
 import useTransfer from '@/utils/useTransfer'
-import { sectionOpts } from '@/lib/options'
+import { accountingStatusOpts, sectionOpts } from '@/lib/options'
 
 const BettingItem: React.FC<{ bet: BetRecord }> = ({ bet }) => {
   const { onToggle, isOpen } = useDisclosure()
@@ -17,7 +17,9 @@ const BettingItem: React.FC<{ bet: BetRecord }> = ({ bet }) => {
           <div className="team-col">
             {bet.handicap.team_home.name}(主) VS {bet.handicap.team_away.name}
           </div>
-          <div className="status">未开</div>
+          <div className="status">
+            {toOptionName(accountingStatusOpts, bet.accounting_status)}
+          </div>
         </div>
         <div className="bet-col">
           <span className="text-red mr-2">反对</span>

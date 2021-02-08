@@ -94,7 +94,7 @@ const Home: React.FC = () => {
             <ColumnTitle>热门赛事</ColumnTitle>
             <div className="d-flex group-btn">
               {/* <LeagueFilterBtn /> */}
-              <CountDownReloadBtn />
+              {/* <CountDownReloadBtn /> */}
             </div>
           </div>
           <div className="list-container">

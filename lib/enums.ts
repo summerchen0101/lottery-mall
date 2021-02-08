@@ -1,7 +1,15 @@
 export enum ProcessStatus {
-  處理中 = 1,
-  已完成 = 2,
-  取消 = 3,
+  Pending = 1,
+  Running = 2,
+  Finish = 3,
+  Cancel = 4,
+}
+
+export enum AccountingStatus {
+  Pending = 1,
+  Running = 2,
+  Finish = 3,
+  Cancel = 4,
 }
 
 export enum NewsType {

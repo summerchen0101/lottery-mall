@@ -1,4 +1,4 @@
-import { NewsType, Section } from './enums'
+import { AccountingStatus, NewsType, Section } from './enums'
 import bankCodes from './bankCodes'
 
 export const bankCodeOpts = bankCodes.map((t) => ({
@@ -36,4 +36,11 @@ export const newsTypeOpts = [
 export const sectionOpts = [
   { label: '全場', value: Section.Full },
   { label: '半場', value: Section.FirstHalf },
+]
+
+export const accountingStatusOpts = [
+  { label: '未結帳', value: AccountingStatus.Pending },
+  { label: '結帳中', value: AccountingStatus.Running },
+  { label: '已結帳', value: AccountingStatus.Finish },
+  { label: '已取消', value: AccountingStatus.Cancel },
 ]
