@@ -252,6 +252,7 @@ export interface Score {
   home_team: string
   id: number
   play_time: string
+  league: string
 }
 
 export interface Message {

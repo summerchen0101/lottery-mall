@@ -39,6 +39,7 @@ const scores: React.FC = () => {
           <Thead bgColor="gray.100" whiteSpace="nowrap">
             <Tr>
               <Th>開賽</Th>
+              <Th>聯盟</Th>
               <Th>对阵</Th>
               <Th>全場</Th>
               <Th>半場</Th>
@@ -53,10 +54,15 @@ const scores: React.FC = () => {
                   {toOptionName(gameStatusOpts, t.game_status)}
                 </Td>
                 <Td fontSize="xs">
-                  <Text isTruncated w="150px">
+                  <Text isTruncated w="60px">
+                    {t.league}
+                  </Text>
+                </Td>
+                <Td fontSize="xs">
+                  <Text isTruncated w="100px">
                     {t.home_team} (主)
                   </Text>
-                  <Text isTruncated w="150px">
+                  <Text isTruncated w="100px">
                     {t.away_team}
                   </Text>
                 </Td>
