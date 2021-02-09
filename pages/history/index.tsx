@@ -15,11 +15,12 @@ import TabGroup from '@/components/TabGroup'
 import Tab from '@/components/Tab'
 import { beforeDateRangeOpts } from '@/lib/options'
 import classNames from 'classnames'
+import EmptyHolder from '@/components/EmptyHolder'
 const HistoryPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState('thisWeek')
   const router = useRouter()
   const [isEmpty, setIsEmpty] = useState(false)
-  const { loadingStart, loadingEnd } = useLoaderProvider()
+  const { loadingStart, loadingEnd, isLoading } = useLoaderProvider()
   const API = useRequest()
   const { toDate, toCurrency, toDateRange } = useTransfer()
   const [summaries, setSummaries] = useState<BetRecordSummary[]>([])
@@ -35,12 +36,16 @@ const HistoryPage: React.FC = () => {
 
   const fetchBetRecordSummary = async () => {
     loadingStart()
+    setIsEmpty(false)
     try {
       const res = await API.getBetRecordSummary({
         start_at,
         end_at,
       })
       setSummaries(res.data.list)
+      if (res.data.list.length === 0) {
+        setIsEmpty(true)
+      }
     } catch (err) {}
     loadingEnd()
   }
@@ -50,18 +55,19 @@ const HistoryPage: React.FC = () => {
   return (
     <Layout>
       <HeaderTitleBar back title="帐务历史" />
-      <>
-        <div className="main-content">
-          <TabGroup justifyContent="space-between">
-            {beforeDateRangeOpts.map((t, i) => (
-              <Tab
-                key={i}
-                label={t.label}
-                active={t.value === currentTab}
-                onClick={() => setCurrentTab(t.value)}
-              />
-            ))}
-          </TabGroup>
+      <div className="main-content">
+        <TabGroup justifyContent="space-between">
+          {beforeDateRangeOpts.map((t, i) => (
+            <Tab
+              key={i}
+              label={t.label}
+              active={t.value === currentTab}
+              onClick={() => setCurrentTab(t.value)}
+            />
+          ))}
+        </TabGroup>
+        {isEmpty && <EmptyHolder />}
+        {!isEmpty && !isLoading && (
           <table className="table table-borderless">
             <thead>
               <tr>
@@ -102,22 +108,8 @@ const HistoryPage: React.FC = () => {
               </tr>
             </tbody>
           </table>
-        </div>
-        {/* <div className="pinbottom-section">
-          <ul className="acc-inner mt-1">
-            <li className="acc-item px-5">
-              <p>400.00</p>
-              <span className="text-lighgray">累计流水</span>
-            </li>
-            <li className="divider" />
-            <li className="acc-item px-5">
-              <p className="text-green">76.00</p>
-              <span className="text-lighgray">总收益</span>
-            </li>
-          </ul>
-        </div> */}
-      </>
-
+        )}
+      </div>
       <FooterNavBar />
     </Layout>
   )

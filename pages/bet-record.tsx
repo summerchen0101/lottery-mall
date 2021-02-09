@@ -12,6 +12,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
 import BettingItem from '@/components/BettingItem'
 import { Box } from '@chakra-ui/layout'
+import EmptyHolder from '@/components/EmptyHolder'
 
 const BettingsPage: React.FC = () => {
   const [current, setCurrent] = useState(1)
@@ -23,9 +24,13 @@ const BettingsPage: React.FC = () => {
   const [betReocrds, setBetRecords] = useState<BetRecord[]>([])
   const fetchBetRecord = async () => {
     loadingStart()
+    setIsEmpty(false)
     try {
       const res = await API.getBetRecordList()
       setBetRecords(res.data.list)
+      if (res.data.list.length === 0) {
+        setIsEmpty(true)
+      }
     } catch (err) {}
     loadingEnd()
   }
@@ -59,6 +64,7 @@ const BettingsPage: React.FC = () => {
       </div>
       <Box className="main-content background-gray" pt="105px" h="100vh">
         <div className="list-container">
+          {isEmpty && <EmptyHolder />}
           {betReocrds.map((bet, i) => (
             <BettingItem key={i} bet={bet} />
           ))}

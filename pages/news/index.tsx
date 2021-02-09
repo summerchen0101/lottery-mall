@@ -17,21 +17,18 @@ import EmptyHolder from '@/components/EmptyHolder'
 const news: React.FC = () => {
   const [current, setCurrent] = useState(1)
   const router = useRouter()
-  const { loadingStart, loadingEnd } = useLoaderProvider()
-  const [isLoaded, setIsLoaded] = useState(false)
+  const { loadingStart, loadingEnd, isLoading } = useLoaderProvider()
   const API = useRequest()
   const { toDate } = useTransfer()
   const [news, setNews] = useState<News[]>([])
   const newsGroups = useMemo(() => _.groupBy(news, 'news_type'), [news])
   const fetchNews = async () => {
     loadingStart()
-    setIsLoaded(false)
     try {
       const res = await API.getNewsList()
       setNews(res.data.list)
     } catch (err) {}
     loadingEnd()
-    setIsLoaded(true)
   }
   useEffect(() => {
     fetchNews()
@@ -55,7 +52,7 @@ const news: React.FC = () => {
         <div className="tab-content section-padding">
           <div className="tab-pane active" id="tabs-1" role="tabpanel">
             <ul className="list-container list-group">
-              {!newsGroups[current] && isLoaded && <EmptyHolder />}
+              {!newsGroups[current] && !isLoading && <EmptyHolder />}
               {newsGroups[current]?.map((t, i) => (
                 <li
                   key={i}

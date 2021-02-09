@@ -1,4 +1,5 @@
 import DateTabGroup from '@/components/DateTabGroup'
+import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useRouter } from 'next/dist/client/router'
@@ -45,6 +46,7 @@ function depositRecord() {
             ))}
         </div>
       </div>
+      <FooterNavBar />
     </Layout>
   )
 }

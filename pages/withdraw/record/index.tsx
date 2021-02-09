@@ -1,4 +1,6 @@
 import DateTabGroup from '@/components/DateTabGroup'
+import EmptyHolder from '@/components/EmptyHolder'
+import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import Tab from '@/components/Tab'
@@ -67,6 +69,7 @@ function withdrawRecord() {
         </TabGroup>
 
         <div className="list-container pt-2 section-padding">
+          {isEmpty && <EmptyHolder />}
           {withdraws.map((t, i) => (
             <div
               key={i}
@@ -88,6 +91,7 @@ function withdrawRecord() {
           ))}
         </div>
       </div>
+      <FooterNavBar />
     </Layout>
   )
 }
