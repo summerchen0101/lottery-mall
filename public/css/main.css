@@ -1278,50 +1278,60 @@ a:hover {
   outline: 0;
 }
 
-.method-btn-wrap .method-input {
+.method-btn-wrap #capital {
   width: 100%;
-  height: 45px;
-  padding: 15px;
+  padding: 0 15px;
   font-size: 14px;
   color: #4A5359;
   border: 1px solid #EBEBEB;
+  margin-bottom: 10px;
+  text-align: left;
+  margin-right: 0;
+  border-radius: 0 3px 3px 0;
   margin-bottom: 10px;
   outline: none;
   -webkit-appearance: none;
 }
 
-.method-btn-wrap .method-input:focus {
+.method-btn-wrap #capital:focus {
   -webkit-box-shadow: 0 0 0 4px #00cdff21 inset;
           box-shadow: 0 0 0 4px #00cdff21 inset;
   border: 1px solid #00CDFF;
   z-index: 2;
 }
 
-.method-btn-wrap .method-input::-webkit-input-placeholder {
+.method-btn-wrap #capital::-webkit-input-placeholder {
   color: #A4A9AC;
 }
 
-.method-btn-wrap .method-input:-ms-input-placeholder {
+.method-btn-wrap #capital:-ms-input-placeholder {
   color: #A4A9AC;
 }
 
-.method-btn-wrap .method-input::-ms-input-placeholder {
+.method-btn-wrap #capital::-ms-input-placeholder {
   color: #A4A9AC;
 }
 
-.method-btn-wrap .method-input::placeholder {
+.method-btn-wrap #capital::placeholder {
   color: #A4A9AC;
 }
 
-.method-btn-wrap .method-input:first-of-type {
-  background: transparent;
-  border-radius: 3px 0 0 3px;
-}
-
-.method-btn-wrap .method-input:last-of-type {
-  background: #f2f2f2;
+.method-btn-wrap #profit {
+  width: 100%;
+  padding: 0 15px;
+  font-size: 14px;
+  line-height: 43px;
+  color: #A4A9AC;
+  border: 1px solid #EBEBEB;
+  margin-bottom: 10px;
+  text-align: left;
+  margin-right: 0;
   border-radius: 0 3px 3px 0;
   margin-left: -1px;
+  background: #f2f2f2;
+  margin-bottom: 10px;
+  outline: none;
+  -webkit-appearance: none;
 }
 
 .form-group {
@@ -1373,7 +1383,7 @@ a:hover {
   z-index: 1;
 }
 
-.form-group input[type="date"]:before {
+.form-group input[type="date"] :before {
   color: transparent;
   background: none;
   display: block;
@@ -1468,12 +1478,13 @@ a:hover {
 }
 
 .form-group .form-copy {
+  display: block;
   width: 100%;
-  line-height: 45px;
-  padding: 0 15px;
+  padding: 9px 32px 10px 15px;
   border: 1px solid #EBEBEB;
   background: #f2f2f2;
   color: #A4A9AC;
+  word-wrap: break-word;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -1960,6 +1971,7 @@ body {
 .main-content {
   width: 100%;
   height: 100%;
+  min-height: 100%;
   padding-top: 50px;
   padding-bottom: 75px;
   overflow-x: hidden;
@@ -2174,8 +2186,9 @@ body {
   background: linear-gradient(155deg, #00DCFF 0%, #00C2FF 100%);
   width: 100%;
   height: 100%;
+  min-height: 100%;
   padding: 4%;
-  overflow-y: hidden;
+  overflow-x: hidden;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -2523,8 +2536,8 @@ body {
           justify-content: center;
   text-align: center;
   border-radius: 50%;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(14%, #fff), color-stop(54%, #ecefff), color-stop(94%, #fafbff));
-  background-image: linear-gradient(180deg, #fff 14%, #ecefff 54%, #fafbff 94%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(14%, #fff), color-stop(54%, #f3f9ff), color-stop(94%, #fafbff));
+  background-image: linear-gradient(180deg, #fff 14%, #f3f9ff 54%, #fafbff 94%);
   border: 1px solid #f1f1f1;
   -webkit-box-shadow: #f7fdff 0px 1px 0px 0px inset;
           box-shadow: #f7fdff 0px 1px 0px 0px inset;
@@ -4096,7 +4109,6 @@ table.team tr td:nth-of-type(2) {
 .bank-list .bank-item .check-mask {
   width: 100%;
   height: 100%;
-  padding-bottom: 20px;
   position: absolute;
   top: 0;
   left: 0;

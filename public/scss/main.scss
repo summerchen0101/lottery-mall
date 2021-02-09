@@ -126,6 +126,7 @@ body {
 .main-content {
   width: 100%;
   height: 100%;
+  min-height: 100%;
   padding-top: 50px;
   padding-bottom: 75px;
   overflow-x: hidden;
@@ -332,11 +333,9 @@ body {
   background: linear-gradient(155deg, #00DCFF 0%, #00C2FF 100%);
   width: 100%;
   height: 100%;
+  min-height: 100%;
   padding: 4%;
-  // position: absolute;
-  // top: 0;
-  // bottom: 0;
-  overflow-y: hidden;
+  overflow-x: hidden;
   box-sizing: border-box;
 
   &::before {
@@ -637,7 +636,7 @@ body {
     justify-content: center;
     text-align: center;
     @include border-radius(50%);
-    background-image: linear-gradient(180deg, #fff 14%, #ecefff 54%,#fafbff 94% );
+    background-image: linear-gradient(180deg, #fff 14%, #f3f9ff 54%,#fafbff 94% );
     border: 1px solid #f1f1f1;
     box-shadow: #f7fdff 0px 1px 0px 0px inset;
 
@@ -1969,6 +1968,7 @@ table.team {
       text-align: center;
       line-height: 1.8;
       margin-top: 14px;
+      // margin-bottom: 30px;
     }
 
     .user-name {
@@ -1980,8 +1980,7 @@ table.team {
     .check-mask {
       width: 100%;
       height: 100%;
-
-      padding-bottom: 20px;
+      // padding-bottom: 20px;
       position: absolute;
       top: 0;
       left: 0;
