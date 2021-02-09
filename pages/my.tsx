@@ -69,87 +69,85 @@ const MyPage: React.FC = () => {
               className="menu-list-item"
               onClick={() => router.push('/promotion')}
             >
-              <img src="images/ic_promotion.svg" />
+              <img src="/images/ic_promotion.svg" />
               优惠活动
             </li>
             <li
               className="menu-list-item"
               onClick={() => router.push('/deposit')}
             >
-              <img src="images/ic_recharge.svg" />
+              <img src="/images/ic_recharge.svg" />
               立即充值
             </li>
             <li
               className="menu-list-item"
               onClick={() => router.push('/withdraw')}
             >
-              <img src="images/ic_withdrawal.svg" />
+              <img src="/images/ic_withdrawal.svg" />
               立即提领
             </li>
             <li
               className="menu-list-item"
               onClick={() => router.push('/deposit/record')}
             >
-              <img src="images/ic_cashhistory.svg" />
+              <img src="/images/ic_cashhistory.svg" />
               充提记录
             </li>
             {/* <li
               className="menu-list-item"
               onClick={() => router.push('/game-result')}
             >
-              <img src="images/ic_gameresult.svg" />
+              <img src="/images/ic_gameresult.svg" />
               比赛结果
             </li> */}
             <li
               className="menu-list-item"
               onClick={() => router.push('/scores')}
             >
-              <img src="images/ic_score.svg" />
+              <img src="/images/ic_score.svg" />
               即时比分
             </li>
             <li
               className="menu-list-item"
               onClick={() => router.push('/bankcard')}
             >
-              <img src="images/ic_bankcard.svg" />
+              <img src="/images/ic_bankcard.svg" />
               银行卡
+            </li>
+            <li className="menu-list-item" onClick={() => router.push('/news')}>
+              <img src="/images/ic_notice.svg" alt="" />
+              公告
+            </li>
+            <li
+              className="menu-list-item"
+              onClick={() => router.push('/invite')}
+            >
+              <img src="/images/ic_invite.svg" alt="" />
+              会员推广
             </li>
           </ul>
         </div>
         {/* 下方List選單 */}
         <div className="bottom-section section-padding">
           <ul className="bottom-menu-list list-group">
-            <li className="menu-list-item" onClick={() => router.push('/news')}>
-              <img src="images/ic_notification.svg" />
-              <div className="item-title">公告</div>
+            <li
+              className="menu-list-item"
+              onClick={() => router.push('/profile')}
+            >
+              <img src="/images/ic_profile.svg" />
+              <div className="item-title">个人资料</div>
               <i className="iconfont iconallow-right" />
             </li>
             <li
               className="menu-list-item"
               onClick={() => router.push('/agent')}
             >
-              <img src="images/ic_agent.svg" />
+              <img src="/images/ic_agent.svg" />
               <div className="item-title">合营计划</div>
               <i className="iconfont iconallow-right" />
             </li>
-            <li
-              className="menu-list-item"
-              onClick={() => router.push('/invite')}
-            >
-              <img src="images/ic_invite.svg" />
-              <div className="item-title">会员推广</div>
-              <i className="iconfont iconallow-right" />
-            </li>
-            <li
-              className="menu-list-item"
-              onClick={() => router.push('/profile')}
-            >
-              <img src="images/ic_profile.svg" />
-              <div className="item-title">个人资料</div>
-              <i className="iconfont iconallow-right" />
-            </li>
             <li className="menu-list-item" onClick={() => router.push('/faq')}>
-              <img src="images/ic_help.svg" />
+              <img src="/images/ic_help.svg" />
               <div className="item-title">帮助中心</div>
               <i className="iconfont iconallow-right" />
             </li>
@@ -157,7 +155,7 @@ const MyPage: React.FC = () => {
               className="menu-list-item"
               onClick={() => router.push('/about')}
             >
-              <img src="images/ic_about.svg" />
+              <img src="/images/ic_about.svg" />
               <div className="item-title">关于AG</div>
               <i className="iconfont iconallow-right" />
             </li>

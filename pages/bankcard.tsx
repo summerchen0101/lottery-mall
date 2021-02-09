@@ -50,7 +50,7 @@ const BankCardPage: React.FC = () => {
       <HeaderTitleBar back title="銀行卡帳戶" />
       <div className="main-content section-padding">
         {/* 暫無數據 */}
-        {/* <div class="data_null"><img src="images/data_null.svg">
+        {/* <div class="data_null"><img src="/images/data_null.svg">
           <p>目前无设置账户</p>
           <button type="submit" class="btnbase primary_btn mt-4 mb-2" data-toggle="modal"
               data-target="#realnameModal">添加账户</button>

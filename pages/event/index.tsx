@@ -64,7 +64,7 @@ const eventList: React.FC = () => {
         <div className="tab-content pt-2 section-padding">
           <div className="tab-pane active">
             {/* 暫無數據 */}
-            {/* <div class="data_null"><img src="images/data_null.svg">
+            {/* <div class="data_null"><img src="/images/data_null.svg">
                               <p>暂无数据</p>
                           </div> */}
             <div className="list-container">

@@ -81,7 +81,7 @@ const HistoryPage: React.FC = () => {
                   <td>{toCurrency(+t.result)}</td>
                   <td>
                     <Link href={`/history/${t.date}`}>
-                      <img src="images/ic_history.svg" />
+                      <img src="/images/ic_history.svg" />
                     </Link>
                   </td>
                 </tr>

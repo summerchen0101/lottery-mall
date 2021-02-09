@@ -24,7 +24,7 @@ const invite: React.FC = () => {
       <div className="main-content">
         <div className="about-section section-padding">
           <div className="w-100 text-center py-3 mt-5">
-            <Image src="images/about_ag.png" w="90%" m="auto" />
+            <Image src="/images/about_ag.png" w="90%" m="auto" />
           </div>
           <div className="w-100 mt-2">
             {/* <span className="text-blue">AG</span> */}
