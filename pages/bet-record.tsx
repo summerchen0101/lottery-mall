@@ -13,20 +13,26 @@ import _ from 'lodash'
 import BettingItem from '@/components/BettingItem'
 import { Box } from '@chakra-ui/layout'
 import EmptyHolder from '@/components/EmptyHolder'
+import { beforeDateRangeOpts } from '@/lib/options'
 
 const BettingsPage: React.FC = () => {
-  const [current, setCurrent] = useState(1)
+  const [currentTab, setCurrentTab] = useState('thisWeek')
   const router = useRouter()
   const [isEmpty, setIsEmpty] = useState(false)
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const API = useRequest()
-  const { toDate, toCurrency, amountToCanWin } = useTransfer()
+  const { toDateRange, toCurrency, amountToCanWin } = useTransfer()
   const [betReocrds, setBetRecords] = useState<BetRecord[]>([])
+  const start_at = useMemo(() => toDateRange(currentTab).start, [currentTab])
+  const end_at = useMemo(() => toDateRange(currentTab).end, [currentTab])
   const fetchBetRecord = async () => {
     loadingStart()
     setIsEmpty(false)
     try {
-      const res = await API.getBetRecordList()
+      const res = await API.getBetRecordList({
+        start_at,
+        end_at,
+      })
       setBetRecords(res.data.list)
       if (res.data.list.length === 0) {
         setIsEmpty(true)
@@ -36,22 +42,42 @@ const BettingsPage: React.FC = () => {
   }
   useEffect(() => {
     fetchBetRecord()
-  }, [])
+  }, [currentTab])
   return (
     <Layout>
-      <HeaderTitleBar title="交易明細" />
-      <div className="pintop-section d-flex flex-column justify-content-center fixed">
+      <HeaderTitleBar title="投資紀錄" />
+
+      <Box className="main-content background-gray" pb="130px" h="100vh">
+        <TabGroup justifyContent="space-between">
+          {beforeDateRangeOpts.map((t, i) => (
+            <Tab
+              key={i}
+              label={t.label}
+              active={t.value === currentTab}
+              onClick={() => setCurrentTab(t.value)}
+            />
+          ))}
+        </TabGroup>
+        <div className="list-container">
+          {isEmpty && <EmptyHolder />}
+          {betReocrds.map((bet, i) => (
+            <BettingItem key={i} bet={bet} />
+          ))}
+        </div>
+      </Box>
+
+      <div className="pinbottom-section">
         <ul className="acc-inner mt-1">
           <li className="acc-item px-2">
             <p>{betReocrds.length}</p>
             <span className="text-lighgray">筆數</span>
           </li>
-          <li className="divider" />
+          <li className="divider"></li>
           <li className="acc-item px-2">
             <p>{toCurrency(_.sumBy(betReocrds, 'amount'))}</p>
-            <span className="text-lighgray">金額統計</span>
+            <span className="text-lighgray">累计流水</span>
           </li>
-          <li className="divider" />
+          <li className="divider"></li>
           <li className="acc-item px-2">
             <p className="text-green">
               {toCurrency(
@@ -62,14 +88,6 @@ const BettingsPage: React.FC = () => {
           </li>
         </ul>
       </div>
-      <Box className="main-content background-gray" pt="105px" h="100vh">
-        <div className="list-container">
-          {isEmpty && <EmptyHolder />}
-          {betReocrds.map((bet, i) => (
-            <BettingItem key={i} bet={bet} />
-          ))}
-        </div>
-      </Box>
 
       <FooterNavBar />
     </Layout>
