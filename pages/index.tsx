@@ -66,12 +66,9 @@ const Home: React.FC = () => {
               充值
             </li>
             <li className="divider" />
-            <li
-              className="menu-list-item ic_withdrawal"
-              onClick={() => router.push('/withdraw')}
-            >
-              <img src="/images/ic_withdrawal.svg" />
-              提领
+            <li className="menu-list-item" onClick={() => router.push('/news')}>
+              <img src="/images/ic_notice.svg" alt="" />
+              公告
             </li>
             <li className="divider" />
             <li

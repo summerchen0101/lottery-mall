@@ -67,10 +67,10 @@ const MyPage: React.FC = () => {
           <ul className="middle-menu-list">
             <li
               className="menu-list-item"
-              onClick={() => router.push('/promotion')}
+              onClick={() => router.push('/profile')}
             >
-              <img src="/images/ic_promotion.svg" />
-              优惠活动
+              <img src="/images/ic_profile.svg" />
+              个人资料
             </li>
             <li
               className="menu-list-item"
@@ -100,13 +100,7 @@ const MyPage: React.FC = () => {
               <img src="/images/ic_gameresult.svg" />
               比赛结果
             </li> */}
-            <li
-              className="menu-list-item"
-              onClick={() => router.push('/scores')}
-            >
-              <img src="/images/ic_score.svg" />
-              即时比分
-            </li>
+
             <li
               className="menu-list-item"
               onClick={() => router.push('/bankcard')}
@@ -130,14 +124,14 @@ const MyPage: React.FC = () => {
         {/* 下方List選單 */}
         <div className="bottom-section section-padding">
           <ul className="bottom-menu-list list-group">
-            <li
+            {/* <li
               className="menu-list-item"
               onClick={() => router.push('/profile')}
             >
               <img src="/images/ic_profile.svg" />
               <div className="item-title">个人资料</div>
               <i className="iconfont iconallow-right" />
-            </li>
+            </li> */}
             <li
               className="menu-list-item"
               onClick={() => router.push('/agent')}
