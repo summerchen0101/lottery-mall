@@ -7,6 +7,7 @@ import { useToast } from '@chakra-ui/toast'
 import useService from '@/utils/useService'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import FieldValidateMessage from '../FieldValidateMessage'
+import useHelper from '@/utils/useHelper'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -21,19 +22,19 @@ function ProfilePhonePopup() {
   }>()
   const API = useRequest()
   const toast = useToast()
+  const { closeBottomPopup } = useHelper()
 
   const onSubmit = handleSubmit(async (d) => {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
+      closeBottomPopup()
+      reset()
+      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
-  const onClose = () => {
-    reset()
-    fetchUserContact()
-  }
   useEffect(() => {
     $('.tel').on('click', jqEffectFunc)
     return () => {
@@ -41,7 +42,7 @@ function ProfilePhonePopup() {
     }
   }, [])
   return (
-    <BottomPopup title="手机号码" id="tel-edit" onClose={onClose}>
+    <BottomPopup title="手机号码" id="tel-edit" onClose={reset}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">手机号码</label>
         <div className="form-group">

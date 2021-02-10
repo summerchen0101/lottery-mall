@@ -1,22 +1,20 @@
-import { useRouter } from 'next/dist/client/router'
-import React, { useEffect } from 'react'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import { Avatar } from '@chakra-ui/avatar'
-import { Box } from '@chakra-ui/layout'
 import MessageBadge from '@/components/MessageBadge'
-import useService from '@/utils/useService'
+import ProfileNickPopup from '@/components/popups/ProfileNickPopup'
 import { useGlobalProvider } from '@/context/GlobalProvider'
+import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
-import useHelper from '@/utils/useHelper'
+import { Avatar } from '@chakra-ui/avatar'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect } from 'react'
 
 const MyPage: React.FC = () => {
   const router = useRouter()
   const { fetchUserInfo } = useService()
   const { user } = useGlobalProvider()
   const { toCurrency } = useTransfer()
-  const { copyToClipboard } = useHelper()
 
   useEffect(() => {
     fetchUserInfo()
@@ -38,10 +36,7 @@ const MyPage: React.FC = () => {
               <div className="user-info d-flex flex-column justify-content-center">
                 <div className="user-id-col d-flex">
                   {user?.acc} [{user?.name}]
-                  <i
-                    className="iconfont iconedit ml-2"
-                    onClick={() => router.push('/profile')}
-                  />
+                  <i className="iconfont iconedit ml-2 nickname" />
                 </div>
                 {/* <div className="last-login-col">
                   複製推廣碼
@@ -163,7 +158,7 @@ const MyPage: React.FC = () => {
           <div className="version my-2">V.1.01</div>
         </div>
       </div>
-
+      <ProfileNickPopup />
       <FooterNavBar />
     </Layout>
   )

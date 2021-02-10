@@ -7,6 +7,7 @@ import { useToast } from '@chakra-ui/toast'
 import useService from '@/utils/useService'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import FieldValidateMessage from '../FieldValidateMessage'
+import useHelper from '@/utils/useHelper'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -20,19 +21,19 @@ function ProfileTelegramPopup() {
   }>()
   const API = useRequest()
   const toast = useToast()
+  const { closeBottomPopup } = useHelper()
 
   const onSubmit = handleSubmit(async (d) => {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
+      closeBottomPopup()
+      reset()
+      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
-  const onClose = () => {
-    reset()
-    fetchUserContact()
-  }
   useEffect(() => {
     $('.telegram').on('click', jqEffectFunc)
     return () => {
@@ -40,7 +41,7 @@ function ProfileTelegramPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="Telegram" id="telegram-edit" onClose={onClose}>
+    <BottomPopup title="Telegram" id="telegram-edit" onClose={reset}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">Telegram帐号</label>
         <div className="form-group">

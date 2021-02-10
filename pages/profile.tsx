@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from 'react'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import $ from 'jquery'
-import ProfileNickPopup from '@/components/popups/ProfileNickPopup'
 import ProfileEmailPopup from '@/components/popups/ProfileEmailPopup'
-import ProfilePhonePopup from '@/components/popups/ProfilePhonePopup'
+import ProfileLinePopup from '@/components/popups/ProfileLinePopup'
 import ProfilePassPopup from '@/components/popups/ProfilePassPopup'
-import ProfileWechatPopup from '@/components/popups/ProfileWechatPopup'
+import ProfilePhonePopup from '@/components/popups/ProfilePhonePopup'
 import ProfileQqPopup from '@/components/popups/ProfileQqPopup'
-import { Router, useRouter } from 'next/dist/client/router'
 import ProfileRealNamePopup from '@/components/popups/ProfileRealNamePopup'
-import ProfileBankCardPopup from '@/components/popups/ProfileBankCardPopup'
+import ProfileTelegramPopup from '@/components/popups/ProfileTelegramPopup'
+import ProfileWechatPopup from '@/components/popups/ProfileWechatPopup'
 import ProfileField from '@/components/ProfileField'
-import { Box, Text } from '@chakra-ui/react'
-import useService from '@/utils/useService'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import useRequest from '@/utils/useRequest'
-import { UserContact } from '@/lib/types'
-import ProfileTelegramPopup from '@/components/popups/ProfileTelegramPopup'
-import ProfileLinePopup from '@/components/popups/ProfileLinePopup'
+import useService from '@/utils/useService'
+import { Box, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect } from 'react'
 
 const ProfilePage: React.FC = () => {
   const router = useRouter()
@@ -71,7 +67,7 @@ const ProfilePage: React.FC = () => {
       </Box>
 
       <ProfileRealNamePopup />
-      <ProfileNickPopup />
+
       <ProfileEmailPopup />
       <ProfilePhonePopup />
       <ProfilePassPopup />
@@ -79,8 +75,6 @@ const ProfilePage: React.FC = () => {
       <ProfileTelegramPopup />
       <ProfileLinePopup />
       <ProfileQqPopup />
-
-      <ProfileBankCardPopup />
 
       <FooterNavBar />
     </Layout>

@@ -7,6 +7,7 @@ import { useToast } from '@chakra-ui/toast'
 import useService from '@/utils/useService'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import FieldValidateMessage from '../FieldValidateMessage'
+import useHelper from '@/utils/useHelper'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -16,6 +17,7 @@ const jqEffectFunc = function () {
 function ProfileEmailPopup() {
   const { fetchUserContact } = useService()
   const { userContact } = useGlobalProvider()
+  const { closeBottomPopup } = useHelper()
   const { register, handleSubmit, errors, reset } = useForm<{ email: string }>()
   const API = useRequest()
   const toast = useToast()
@@ -24,14 +26,13 @@ function ProfileEmailPopup() {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
+      closeBottomPopup()
+      reset()
+      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
-  const onClose = () => {
-    reset()
-    fetchUserContact()
-  }
   useEffect(() => {
     $('.email').on('click', jqEffectFunc)
     return () => {
@@ -39,7 +40,7 @@ function ProfileEmailPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="Email" id="email-edit" onClose={onClose}>
+    <BottomPopup title="Email" id="email-edit" onClose={reset}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">Email</label>
         <div className="form-group">

@@ -1,3 +1,4 @@
+import useHelper from '@/utils/useHelper'
 import $ from 'jquery'
 import React, { ReactNode, useCallback, useEffect } from 'react'
 
@@ -9,10 +10,10 @@ type ButtonPopupProps = {
 }
 
 function BottomPopup({ title, children, id, onClose }: ButtonPopupProps) {
+  const { closeBottomPopup } = useHelper()
   const jqEffectFunc = useCallback(function () {
-    $('.mask').fadeOut()
-    $('.slide-up-section').removeClass('slide-up')
     onClose && onClose()
+    closeBottomPopup()
   }, [])
   useEffect(() => {
     $('.close_btn, .mask, .remove-slide').on('click', jqEffectFunc)

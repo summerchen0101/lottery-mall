@@ -1,4 +1,5 @@
 import moment from 'moment'
+import $ from 'jquery'
 
 const useHelper = () => {
   function getBase64(file) {
@@ -18,7 +19,12 @@ const useHelper = () => {
     input.parentNode.removeChild(input)
   }
 
-  return { getBase64, copyToClipboard }
+  const closeBottomPopup = () => {
+    $('.mask').fadeOut()
+    $('.slide-up-section').removeClass('slide-up')
+  }
+
+  return { getBase64, copyToClipboard, closeBottomPopup }
 }
 
 export default useHelper

@@ -6,6 +6,8 @@ import useRequest from '@/utils/useRequest'
 import FieldValidateMessage from '../FieldValidateMessage'
 import { useToast } from '@chakra-ui/toast'
 import useService from '@/utils/useService'
+import { useGlobalProvider } from '@/context/GlobalProvider'
+import useHelper from '@/utils/useHelper'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -17,20 +19,20 @@ function ProfileNickPopup() {
   const API = useRequest()
   const toast = useToast()
   const { fetchUserInfo } = useService()
+  const { user } = useGlobalProvider()
+  const { closeBottomPopup } = useHelper()
 
   const onSubmit = handleSubmit(async (d) => {
     try {
       await API.editUserInfo(d)
       toast({ status: 'success', title: '更新成功' })
+      closeBottomPopup()
       reset()
+      fetchUserInfo()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
-  const onClose = () => {
-    reset()
-    fetchUserInfo()
-  }
 
   useEffect(() => {
     $('.nickname').on('click', jqEffectFunc)
@@ -39,7 +41,7 @@ function ProfileNickPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="昵称修改" id="nickname-edit" onClose={onClose}>
+    <BottomPopup title="昵称修改" id="nickname-edit" onClose={reset}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">昵称</label>
         <div className="form-group">
@@ -49,6 +51,7 @@ function ProfileNickPopup() {
             placeholder="請輸入昵称"
             name="name"
             ref={register({ required: '不可為空' })}
+            defaultValue={user?.name}
           />
           <FieldValidateMessage error={errors.name} />
         </div>
