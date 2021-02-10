@@ -24,12 +24,14 @@ function ProfileEmailPopup() {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
-      reset()
-      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
+  const onClose = () => {
+    reset()
+    fetchUserContact()
+  }
   useEffect(() => {
     $('.email').on('click', jqEffectFunc)
     return () => {
@@ -37,7 +39,7 @@ function ProfileEmailPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="Email" id="email-edit" onClear={reset}>
+    <BottomPopup title="Email" id="email-edit" onClose={onClose}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">Email</label>
         <div className="form-group">

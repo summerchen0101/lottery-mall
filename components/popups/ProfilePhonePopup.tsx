@@ -26,12 +26,14 @@ function ProfilePhonePopup() {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
-      reset()
-      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
+  const onClose = () => {
+    reset()
+    fetchUserContact()
+  }
   useEffect(() => {
     $('.tel').on('click', jqEffectFunc)
     return () => {
@@ -39,7 +41,7 @@ function ProfilePhonePopup() {
     }
   }, [])
   return (
-    <BottomPopup title="手机号码" id="tel-edit" onClear={reset}>
+    <BottomPopup title="手机号码" id="tel-edit" onClose={onClose}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">手机号码</label>
         <div className="form-group">

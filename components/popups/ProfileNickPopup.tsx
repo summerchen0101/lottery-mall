@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import useRequest from '@/utils/useRequest'
 import FieldValidateMessage from '../FieldValidateMessage'
 import { useToast } from '@chakra-ui/toast'
+import useService from '@/utils/useService'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -15,16 +16,22 @@ function ProfileNickPopup() {
   const { register, handleSubmit, errors, reset } = useForm<{ name: string }>()
   const API = useRequest()
   const toast = useToast()
+  const { fetchUserInfo } = useService()
 
   const onSubmit = handleSubmit(async (d) => {
     try {
-      await API.editUserContact(d)
+      await API.editUserInfo(d)
       toast({ status: 'success', title: '更新成功' })
       reset()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
+  const onClose = () => {
+    reset()
+    fetchUserInfo()
+  }
+
   useEffect(() => {
     $('.nickname').on('click', jqEffectFunc)
     return () => {
@@ -32,7 +39,7 @@ function ProfileNickPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="昵称修改" id="nickname-edit">
+    <BottomPopup title="昵称修改" id="nickname-edit" onClose={onClose}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">昵称</label>
         <div className="form-group">

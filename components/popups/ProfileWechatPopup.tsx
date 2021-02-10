@@ -25,12 +25,14 @@ function ProfileWechatPopup() {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
-      reset()
-      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
+  const onClose = () => {
+    reset()
+    fetchUserContact()
+  }
   useEffect(() => {
     $('.wechat').on('click', jqEffectFunc)
     return () => {
@@ -38,7 +40,7 @@ function ProfileWechatPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="微信" id="wechat-edit" onClear={reset}>
+    <BottomPopup title="微信" id="wechat-edit" onClose={onClose}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">微信帐号</label>
         <div className="form-group">

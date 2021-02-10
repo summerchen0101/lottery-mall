@@ -38,6 +38,7 @@ import {
   PageContent,
   BetRecordSummary,
   UserContact,
+  EditUserInfoRequest,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -262,12 +263,15 @@ const useRequest = () => {
   const logout = () => get<null>('logout')
 
   const getUserInfo = () => get<UserInfo>('member/view')
+  const editUserInfo = (req: EditUserInfoRequest) =>
+    post<null>('member/edit', req)
 
   return {
     getUserContact,
     editUserContact,
     getAboutContent,
     getUserInfo,
+    editUserInfo,
     getMemberBankList,
     getMemberBankOptions,
     createMemberBank,

@@ -5,14 +5,14 @@ type ButtonPopupProps = {
   id?: string
   title?: string
   children?: ReactNode
-  onClear: () => void
+  onClose: () => void
 }
 
-function BottomPopup({ title, children, id, onClear }: ButtonPopupProps) {
+function BottomPopup({ title, children, id, onClose }: ButtonPopupProps) {
   const jqEffectFunc = useCallback(function () {
     $('.mask').fadeOut()
     $('.slide-up-section').removeClass('slide-up')
-    onClear && onClear()
+    onClose && onClose()
   }, [])
   useEffect(() => {
     $('.close_btn, .mask, .remove-slide').on('click', jqEffectFunc)

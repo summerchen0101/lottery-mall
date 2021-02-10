@@ -25,12 +25,14 @@ function ProfileTelegramPopup() {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
-      reset()
-      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
+  const onClose = () => {
+    reset()
+    fetchUserContact()
+  }
   useEffect(() => {
     $('.telegram').on('click', jqEffectFunc)
     return () => {
@@ -38,7 +40,7 @@ function ProfileTelegramPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="Telegram" id="telegram-edit" onClear={reset}>
+    <BottomPopup title="Telegram" id="telegram-edit" onClose={onClose}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">Telegram帐号</label>
         <div className="form-group">

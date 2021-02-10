@@ -286,8 +286,8 @@ export interface MemberBankCreateRequest {
 }
 
 export interface PwUpdateRequest {
+  old_pass: string
   pass: string
-  code: string
 }
 
 export interface RegisterRequest {
@@ -322,6 +322,9 @@ export interface UserInfo {
   promo_code: string
   email: string
   mobile: string
+}
+export interface EditUserInfoRequest {
+  name: string
 }
 
 export interface CaptchaResponse {

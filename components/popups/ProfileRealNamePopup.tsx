@@ -24,12 +24,14 @@ function ProfileRealNamePopup() {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
-      reset()
-      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
+  const onClose = () => {
+    reset()
+    fetchUserContact()
+  }
   useEffect(() => {
     $('.name').on('click', jqEffectFunc)
     return () => {
@@ -37,7 +39,7 @@ function ProfileRealNamePopup() {
     }
   }, [])
   return (
-    <BottomPopup title="真实姓名" id="name-edit" onClear={reset}>
+    <BottomPopup title="真实姓名" id="name-edit" onClose={onClose}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">真实姓名</label>
         <div className="form-group">

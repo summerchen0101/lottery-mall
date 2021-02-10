@@ -25,12 +25,14 @@ function ProfileLinePopup() {
     try {
       await API.editUserContact({ ...userContact, ...d })
       toast({ status: 'success', title: '更新成功' })
-      reset()
-      fetchUserContact()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
   })
+  const onClose = () => {
+    reset()
+    fetchUserContact()
+  }
   useEffect(() => {
     $('.line').on('click', jqEffectFunc)
     return () => {
@@ -38,7 +40,7 @@ function ProfileLinePopup() {
     }
   }, [])
   return (
-    <BottomPopup title="Line" id="line-edit" onClear={reset}>
+    <BottomPopup title="Line" id="line-edit" onClose={onClose}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">Line帐号</label>
         <div className="form-group">
