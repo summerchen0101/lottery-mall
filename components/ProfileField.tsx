@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 
 type ProfileFieldProps = {
   label: string
-  children: ReactNode
+  children?: ReactNode
   code: string
 }
 function ProfileField({ label, children, code }: ProfileFieldProps) {

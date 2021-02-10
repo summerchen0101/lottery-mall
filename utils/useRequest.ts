@@ -37,6 +37,7 @@ import {
   BetCreateRequest,
   PageContent,
   BetRecordSummary,
+  UserContact,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -239,11 +240,19 @@ const useRequest = () => {
 
   const getAboutContent = () => get<PageContent>('page/view/ABOUT')
 
+  /**
+   * 個人聯絡資料
+   */
+  const getUserContact = () => get<UserContact>('member_contact/view')
+  const editUserContact = (req: UserContact) =>
+    post<null>('member_contact/edit', req)
+
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
 
-  const updatePw = (req: PwUpdateRequest) => post<null>('member/pass')
-  const updateTradePw = (req: PwUpdateRequest) => post<null>('member/sec_pass')
+  const updatePw = (req: PwUpdateRequest) => post<null>('member/pass', req)
+  const updateTradePw = (req: PwUpdateRequest) =>
+    post<null>('member/sec_pass', req)
   const checkAcc = (acc: string) => post<null>('check_acc', { acc })
   const checkName = (name: string) => post<null>('check_name', { name })
   const sendSmsCode = (mobile: string) => post<null>('sms_code', { mobile })
@@ -255,6 +264,8 @@ const useRequest = () => {
   const getUserInfo = () => get<UserInfo>('member/view')
 
   return {
+    getUserContact,
+    editUserContact,
     getAboutContent,
     getUserInfo,
     getMemberBankList,

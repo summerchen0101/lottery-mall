@@ -17,6 +17,7 @@ const useHelper = () => {
     document.execCommand('copy')
     input.parentNode.removeChild(input)
   }
+
   return { getBase64, copyToClipboard }
 }
 

@@ -341,3 +341,13 @@ export interface PageContent {
   created_at: number
   updated_at: number
 }
+
+export interface UserContact {
+  name?: string
+  mobile?: string
+  email?: string
+  line_id?: string
+  wechat_id?: string
+  qq_id?: string
+  telegram_id?: string
+}

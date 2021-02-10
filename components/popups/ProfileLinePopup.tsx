@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react'
 import BottomPopup from '@/components/popups/BottomPopup'
 import $ from 'jquery'
+import { useForm } from 'react-hook-form'
 import useRequest from '@/utils/useRequest'
 import { useToast } from '@chakra-ui/toast'
-import { useForm } from 'react-hook-form'
-import FieldValidateMessage from '../FieldValidateMessage'
 import useService from '@/utils/useService'
 import { useGlobalProvider } from '@/context/GlobalProvider'
+import FieldValidateMessage from '../FieldValidateMessage'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
-  $('#name-edit').addClass('slide-up')
+  $('#line-edit').addClass('slide-up')
 }
-
-function ProfileRealNamePopup() {
+function ProfileLinePopup() {
   const { fetchUserContact } = useService()
   const { userContact } = useGlobalProvider()
-  const { register, handleSubmit, errors, reset } = useForm<{ name: string }>()
+  const { register, handleSubmit, errors, reset } = useForm<{
+    line_id: string
+  }>()
   const API = useRequest()
   const toast = useToast()
 
@@ -31,25 +32,25 @@ function ProfileRealNamePopup() {
     } catch (err) {}
   })
   useEffect(() => {
-    $('.name').on('click', jqEffectFunc)
+    $('.line').on('click', jqEffectFunc)
     return () => {
-      $('.name').off()
+      $('.line').off()
     }
   }, [])
   return (
-    <BottomPopup title="真实姓名" id="name-edit" onClear={reset}>
+    <BottomPopup title="Line" id="line-edit" onClear={reset}>
       <form onSubmit={onSubmit} noValidate>
-        <label className="form-label">真实姓名</label>
+        <label className="form-label">Line帐号</label>
         <div className="form-group">
           <input
             type="text"
             className="form-input account-input"
-            placeholder="請輸入真实姓名"
-            name="name"
+            placeholder="請輸入Line帐号"
+            name="line_id"
             ref={register({ required: '不可為空' })}
-            defaultValue={userContact?.name}
+            defaultValue={userContact?.line_id}
           />
-          <FieldValidateMessage error={errors.name} />
+          <FieldValidateMessage error={errors.line_id} />
         </div>
         <button type="submit" className="btnbase primary_btn mt-4 mb-2">
           送出
@@ -59,4 +60,4 @@ function ProfileRealNamePopup() {
   )
 }
 
-export default ProfileRealNamePopup
+export default ProfileLinePopup

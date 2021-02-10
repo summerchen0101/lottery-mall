@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react'
 import BottomPopup from '@/components/popups/BottomPopup'
 import $ from 'jquery'
+import { useForm } from 'react-hook-form'
+import useRequest from '@/utils/useRequest'
+import { useToast } from '@chakra-ui/toast'
+import useService from '@/utils/useService'
+import { useGlobalProvider } from '@/context/GlobalProvider'
+import FieldValidateMessage from '../FieldValidateMessage'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -8,6 +14,22 @@ const jqEffectFunc = function () {
 }
 
 function ProfileEmailPopup() {
+  const { fetchUserContact } = useService()
+  const { userContact } = useGlobalProvider()
+  const { register, handleSubmit, errors, reset } = useForm<{ email: string }>()
+  const API = useRequest()
+  const toast = useToast()
+
+  const onSubmit = handleSubmit(async (d) => {
+    try {
+      await API.editUserContact({ ...userContact, ...d })
+      toast({ status: 'success', title: '更新成功' })
+      reset()
+      fetchUserContact()
+      $('.mask').fadeOut()
+      $('.slide-up-section').removeClass('slide-up')
+    } catch (err) {}
+  })
   useEffect(() => {
     $('.email').on('click', jqEffectFunc)
     return () => {
@@ -15,35 +37,20 @@ function ProfileEmailPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="邮箱账号" id="email-edit">
-      <form>
-        <div className="descript">
-          为了您的安全，信息在送出后将无法修改，如需帮助请
-          <a href="#">联系客服</a>
-        </div>
-        <label className="form-label">邮箱账号</label>
+    <BottomPopup title="Email" id="email-edit" onClear={reset}>
+      <form onSubmit={onSubmit} noValidate>
+        <label className="form-label">Email</label>
         <div className="form-group">
           <input
             type="text"
             className="form-input account-input"
-            required
-            placeholder="請輸入邮箱账号"
+            name="email"
+            ref={register({ required: '不可為空' })}
+            defaultValue={userContact?.email}
           />
-          <a className="captcha">获取验证码</a>
+          <FieldValidateMessage error={errors.email} />
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-input account-input"
-            required
-            placeholder="请输入邮箱验证码"
-          />
-          <a className="iconfont iconclear btn_cancel" />
-        </div>
-        <button
-          type="submit"
-          className="btnbase primary_btn mt-4 mb-2 remove-slide"
-        >
+        <button type="submit" className="btnbase primary_btn mt-4 mb-2">
           送出
         </button>
       </form>

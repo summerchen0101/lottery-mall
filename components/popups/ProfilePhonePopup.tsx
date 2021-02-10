@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react'
 import BottomPopup from '@/components/popups/BottomPopup'
 import $ from 'jquery'
+import { useForm } from 'react-hook-form'
+import useRequest from '@/utils/useRequest'
+import { useToast } from '@chakra-ui/toast'
+import useService from '@/utils/useService'
+import { useGlobalProvider } from '@/context/GlobalProvider'
+import FieldValidateMessage from '../FieldValidateMessage'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -8,6 +14,24 @@ const jqEffectFunc = function () {
 }
 
 function ProfilePhonePopup() {
+  const { fetchUserContact } = useService()
+  const { userContact } = useGlobalProvider()
+  const { register, handleSubmit, errors, reset } = useForm<{
+    mobile: string
+  }>()
+  const API = useRequest()
+  const toast = useToast()
+
+  const onSubmit = handleSubmit(async (d) => {
+    try {
+      await API.editUserContact({ ...userContact, ...d })
+      toast({ status: 'success', title: '更新成功' })
+      reset()
+      fetchUserContact()
+      $('.mask').fadeOut()
+      $('.slide-up-section').removeClass('slide-up')
+    } catch (err) {}
+  })
   useEffect(() => {
     $('.tel').on('click', jqEffectFunc)
     return () => {
@@ -15,35 +39,20 @@ function ProfilePhonePopup() {
     }
   }, [])
   return (
-    <BottomPopup title="手机号码" id="tel-edit">
-      <form>
-        <div className="descript">
-          为了您的安全，信息在送出后将无法修改，如需帮助请
-          <a href="#">联系客服</a>
-        </div>
+    <BottomPopup title="手机号码" id="tel-edit" onClear={reset}>
+      <form onSubmit={onSubmit} noValidate>
         <label className="form-label">手机号码</label>
         <div className="form-group">
           <input
             type="text"
             className="form-input account-input"
-            required
-            placeholder="請輸入手机号码"
+            name="mobile"
+            ref={register({ required: '不可為空' })}
+            defaultValue={userContact?.mobile}
           />
-          <a className="captcha">获取验证码</a>
+          <FieldValidateMessage error={errors.mobile} />
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-input account-input"
-            required
-            placeholder="请输入短信验证码"
-          />
-          <a className="iconfont iconclear btn_cancel" />
-        </div>
-        <button
-          type="submit"
-          className="btnbase primary_btn mt-4 mb-2 remove-slide"
-        >
+        <button type="submit" className="btnbase primary_btn mt-4 mb-2">
           送出
         </button>
       </form>

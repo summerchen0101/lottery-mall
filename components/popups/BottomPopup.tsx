@@ -1,16 +1,19 @@
 import $ from 'jquery'
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode, useCallback, useEffect } from 'react'
 
 type ButtonPopupProps = {
   id?: string
   title?: string
   children?: ReactNode
+  onClear: () => void
 }
-const jqEffectFunc = function () {
-  $('.mask').fadeOut()
-  $('.slide-up-section').removeClass('slide-up')
-}
-function BottomPopup({ title, children, id }: ButtonPopupProps) {
+
+function BottomPopup({ title, children, id, onClear }: ButtonPopupProps) {
+  const jqEffectFunc = useCallback(function () {
+    $('.mask').fadeOut()
+    $('.slide-up-section').removeClass('slide-up')
+    onClear && onClear()
+  }, [])
   useEffect(() => {
     $('.close_btn, .mask, .remove-slide').on('click', jqEffectFunc)
     return () => {

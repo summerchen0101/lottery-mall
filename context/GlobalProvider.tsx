@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
-import { Handicap, Odds, UserInfo } from '@/lib/types'
+import { Handicap, Odds, UserContact, UserInfo } from '@/lib/types'
 import useStorage from '@/utils/useStorage'
 import useTransfer from '@/utils/useTransfer'
 
 type ContextState = {
   user: UserInfo
   setUser: React.Dispatch<React.SetStateAction<UserInfo>>
+  userContact: UserContact
+  setUserContact: React.Dispatch<React.SetStateAction<UserContact>>
   token: string
   setToken: React.Dispatch<React.SetStateAction<string>>
   bettingInfo: Odds
@@ -19,6 +21,7 @@ const GlobalContext = createContext<ContextState>(null)
 
 const GlobalProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<UserInfo>(null)
+  const [userContact, setUserContact] = useState<UserContact>(null)
   const [token, setToken] = useStorage<string>('token', '')
   const [bettingInfo, setBettingInfo] = useState<Odds>(null)
   const [eventInfo, setEventInfo] = useStorage<Handicap>('event', null)
@@ -32,6 +35,8 @@ const GlobalProvider: React.FC = ({ children }) => {
       value={{
         user,
         setUser,
+        userContact,
+        setUserContact,
         token,
         setToken,
         bettingInfo,

@@ -9,6 +9,7 @@ import {
   Handicap,
   Marquee,
   Score,
+  UserContact,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 
@@ -21,7 +22,7 @@ const useService = () => {
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const API = useRequest()
   const router = useRouter()
-  const { setUser } = useGlobalProvider()
+  const { setUser, setUserContact } = useGlobalProvider()
 
   const handleSendPhoneCode = async (acc: string) => {
     if (!acc) {
@@ -31,6 +32,13 @@ const useService = () => {
     try {
       await API.sendSmsCode(acc)
       toast({ status: 'success', title: '已送出驗證碼' })
+    } catch (err) {}
+  }
+
+  const fetchUserContact = async () => {
+    try {
+      const res = await API.getUserContact()
+      setUserContact(res.data)
     } catch (err) {}
   }
 
@@ -91,6 +99,7 @@ const useService = () => {
     fetchBanners,
     fetchHandicaps,
     fetchScores,
+    fetchUserContact,
     banners,
     marquee,
     handicaps,
