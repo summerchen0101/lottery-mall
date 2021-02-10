@@ -7,32 +7,34 @@ import { useForm } from 'react-hook-form'
 import useRequest from '@/utils/useRequest'
 import { Modal } from 'react-bootstrap'
 import { usePopupContext } from '@/context/PopupContext'
-
-type BettingForm = {
-  amount: number
-}
+import numeral from 'numeral'
 
 function BettingPopup() {
   const { bettingInfo, eventInfo, userBalance } = useGlobalProvider()
   const { toDateTime, toOptionName, amountToCanWin } = useTransfer()
-  const [amount, setAmount] = useState<number>()
+  const [amount, setAmount] = useState<string>('')
   const [visible, setVisible] = usePopupContext('betting')
 
   const API = useRequest()
   const toast = useToast()
+
+  const handleReset = () => {
+    setAmount('')
+    setVisible(false)
+  }
   const onSubmit = async () => {
     try {
       await API.createBet({
         odds_id: bettingInfo.id,
         odds: bettingInfo.odds,
-        amount: +amount,
+        amount: numeral(amount).value(),
       })
       toast({ status: 'success', title: '下注成功' })
-      setVisible(false)
+      handleReset()
     } catch (err) {}
   }
   return (
-    <Modal show={visible} onHide={() => setVisible(false)} centered>
+    <Modal show={visible} onHide={handleReset} centered>
       <Modal.Header closeButton>
         <h5 className="modal-titlemodal-header">下注資訊</h5>
       </Modal.Header>
@@ -68,17 +70,15 @@ function BettingPopup() {
         <div className="method-btn-wrap">
           <input
             type="number"
-            className="method-input w-50"
+            className="w-50"
             placeholder="本金"
+            id="capital"
             value={amount}
-            onChange={(e) => setAmount(+e.target.value)}
+            onChange={(e) => setAmount(e.target.value)}
           />
-          <input
-            type="number"
-            className="method-input w-50"
-            placeholder={`可赢 $${amountToCanWin(amount, bettingInfo?.odds)}`}
-            disabled
-          />
+          <div className="w-50 " id="profit">
+            可赢 ${amountToCanWin(amount, bettingInfo?.odds)}
+          </div>
         </div>
       </Modal.Body>
 
