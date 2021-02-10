@@ -1,4 +1,5 @@
-$red: rgb(197, 0, 0);
+@import "public/scss/_veriables";
+
 .marquee-box {
   height: 100%;
   overflow: hidden;
@@ -26,4 +27,20 @@ $red: rgb(197, 0, 0);
   100% {
       transform: translateX(-100%);
   }
+}
+
+.page-link {
+  color: $primary-color;
+  &:hover {
+    color: #999
+  }
+}
+
+.page-item.active .page-link {
+  border-color: $primary-color;
+  background-color: $primary-color;
+}
+
+.page-item.disabled .page-link {
+  color: $second-text-color
 }

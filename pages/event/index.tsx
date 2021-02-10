@@ -1,30 +1,26 @@
 import ColumnTitle from '@/components/ColumnTitle'
-import CountDownReloadBtn from '@/components/CountDownReloadBtn'
 import EventItem from '@/components/EventItem'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import LeagueFilterBtn from '@/components/LeagueFilterBtn'
 import NoticeBar from '@/components/NoticeBar'
+import Paginator from '@/components/Paginator'
 import LeagueFilterPopup from '@/components/popups/LeagueFilterPopup'
 import Tab from '@/components/Tab'
 import TabGroup from '@/components/TabGroup'
-import React, { useEffect, useMemo, useState } from 'react'
+import { usePaginationContext } from '@/context/PaginationProvider'
 import { afterDateRangeOpts } from '@/lib/options'
-import { useRouter } from 'next/dist/client/router'
 import useService from '@/utils/useService'
-import { useGlobalProvider } from '@/context/GlobalProvider'
 import useTransfer from '@/utils/useTransfer'
+import React, { useEffect, useMemo, useState } from 'react'
 
 const eventList: React.FC = () => {
   const [currentTab, setCurrentTab] = useState('today')
-  const router = useRouter()
   const { fetchMarquee, fetchHandicaps, marquee, handicaps } = useService()
-  const { user } = useGlobalProvider()
   const { toDateRange } = useTransfer()
   const start_at = useMemo(() => toDateRange(currentTab).start, [currentTab])
   const end_at = useMemo(() => toDateRange(currentTab).end, [currentTab])
-
+  const { page } = usePaginationContext()
   useEffect(() => {
     fetchMarquee()
   }, [])
@@ -33,8 +29,9 @@ const eventList: React.FC = () => {
     fetchHandicaps({
       start_at,
       end_at,
+      page,
     })
-  }, [currentTab])
+  }, [currentTab, page])
   return (
     <Layout>
       <HeaderTitleBar title="市场列表" />
@@ -61,18 +58,13 @@ const eventList: React.FC = () => {
           ))}
         </TabGroup>
         {/* Tab panes */}
-        <div className="tab-content pt-2 section-padding">
-          <div className="tab-pane active">
-            {/* 暫無數據 */}
-            {/* <div class="data_null"><img src="/images/data_null.svg">
-                              <p>暂无数据</p>
-                          </div> */}
-            <div className="list-container">
-              {handicaps.map((t, i) => (
-                <EventItem key={i} event={t} />
-              ))}
-            </div>
+        <div className="pt-2 section-padding">
+          <div className="list-container">
+            {handicaps.map((t, i) => (
+              <EventItem key={i} event={t} />
+            ))}
           </div>
+          <Paginator />
         </div>
       </div>
       <LeagueFilterPopup />

@@ -13,6 +13,7 @@ import {
   UserContact,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
+import { usePaginationContext } from '@/context/PaginationProvider'
 
 const useService = () => {
   const [marquee, setMarquee] = useState<Marquee[]>([])
@@ -25,6 +26,7 @@ const useService = () => {
   const API = useRequest()
   const router = useRouter()
   const { setUser, setUserContact } = useGlobalProvider()
+  const { setTotalCount, setTotalPages, setPage } = usePaginationContext()
 
   const fetchBankCardOpts = async () => {
     try {
@@ -86,6 +88,8 @@ const useService = () => {
     try {
       const { data } = await API.getHandicapList(req)
       setHandicaps(data.list)
+      setTotalPages(data.total_page)
+      setTotalCount(data.total_count)
     } catch (err) {}
     loadingEnd()
   }, [])
