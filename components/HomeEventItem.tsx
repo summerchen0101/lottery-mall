@@ -4,6 +4,7 @@ import useTransfer from '@/utils/useTransfer'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import numeral from 'numeral'
+import { Text } from '@chakra-ui/layout'
 
 const HomeEventItem: React.FC<{ event: Handicap }> = ({ event }) => {
   const router = useRouter()
@@ -18,10 +19,10 @@ const HomeEventItem: React.FC<{ event: Handicap }> = ({ event }) => {
           <i className="iconfont iconcalendar"></i>
           {toDateTime(event.play_at)}
         </div>
-        <div className="team-col">
+        <Text fontSize="sm">
           {event.team_home.name}(主) VS {event.team_away.name}
-        </div>
-        <div className="league-col">{event.league.name}</div>
+        </Text>
+        <Text className="league-col">{event.league.name}</Text>
       </div>
       <div className="chart-col">
         <div className="count text-blue">
