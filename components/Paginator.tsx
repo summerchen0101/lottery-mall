@@ -1,5 +1,5 @@
 import { usePaginationContext } from '@/context/PaginationProvider'
-import { Box } from '@chakra-ui/layout'
+import { Box, Text } from '@chakra-ui/layout'
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { Pagination } from 'react-bootstrap'
 type PaginatorProps = {
@@ -49,9 +49,9 @@ const Paginator: React.FC<PaginatorProps> = ({ displayCount = 5 }) => {
           onClick={() => setPage(totalPages)}
         />
       </Pagination>
-      <p className="mb-0 mt-2 w-100 text-center">
+      <Text mt="2" textAlign="center" fontSize="md" color="gray">
         共 {totalPages} 頁 <span hidden={!totalCount}>({totalCount} 筆)</span>
-      </p>
+      </Text>
     </Box>
   )
 }
