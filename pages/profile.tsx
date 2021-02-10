@@ -63,9 +63,6 @@ const ProfilePage: React.FC = () => {
           </ProfileField>
 
           <li className="thead col-list-item section-padding pointer">金融</li>
-          <ProfileField label="银行卡" code="bank-card">
-            {/* <Text color="red">未设置</Text> */}
-          </ProfileField>
           <ProfileField label="提领密码" code="withdrawal-pw"></ProfileField>
         </ul>
         {/* <div className="register_time pt-3 text-lighgray">

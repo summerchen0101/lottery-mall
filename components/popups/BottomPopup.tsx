@@ -5,7 +5,7 @@ type ButtonPopupProps = {
   id?: string
   title?: string
   children?: ReactNode
-  onClose: () => void
+  onClose?: () => void
 }
 
 function BottomPopup({ title, children, id, onClose }: ButtonPopupProps) {

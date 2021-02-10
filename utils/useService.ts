@@ -8,6 +8,7 @@ import {
   DateRangeListRequest,
   Handicap,
   Marquee,
+  OptionBasic,
   Score,
   UserContact,
 } from '@/lib/types'
@@ -18,12 +19,19 @@ const useService = () => {
   const [banners, setBanners] = useState<Banner[]>([])
   const [handicaps, setHandicaps] = useState<Handicap[]>([])
   const [scores, setScores] = useState<Score[]>([])
+  const [bankCardOpts, setBankCardOpts] = useState<OptionBasic[]>([])
   const toast = useToast()
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const API = useRequest()
   const router = useRouter()
   const { setUser, setUserContact } = useGlobalProvider()
 
+  const fetchBankCardOpts = async () => {
+    try {
+      const res = await API.getMemberBankOptions()
+      setBankCardOpts(res.data.list)
+    } catch (err) {}
+  }
   const handleSendPhoneCode = async (acc: string) => {
     if (!acc) {
       toast({ status: 'info', title: '請先填寫帳號/手機' })
@@ -100,6 +108,8 @@ const useService = () => {
     fetchHandicaps,
     fetchScores,
     fetchUserContact,
+    fetchBankCardOpts,
+    bankCardOpts,
     banners,
     marquee,
     handicaps,

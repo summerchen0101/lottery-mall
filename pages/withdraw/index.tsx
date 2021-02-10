@@ -22,21 +22,14 @@ type WithdrawForm = {
 }
 
 const withdraw: React.FC = () => {
-  const [bankCardOpts, setBankCardOpts] = useState<OptionBasic[]>([])
   const router = useRouter()
   const API = useRequest()
   const toast = useToast()
-  const { fetchUserInfo } = useService()
+  const { fetchUserInfo, fetchBankCardOpts, bankCardOpts } = useService()
   const { userBalance } = useGlobalProvider()
   const { register, handleSubmit, errors, watch } = useForm<WithdrawForm>()
-  const fetchBankCardOpts = async () => {
-    try {
-      const res = await API.getMemberBankOptions()
-      setBankCardOpts(res.data.list)
-    } catch (err) {}
-  }
+
   const onSubmit = handleSubmit(async (d) => {
-    console.log(d)
     try {
       const res = await API.createWithdraw({
         bank_id: +d.bank_id,

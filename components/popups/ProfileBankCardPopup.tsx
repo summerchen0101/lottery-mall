@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import BottomPopup from '@/components/popups/BottomPopup'
 import $ from 'jquery'
+import useRequest from '@/utils/useRequest'
+import useService from '@/utils/useService'
+import { Text } from '@chakra-ui/layout'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -8,20 +11,20 @@ const jqEffectFunc = function () {
 }
 
 function ProfileBankCardPopup() {
+  const { bankCardOpts, fetchBankCardOpts } = useService()
+
   useEffect(() => {
     $('.bank-card').on('click', jqEffectFunc)
+    fetchBankCardOpts()
     return () => {
       $('.bank-card').off()
     }
   }, [])
   return (
     <BottomPopup title="銀行卡" id="bank-card-edit">
-      <form>
-        <a className="item-btn">中国工商银行 (9372)</a>
-        <a className="item-btn">中国邮政 (1223)</a>
-        <a className="item-btn">添加銀行卡</a>
-        {/* <a className="item-btn close_btn">取消</a> */}
-      </form>
+      {bankCardOpts.map((t, i) => (
+        <Text key={i}>{t.name}</Text>
+      ))}
     </BottomPopup>
   )
 }
