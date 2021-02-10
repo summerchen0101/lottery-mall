@@ -31,6 +31,7 @@ function ProfileTradePassPopup() {
         pass: d.pass,
       })
       toast({ status: 'success', title: '更新成功' })
+      reset()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
