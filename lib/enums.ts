@@ -22,3 +22,12 @@ export enum Section {
   Full = 'F',
   FirstHalf = 'FH',
 }
+
+export enum GameStatus {
+  Live = 1,
+  Preparing = 2,
+  Finished = 3,
+  Determining = 4,
+  Canceled = 5,
+  Postpone = 6,
+}

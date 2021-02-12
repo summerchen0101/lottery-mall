@@ -1,4 +1,10 @@
-import { AccountingStatus, NewsType, ProcessStatus, Section } from './enums'
+import {
+  AccountingStatus,
+  GameStatus,
+  NewsType,
+  ProcessStatus,
+  Section,
+} from './enums'
 import bankCodes from './bankCodes'
 
 export const bankCodeOpts = bankCodes.map((t) => ({
@@ -52,10 +58,10 @@ export const processStatusOpts = [
 ]
 
 export const gameStatusOpts = [
-  { label: '走地', value: 1 },
-  { label: '未開賽', value: 2 },
-  { label: '完賽', value: 3 },
-  { label: '待定', value: 4 },
-  { label: '取消', value: 5 },
-  { label: '延期', value: 6 },
+  { label: '走地', value: GameStatus.Live },
+  { label: '未開賽', value: GameStatus.Preparing },
+  { label: '完賽', value: GameStatus.Finished },
+  { label: '待定', value: GameStatus.Determining },
+  { label: '取消', value: GameStatus.Canceled },
+  { label: '延期', value: GameStatus.Postpone },
 ]
