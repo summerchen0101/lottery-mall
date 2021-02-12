@@ -105,8 +105,9 @@ function login() {
             登入
           </button>
           <button
+            type="button"
             className="btnbase forget_pwd"
-            // onClick="location.href = 'forget-pw.html'"
+            onClick={() => router.push('/forget')}
           >
             忘记密码
           </button>
