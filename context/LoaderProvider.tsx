@@ -1,8 +1,7 @@
-import { Box, Center } from '@chakra-ui/layout'
+import { Center } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { Fade } from '@chakra-ui/transition'
 import React, { createContext, useContext, useState } from 'react'
-import { Modal } from 'react-bootstrap'
 
 type ContextState = {
   isLoading: boolean

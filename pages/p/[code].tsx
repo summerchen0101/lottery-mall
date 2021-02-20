@@ -45,7 +45,7 @@ const register: React.FC = () => {
         promo_code: router.query.code as string,
       })
       setToken(res.data.token)
-      router.push('/')
+      router.push('/home')
     } catch (err) {}
   })
   const handleAccCheck = async () => {

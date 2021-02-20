@@ -32,7 +32,7 @@ function login() {
         token,
       })
       setToken(res.data.token)
-      router.push('/')
+      router.push('/home')
     } catch (err) {}
   })
   const fetchCaptcha = async () => {
