@@ -22,7 +22,7 @@ const HomeEventItem: React.FC<{ event: Handicap }> = ({ event }) => {
         <Text fontSize="sm">
           {event.team_home.name}(主) VS {event.team_away.name}
         </Text>
-        <Text className="league-col">{event.league.name}</Text>
+        <Text className="league-col">{event.team_home.league_name}</Text>
       </div>
       <div className="chart-col">
         <div className="count text-blue">

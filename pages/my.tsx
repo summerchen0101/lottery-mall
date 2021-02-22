@@ -86,7 +86,7 @@ const MyPage: React.FC = () => {
               onClick={() => router.push('/deposit/record')}
             >
               <img src="/images/ic_cashhistory.svg" />
-              充提记录
+              充提纪录
             </li>
             {/* <li
               className="menu-list-item"

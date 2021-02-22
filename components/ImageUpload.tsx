@@ -35,9 +35,9 @@ const ImageUpload: React.FC<{
         <button type="button" className="text-area">
           <i className="iconfont iconadd" />
           <span className="text-lighgray">
-            支持扩展名 .rar .zip .doc .docx .pdf .jpg...
+            支持扩展名 .png .jpg
             <br />
-            （圖片最大上傳檔案大小：8 MB)
+            （圖片最大上傳檔案大小：2 MB)
           </span>
         </button>
       )}

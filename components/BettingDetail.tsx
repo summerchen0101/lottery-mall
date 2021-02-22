@@ -4,10 +4,11 @@ import React from 'react'
 import numeral from 'numeral'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
+import { sectionOpts } from '@/lib/options'
 
 const BettingDetail: React.FC<{ bet: BetRecord }> = ({ bet }) => {
   const { copyToClipboard } = useHelper()
-  const { toDateTime } = useTransfer()
+  const { toDateTime, toOptionName } = useTransfer()
   return (
     <Box className="detail-content" display="block">
       <ul className="title-inner">
@@ -40,12 +41,13 @@ const BettingDetail: React.FC<{ bet: BetRecord }> = ({ bet }) => {
         </li>
         <li className="content-item">{toDateTime(bet.handicap.play_at)}</li>
         <li className="content-item">{toDateTime(bet.created_at)}</li>
-        <li className="content-item">{bet.handicap.league.name}</li>
+        <li className="content-item">{bet.handicap.team_home.league_name}</li>
         <li className="content-item">
           {bet.handicap.team_home.name}(主) VS {bet.handicap.team_away.name}
         </li>
         <li className="content-item">
-          <span className="text-red">反对</span>全场坡胆 {bet.home_point}-
+          <span className="text-red">反对</span>
+          {toOptionName(sectionOpts, bet.section_code)}坡胆 {bet.home_point}-
           {bet.away_point}
         </li>
         {/* <li className="content-item">{bet.amount}</li> */}

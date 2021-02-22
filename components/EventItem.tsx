@@ -27,7 +27,7 @@ function EventItem({ event }: { event: Handicap }) {
         <div className="team-col">
           {event.team_home.name}(主) VS {event.team_away.name}
         </div>
-        <div className="league-col">{event.league.name}</div>
+        <div className="league-col">{event.team_home.league_name}</div>
       </div>
     </div>
   )
