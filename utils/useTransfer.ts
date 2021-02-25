@@ -13,10 +13,7 @@ const useTransfer = () => {
 
   const toCurrency = (num: number) => numeral(num).format('0,0')
 
-  const toOptionName = function (
-    options: OptionType[],
-    code: number | string,
-  ): string {
+  const toOptionName = function <T>(options: OptionType<T>[], code: T): string {
     return options.find((t) => t.value === code)?.label
   }
 
