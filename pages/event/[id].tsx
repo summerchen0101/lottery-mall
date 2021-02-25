@@ -81,7 +81,7 @@ const MarketPage: React.FC = () => {
           <a className="left-item">
             <i className="iconfont iconallow-left" />
           </a>
-          <div className="league-col">{eventInfo?.league?.name}</div>
+          <div className="league-col">{eventInfo?.team_home.league_name}</div>
           <div className="time-col">{toDateTime(eventInfo?.play_at)}</div>
           <div className="team-col">
             <div className="t1">{eventInfo?.team_home?.name}(主)</div>

@@ -36,11 +36,11 @@ function BettingPopup() {
   return (
     <Modal show={visible} onHide={handleReset} centered>
       <Modal.Header closeButton>
-        <h5 className="modal-titlemodal-header">下注資訊</h5>
+        <h5 className="modal-titlemodal-header">下注资讯</h5>
       </Modal.Header>
       <Modal.Body>
         <div className="league-col text-center text-lighgray">
-          {eventInfo?.league?.name}
+          {eventInfo?.team_home.league_name}
         </div>
         <div className="text-center ft-15 my-2">
           {eventInfo?.team_home?.name}(主) VS {eventInfo?.team_away?.name}

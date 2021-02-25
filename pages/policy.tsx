@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { Image } from '@chakra-ui/react'
 import useRequest from '@/utils/useRequest'
 
-const AboutPage: React.FC = () => {
+const PolicyPage: React.FC = () => {
   const [content, setContent] = useState('')
   const API = useRequest()
   const fetchContent = async () => {
@@ -20,7 +20,7 @@ const AboutPage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar back title="关于AG" />
+      <HeaderTitleBar back title="条款与规则" />
       <div className="main-content">
         <div className="about-section section-padding">
           <div className="w-100 text-center py-3 mt-5">
@@ -38,4 +38,4 @@ const AboutPage: React.FC = () => {
   )
 }
 
-export default AboutPage
+export default PolicyPage
