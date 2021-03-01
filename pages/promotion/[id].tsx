@@ -7,11 +7,14 @@ import useTransfer from '@/utils/useTransfer'
 import useRequest from '@/utils/useRequest'
 import { ActivityDetail } from '@/lib/types'
 import { useRouter } from 'next/dist/client/router'
+import { Box } from '@chakra-ui/layout'
+import useService from '@/utils/useService'
 
 const PromotionDetailPage: React.FC = () => {
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const API = useRequest()
   const { toDate } = useTransfer()
+  const { applyActivity } = useService()
   const [activity, setActivity] = useState<ActivityDetail>(null)
   const router = useRouter()
   const id = useMemo(() => +router.query.id, [router.query])
@@ -52,11 +55,15 @@ const PromotionDetailPage: React.FC = () => {
               </div>
 
               <div className="activity_title font-weight-bold">活动内容</div>
-              <p>{activity.content_mobile}</p>
+              <Box whiteSpace="pre-wrap">{activity.content_mobile}</Box>
 
-              {/* <button type="button" className="btnbase primary_btn mt-4">
-              活动申请
-            </button> */}
+              <button
+                type="button"
+                className="btnbase primary_btn mt-4"
+                onClick={() => applyActivity(activity.id)}
+              >
+                活动申请
+              </button>
             </div>
           </div>
         )}
