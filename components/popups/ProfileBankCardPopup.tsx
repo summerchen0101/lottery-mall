@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
 import BottomPopup from '@/components/popups/BottomPopup'
-import $ from 'jquery'
-import useRequest from '@/utils/useRequest'
+import { useGlobalProvider } from '@/context/GlobalProvider'
 import useService from '@/utils/useService'
 import { Text } from '@chakra-ui/layout'
+import $ from 'jquery'
+import React, { useEffect } from 'react'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -11,7 +11,8 @@ const jqEffectFunc = function () {
 }
 
 function ProfileBankCardPopup() {
-  const { bankCardOpts, fetchBankCardOpts } = useService()
+  const { fetchBankCardOpts } = useService()
+  const { bankcardOpts } = useGlobalProvider()
 
   useEffect(() => {
     $('.bank-card').on('click', jqEffectFunc)
@@ -22,7 +23,7 @@ function ProfileBankCardPopup() {
   }, [])
   return (
     <BottomPopup title="銀行卡" id="bank-card-edit">
-      {bankCardOpts.map((t, i) => (
+      {bankcardOpts.map((t, i) => (
         <Text key={i}>{t.name}</Text>
       ))}
     </BottomPopup>

@@ -25,8 +25,8 @@ const withdraw: React.FC = () => {
   const router = useRouter()
   const API = useRequest()
   const toast = useToast()
-  const { fetchUserInfo, fetchBankCardOpts, bankCardOpts } = useService()
-  const { userBalance } = useGlobalProvider()
+  const { fetchUserInfo, fetchBankCardOpts } = useService()
+  const { bankcardOpts } = useGlobalProvider()
   const { register, handleSubmit, errors, watch } = useForm<WithdrawForm>()
 
   const onSubmit = handleSubmit(async (d) => {
@@ -93,7 +93,7 @@ const withdraw: React.FC = () => {
               name="bank_id"
               ref={register({ required: '不可為空' })}
             >
-              {bankCardOpts.map((t, i) => (
+              {bankcardOpts.map((t, i) => (
                 <option key={i} value={t.id}>
                   {t.name}
                 </option>
