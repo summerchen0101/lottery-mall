@@ -18,9 +18,7 @@ const IndexPage = () => {
   }, [])
   return (
     <Layout>
-      <Center h="100vh" bg="gray.100">
-        <Spinner size="xl" color="gray.400" thickness="4px" />
-      </Center>
+      <Center h="100vh" bg="gray.100"></Center>
     </Layout>
   )
 }
