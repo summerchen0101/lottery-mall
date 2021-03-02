@@ -207,7 +207,7 @@ export interface Odds {
   id: number
   away_percent: number
   away_point: number
-  bet_amount_limit: number
+  single_game_limit: number
   bet_sum: number
   game_code: string
   home_percent: number
