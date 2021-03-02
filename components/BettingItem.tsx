@@ -2,22 +2,32 @@ import { useDisclosure } from '@chakra-ui/hooks'
 import { Box } from '@chakra-ui/layout'
 import React from 'react'
 import BettingDetail from './BettingDetail'
-import cs from 'classnames'
 import { BetRecord } from '@/lib/types'
 import useTransfer from '@/utils/useTransfer'
 import { accountingStatusOpts, sectionOpts } from '@/lib/options'
+import classNames from 'classnames'
+import { AccountingStatus } from '@/lib/enums'
 
 const BettingItem: React.FC<{ bet: BetRecord }> = ({ bet }) => {
   const { onToggle, isOpen } = useDisclosure()
   const { toOptionName, toCurrency, amountToCanWin } = useTransfer()
   return (
-    <Box className={cs('detail-item', { show: isOpen })} onClick={onToggle}>
+    <Box
+      className={classNames('detail-item', { show: isOpen })}
+      onClick={onToggle}
+    >
       <div className="detail-header">
         <div className="d-flex justify-content-between">
           <div className="team-col">
             {bet.handicap.team_home.name}(主) VS {bet.handicap.team_away.name}
           </div>
-          <div className="status">
+          <div
+            className={classNames(
+              'status',
+              bet.accounting_status === AccountingStatus.Finish && 'text-green',
+              bet.accounting_status === AccountingStatus.Cancel && 'text-red',
+            )}
+          >
             {toOptionName(accountingStatusOpts, bet.accounting_status)}
           </div>
         </div>

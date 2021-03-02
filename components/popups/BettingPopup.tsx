@@ -8,9 +8,11 @@ import useRequest from '@/utils/useRequest'
 import { Modal } from 'react-bootstrap'
 import { usePopupContext } from '@/context/PopupContext'
 import numeral from 'numeral'
+import useService from '@/utils/useService'
 
 function BettingPopup() {
   const { bettingInfo, eventInfo, userBalance } = useGlobalProvider()
+  const { fetchUserInfo } = useService()
   const { toDateTime, toOptionName, amountToCanWin } = useTransfer()
   const [amount, setAmount] = useState<number | ''>('')
   const [visible, setVisible] = usePopupContext('betting')
@@ -35,6 +37,7 @@ function BettingPopup() {
         odds: bettingInfo.odds,
         amount: _amount,
       })
+      fetchUserInfo()
       toast({ status: 'success', title: '下注成功' })
       handleReset()
     } catch (err) {}

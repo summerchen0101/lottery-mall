@@ -127,7 +127,7 @@ const MarketPage: React.FC = () => {
               <div className="tricks-item-thead d-flex">
                 <div className="tricks-item-title">比分</div>
                 <div className="tricks-item-title">获利</div>
-                <div className="tricks-item-title">可交易</div>
+                <div className="tricks-item-title">交易量</div>
               </div>
               <div className="list-container">
                 {odds.map((t, i) => (
@@ -142,9 +142,7 @@ const MarketPage: React.FC = () => {
                     <div className="profit text-red">
                       {(t.odds * 100).toFixed(2)}%
                     </div>
-                    <div className="price">
-                      ￥ {toCurrency(t.single_game_limit)}
-                    </div>
+                    <div className="price">￥ {toCurrency(t.bet_sum)}</div>
                   </div>
                 ))}
               </div>
