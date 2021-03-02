@@ -89,7 +89,10 @@ function BettingPopup() {
             onChange={(e) => setAmount(+e.target.value)}
           />
           <div className="w-50 " id="profit">
-            可赢 ${amountToCanWin(amount, bettingInfo?.odds)}
+            可赢 $
+            {numeral(amountToCanWin(amount, bettingInfo?.odds)).format(
+              '0,0.00',
+            )}
           </div>
         </div>
         <div className="method-btn-wrap">
