@@ -1,7 +1,7 @@
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { sectionOpts } from '@/lib/options'
 import useTransfer from '@/utils/useTransfer'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { HStack, Text, useToast } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import useRequest from '@/utils/useRequest'
@@ -12,7 +12,7 @@ import numeral from 'numeral'
 function BettingPopup() {
   const { bettingInfo, eventInfo, userBalance } = useGlobalProvider()
   const { toDateTime, toOptionName, amountToCanWin } = useTransfer()
-  const [amount, setAmount] = useState<number>(null)
+  const [amount, setAmount] = useState<number | ''>('')
   const [visible, setVisible] = usePopupContext('betting')
   const chips = [100, 1000, 5000]
 
@@ -20,20 +20,31 @@ function BettingPopup() {
   const toast = useToast()
 
   const handleReset = () => {
-    setAmount(null)
+    setAmount('')
     setVisible(false)
   }
   const onSubmit = async () => {
+    const _amount = numeral(amount).value()
+    if (!_amount) {
+      toast({ status: 'warning', title: '本金不可為空' })
+      return
+    }
     try {
       await API.createBet({
         odds_id: bettingInfo.id,
         odds: bettingInfo.odds,
-        amount: numeral(amount).value(),
+        amount: _amount,
       })
       toast({ status: 'success', title: '下注成功' })
       handleReset()
     } catch (err) {}
   }
+
+  useEffect(() => {
+    if (amount > 999999) {
+      return setAmount(999999)
+    }
+  }, [amount])
   return (
     <Modal show={visible} onHide={handleReset} centered>
       <Modal.Header closeButton>
@@ -91,7 +102,7 @@ function BettingPopup() {
               +{chip}
             </div>
           ))}
-          <div className="outline_btn color-gray" onClick={() => setAmount(0)}>
+          <div className="outline_btn color-gray" onClick={() => setAmount('')}>
             清除
           </div>
         </div>
