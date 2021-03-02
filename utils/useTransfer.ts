@@ -13,7 +13,10 @@ const useTransfer = () => {
 
   const toCurrency = (num: number) => numeral(num).format('0,0')
 
-  const toOptionName = function <T>(options: OptionType<T>[], code: T): string {
+  const toOptionName = function <T extends string | number>(
+    options: OptionType<T>[],
+    code: number | string,
+  ): string {
     return options.find((t) => t.value === code)?.label
   }
 
@@ -64,8 +67,9 @@ const useTransfer = () => {
   }, [])
 
   const amountToCanWin = useCallback((amount, odds) => {
+    // 手續費5%
     if (amount && odds) {
-      return numeral(amount).multiply(odds).value()
+      return numeral(amount).multiply(odds).multiply(0.95).value()
     }
     return 0
   }, [])

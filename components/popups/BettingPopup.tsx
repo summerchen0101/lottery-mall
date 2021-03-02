@@ -12,14 +12,15 @@ import numeral from 'numeral'
 function BettingPopup() {
   const { bettingInfo, eventInfo, userBalance } = useGlobalProvider()
   const { toDateTime, toOptionName, amountToCanWin } = useTransfer()
-  const [amount, setAmount] = useState<string>('')
+  const [amount, setAmount] = useState<number>(null)
   const [visible, setVisible] = usePopupContext('betting')
+  const chips = [100, 1000, 5000]
 
   const API = useRequest()
   const toast = useToast()
 
   const handleReset = () => {
-    setAmount('')
+    setAmount(null)
     setVisible(false)
   }
   const onSubmit = async () => {
@@ -65,7 +66,7 @@ function BettingPopup() {
 
         <div className="d-flex justify-content-between py-3">
           <div className="user-wallet">余额 ¥ {userBalance}</div>
-          {/* <div className="handling-charge">手续费5%</div> */}
+          <div className="handling-charge">手续费5%</div>
         </div>
         <div className="method-btn-wrap">
           <input
@@ -74,10 +75,24 @@ function BettingPopup() {
             placeholder="本金"
             id="capital"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => setAmount(+e.target.value)}
           />
           <div className="w-50 " id="profit">
             可赢 ${amountToCanWin(amount, bettingInfo?.odds)}
+          </div>
+        </div>
+        <div className="method-btn-wrap">
+          {chips.map((chip) => (
+            <div
+              key={chip}
+              className="outline_btn color-gray"
+              onClick={() => setAmount((t) => +t + chip)}
+            >
+              +{chip}
+            </div>
+          ))}
+          <div className="outline_btn color-gray" onClick={() => setAmount(0)}>
+            清除
           </div>
         </div>
       </Modal.Body>
