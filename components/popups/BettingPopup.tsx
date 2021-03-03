@@ -16,7 +16,7 @@ function BettingPopup() {
   const { toDateTime, toOptionName, amountToCanWin, toCurrency } = useTransfer()
   const [amount, setAmount] = useState<number | ''>('')
   const [visible, setVisible] = usePopupContext('betting')
-  const chips = [100, 1000, 5000]
+  const chips = [100, 500, 1000, 5000]
 
   const API = useRequest()
   const toast = useToast()
@@ -41,6 +41,19 @@ function BettingPopup() {
       toast({ status: 'success', title: '下注成功' })
       handleReset()
     } catch (err) {}
+  }
+
+  const onClose = () => {
+    setVisible(false)
+    handleReset()
+  }
+
+  const handleAmountChange = (amount: number) => {
+    let value = amount
+    if (value > user?.balance) {
+      value = user?.balance
+    }
+    return setAmount(value || '')
   }
 
   useEffect(() => {
@@ -80,7 +93,7 @@ function BettingPopup() {
 
         <div className="d-flex justify-content-between py-3">
           <div className="user-wallet">
-            余额 ¥ {toCurrency(user?.balance, 2)}
+            余额 ¥ {toCurrency(user?.balance, 3)}
           </div>
           <div className="handling-charge">手续费5%</div>
         </div>
@@ -91,7 +104,7 @@ function BettingPopup() {
             placeholder="本金"
             id="capital"
             value={amount}
-            onChange={(e) => setAmount(+e.target.value)}
+            onChange={(e) => handleAmountChange(+e.currentTarget.value)}
           />
           <div className="w-50 " id="profit">
             可赢 $
@@ -105,13 +118,22 @@ function BettingPopup() {
             <div
               key={chip}
               className="outline_btn color-gray"
-              onClick={() => setAmount((t) => +t + chip)}
+              onClick={() => handleAmountChange(+amount + chip)}
             >
               +{chip}
             </div>
           ))}
+        </div>
+        <div className="method-btn-wrap">
           <div className="outline_btn color-gray" onClick={() => setAmount('')}>
             清除
+          </div>
+          {/* <div className="outline_btn color-gray">修改</div> */}
+          <div
+            className="flex2 outline_btn color-blue"
+            onClick={() => setAmount(user?.balance)}
+          >
+            余额全投
           </div>
         </div>
       </Modal.Body>

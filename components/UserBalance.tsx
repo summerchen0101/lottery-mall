@@ -8,7 +8,7 @@ import React from 'react'
 function UserBalance() {
   const { user } = useGlobalProvider()
   const { toCurrency } = useTransfer()
-  return <span className="user-wallet">¥ {toCurrency(user?.balance, 2)}</span>
+  return <span className="user-wallet">¥ {toCurrency(user?.balance, 3)}</span>
 }
 
 export default UserBalance
