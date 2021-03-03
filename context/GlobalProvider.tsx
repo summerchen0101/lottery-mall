@@ -21,7 +21,6 @@ type ContextState = {
   setBettingInfo: React.Dispatch<React.SetStateAction<Odds>>
   eventInfo: Handicap
   setEventInfo: React.Dispatch<React.SetStateAction<Handicap>>
-  userBalance: string
   bankcardOpts: MemberBankOption[]
   setBankcardOpts: React.Dispatch<React.SetStateAction<MemberBankOption[]>>
   bankcards: MemberBank[]
@@ -39,10 +38,6 @@ const GlobalProvider: React.FC = ({ children }) => {
   const [bettingInfo, setBettingInfo] = useState<Odds>(null)
   const [eventInfo, setEventInfo] = useStorage<Handicap>('event', null)
   const { toCurrency } = useTransfer()
-  const userBalance = useMemo(
-    () => (user?.balance ? toCurrency(user?.balance) : '0'),
-    [user],
-  )
   return (
     <GlobalContext.Provider
       value={{
@@ -56,7 +51,6 @@ const GlobalProvider: React.FC = ({ children }) => {
         setBettingInfo,
         eventInfo,
         setEventInfo,
-        userBalance,
         bankcardOpts,
         setBankcardOpts,
         bankcards,

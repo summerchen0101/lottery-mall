@@ -6,8 +6,9 @@ import React from 'react'
 //   balance: number
 // }
 function UserBalance() {
-  const { userBalance } = useGlobalProvider()
-  return <span className="user-wallet">¥ {userBalance}</span>
+  const { user } = useGlobalProvider()
+  const { toCurrency } = useTransfer()
+  return <span className="user-wallet">¥ {toCurrency(user?.balance, 2)}</span>
 }
 
 export default UserBalance

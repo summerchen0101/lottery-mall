@@ -11,9 +11,9 @@ import numeral from 'numeral'
 import useService from '@/utils/useService'
 
 function BettingPopup() {
-  const { bettingInfo, eventInfo, userBalance } = useGlobalProvider()
+  const { bettingInfo, eventInfo, user } = useGlobalProvider()
   const { fetchUserInfo } = useService()
-  const { toDateTime, toOptionName, amountToCanWin } = useTransfer()
+  const { toDateTime, toOptionName, amountToCanWin, toCurrency } = useTransfer()
   const [amount, setAmount] = useState<number | ''>('')
   const [visible, setVisible] = usePopupContext('betting')
   const chips = [100, 1000, 5000]
@@ -79,7 +79,9 @@ function BettingPopup() {
         )}
 
         <div className="d-flex justify-content-between py-3">
-          <div className="user-wallet">余额 ¥ {userBalance}</div>
+          <div className="user-wallet">
+            余额 ¥ {toCurrency(user?.balance, 2)}
+          </div>
           <div className="handling-charge">手续费5%</div>
         </div>
         <div className="method-btn-wrap">

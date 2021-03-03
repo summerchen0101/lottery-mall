@@ -8,6 +8,7 @@ import pattern from '@/lib/pattern'
 import { OptionBasic } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useService from '@/utils/useService'
+import useTransfer from '@/utils/useTransfer'
 import { Box } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { useToast } from '@chakra-ui/toast'
@@ -26,7 +27,8 @@ const withdraw: React.FC = () => {
   const API = useRequest()
   const toast = useToast()
   const { fetchUserInfo, fetchBankCardOpts } = useService()
-  const { bankcardOpts, userBalance } = useGlobalProvider()
+  const { bankcardOpts, user } = useGlobalProvider()
+  const { toCurrency } = useTransfer()
   const { register, handleSubmit, errors, reset } = useForm<WithdrawForm>()
 
   const onSubmit = handleSubmit(async (d) => {
@@ -106,7 +108,7 @@ const withdraw: React.FC = () => {
           <label className="form-label2">
             提领金额
             <span className="user-wallet text-blue ml-3">
-              餘額 ¥ {userBalance}
+              餘額 ¥ {toCurrency(user?.balance, 2)}
             </span>
           </label>
           <div className="form-group">
