@@ -126,6 +126,12 @@ body {
 .main-content {
   width: 100%;
   height: 100%;
+  // WebKit-based browsers will ignore this
+  height: -moz-available;
+  // Mozilla-based browsers will ignore this.
+  height: -webkit-fill-available;
+  // For WebKit-based browsers, Edge not support this
+  height: fill-available;
   min-height: 100%;
   padding-top: 50px;
   padding-bottom: 75px;
@@ -636,7 +642,7 @@ body {
     justify-content: center;
     text-align: center;
     @include border-radius(50%);
-    background-image: linear-gradient(180deg, #fff 14%, #f3f9ff 54%,#fafbff 94% );
+    background-image: linear-gradient(180deg, #fff 14%, #f3f9ff 54%, #fafbff 94%);
     border: 1px solid #f1f1f1;
     box-shadow: #f7fdff 0px 1px 0px 0px inset;
 
@@ -1544,51 +1550,40 @@ table {
 }
 
 .team-wrap {
-  display: flex;
-  align-items: center;
-  width: 100%;
+  width: 100% !important;
   font-size: 12px;
-  height: 45px;
+  // height: 45px;
   text-align: center;
-  background: #fff;
-  @include border-bottom;
 
 
-  .datetime {
+  div:nth-of-type(1) {
     width: 15%;
-    height: 100%;
-    padding: 0 0 0 4%;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    @include border-right;
+    box-sizing: border-box;
   }
 
-  .teaminfo {
+  div:nth-of-type(2) {
+    width: 15%;
+    box-sizing: border-box;
+  }
+
+  div:nth-of-type(3) {
     width: 40%;
-    height: 100%;
-    padding: 0 4%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    @include border-right;
+    box-sizing: border-box;
+    p{
+      width: 100%;
+      min-width: 60px
+    }
   }
 
-  .result-score {
+  div:nth-of-type(4) {
     width: 15%;
-    height: 100%;
-    padding: 0 4%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    @include border-right;
+    box-sizing: border-box;
+
   }
 
-  .resul-total-score {
+  div:nth-of-type(5) {
     width: 15%;
-    padding: 0 4%;
+    box-sizing: border-box;
   }
 }
 
