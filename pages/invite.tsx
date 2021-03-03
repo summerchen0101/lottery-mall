@@ -58,13 +58,13 @@ const invite: React.FC = () => {
             <i className="iconcopy iconfont btn_copy" />
           </CopyToClipboard>
         </div>
-        <button
+        {/* <button
           type="submit"
           className="btnbase primary_btn mt-4 mb-2 "
           onClick={() => router.push('/invite-profit')}
         >
           推广收益
-        </button>
+        </button> */}
       </div>
 
       <FooterNavBar />
