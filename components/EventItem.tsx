@@ -10,7 +10,7 @@ function EventItem({ event }: { event: Handicap }) {
   return (
     <div
       className="team-item"
-      onClick={() => router.push(`/event/${event.id}`)}
+      onClick={() => router.push(`/events/${event.id}`)}
     >
       <div className="info-col ">
         <div className="d-flex justify-content-between align-items-center bdb pb">

@@ -12,7 +12,7 @@ const HomeEventItem: React.FC<{ event: Handicap }> = ({ event }) => {
   return (
     <div
       className="team-item"
-      onClick={() => router.push(`/event/${event.id}`)}
+      onClick={() => router.push(`/events/${event.id}`)}
     >
       <div className="info-col">
         <div className="time">
