@@ -32,13 +32,14 @@ const BankCardAddPage: React.FC = () => {
   const { register, handleSubmit, errors, watch } = useForm<MemberBankForm>()
   const onSubmit = handleSubmit(async (d) => {
     try {
-      const res = await API.createMemberBank({
+      await API.createMemberBank({
         name: toOptionName(bankCodeOpts, d.name),
         branch: d.branch,
         acc: d.acc,
         person: d.person,
         img: await getBase64(d.img[0]),
-        is_default: d.is_default,
+        // is_default: d.is_default,
+        is_default: false,
       })
       await router.push('/bankcard')
       toast({ status: 'success', title: '新增成功' })
@@ -105,11 +106,11 @@ const BankCardAddPage: React.FC = () => {
             <small className="text-lighgray d-block">
               为了您的资金能够迅速到账，请确保填写的姓名与账户姓名一致
             </small>
-            <label className="form-label2 w-25">预设帐户</label>
+            {/* <label className="form-label2 w-25">预设帐户</label>
             <label className="form-switch">
               <input type="checkbox" name="is_default" ref={register} />
               <span className="slider " />
-            </label>
+            </label> */}
             <label className="form-label2">照片上传</label>
             <ImageUpload register={register} />
             <FieldValidateMessage error={errors.img} />
