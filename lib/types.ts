@@ -154,7 +154,7 @@ export interface TeamInfo {
 }
 
 export interface Handicap {
-  bet_amount_limit: number
+  single_game_limit: number
   bet_sum: number
   game_code: string
   id: number

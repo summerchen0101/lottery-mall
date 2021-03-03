@@ -196,7 +196,7 @@ const useRequest = () => {
     post<null>('withdraw_rec/add', req)
 
   /**
-   * 盤口
+   * 賽事盤口
    */
   const getHandicapList = (req?: DateRangeListRequest) =>
     post<BaseListResponse<Handicap>>('handicap/list', {
@@ -204,6 +204,7 @@ const useRequest = () => {
       perpage: 100,
       ...req,
     })
+  const getHotHandicaps = () => post<BaseListResponse<Handicap>>('handicap/hot')
 
   const getHandicapDetail = (id: number) => get<Handicap>(`handicap/view/${id}`)
 
@@ -300,6 +301,7 @@ const useRequest = () => {
     getBannerList,
     getHandicapDetail,
     getHandicapList,
+    getHotHandicaps,
     getScoreList,
     getOddsList,
     getFaqList,

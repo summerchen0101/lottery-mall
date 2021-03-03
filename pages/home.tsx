@@ -1,7 +1,5 @@
 import CarouselBanner from '@/components/CarouselBanner'
-import CarouselSlide from '@/components/CarouselSlide'
 import ColumnTitle from '@/components/ColumnTitle'
-import CountDownReloadBtn from '@/components/CountDownReloadBtn'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import HomeEventItem from '@/components/HomeEventItem'
@@ -10,30 +8,38 @@ import MessageBadge from '@/components/MessageBadge'
 import NoticeBar from '@/components/NoticeBar'
 import UserBalance from '@/components/UserBalance'
 import { useGlobalProvider } from '@/context/GlobalProvider'
+import { Handicap } from '@/lib/types'
+import useRequest from '@/utils/useRequest'
 import useService from '@/utils/useService'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect } from 'react'
-import Swiper from 'swiper'
+import React, { useEffect, useState } from 'react'
 
 const Home: React.FC = () => {
+  const [handicaps, setHandicaps] = useState<Handicap[]>([])
   const router = useRouter()
   const {
     fetchMarquee,
     fetchBanners,
     fetchUserInfo,
-    fetchHandicaps,
     marquee,
     banners,
-    handicaps,
   } = useService()
+  const API = useRequest()
   const { user } = useGlobalProvider()
+
+  const fetchHotHandicaps = async () => {
+    try {
+      const res = await API.getHotHandicaps()
+      setHandicaps(res.data.list)
+    } catch (err) {}
+  }
 
   useEffect(() => {
     Promise.all([
       fetchMarquee(),
       fetchBanners(),
       fetchUserInfo(),
-      fetchHandicaps({ perpage: 20 }),
+      fetchHotHandicaps(),
     ])
     return () => {
       // slider.removeAllSlides()
