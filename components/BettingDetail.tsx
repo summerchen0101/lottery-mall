@@ -24,20 +24,16 @@ const BettingDetail: React.FC<{ bet: BetRecord }> = ({ bet }) => {
       </ul>
       <ul className="content-inner">
         <li className="content-item">
-          {numeral(bet.id).format('0000')}
-          {/* <button
+          {bet.sn}
+          <button
             className="icon_btn"
-            onClick={() => copyToClipboard(numeral(bet.id).format('0000'))}
+            onClick={(e) => {
+              e.stopPropagation()
+              copyToClipboard(bet.sn)
+            }}
           >
             <i className="iconcopy iconfont" />
-          </button> */}
-          {/* <button
-            className="mini_btn color-red"
-            data-toggle="modal"
-            data-target="#revokeModal"
-          >
-            撤单
-          </button> */}
+          </button>
         </li>
         <li className="content-item">{toDateTime(bet.handicap.play_at)}</li>
         <li className="content-item">{toDateTime(bet.created_at)}</li>
