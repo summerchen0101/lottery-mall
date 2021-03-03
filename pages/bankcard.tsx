@@ -70,7 +70,7 @@ const BankCardPage: React.FC = () => {
                 <div className="bank-num">**** **** **** {t.acc.slice(-5)}</div>
                 <div className="check-mask">审核中，请耐心等候</div>
                 <div className="btn-wrap">
-                  <button
+                  {/* <button
                     className={classNames(
                       'mr-1 w-50',
                       t.is_default ? 'primary_btn' : 'second_btn',
@@ -78,9 +78,9 @@ const BankCardPage: React.FC = () => {
                     onClick={() => onSetDefault(t.id)}
                   >
                     預設
-                  </button>
+                  </button> */}
                   <button
-                    className="second_btn w-50"
+                    className="second_btn w-100"
                     onClick={() => onOpen(t.id)}
                   >
                     刪除
