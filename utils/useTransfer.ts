@@ -11,7 +11,10 @@ const useTransfer = () => {
   const isBeforeDay = (unixTime: number) =>
     moment(unixTime * 1000).isBefore(moment(), 'day')
 
-  const toCurrency = (num: number) => numeral(num).format('0,0')
+  const toCurrency = (num: number, decimal?: number) =>
+    numeral(num).format(
+      decimal ? `0,0.${Array(decimal).fill('0').join('')}` : '0,0',
+    )
 
   const toOptionName = function <T extends string | number>(
     options: OptionType<T>[],
