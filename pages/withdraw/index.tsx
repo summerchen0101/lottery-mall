@@ -26,8 +26,8 @@ const withdraw: React.FC = () => {
   const API = useRequest()
   const toast = useToast()
   const { fetchUserInfo, fetchBankCardOpts } = useService()
-  const { bankcardOpts } = useGlobalProvider()
-  const { register, handleSubmit, errors, watch } = useForm<WithdrawForm>()
+  const { bankcardOpts, userBalance } = useGlobalProvider()
+  const { register, handleSubmit, errors, reset } = useForm<WithdrawForm>()
 
   const onSubmit = handleSubmit(async (d) => {
     try {
@@ -36,6 +36,8 @@ const withdraw: React.FC = () => {
         amount: +d.amount,
         sec_pass: d.sec_pass,
       })
+      reset()
+      fetchUserInfo()
       toast({
         status: 'success',
         title: '提领',
@@ -104,7 +106,7 @@ const withdraw: React.FC = () => {
           <label className="form-label2">
             提领金额
             <span className="user-wallet text-blue ml-3">
-              ¥ {watch('amount')}
+              餘額 ¥ {userBalance}
             </span>
           </label>
           <div className="form-group">
