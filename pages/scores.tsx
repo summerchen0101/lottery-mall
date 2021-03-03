@@ -34,43 +34,43 @@ const scores: React.FC = () => {
   return (
     <Layout>
       <HeaderTitleBar back title="即時比分" />
-      <Box className="main-content" overflowX="auto">
-        <Table size="sm">
+      <Box className="main-content">
+        <Table size="sm" w="full">
           <Thead bgColor="gray.100" whiteSpace="nowrap">
             <Tr>
-              <Th>開賽</Th>
-              <Th>聯盟</Th>
-              <Th>对阵</Th>
-              <Th>全場</Th>
-              <Th>半場</Th>
+              <Th padding=".25rem .9rem">開賽</Th>
+              <Th padding=".25rem .9rem">聯盟</Th>
+              <Th padding=".25rem .9rem">对阵</Th>
+              <Th padding=".25rem .9rem">全場</Th>
+              <Th padding=".25rem .9rem">半場</Th>
             </Tr>
           </Thead>
           <Tbody>
             {scores.map((t, i) => (
               <Tr key={i}>
-                <Td fontSize="xs">
+                <Td fontSize="xs" padding=".25rem .9rem">
                   {t.play_time}
                   <br />
                   {toOptionName(gameStatusOpts, t.game_status)}
                 </Td>
-                <Td fontSize="xs">
+                <Td fontSize="xs" padding=".25rem .9rem">
                   <Text isTruncated w="60px">
                     {t.league}
                   </Text>
                 </Td>
-                <Td fontSize="xs">
-                  <Text isTruncated w="100px">
+                <Td fontSize="xs" padding=".25rem .9rem">
+                  <Text isTruncated w="80px">
                     {t.home_team} (主)
                   </Text>
-                  <Text isTruncated w="100px">
+                  <Text isTruncated w="80px">
                     {t.away_team}
                   </Text>
                 </Td>
-                <Td>
+                <Td padding=".25rem .9rem">
                   <div>{t.home_score}</div>
                   <div>{t.away_score}</div>
                 </Td>
-                <Td>
+                <Td padding=".25rem .9rem">
                   <div>{t.home_half_score}</div>
                   <div>{t.away_half_score}</div>
                 </Td>
