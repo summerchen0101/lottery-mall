@@ -41,7 +41,7 @@ const message: React.FC = () => {
             <li
               key={i}
               className="message-item"
-              onClick={() => router.push(`/message/${i + 1}`)}
+              onClick={() => router.push(`/message/${t.id}}`)}
             >
               <label className="form-checkbox message-select">
                 <input
