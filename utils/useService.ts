@@ -1,21 +1,17 @@
-import { useRouter } from 'next/dist/client/router'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useLoaderProvider } from '@/context/LoaderProvider'
-import useRequest from './useRequest'
-import { useCallback, useState } from 'react'
+import { usePaginationContext } from '@/context/PaginationProvider'
 import {
   Banner,
   DateRangeListRequest,
   Handicap,
   Marquee,
-  MemberBank,
-  MemberBankOption,
-  OptionBasic,
   Score,
-  UserContact,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
-import { usePaginationContext } from '@/context/PaginationProvider'
+import { useRouter } from 'next/dist/client/router'
+import { useCallback, useState } from 'react'
+import useRequest from './useRequest'
 
 const useService = () => {
   const [marquee, setMarquee] = useState<Marquee[]>([])

@@ -8,12 +8,12 @@
 }
 
 
-.marquee-box p {
+.marquee-box > p {
   position: absolute;
   white-space: nowrap;
   height: 100%;
   margin: 0;
-  animation: marquee 10s linear infinite;
+  animation: marquee 15s linear infinite;
   padding: 0;
   margin: 0;
   min-width: 100%;
