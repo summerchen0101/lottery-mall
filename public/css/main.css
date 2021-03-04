@@ -780,12 +780,14 @@ a:hover {
   position: fixed;
   bottom: 0;
   left: 0;
-  background: #fff;
   width: 100%;
   height: 60px;
-  -webkit-box-shadow: 0px -3px 8px #0000000D;
-          box-shadow: 0px -3px 8px #0000000D;
-  border-top: 1px solid #EBEBEB;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f8fbff), to(#f8fdff));
+  background: linear-gradient(top, #f8fbff 0%, #f8fdff 100%);
+  -webkit-box-shadow: 0px 0 15px rgba(32, 86, 153, 0.2);
+          box-shadow: 0px 0 15px rgba(32, 86, 153, 0.2);
+  border-top: 1px solid #ffffff;
+  border-radius: 10px 10px 0 0;
 }
 
 .footer-list {
@@ -810,7 +812,7 @@ a:hover {
 }
 
 .footer-list .footer-list-item a {
-  color: #ABBED3;
+  color: #9aa4c2;
   display: block;
   font-size: 12px;
   width: 100%;
@@ -2377,6 +2379,10 @@ body {
   color: #4A5359;
 }
 
+.middle-menu-section .user-info .user-id {
+  color: #4A5359;
+}
+
 .middle-menu-section .user-info .user-wallet {
   color: #00CDFF;
   margin-left: 10px;
@@ -2414,7 +2420,7 @@ body {
 }
 
 .menu-list .menu-list-item img {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .menu-list .divider {
@@ -2482,6 +2488,8 @@ body {
   font-size: 14px;
   letter-spacing: 1px;
   padding-bottom: 2px;
+  color: #4A5359;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .team-item .info-col .time .iconfont {
@@ -2489,6 +2497,7 @@ body {
   margin-right: 5px;
   position: relative;
   bottom: 1px;
+  color: #4A5359;
 }
 
 .team-item .info-col .tricks-num {
@@ -2512,11 +2521,10 @@ body {
 }
 
 .team-item .info-col .team-col {
-  margin-top: 4px;
+  color: #4A5359;
+  margin-top: 2px;
   font-size: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  width: 95%;
 }
 
 .team-item .info-col .league-col {
@@ -2562,6 +2570,7 @@ body {
   position: relative;
   font-size: 11px;
   display: block;
+  color: #4A5359;
 }
 
 .section-title-bar {
