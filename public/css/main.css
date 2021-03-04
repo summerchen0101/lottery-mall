@@ -2314,6 +2314,11 @@ body {
           align-items: center;
 }
 
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #00CDFF !important;
+}
+
 @media screen and (max-width: 375px) {
   .swiper-container {
     min-width: 375px;

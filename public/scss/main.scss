@@ -457,6 +457,11 @@ body {
   }
 }
 
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: $primary-color !important;
+}
+
 @media screen and (max-width: 375px) {
   .swiper-container {
     min-width: 375px;
@@ -1569,7 +1574,8 @@ table {
   div:nth-of-type(3) {
     width: 40%;
     box-sizing: border-box;
-    p{
+
+    p {
       width: 100%;
       min-width: 60px
     }
