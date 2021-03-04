@@ -1,43 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 28 28" style="enable-background:new 0 0 28 28;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:url(#Ellipse_48_1_);}
-	.st1{fill:url(#Path_620_1_);}
-	.st2{fill:url(#Ellipse_49_1_);}
-	.st3{fill:url(#Path_621_1_);}
-</style>
-<g id="Group_725" transform="translate(-1146.223 -780.435)">
-	<g id="Group_723">
-		
-			<linearGradient id="Ellipse_48_1_" gradientUnits="userSpaceOnUse" x1="271.1985" y1="1296.1333" x2="272.2025" y2="1296.1333" gradientTransform="matrix(13.454 0 0 -13.454 -2495.2354 18226.6348)">
-			<stop  offset="0" style="stop-color:#00DCFF"/>
-			<stop  offset="1" style="stop-color:#00C2FF"/>
-		</linearGradient>
-		<circle id="Ellipse_48" class="st0" cx="1160.2" cy="788.5" r="6.7"/>
-		
-			<linearGradient id="Path_620_1_" gradientUnits="userSpaceOnUse" x1="238.9727" y1="1286.7343" x2="239.9767" y2="1286.7343" gradientTransform="matrix(24.8152 0 0 -10.8464 -4782.3853 14758.1982)">
-			<stop  offset="0" style="stop-color:#00DCFF"/>
-			<stop  offset="1" style="stop-color:#00C2FF"/>
-		</linearGradient>
-		<path id="Path_620" class="st1" d="M1172.4,803.4c-3.8-6.7-12.3-9.1-19-5.3c-2.2,1.2-4,3.1-5.3,5.3c-0.6,1.3-0.1,2.8,1.1,3.5
-			c0.4,0.2,0.8,0.3,1.2,0.3h19.6c1.4,0,2.6-1.2,2.6-2.6C1172.6,804.1,1172.5,803.7,1172.4,803.4L1172.4,803.4z"/>
-	</g>
-	<g id="Group_724">
-		
-			<linearGradient id="Ellipse_49_1_" gradientUnits="userSpaceOnUse" x1="162.2163" y1="1263.4315" x2="162.2163" y2="1265.1644" gradientTransform="matrix(8.238200e-16 -13.454 -13.454 -8.238200e-16 18177.4023 2970.9143)">
-			<stop  offset="0" style="stop-color:#00D0FF"/>
-			<stop  offset="1" style="stop-color:#57E7FF"/>
-		</linearGradient>
-		<circle id="Ellipse_49" class="st2" cx="1160.2" cy="788.5" r="6.7"/>
-		
-			<linearGradient id="Path_621_1_" gradientUnits="userSpaceOnUse" x1="266.7469" y1="1286.2009" x2="266.7469" y2="1288.3508" gradientTransform="matrix(14.4725 0 0 -10.8448 -2695.1084 14755.9951)">
-			<stop  offset="0" style="stop-color:#00D0FF"/>
-			<stop  offset="1" style="stop-color:#57E7FF"/>
-		</linearGradient>
-		<path id="Path_621" class="st3" d="M1172.4,803.4c-2.4-4.4-7.1-7.2-12.1-7.1c-0.7,0-1.4,0.1-2.1,0.2l10.7,10.7h1.2
-			c1.4,0,2.6-1.2,2.6-2.6C1172.6,804.1,1172.5,803.7,1172.4,803.4L1172.4,803.4z"/>
-	</g>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-65.843" y1="38.383" x2="-65.768" y2="38.383" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffe200"/>
+      <stop offset="1" stop-color="#ffce00"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-36.716" y1="44.971" x2="-36.675" y2="44.971" xlink:href="#linear-gradient"/>
+    <clipPath id="clip-Artboard_9">
+      <rect width="28" height="28"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_9" data-name="Artboard – 9" clip-path="url(#clip-Artboard_9)">
+    <g id="Group_725" transform="translate(-1146.273 -780.5)">
+      <g id="Group_723">
+        <circle id="Ellipse_48" cx="6.7" cy="6.7" r="6.7" transform="translate(1153.5 781.8)" fill="url(#linear-gradient)"/>
+        <path id="Path_620" d="M1172.4,803.4a13.949,13.949,0,0,0-19-5.3,14.191,14.191,0,0,0-5.3,5.3,2.721,2.721,0,0,0,1.1,3.5,2.663,2.663,0,0,0,1.2.3H1170a2.647,2.647,0,0,0,2.6-2.6,3.727,3.727,0,0,0-.2-1.2Z" fill="url(#linear-gradient-2)"/>
+      </g>
+      <g id="Group_724">
+        <circle id="Ellipse_49" cx="6.7" cy="6.7" r="6.7" transform="translate(1153.5 781.8)" fill="#feb12a"/>
+        <path id="Path_621" d="M1172.4,803.4a13.6,13.6,0,0,0-12.1-7.1,14.913,14.913,0,0,0-2.1.2l10.7,10.7h1.2a2.647,2.647,0,0,0,2.6-2.6,10.374,10.374,0,0,0-.3-1.2Z" fill="#feb12a"/>
+      </g>
+    </g>
+  </g>
 </svg>

@@ -19,7 +19,7 @@ const HomeEventItem: React.FC<{ event: Handicap }> = ({ event }) => {
           <i className="iconfont iconcalendar"></i>
           {toDateTime(event.play_at)}
         </div>
-        <Text fontSize="sm">
+        <Text fontSize="sm" className="team-col">
           {event.team_home.name}(主) VS {event.team_away.name}
         </Text>
         <Text className="league-col">{event.team_home.league_name}</Text>

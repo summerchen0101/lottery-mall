@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 28 28" style="enable-background:new 0 0 28 28;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#ABBED3;}
-</style>
-<g>
-	<path id="Path_535" class="st0" d="M25,2.2H3c-1.6,0-2.9,1.3-2.9,2.9v0v17.9c0,1.6,1.3,2.9,2.9,2.9h0h22c1.6,0,2.9-1.3,2.9-2.9v0
-		V5.1C27.9,3.5,26.6,2.2,25,2.2L25,2.2z M14,17.9c-1.8,0-3.2-1.4-3.2-3.2c0-1.8,1.4-3.2,3.2-3.2c1.8,0,3.2,1.4,3.2,3.2
-		C17.2,16.5,15.8,17.9,14,17.9z M1.9,11.5h3v6.4h-3V11.5z M1.9,22.9v-3.3h4.8v-10H1.9V5.1C1.9,4.4,2.4,4,3,4h10.1v5.8
-		c-2.7,0.5-4.5,3.1-4,5.8c0.4,2.1,2,3.7,4,4V24H3C2.4,24,1.9,23.6,1.9,22.9L1.9,22.9z M25,24H14.9v-4.4c2.7-0.5,4.5-3.1,4-5.8
-		c-0.4-2.1-2-3.7-4-4V4H25c0.6,0,1.1,0.5,1.1,1.1v4.6h-4.8v10h4.8v3.3C26.1,23.6,25.6,24,25,24L25,24z M26.1,11.5v6.4h-3v-6.4H26.1z
-		"/>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+  <defs>
+    <clipPath id="clip-Artboard_7">
+      <rect width="28" height="28"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_7" data-name="Artboard – 7" clip-path="url(#clip-Artboard_7)">
+    <g id="ft_market" transform="translate(0 -0.05)">
+      <path id="Path_535" d="M25,2.2H3A2.9,2.9,0,0,0,.1,5.1h0V23A2.9,2.9,0,0,0,3,25.9H25A2.9,2.9,0,0,0,27.9,23h0V5.1A2.9,2.9,0,0,0,25,2.2ZM14,17.9a3.2,3.2,0,1,1,3.2-3.2A3.159,3.159,0,0,1,14,17.9ZM1.9,11.5h3v6.4h-3V11.5Zm0,11.4V19.6H6.7V9.6H1.9V5.1A1.049,1.049,0,0,1,3,4H13.1V9.8a4.989,4.989,0,0,0-4,5.8,4.886,4.886,0,0,0,4,4V24H3a1.049,1.049,0,0,1-1.1-1.1ZM25,24H14.9V19.6a4.989,4.989,0,0,0,4-5.8,4.886,4.886,0,0,0-4-4V4H25a1.11,1.11,0,0,1,1.1,1.1V9.7H21.3v10h4.8V23A1.028,1.028,0,0,1,25,24Zm1.1-12.5v6.4h-3V11.5Z" fill="#fff"/>
+    </g>
+  </g>
 </svg>

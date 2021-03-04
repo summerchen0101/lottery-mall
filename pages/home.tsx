@@ -58,14 +58,14 @@ const Home: React.FC = () => {
         <NoticeBar msgs={marquee} />
         <div className="middle-menu-section">
           <div className="user-info d-flex justify-content-between">
-            <div className="user-id">{user?.acc}</div>
+            <div className="user-id">欢迎您 {user?.acc}</div>
             <div>
               账户余额 <UserBalance />
             </div>
           </div>
           <ul className="menu-list">
             <li
-              className="menu-list-item ic_recharge"
+              className="menu-list-item "
               onClick={() => router.push('/deposit')}
             >
               <img src="/images/ic_recharge.svg" />
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
             </li>
             <li className="divider" />
             <li
-              className="menu-list-item ic_promotion"
+              className="menu-list-item i"
               onClick={() => router.push('/promotion')}
             >
               <img src="/images/ic_promotion.svg" />
@@ -86,7 +86,7 @@ const Home: React.FC = () => {
             </li>
             <li className="divider" />
             <li
-              className="menu-list-item ic_score"
+              className="menu-list-item"
               onClick={() => router.push('/scores')}
             >
               <img src="/images/ic_score.svg" />
