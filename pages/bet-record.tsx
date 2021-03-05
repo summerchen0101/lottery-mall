@@ -75,7 +75,7 @@ const BettingsPage: React.FC = () => {
           <li className="divider"></li>
           <li className="acc-item px-2">
             <p>{(toCurrency(_.sumBy(betReocrds, 'amount')), 2)}</p>
-            <span className="text-lighgray">累计流水</span>
+            <span className="text-lighgray">累计注額</span>
           </li>
           <li className="divider"></li>
           <li className="acc-item px-2">
