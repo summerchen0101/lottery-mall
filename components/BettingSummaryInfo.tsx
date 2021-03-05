@@ -21,7 +21,7 @@ const BettingSummaryInfo: React.FC<{
         <li className="divider" />
         <li className="acc-item px-2">
           <p className="text-green">{toCurrency(expect)}</p>
-          <span className="text-lighgray">預估獲利</span>
+          <span className="text-lighgray">输赢结果</span>
         </li>
       </ul>
     </div>

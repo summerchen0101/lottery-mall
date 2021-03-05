@@ -44,7 +44,7 @@ const HistoryDetailPage: React.FC = () => {
       <BettingSummaryInfo
         date={date}
         sum={_.sumBy(betReocrds, 'amount')}
-        expect={_.sumBy(betReocrds, (t) => amountToCanWin(t.amount, t.odds))}
+        expect={_.sumBy(betReocrds, (t) => t.result)}
       />
       <div className="main-content background-gray" style={{ paddingTop: 105 }}>
         <div className="list-container">
