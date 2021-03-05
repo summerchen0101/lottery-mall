@@ -85,7 +85,7 @@ function withdrawRecord() {
                 <div>{toOptionName(processStatusOpts, t.status)}</div>
               </div>
               <div>交易类型:提领</div>
-              <div>交易金额:{toCurrency(t.amount)}</div>
+              <div>交易金额:{toCurrency(t.amount, 2)}</div>
               <div className="order-num">订单号: {t.sn}</div>
             </div>
           ))}

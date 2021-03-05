@@ -108,7 +108,7 @@ const withdraw: React.FC = () => {
           <label className="form-label2">
             提领金额
             <span className="user-wallet text-blue ml-3">
-              餘額 ¥ {toCurrency(user?.balance, 3)}
+              餘額 ¥ {toCurrency(user?.balance, 2)}
             </span>
           </label>
           <div className="form-group">

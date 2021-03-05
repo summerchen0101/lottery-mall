@@ -93,7 +93,7 @@ function BettingPopup() {
 
         <div className="d-flex justify-content-between py-3">
           <div className="user-wallet">
-            余额 ¥ {toCurrency(user?.balance, 3)}
+            余额 ¥ {toCurrency(user?.balance, 2)}
           </div>
           <div className="handling-charge">手续费5%</div>
         </div>

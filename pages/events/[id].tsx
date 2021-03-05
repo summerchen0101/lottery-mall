@@ -107,7 +107,7 @@ const MarketPage: React.FC = () => {
             <div className="vol-col">
               交易累計：
               <span className="text-blue">
-                {toCurrency(eventInfo?.bet_sum)}
+                {toCurrency(eventInfo?.bet_sum, 2)}
               </span>
             </div>
             {/* <div className="d-flex">

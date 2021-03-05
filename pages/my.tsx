@@ -46,12 +46,12 @@ const MyPage: React.FC = () => {
             </div>
             <ul className="acc-inner mt-3">
               <li className="acc-item text-white">
-                <p className="user-wallet">{toCurrency(user?.balance)}</p>
+                <p className="user-wallet">{toCurrency(user?.balance, 2)}</p>
                 <span>可用余额</span>
               </li>
               <li className="divider" />
               <li className="acc-item text-white">
-                <p>{toCurrency(user?.bet_sum)}</p>
+                <p>{toCurrency(user?.bet_sum, 2)}</p>
                 <span>交易中金额</span>
               </li>
             </ul>

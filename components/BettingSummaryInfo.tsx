@@ -15,12 +15,12 @@ const BettingSummaryInfo: React.FC<{
         </li>
         <li className="divider" />
         <li className="acc-item px-2">
-          <p>{toCurrency(sum)}</p>
+          <p>{toCurrency(sum, 2)}</p>
           <span className="text-lighgray">金額統計</span>
         </li>
         <li className="divider" />
         <li className="acc-item px-2">
-          <p className="text-green">{toCurrency(expect)}</p>
+          <p className="text-green">{toCurrency(expect, 2)}</p>
           <span className="text-lighgray">输赢结果</span>
         </li>
       </ul>
