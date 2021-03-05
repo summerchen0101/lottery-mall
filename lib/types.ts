@@ -285,7 +285,6 @@ export interface RegisterRequest {
   name: string
   pass: string
   mobile: string
-  email: string
 }
 
 export interface LoginRequest {
