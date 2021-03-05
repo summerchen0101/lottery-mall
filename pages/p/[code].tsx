@@ -166,13 +166,7 @@ const register: React.FC = () => {
               className="form-input account-input"
               placeholder="请输入手机号码"
               name="mobile"
-              ref={register({
-                required: '不可為空',
-                pattern: {
-                  value: pattern.twPhone,
-                  message: '手机格式有誤',
-                },
-              })}
+              ref={register({ required: '不可為空' })}
             />
             <FieldValidateMessage error={errors.mobile} />
           </div>
