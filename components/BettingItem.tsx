@@ -7,6 +7,7 @@ import useTransfer from '@/utils/useTransfer'
 import { accountingStatusOpts, sectionOpts } from '@/lib/options'
 import classNames from 'classnames'
 import { AccountingStatus } from '@/lib/enums'
+import ColorText from './ColorText'
 
 const BettingItem: React.FC<{ bet: BetRecord }> = ({ bet }) => {
   const { onToggle, isOpen } = useDisclosure()
@@ -24,8 +25,8 @@ const BettingItem: React.FC<{ bet: BetRecord }> = ({ bet }) => {
           <div
             className={classNames(
               'status',
-              bet.accounting_status === AccountingStatus.Finish && 'text-green',
-              bet.accounting_status === AccountingStatus.Cancel && 'text-red',
+              bet.accounting_status === AccountingStatus.Finish && 'text-blue',
+              bet.accounting_status === AccountingStatus.Cancel && 'text-gray',
             )}
           >
             {toOptionName(accountingStatusOpts, bet.accounting_status)}
@@ -38,8 +39,19 @@ const BettingItem: React.FC<{ bet: BetRecord }> = ({ bet }) => {
         </div>
         <BettingDetail bet={bet} />
         <div className="detail-footer">
-          <div>投注额: {toCurrency(bet.amount)}</div>
-          <div>预估获利: {amountToCanWin(bet.amount, bet.odds)}</div>
+          <div>
+            投注额: <span className="text-blue">{toCurrency(bet.amount)}</span>
+          </div>
+
+          {bet.accounting_status !== AccountingStatus.Pending ? (
+            <div>
+              結果: <ColorText num={bet.result} fontWeight="500" />
+            </div>
+          ) : (
+            <div>
+              预估获利: <ColorText num={amountToCanWin(bet.amount, bet.odds)} />
+            </div>
+          )}
         </div>
       </div>
       <div className="icon-col">
