@@ -23,15 +23,15 @@ const BettingDetail: React.FC<{ bet: BetRecord }> = ({ bet }) => {
         {/* <li className="title-item">预估获利</li> */}
       </ul>
       <ul className="content-inner">
-        <li className="content-item">
+        <li
+          className="content-item"
+          onClick={(e) => {
+            e.stopPropagation()
+            copyToClipboard(bet.sn)
+          }}
+        >
           {bet.sn}
-          <button
-            className="icon_btn"
-            onClick={(e) => {
-              e.stopPropagation()
-              copyToClipboard(bet.sn)
-            }}
-          >
+          <button className="icon_btn">
             <i className="iconcopy iconfont" />
           </button>
         </li>
