@@ -16,6 +16,7 @@ import Tab from '@/components/Tab'
 import { beforeDateRangeOpts } from '@/lib/options'
 import classNames from 'classnames'
 import EmptyHolder from '@/components/EmptyHolder'
+import ColorText from '@/components/ColorText'
 const HistoryPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState('thisWeek')
   const router = useRouter()
@@ -84,7 +85,9 @@ const HistoryPage: React.FC = () => {
                   <td>{t.date}</td>
                   <td>{t.count}</td>
                   <td>{toCurrency(+t.amount)}</td>
-                  <td>{toCurrency(+t.result)}</td>
+                  <td>
+                    <ColorText num={+t.result} />
+                  </td>
                   <td>
                     <Link href={`/history/${t.date}`}>
                       <img src="/images/ic_history.svg" />
@@ -96,13 +99,8 @@ const HistoryPage: React.FC = () => {
                 <td>合計</td>
                 <td>{totalInfo.count}</td>
                 <td>{toCurrency(totalInfo.amount)}</td>
-                <td
-                  className={classNames({
-                    'text-success': totalInfo.result > 0,
-                    'text-danger': totalInfo.result < 0,
-                  })}
-                >
-                  {toCurrency(totalInfo.result)}
+                <td>
+                  <ColorText num={totalInfo.result} />
                 </td>
                 <td />
               </tr>
