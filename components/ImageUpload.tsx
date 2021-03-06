@@ -1,21 +1,21 @@
 import useHelper from '@/utils/useHelper'
-import useTransfer from '@/utils/useTransfer'
-import { Box, Image, InputProps, Stack } from '@chakra-ui/react'
-import React, { useEffect, useRef, useState } from 'react'
+import { Box, Image, Input, InputProps } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 
-const ImageUpload: React.FC<{
+interface ImageUploadProps {
   onChange?: (dataUrl: string) => void
-  value?: string
-  register: any
-}> = ({ onChange, value, register }) => {
-  const [loading, setLoading] = useState(false)
+}
+
+const ImageUpload = function (
+  { onChange, defaultValue, ...props }: ImageUploadProps & InputProps,
+  ref,
+) {
   const [imageUrl, setImageUrl] = useState('')
   const { getBase64 } = useHelper()
   useEffect(() => {
-    setImageUrl(value)
-  }, [value])
+    setImageUrl(defaultValue as string)
+  }, [defaultValue])
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoading(true)
     const file = e.target.files[0]
     if (!file) {
       setImageUrl('')
@@ -24,7 +24,6 @@ const ImageUpload: React.FC<{
     const imgUrl = await getBase64(file)
     setImageUrl(imgUrl)
     onChange && onChange(imgUrl)
-    setLoading(false)
   }
 
   return (
@@ -37,20 +36,20 @@ const ImageUpload: React.FC<{
           <span className="text-lighgray">
             支持扩展名 .png .jpg
             <br />
-            （圖片最大上傳檔案大小：2 MB)
+            {'（圖片最大上傳檔案大小：2 MB)'}
           </span>
         </button>
       )}
 
-      <input
-        ref={register({ required: '不可為空' })}
+      <Input
         className="upload"
         type="file"
-        name="img"
+        ref={ref}
         onChange={handleChange}
+        {...props}
       />
     </Box>
   )
 }
 
-export default ImageUpload
+export default React.forwardRef(ImageUpload)
