@@ -4,8 +4,8 @@ import React from 'react'
 const BettingSummaryInfo: React.FC<{
   date?: string
   sum: number
-  expect: number
-}> = ({ date, sum, expect }) => {
+  result: number
+}> = ({ date, sum, result }) => {
   const { toCurrency } = useTransfer()
   return (
     <div className="pintop-section d-flex flex-column justify-content-center fixed">
@@ -16,12 +16,12 @@ const BettingSummaryInfo: React.FC<{
         <li className="divider" />
         <li className="acc-item px-2">
           <p>{toCurrency(sum, 2)}</p>
-          <span className="text-lighgray">金額統計</span>
+          <span className="text-lighgray">累計流水</span>
         </li>
         <li className="divider" />
         <li className="acc-item px-2">
-          <p className="text-green">{toCurrency(expect, 2)}</p>
-          <span className="text-lighgray">输赢结果</span>
+          <p className="text-green">{toCurrency(result, 2)}</p>
+          <span className="text-lighgray">累計收益</span>
         </li>
       </ul>
     </div>

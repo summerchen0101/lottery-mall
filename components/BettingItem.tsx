@@ -46,7 +46,7 @@ const BettingItem: React.FC<{ bet: BetRecord }> = ({ bet }) => {
 
           {bet.accounting_status !== AccountingStatus.Pending ? (
             <div>
-              输赢结果: <ColorText num={bet.result} fontWeight="500" />
+              投資收益: <ColorText num={bet.result} fontWeight="bold" />
             </div>
           ) : (
             <div>

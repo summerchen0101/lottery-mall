@@ -44,8 +44,8 @@ const HistoryDetailPage: React.FC = () => {
       <HeaderTitleBar back title="账务明细" extra={<MessageBadge />} />
       <BettingSummaryInfo
         date={date}
-        sum={_.sumBy(betReocrds, 'amount')}
-        expect={_.sumBy(betReocrds, (t) => t.result)}
+        sum={_.sumBy(betReocrds, 'valid_amount')}
+        result={_.sumBy(betReocrds, (t) => t.result)}
       />
       <Box className="main-content background-gray" h="100vh" pt="105px">
         <div className="list-container">
