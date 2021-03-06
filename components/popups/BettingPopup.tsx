@@ -2,7 +2,7 @@ import { useGlobalProvider } from '@/context/GlobalProvider'
 import { sectionOpts } from '@/lib/options'
 import useTransfer from '@/utils/useTransfer'
 import React, { useEffect, useMemo, useState } from 'react'
-import { HStack, Text, useToast } from '@chakra-ui/react'
+import { Box, Flex, HStack, Spacer, Text, useToast } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import useRequest from '@/utils/useRequest'
 import { Modal } from 'react-bootstrap'
@@ -11,7 +11,7 @@ import numeral from 'numeral'
 import useService from '@/utils/useService'
 
 function BettingPopup() {
-  const { bettingInfo, eventInfo, user } = useGlobalProvider()
+  const { bettingInfo, eventInfo, user, betSettings } = useGlobalProvider()
   const { fetchUserInfo } = useService()
   const { toDateTime, toOptionName, amountToCanWin, toCurrency } = useTransfer()
   const [amount, setAmount] = useState<number | ''>('')
@@ -43,11 +43,6 @@ function BettingPopup() {
     } catch (err) {}
   }
 
-  const onClose = () => {
-    setVisible(false)
-    handleReset()
-  }
-
   const handleAmountChange = (amount: number) => {
     let value = amount
     if (value > user?.balance) {
@@ -67,7 +62,7 @@ function BettingPopup() {
         <h5 className="modal-titlemodal-header">下注资讯</h5>
       </Modal.Header>
       <Modal.Body>
-        <div className="league-col text-center text-lighgray">
+        <div className="league-col text-center">
           {eventInfo?.team_home.league_name}
         </div>
         <div className="text-center ft-15 my-2">
@@ -91,12 +86,33 @@ function BettingPopup() {
           </div>
         )}
 
-        <div className="d-flex justify-content-between py-3">
+        <div className="d-flex justify-content-between mt-3">
           <div className="user-wallet">
-            余额 ¥ {toCurrency(user?.balance, 2)}
+            余额
+            <span className="ml-2 text-blue">
+              ¥{toCurrency(user?.balance, 2)}
+            </span>
           </div>
-          <div className="handling-charge">手续费5%</div>
+          <div className="handling-charge">
+            手续费<span className="ml-2 text-yellow">5%</span>
+          </div>
         </div>
+        <Flex mt="1" mb="4">
+          <Box>
+            单注限额
+            <Text ml="2" as="span">
+              {betSettings?.single_bet_least} ~{' '}
+              {toCurrency(betSettings?.single_bet_limit, 0)}
+            </Text>
+          </Box>
+          <Spacer />
+          <Box>
+            单场限额
+            <Text ml="2" as="span">
+              {toCurrency(betSettings?.single_game_limit, 0)}
+            </Text>
+          </Box>
+        </Flex>
         <div className="method-btn-wrap">
           <input
             type="number"
@@ -130,7 +146,7 @@ function BettingPopup() {
           </div>
           {/* <div className="outline_btn color-gray">修改</div> */}
           <div
-            className="flex2 outline_btn color-blue"
+            className="flex2 outline_btn color-gray"
             onClick={() => setAmount(user?.balance)}
           >
             余额全投

@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useMemo, useState } from 'react'
 import {
+  BetSetting,
   Handicap,
   MemberBank,
   MemberBankOption,
@@ -8,7 +8,7 @@ import {
   UserInfo,
 } from '@/lib/types'
 import useStorage from '@/utils/useStorage'
-import useTransfer from '@/utils/useTransfer'
+import React, { createContext, useContext, useState } from 'react'
 
 type ContextState = {
   user: UserInfo
@@ -25,6 +25,8 @@ type ContextState = {
   setBankcardOpts: React.Dispatch<React.SetStateAction<MemberBankOption[]>>
   bankcards: MemberBank[]
   setBankcards: React.Dispatch<React.SetStateAction<MemberBank[]>>
+  betSettings: BetSetting
+  setBetSettings: React.Dispatch<React.SetStateAction<BetSetting>>
 }
 
 const GlobalContext = createContext<ContextState>(null)
@@ -36,8 +38,8 @@ const GlobalProvider: React.FC = ({ children }) => {
   const [userContact, setUserContact] = useState<UserContact>(null)
   const [token, setToken] = useStorage<string>('token', '')
   const [bettingInfo, setBettingInfo] = useState<Odds>(null)
+  const [betSettings, setBetSettings] = useState<BetSetting>(null)
   const [eventInfo, setEventInfo] = useStorage<Handicap>('event', null)
-  const { toCurrency } = useTransfer()
   return (
     <GlobalContext.Provider
       value={{
@@ -55,6 +57,8 @@ const GlobalProvider: React.FC = ({ children }) => {
         setBankcardOpts,
         bankcards,
         setBankcards,
+        betSettings,
+        setBetSettings,
       }}
     >
       {children}

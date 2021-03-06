@@ -28,7 +28,7 @@ const MarketPage: React.FC = () => {
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const { setBettingInfo, setEventInfo, eventInfo } = useGlobalProvider()
   const [, setBettingVisible] = usePopupContext('betting')
-  const { fetchUserInfo } = useService()
+  const { fetchUserInfo, fetchBetSettings } = useService()
   const API = useRequest()
   const { toCurrency, toDateTime } = useTransfer()
   const [odds, setOdds] = useState<Odds[]>([])
@@ -57,7 +57,8 @@ const MarketPage: React.FC = () => {
     loadingEnd()
   }
 
-  const handleBetting = (odds: Odds) => {
+  const handleBetting = async (odds: Odds) => {
+    fetchBetSettings(currentSection)
     setBettingInfo(odds)
     setBettingVisible(true)
   }

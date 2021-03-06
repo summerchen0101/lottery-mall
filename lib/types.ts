@@ -342,3 +342,34 @@ export interface UserContact {
   qq_id?: string
   telegram_id?: string
 }
+
+export interface BetSettingRequest {
+  game_code: string
+  section_code: string
+  play_code: string
+}
+
+export interface MemberBasic {
+  acc: string
+  id: number
+  name: string
+}
+
+export interface BetSetting {
+  created_at: number
+  editor: string
+  fee_percent: number
+  game_code: string
+  id: number
+  is_open_bet: true
+  member: MemberBasic
+  play_code: string
+  rebate_percent: number
+  risk_percent: number
+  section_code: string
+  single_bet_least: number
+  single_bet_limit: number
+  single_game_limit: number
+  single_side_limit: number
+  updated_at: number
+}
