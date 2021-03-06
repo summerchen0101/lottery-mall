@@ -13,7 +13,7 @@ import ProfileField from '@/components/ProfileField'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import useRequest from '@/utils/useRequest'
 import useService from '@/utils/useService'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, HStack, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 
@@ -33,8 +33,13 @@ const ProfilePage: React.FC = () => {
           <li className="thead col-list-item section-padding pointer">
             基本资料
           </li>
-          <ProfileField label="真实姓名" code="name">
-            <Text color="gray.400">{userContact?.name}</Text>
+          <ProfileField label="實名認證" code="name">
+            {userContact?.name && (
+              <HStack justify="flex-end">
+                <Text color="red.400">(未認證)</Text>
+                <Text color="gray.400">{userContact?.name}</Text>
+              </HStack>
+            )}
           </ProfileField>
           <ProfileField label="电子邮箱" code="email">
             <Text color="gray.400">{userContact?.email}</Text>

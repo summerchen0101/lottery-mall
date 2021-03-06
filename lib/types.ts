@@ -341,6 +341,8 @@ export interface UserContact {
   wechat_id?: string
   qq_id?: string
   telegram_id?: string
+  id_card_num?: string
+  id_card_img?: string
 }
 
 export interface BetSettingRequest {
