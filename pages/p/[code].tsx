@@ -164,9 +164,14 @@ const register: React.FC = () => {
               name="mobile"
               ref={register({
                 required: '不可為空',
-                pattern: {
-                  value: pattern.cnPhone,
-                  message: '手机格式有誤',
+                validate: (value) => {
+                  if (
+                    !pattern.twPhone.test(value) &&
+                    !pattern.cnPhone.test(value)
+                  ) {
+                    return '手機格式不符'
+                  }
+                  return true
                 },
               })}
             />
