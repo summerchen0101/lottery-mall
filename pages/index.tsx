@@ -9,8 +9,10 @@ const IndexPage = () => {
   const router = useRouter()
   const checkUserStatus = async () => {
     try {
-      await API.checkLogin()
-      router.push('/home')
+      const res = await API.checkLogin()
+      if (res.code === 0) {
+        router.push('/home')
+      }
     } catch (err) {}
   }
   useEffect(() => {
