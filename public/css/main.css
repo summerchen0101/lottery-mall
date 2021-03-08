@@ -385,7 +385,8 @@ template {
     from(#009df9),
     to(#00c2ff)
   );
-  background: linear-gradient(top, #009df9 0%, #00c2ff 100%);
+  /* background: linear-gradient(top, #009df9 0%, #00c2ff 100%); */
+  background: #a97e33;
   color: #fff;
   border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -468,8 +469,9 @@ template {
 }
 
 .outline_btn.color-gray:hover {
-  color: #00cdff;
-  border: 1px solid #00cdff;
+  color: #fff;
+  /* border: 1px solid #a97e33; */
+  background: #a97e33;
 }
 
 .outline_btn.color-blue {
@@ -511,7 +513,7 @@ template {
 }
 
 .icon_btn .iconfont {
-  color: #00cdff;
+  color: #a97e33;
   font-size: 20px;
   width: 21px;
   line-height: 21px;
@@ -669,7 +671,7 @@ a:hover {
 }
 
 .text-blue {
-  color: #00cdff;
+  color: #a97e33;
 }
 
 .text-yellow {
@@ -1002,6 +1004,8 @@ a:hover {
   line-height: 50px;
   text-align: center;
   position: relative;
+  background: linear-gradient(to top, #101010, #212121, #313131);
+  color: #d49c3b;
 }
 
 .slide-up-section .title-col .close_btn {
@@ -1307,9 +1311,10 @@ a:hover {
 .method-btn-wrap > .trans-input:hover,
 .method-btn-wrap > .trans-input:focus,
 .method-btn-wrap > .trans-input.active {
-  border-color: #38b3ff;
-  color: #38b3ff;
+  /* border-color: #a97e33; */
+  color: #fff;
   outline: 0;
+  background: #a97e33;
 }
 
 .method-btn-wrap #capital {
@@ -1533,7 +1538,7 @@ a:hover {
   width: 22px;
   height: 22px;
   font-size: 22px;
-  color: #00cdff;
+  color: #feb12a;
   position: absolute;
   top: 6px;
   right: 10px;
@@ -3405,7 +3410,7 @@ table tbody tr:nth-child(even) {
 }
 
 .pintop-section .info-col .user-wallet-col {
-  color: #00a5ff;
+  color: #a97e33;
   font-size: 16px;
 }
 
@@ -3415,7 +3420,7 @@ table tbody tr:nth-child(even) {
 
 .pintop-section .reload-btn .iconfont {
   font-size: 20px;
-  color: #38b3ff;
+  color: #a97e33;
 }
 
 .message-list-section {
@@ -3815,6 +3820,8 @@ table.team tr td:nth-of-type(2) {
   text-align: center;
   padding: 3% 4%;
   min-height: 105px;
+  background: #1b1b1b;
+  color: #fff;
 }
 
 .cash-box p {
@@ -3919,7 +3926,7 @@ table.team tr td:nth-of-type(2) {
 .cash-record {
   -webkit-box-shadow: 0px 0px 8px #0000000f;
   box-shadow: 0px 0px 8px #0000000f;
-  border: 1px solid #ebebeb;
+  border: 1px solid #d49c3b;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -3962,7 +3969,7 @@ table.team tr td:nth-of-type(2) {
 
 .cash-record .info-col .time {
   font-size: 13px;
-  color: #abbed3;
+  color: #d49c3b;
   margin-left: 5px;
 }
 
@@ -3977,7 +3984,7 @@ table.team tr td:nth-of-type(2) {
 .cash-record .info-col::after {
   height: 1px;
   content: '';
-  background: #ebebeb;
+  background: #d49c3b;
   position: absolute;
   bottom: 0;
   left: -10px;
@@ -4093,7 +4100,7 @@ table.team tr td:nth-of-type(2) {
   margin-right: 5px;
   font-size: 18px;
   font-weight: normal;
-  color: #00cdff;
+  color: #d49c3b;
 }
 
 .help_inner li:nth-of-type(2) {
