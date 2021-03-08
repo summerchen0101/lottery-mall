@@ -5,13 +5,7 @@ import Layout from '@/components/Layout'
 import cs from 'classnames'
 import { useRouter } from 'next/dist/client/router'
 import { Box, Text } from '@chakra-ui/layout'
-
-const paywayOpts = [
-  { label: '银行卡转卡', value: 1 },
-  { label: 'ATM充值', value: 2 },
-  { label: '超商代码', value: 3 },
-  { label: 'ATM转账', value: 4 },
-]
+import { paywayOpts } from '@/lib/options'
 
 const deposit: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(1)

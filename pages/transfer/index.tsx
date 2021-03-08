@@ -27,7 +27,7 @@ const transfer: React.FC = () => {
   const API = useRequest()
   const toast = useToast()
   const { fetchUserInfo, fetchBankCardOpts } = useService()
-  const { bankcardOpts, user } = useGlobalProvider()
+  const { user } = useGlobalProvider()
   const { toCurrency } = useTransfer()
   const { register, handleSubmit, errors, reset } = useForm<TransferForm>()
 

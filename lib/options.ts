@@ -79,3 +79,14 @@ export const walletRecTypeOpts = [
   { label: '轉帳', value: WalletRecType.Transfer },
   { label: '活動獎勵', value: WalletRecType.Activirty },
 ]
+
+export const tradeTabOpts = [
+  { label: '充值纪录', value: 'deposit' },
+  { label: '提领纪录', value: 'withdraw' },
+  { label: '轉移纪录', value: 'transfer' },
+]
+
+export const paywayOpts = [
+  { label: '银行卡转卡', value: 1 },
+  { label: 'ATM', value: 2 },
+]
