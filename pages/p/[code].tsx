@@ -69,9 +69,9 @@ const register: React.FC = () => {
   return (
     <Layout>
       <Box className="login-content" h="100vh" w="100vw" overflowY="auto">
-        <Box className="lang-select">
+        {/* <Box className="lang-select">
           <Image className="flag" src="/images/lang_cn.png" m="auto" />
-        </Box>
+        </Box> */}
         <Box className="logo" mt="0">
           <Image src="/images/logo.png" m="auto" />
         </Box>
