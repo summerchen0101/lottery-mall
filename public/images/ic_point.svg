@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34" height="28" viewBox="0 0 34 28">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffb100"/>
+      <stop offset="1" stop-color="#fde668"/>
+    </linearGradient>
+    <clipPath id="clip-Artboard_14">
+      <rect width="34" height="28"/>
+    </clipPath>
+  </defs>
+  <g id="Artboard_14" data-name="Artboard – 14" clip-path="url(#clip-Artboard_14)">
+    <path id="ic_point" d="M8.707,19.915a6.939,6.939,0,0,1-6.658-7.19,6.939,6.939,0,0,1,6.658-7.19h7.812A4.122,4.122,0,0,0,21,8.807a4.324,4.324,0,0,0,3.583-4.379A4.323,4.323,0,0,0,21,.035a4.121,4.121,0,0,0-4.485,3.288H8.707C3.9,3.323,0,7.532,0,12.725s3.9,9.4,8.707,9.4h12.38l-2.349,2.536a1.169,1.169,0,0,0,0,1.564.972.972,0,0,0,1.449,0l4.1-4.425a1.17,1.17,0,0,0,0-1.564l-4.1-4.425a.971.971,0,0,0-1.449,0,1.17,1.17,0,0,0,0,1.564l2.349,2.536ZM18.438,4.429a2.055,2.055,0,1,0,4.1,0,2.055,2.055,0,1,0-4.1,0Z" transform="translate(3.757 0.724)" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_1" data-name="Ellipse 1" cx="5" cy="5" r="5" transform="translate(19)" fill="#ffb100"/>
+  </g>
+</svg>

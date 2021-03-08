@@ -85,7 +85,7 @@ const MyPage: React.FC = () => {
               className="menu-list-item"
               onClick={() => router.push('/transfer')}
             >
-              <img src="/images/ic_withdrawal.svg" />
+              <img src="/images/ic_point.svg" />
               立即轉點
             </li>
             <li
