@@ -87,7 +87,7 @@ const Home: React.FC = () => {
             <li className="divider" />
             <li
               className="menu-list-item"
-              onClick={() => router.push('/scores')}
+              onClick={() => window.open('https://live.leisu.com/', '_blank')}
             >
               <img src="/images/ic_score.svg" />
               比分
