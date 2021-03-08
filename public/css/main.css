@@ -1092,10 +1092,10 @@ a:hover {
   text-align: center;
   padding: 0;
   height: 52px;
-  background: #00cdff;
-  border: 1px solid #00cdff;
-  -webkit-box-shadow: #50f3f3 0px 1px 0px 0px inset;
-  box-shadow: #50f3f3 0px 1px 0px 0px inset;
+  background: linear-gradient(to top, #101010, #212121, #313131);
+  /* border: 1px solid #00cdff; */
+  /* -webkit-box-shadow: #50f3f3 0px 1px 0px 0px inset;
+  box-shadow: #50f3f3 0px 1px 0px 0px inset; */
 }
 
 .modal-header .icon_btn:first-of-type {
@@ -2776,7 +2776,7 @@ body {
 }
 
 .tricks-item-thead {
-  color: #abbed3;
+  color: #171717;
   font-size: 14px;
   text-align: center;
   line-height: 35px;
@@ -2804,7 +2804,7 @@ body {
   margin-top: 10px;
   -webkit-box-shadow: 0px 0px 8px #0000000f;
   box-shadow: 0px 0px 8px #0000000f;
-  border: 1px solid #ebebeb;
+  border: 1px solid #b38539;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
