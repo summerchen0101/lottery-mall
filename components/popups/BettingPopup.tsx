@@ -63,7 +63,7 @@ function BettingPopup() {
       </Modal.Header>
       <Modal.Body>
         <div className="league-col text-center">
-          {eventInfo?.team_home.league_name}
+          {eventInfo?.team_home?.league_name}
         </div>
         <div className="text-center ft-15 my-2">
           {eventInfo?.team_home?.name}(主) VS {eventInfo?.team_away?.name}
