@@ -382,8 +382,8 @@ template {
     linear,
     left top,
     left bottom,
-    from(#009df9),
-    to(#00c2ff)
+    from(#a97e33),
+    to(#a97e33)
   );
   /* background: linear-gradient(top, #009df9 0%, #00c2ff 100%); */
   background: #a97e33;
@@ -1875,7 +1875,7 @@ a:hover {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #00cdff;
+  background: #d49c3b;
   -webkit-box-shadow: 0px 0px 8px #0000000f;
   box-shadow: 0px 0px 8px #0000000f;
 }
