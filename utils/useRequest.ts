@@ -42,6 +42,8 @@ import {
   MemberBankOption,
   BetSettingRequest,
   BetSetting,
+  Transfer,
+  TransferCreateRequest,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -186,6 +188,18 @@ const useRequest = () => {
     post<null>('member_bank/add', req)
 
   /**
+   * 轉移
+   */
+  const getTransferList = (req?: DateRangeListRequest) =>
+    post<BaseListResponse<Transfer>>('transfer_rec/list', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
+  const createTransfer = (req: TransferCreateRequest) =>
+    post<null>('transfer_rec/add', req)
+
+  /**
    * 提領
    */
   const getWithdrawList = (req?: DateRangeListRequest) =>
@@ -297,6 +311,8 @@ const useRequest = () => {
     getMessageDetail,
     getWithdrawList,
     createWithdraw,
+    getTransferList,
+    createTransfer,
     getNewsList,
     getNewsDetail,
     applyActivity,

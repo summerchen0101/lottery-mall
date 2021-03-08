@@ -1,5 +1,10 @@
 import { NewsType } from './enums'
 
+export interface MemberBasic {
+  acc: string
+  id: number
+  name: string
+}
 export class ResponseBase<T> {
   code: number
   data: T
@@ -141,6 +146,23 @@ export interface Withdraw {
 }
 export interface WithdrawCreateRequest {
   bank_id: number
+  amount: number
+  sec_pass: string
+}
+export interface Transfer {
+  id: number
+  amount: number
+  created_at: number
+  fee: number
+  from_balance: number
+  from_member: MemberBasic
+  status: number
+  to_balance: number
+  to_member: MemberBasic
+  updated_at: number
+}
+export interface TransferCreateRequest {
+  acc: string
   amount: number
   sec_pass: string
 }
@@ -349,12 +371,6 @@ export interface BetSettingRequest {
   game_code: string
   section_code: string
   play_code: string
-}
-
-export interface MemberBasic {
-  acc: string
-  id: number
-  name: string
 }
 
 export interface BetSetting {
