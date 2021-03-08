@@ -129,7 +129,7 @@ const withdraw: React.FC = () => {
             <FieldValidateMessage error={errors.amount} />
           </div>
           <label className="form-label2">
-            提领密码
+            交易密码
             <span
               className="pointer label-right text-blue"
               onClick={() => router.push('/profile')}
@@ -142,7 +142,7 @@ const withdraw: React.FC = () => {
               type="password"
               className="form-input"
               name="sec_pass"
-              placeholder="请输入提领密码"
+              placeholder="请输入交易密码"
               ref={register({ required: '不可為空' })}
             />
             {/* <i className="iconfont iconeye-close btn_eye" /> */}

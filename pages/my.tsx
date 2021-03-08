@@ -83,10 +83,17 @@ const MyPage: React.FC = () => {
             </li>
             <li
               className="menu-list-item"
-              onClick={() => router.push('/deposit/record')}
+              onClick={() => router.push('/transfer')}
+            >
+              <img src="/images/ic_withdrawal.svg" />
+              立即轉點
+            </li>
+            <li
+              className="menu-list-item"
+              onClick={() => router.push('/cash-record')}
             >
               <img src="/images/ic_cashhistory.svg" />
-              充提纪录
+              資金明細
             </li>
             {/* <li
               className="menu-list-item"

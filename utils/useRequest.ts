@@ -44,6 +44,8 @@ import {
   BetSetting,
   Transfer,
   TransferCreateRequest,
+  WalletRecListRequest,
+  WalletRec,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -188,6 +190,15 @@ const useRequest = () => {
     post<null>('member_bank/add', req)
 
   /**
+   * 資金明細
+   */
+  const getWalletRecList = (req?: WalletRecListRequest) =>
+    post<BaseListResponse<WalletRec>>('wallet_rec/list', {
+      page: 1,
+      perpage: 100,
+      ...req,
+    })
+  /**
    * 轉移
    */
   const getTransferList = (req?: DateRangeListRequest) =>
@@ -313,6 +324,7 @@ const useRequest = () => {
     createWithdraw,
     getTransferList,
     createTransfer,
+    getWalletRecList,
     getNewsList,
     getNewsDetail,
     applyActivity,

@@ -64,7 +64,7 @@ const ProfilePage: React.FC = () => {
           </ProfileField>
 
           <li className="thead col-list-item section-padding pointer">金融</li>
-          <ProfileField label="提领密码" code="withdrawal-pw"></ProfileField>
+          <ProfileField label="交易密码" code="withdrawal-pw"></ProfileField>
         </ul>
         {/* <div className="register_time pt-3 text-lighgray">
             注册时间<span>2020/06/08 15:50:16</span>

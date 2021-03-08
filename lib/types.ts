@@ -1,4 +1,4 @@
-import { NewsType } from './enums'
+import { NewsType, WalletRecType } from './enums'
 
 export interface MemberBasic {
   acc: string
@@ -165,6 +165,21 @@ export interface TransferCreateRequest {
   acc: string
   amount: number
   sec_pass: string
+}
+
+export interface WalletRec {
+  amount: number
+  balance: number
+  created_at: number
+  id: number
+  member: MemberBasic
+  note: string
+  updated_at: number
+  wallet_rec_type: WalletRecType
+}
+
+export interface WalletRecListRequest extends DateRangeListRequest {
+  wallet_rec_type: WalletRecType
 }
 
 export interface TeamInfo {

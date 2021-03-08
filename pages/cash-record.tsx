@@ -1,40 +1,100 @@
-import React from 'react'
+import ColorText from '@/components/ColorText'
+import DateTabGroup from '@/components/DateTabGroup'
+import EmptyHolder from '@/components/EmptyHolder'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import { Select } from '@chakra-ui/select'
-import { dateOpts, beforeDateRangeOpts } from '@/lib/options'
-import DateTabGroup from '@/components/DateTabGroup'
+import Tab from '@/components/Tab'
+import TabGroup from '@/components/TabGroup'
+import { useLoaderProvider } from '@/context/LoaderProvider'
+import { WalletRecType } from '@/lib/enums'
+import {
+  beforeDateRangeOpts,
+  processStatusOpts,
+  walletRecTypeOpts,
+} from '@/lib/options'
+import { WalletRec } from '@/lib/types'
+import useRequest from '@/utils/useRequest'
+import useTransfer from '@/utils/useTransfer'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect, useMemo, useState } from 'react'
 
-const CashRecordPage: React.FC = () => {
+function transferRecord() {
+  const router = useRouter()
+  const [currentTab, setCurrentTab] = useState('thisWeek')
+  const [isEmpty, setIsEmpty] = useState(false)
+  const { loadingStart, loadingEnd } = useLoaderProvider()
+  const API = useRequest()
+  const [transfers, setWalletRecs] = useState<WalletRec[]>([])
+  const { toDateRange, toDateTime, toOptionName, toCurrency } = useTransfer()
+  const start_at = useMemo(() => toDateRange(currentTab).start, [currentTab])
+  const end_at = useMemo(() => toDateRange(currentTab).end, [currentTab])
+  const noteLabelMap = useMemo(() => {
+    return {
+      [WalletRecType.Transfer]: '來源帳號',
+      [WalletRecType.Bet]: '注單編號',
+    }
+  }, [])
+  const fetchWalletRecs = async () => {
+    loadingStart()
+    setIsEmpty(false)
+    try {
+      const res = await API.getWalletRecList({
+        wallet_rec_type: 0,
+        start_at,
+        end_at,
+      })
+      setWalletRecs(res.data.list)
+      if (res.data.list.length === 0) {
+        setIsEmpty(true)
+      }
+    } catch (err) {}
+    loadingEnd()
+  }
+  useEffect(() => {
+    fetchWalletRecs()
+  }, [currentTab])
   return (
     <Layout>
-      <HeaderTitleBar back title="资金明细" />
-
+      <HeaderTitleBar back backPath="/my" title="資金明細" />
       <div className="main-content">
-        <DateTabGroup />
+        <TabGroup justifyContent="space-between">
+          {beforeDateRangeOpts.map((t, i) => (
+            <Tab
+              key={i}
+              label={t.label}
+              active={t.value === currentTab}
+              onClick={() => setCurrentTab(t.value)}
+            />
+          ))}
+        </TabGroup>
+
         <div className="list-container pt-2 section-padding">
-          {Array(10)
-            .fill('')
-            .map((t, i) => (
-              <div
-                key={i}
-                className="cash-record background-white"
-                data-toggle="modal"
-                data-target="#notifyModal"
-              >
-                <div className="info-col">
-                  <div className="d-flex align-items-center">
-                    <div className="record-title">充值</div>
-                    <div className="time ml-2">2020-06-30 11:19</div>
+          {isEmpty && <EmptyHolder />}
+          {transfers.map((t, i) => (
+            <div
+              key={t.id}
+              className="cash-record background-white"
+              // onClick="location.href = 'transferal-record-detail.html'"
+              // onClick={() => router.push(`/transfer/record/${i + 1}`)}
+            >
+              <div className="info-col">
+                <div className="d-flex align-items-center">
+                  <div className="record-title">
+                    {toOptionName(walletRecTypeOpts, t.wallet_rec_type)}
                   </div>
-                  <div className="status text-green">已完成</div>
+                  <div className="time ml-2">{toDateTime(t.created_at)}</div>
                 </div>
-                <div>交易类型:充值</div>
-                <div>交易金额:100</div>
-                <div className="order-num">订单号:20160130123145675434</div>
               </div>
-            ))}
+              <div>
+                金额: <ColorText num={t.amount} />
+              </div>
+              <div>餘額: {toCurrency(t.balance, 2)}</div>
+              <div>
+                {noteLabelMap[t.wallet_rec_type] || '備註'}: {t.note || '-'}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <FooterNavBar />
@@ -42,4 +102,4 @@ const CashRecordPage: React.FC = () => {
   )
 }
 
-export default CashRecordPage
+export default transferRecord

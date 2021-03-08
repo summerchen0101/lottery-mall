@@ -43,7 +43,7 @@ function ProfileTradePassPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="提領密码修改" id="withdrawal-pw-edit" onClose={reset}>
+    <BottomPopup title="交易密码修改" id="withdrawal-pw-edit" onClose={reset}>
       <form onSubmit={onSubmit} noValidate>
         <label className="form-label">当前密码</label>
         <div className="form-group">

@@ -99,7 +99,7 @@ const transfer: React.FC = () => {
             <FieldValidateMessage error={errors.amount} />
           </div>
           <label className="form-label2">
-            轉移密码
+            交易密码
             <span
               className="pointer label-right text-blue"
               onClick={() => router.push('/profile')}

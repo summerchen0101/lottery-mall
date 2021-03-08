@@ -4,6 +4,7 @@ import {
   NewsType,
   ProcessStatus,
   Section,
+  WalletRecType,
 } from './enums'
 import bankCodes from './bankCodes'
 
@@ -64,4 +65,17 @@ export const gameStatusOpts = [
   { label: '待定', value: GameStatus.Determining },
   { label: '取消', value: GameStatus.Canceled },
   { label: '延期', value: GameStatus.Postpone },
+]
+
+export const walletRecTypeOpts = [
+  { label: '充值', value: WalletRecType.Deposit },
+  { label: '人工加扣', value: WalletRecType.Manual },
+  { label: '提領', value: WalletRecType.Withdraw },
+  { label: '投注', value: WalletRecType.Bet },
+  { label: '投注取消退還', value: WalletRecType.BetCancel },
+  { label: '投注結果', value: WalletRecType.BetResult },
+  { label: '結帳修正', value: WalletRecType.AccountingFix },
+  { label: '退水', value: WalletRecType.Rebate },
+  { label: '轉帳', value: WalletRecType.Transfer },
+  { label: '活動獎勵', value: WalletRecType.Activirty },
 ]

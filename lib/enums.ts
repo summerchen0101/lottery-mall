@@ -31,3 +31,16 @@ export enum GameStatus {
   Canceled = 5,
   Postpone = 6,
 }
+
+export enum WalletRecType {
+  Deposit = 1,
+  Manual = 2,
+  Withdraw = 3,
+  Bet = 4,
+  BetCancel = 5,
+  BetResult = 6,
+  AccountingFix = 7,
+  Rebate = 8,
+  Transfer = 9,
+  Activirty = 10,
+}
