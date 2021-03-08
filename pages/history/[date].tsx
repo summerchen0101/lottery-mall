@@ -13,6 +13,7 @@ import { BetRecord } from '@/lib/types'
 import _ from 'lodash'
 import moment from 'moment'
 import MessageBadge from '@/components/MessageBadge'
+import { Box } from '@chakra-ui/layout'
 
 const HistoryDetailPage: React.FC = () => {
   const [current, setCurrent] = useState(1)
@@ -43,16 +44,16 @@ const HistoryDetailPage: React.FC = () => {
       <HeaderTitleBar back title="账务明细" extra={<MessageBadge />} />
       <BettingSummaryInfo
         date={date}
-        sum={_.sumBy(betReocrds, 'amount')}
-        expect={_.sumBy(betReocrds, (t) => t.result)}
+        sum={_.sumBy(betReocrds, 'valid_amount')}
+        result={_.sumBy(betReocrds, (t) => t.result)}
       />
-      <div className="main-content background-gray" style={{ paddingTop: 105 }}>
+      <Box className="main-content background-gray" h="100vh" pt="105px">
         <div className="list-container">
           {betReocrds.map((bet, i) => (
             <BettingItem key={i} bet={bet} />
           ))}
         </div>
-      </div>
+      </Box>
 
       <FooterNavBar />
     </Layout>

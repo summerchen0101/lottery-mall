@@ -83,8 +83,8 @@ const HistoryPage: React.FC = () => {
               {summaries.map((t, i) => (
                 <tr key={i}>
                   <td>{t.date}</td>
-                  <td>{t.count}</td>
-                  <td>{toCurrency(+t.amount)}</td>
+                  <td>{toCurrency(t.count, 0)}</td>
+                  <td>{toCurrency(+t.amount, 2)}</td>
                   <td>
                     <ColorText num={+t.result} />
                   </td>
@@ -97,8 +97,8 @@ const HistoryPage: React.FC = () => {
               ))}
               <tr>
                 <td>合計</td>
-                <td>{totalInfo.count}</td>
-                <td>{toCurrency(totalInfo.amount)}</td>
+                <td>{toCurrency(totalInfo.count, 0)}</td>
+                <td>{toCurrency(totalInfo.amount, 2)}</td>
                 <td>
                   <ColorText num={totalInfo.result} />
                 </td>

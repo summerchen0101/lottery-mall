@@ -18,7 +18,7 @@ const useService = () => {
   const [banners, setBanners] = useState<Banner[]>([])
   const [handicaps, setHandicaps] = useState<Handicap[]>([])
   const [scores, setScores] = useState<Score[]>([])
-
+  const { setBetSettings } = useGlobalProvider()
   const toast = useToast()
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const API = useRequest()
@@ -104,6 +104,17 @@ const useService = () => {
     loadingEnd()
   }
 
+  const fetchBetSettings = async (section_code: string) => {
+    try {
+      const res = await API.betSettings({
+        game_code: 'SC',
+        section_code,
+        play_code: 'NCS',
+      })
+      setBetSettings(res.data.list?.[0])
+    } catch (err) {}
+  }
+
   const fetchHandicaps = useCallback(async (req?: DateRangeListRequest) => {
     loadingStart()
     try {
@@ -136,6 +147,7 @@ const useService = () => {
     fetchBankCardOpts,
     fetchMemberBankList,
     applyActivity,
+    fetchBetSettings,
     banners,
     marquee,
     handicaps,

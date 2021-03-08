@@ -16,7 +16,6 @@ type FormData = {
   pass: string
   pass_confirm: string
   mobile: string
-  email: string
   is_checked_rule: boolean
 }
 
@@ -41,7 +40,6 @@ const register: React.FC = () => {
         name: d.name,
         pass: d.pass,
         mobile: d.mobile,
-        email: d.email,
         promo_code: router.query.code as string,
       })
       setToken(res.data.token)
@@ -66,9 +64,7 @@ const register: React.FC = () => {
     try {
       await API.checkName(getValues('name'))
       toast({ status: 'success', title: '暱稱可用' })
-    } catch (err) {
-      toast({ status: 'error', title: err.message })
-    }
+    } catch (err) {}
   }
   return (
     <Layout>
@@ -168,30 +164,20 @@ const register: React.FC = () => {
               name="mobile"
               ref={register({
                 required: '不可為空',
-                pattern: {
-                  value: pattern.twPhone,
-                  message: '手机格式有誤',
+                validate: (value) => {
+                  if (
+                    !pattern.twPhone.test(value) &&
+                    !pattern.cnPhone.test(value)
+                  ) {
+                    return '手機格式不符'
+                  }
+                  return true
                 },
               })}
             />
             <FieldValidateMessage error={errors.mobile} />
           </div>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-input"
-              placeholder="请输入邮箱账号"
-              name="email"
-              ref={register({
-                required: '不可為空',
-                pattern: {
-                  value: pattern.email,
-                  message: '邮箱格式有誤',
-                },
-              })}
-            />
-            <FieldValidateMessage error={errors.email} />
-          </div>
+
           {/* <div className="form-group">
             <input
               type="text"

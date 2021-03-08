@@ -14,7 +14,7 @@ function ColorText({ children, num, ...props }: ColorTextProps & TextProps) {
   }, [num])
   return (
     <Text as="span" color={color} {...props}>
-      {children || toCurrency(num)}
+      {children || toCurrency(num, 2)}
     </Text>
   )
 }

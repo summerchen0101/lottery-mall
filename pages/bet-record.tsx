@@ -14,6 +14,7 @@ import BettingItem from '@/components/BettingItem'
 import { Box } from '@chakra-ui/layout'
 import EmptyHolder from '@/components/EmptyHolder'
 import { beforeDateRangeOpts } from '@/lib/options'
+import ColorText from '@/components/ColorText'
 
 const BettingsPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState('thisWeek')
@@ -69,22 +70,38 @@ const BettingsPage: React.FC = () => {
       <div className="pinbottom-section">
         <ul className="acc-inner mt-1">
           <li className="acc-item px-2">
-            <p>{betReocrds.length}</p>
+            <p>{toCurrency(betReocrds.length, 0)}</p>
             <span className="text-lighgray">筆數</span>
           </li>
           <li className="divider"></li>
-          <li className="acc-item px-2">
-            <p>{toCurrency(_.sumBy(betReocrds, 'amount'))}</p>
-            <span className="text-lighgray">累计流水</span>
-          </li>
+          {/* <li className="acc-item px-2">
+            <p>{toCurrency(_.sumBy(betReocrds, 'amount'), 2)}</p>
+            <span className="text-lighgray">累计注額</span>
+          </li> */}
           <li className="divider"></li>
           <li className="acc-item px-2">
+            <p>{toCurrency(_.sumBy(betReocrds, 'valid_amount'), 2)}</p>
+            <span className="text-lighgray">累計流水</span>
+          </li>
+          <li className="divider"></li>
+          {/* <li className="acc-item px-2">
             <p className="text-green">
               {toCurrency(
                 _.sumBy(betReocrds, (t) => amountToCanWin(t.amount, t.odds)),
+                2,
               )}
             </p>
             <span className="text-lighgray">預估獲利</span>
+          </li>
+          <li className="divider"></li> */}
+          <li className="acc-item px-2">
+            <p>
+              <ColorText
+                fontWeight="bold"
+                num={_.sumBy(betReocrds, 'result')}
+              />
+            </p>
+            <span className="text-lighgray">累計收益</span>
           </li>
         </ul>
       </div>

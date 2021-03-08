@@ -112,7 +112,7 @@ const BankCardAddPage: React.FC = () => {
               <span className="slider " />
             </label> */}
             <label className="form-label2">照片上传</label>
-            <ImageUpload register={register} />
+            <ImageUpload ref={register({ required: '不可為空' })} name="img" />
             <FieldValidateMessage error={errors.img} />
             <p className="ft-14 text-red">
               <i className="iconfont iconremind mr-1" />

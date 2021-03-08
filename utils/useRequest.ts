@@ -40,6 +40,8 @@ import {
   UserContact,
   EditUserInfoRequest,
   MemberBankOption,
+  BetSettingRequest,
+  BetSetting,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -277,6 +279,9 @@ const useRequest = () => {
   const editUserInfo = (req: EditUserInfoRequest) =>
     post<null>('member/edit', req)
 
+  const betSettings = (req: BetSettingRequest) =>
+    post<BaseListResponse<BetSetting>>('bet_setting/list', req)
+
   return {
     getUserContact,
     editUserContact,
@@ -319,6 +324,7 @@ const useRequest = () => {
     register,
     login,
     logout,
+    betSettings,
   }
 }
 

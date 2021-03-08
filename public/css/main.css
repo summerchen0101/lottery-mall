@@ -970,11 +970,11 @@ a:hover {
   -webkit-transition: all 0.15s ease-in-out;
   -moz-transition: all 0.15s ease-in-out;
   -o-transition: all 0.15s ease-in-out;
-  transform: translateY(460px);
-  -webkit-transform: translateY(460px);
-  -moz-transform: translateY(460px);
-  -ms-transform: translateY(460px);
-  -o-transform: translateY(460px);
+  transform: translateY(580px);
+  -webkit-transform: translateY(580px);
+  -moz-transform: translateY(580px);
+  -ms-transform: translateY(580px);
+  -o-transform: translateY(580px);
 }
 
 .slide-up-section.slide-up {
@@ -4234,4 +4234,3 @@ table.team tr td:nth-of-type(2) {
   margin-bottom: 10px;
   color: #4a5359;
 }
-/*# sourceMappingURL=main.css.map */

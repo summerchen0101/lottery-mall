@@ -40,12 +40,13 @@ const BettingItem: React.FC<{ bet: BetRecord }> = ({ bet }) => {
         <BettingDetail bet={bet} />
         <div className="detail-footer">
           <div>
-            投注额: <span className="text-blue">{toCurrency(bet.amount)}</span>
+            投注额:{' '}
+            <span className="text-blue">{toCurrency(bet.amount, 2)}</span>
           </div>
 
           {bet.accounting_status !== AccountingStatus.Pending ? (
             <div>
-              输赢结果: <ColorText num={bet.result} fontWeight="500" />
+              投資收益: <ColorText num={bet.result} fontWeight="bold" />
             </div>
           ) : (
             <div>
