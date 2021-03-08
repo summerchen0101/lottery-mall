@@ -111,7 +111,7 @@ $(document).ready(function () {
         $('.mask').fadeIn();
         $('#search-acc-type').addClass("slide-up");
     });
-    // 資金明細 Slide up
+    // 資金紀錄 Slide up
     $('.lang-select').on('click', function () {
         $('.mask').fadeIn();
         $('#lang-select').addClass("slide-up");

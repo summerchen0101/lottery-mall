@@ -93,7 +93,7 @@ const MyPage: React.FC = () => {
               onClick={() => router.push('/cash-record')}
             >
               <img src="/images/ic_cashhistory.svg" />
-              資金明細
+              資金紀錄
             </li>
             {/* <li
               className="menu-list-item"

@@ -190,7 +190,7 @@ const useRequest = () => {
     post<null>('member_bank/add', req)
 
   /**
-   * 資金明細
+   * 資金紀錄
    */
   const getWalletRecList = (req?: WalletRecListRequest) =>
     post<BaseListResponse<WalletRec>>('wallet_rec/list', {

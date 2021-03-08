@@ -56,7 +56,7 @@ function transferRecord() {
   }, [currentTab])
   return (
     <Layout>
-      <HeaderTitleBar back backPath="/my" title="資金明細" />
+      <HeaderTitleBar back backPath="/my" title="資金紀錄" />
       <div className="main-content">
         <TabGroup justifyContent="space-between">
           {beforeDateRangeOpts.map((t, i) => (
