@@ -485,8 +485,8 @@ template {
 }
 
 .outline_btn.color-blue.active {
-  color: #00cdff;
-  border: 1px solid #00cdff;
+  color: #a97e33;
+  border: 1px solid #a97e33;
 }
 
 .outline_btn.color-red {
@@ -564,7 +564,7 @@ template {
 }
 
 .mini_btn.color-blue {
-  background: #00cdff;
+  background: #a97e33;
   color: #fff;
   outline: none;
 }
@@ -579,7 +579,7 @@ template {
 .second_btn {
   outline: none;
   border: 1px solid #ebebeb;
-  color: #00cdff;
+  color: #a97e33;
   background: rgba(255, 255, 255, 0.2);
   font-size: 14px;
   line-height: 30px;
@@ -590,8 +590,8 @@ template {
 .second_btn:hover,
 .second_btn:focus,
 .second_btn:active {
-  border: 1px solid #00cdff;
-  background: #00cdff;
+  border: 1px solid #a97e33;
+  background: #a97e33;
   color: #fff;
   outline: none;
 }
@@ -689,7 +689,7 @@ a:hover {
 }
 
 .nav-bar {
-  /* background-color: #00CDFF; */
+  /* background-color: #a97e33; */
   background: linear-gradient(to top, #101010, #212121, #313131);
   padding: 0 4%;
   height: 50px;
@@ -1034,7 +1034,7 @@ a:hover {
 }
 
 .slide-up-section .content-col .item-btn:hover {
-  color: #00cdff;
+  color: #a97e33;
 }
 
 .modal {
@@ -1093,7 +1093,7 @@ a:hover {
   padding: 0;
   height: 52px;
   background: linear-gradient(to top, #101010, #212121, #313131);
-  /* border: 1px solid #00cdff; */
+  /* border: 1px solid #a97e33; */
   /* -webkit-box-shadow: #50f3f3 0px 1px 0px 0px inset;
   box-shadow: #50f3f3 0px 1px 0px 0px inset; */
 }
@@ -1104,7 +1104,7 @@ a:hover {
 }
 
 .modal-header .icon_btn:first-of-type .iconfont {
-  color: #00cdff;
+  color: #a97e33;
   font-size: 20px;
   width: 21px;
   position: relative;
@@ -1269,8 +1269,8 @@ a:hover {
 }
 
 .method-btn-wrap .trans-input:focus {
-  -webkit-box-shadow: 0 0 0 4px #00cdff21 inset;
-  box-shadow: 0 0 0 4px #00cdff21 inset;
+  -webkit-box-shadow: 0 0 0 4px #a97e3321 inset;
+  box-shadow: 0 0 0 4px #a97e3321 inset;
 }
 
 .method-btn-wrap > div,
@@ -1333,9 +1333,9 @@ a:hover {
 }
 
 .method-btn-wrap #capital:focus {
-  -webkit-box-shadow: 0 0 0 4px #00cdff21 inset;
-  box-shadow: 0 0 0 4px #00cdff21 inset;
-  border: 1px solid #00cdff;
+  -webkit-box-shadow: 0 0 0 4px #a97e3321 inset;
+  box-shadow: 0 0 0 4px #a97e3321 inset;
+  border: 1px solid #a97e33;
   z-index: 2;
 }
 
@@ -1469,9 +1469,9 @@ a:hover {
 }
 
 .form-group .form-input:focus {
-  border-color: #00cdff;
-  -webkit-box-shadow: 0 0 0 4px #00cdff21 inset;
-  box-shadow: 0 0 0 4px #00cdff21 inset;
+  border-color: #a97e33;
+  -webkit-box-shadow: 0 0 0 4px #a97e3321 inset;
+  box-shadow: 0 0 0 4px #a97e3321 inset;
 }
 
 .form-group .btn_cancel {
@@ -1479,7 +1479,7 @@ a:hover {
   width: 22px;
   height: 22px;
   font-size: 22px;
-  color: #00cdff;
+  color: #a97e33;
   position: absolute;
   top: 6px;
   right: 10px;
@@ -1492,7 +1492,7 @@ a:hover {
 
 .form-group .captcha {
   font-size: 13px;
-  color: #00cdff;
+  color: #a97e33;
   cursor: pointer;
   position: absolute;
   padding: 4px 10px;
@@ -1502,7 +1502,7 @@ a:hover {
 }
 
 .form-group .captcha:hover {
-  color: #33d7ff;
+  color: #a97e33;
 }
 
 .form-group .btn_eye {
@@ -1510,7 +1510,7 @@ a:hover {
   width: 22px;
   height: 22px;
   font-size: 22px;
-  color: #00cdff;
+  color: #a97e33;
   position: absolute;
   top: 6px;
   right: 10px;
@@ -1587,7 +1587,7 @@ a:hover {
   height: 14px;
   top: 9px;
   right: 10px;
-  color: #00cdff;
+  color: #a97e33;
 }
 
 .form-date-picker {
@@ -1654,9 +1654,9 @@ a:hover {
 }
 
 .form-checkbox .input-check:checked + .checkmark {
-  border: 1px solid #00cdff;
+  border: 1px solid #a97e33;
   position: relative;
-  background: #00cdff;
+  background: #a97e33;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1712,12 +1712,12 @@ a:hover {
   border-radius: 50%;
   content: '';
   position: absolute;
-  background: #00cdff;
+  background: #a97e33;
   display: none;
 }
 
 .form-radio .input-check:checked + .checkmark {
-  border: 1px solid #00cdff;
+  border: 1px solid #a97e33;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1774,7 +1774,7 @@ a:hover {
 }
 
 .form-switch input:checked + .slider {
-  background: #00cdff;
+  background: #a97e33;
 }
 
 .form-switch input:checked + .slider:before {
@@ -1832,7 +1832,7 @@ a:hover {
 .form-upload .text-area {
   border: 1px dashed #ebebeb;
   background: #fff;
-  color: #00cdff;
+  color: #a97e33;
   font-size: 14px;
   width: 100%;
   border-radius: 4px;
@@ -1883,7 +1883,7 @@ a:hover {
 .form-upload .iconfont:hover:before,
 .form-upload .iconfont:focus:before,
 .form-upload .iconfont:active:before {
-  background: #33d7ff;
+  background: #a97e33;
 }
 
 .form-upload input[type='file'] {
@@ -1994,7 +1994,7 @@ body {
 }
 
 .background-blue {
-  background: #00cdff;
+  background: #a97e33;
 }
 
 .background-white {
@@ -2309,11 +2309,11 @@ body {
 }
 
 .descript a {
-  color: #00cdff;
+  color: #a97e33;
 }
 
 .descript a:hover {
-  color: #33d7ff;
+  color: #a97e33;
 }
 
 .forget_pwd {
@@ -2647,7 +2647,7 @@ body {
 }
 
 .section-title-bar .title-bar-btn {
-  color: #00cdff;
+  color: #a97e33;
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2909,7 +2909,7 @@ body {
 
 .content-inner .icon_btn .iconfont {
   font-size: 22px;
-  color: #00cdff;
+  color: #a97e33;
   line-height: 26px;
   margin-left: 5px;
 }
@@ -3092,7 +3092,7 @@ table tbody tr:nth-child(even) {
 
 .accordion-item .accordion-title .iconfont {
   pointer-events: none;
-  color: #00cdff;
+  color: #a97e33;
   width: 16px;
   height: 16px;
   line-height: 16px;
@@ -3342,7 +3342,7 @@ table tbody tr:nth-child(even) {
   content: '\e676';
   font-size: 16px;
   font-family: 'iconfont' !important;
-  color: #00cdff;
+  color: #a97e33;
   font-weight: bold;
 }
 
@@ -3369,7 +3369,7 @@ table tbody tr:nth-child(even) {
 }
 
 .col-list .col-list-item .iconfont.iconcheck {
-  color: #00cdff;
+  color: #a97e33;
 }
 
 .col-list .col-list-item .iconfont.iconallow-right {
@@ -3845,7 +3845,7 @@ table.team tr td:nth-of-type(2) {
 }
 
 .cash-box .cash-num .iconfont {
-  color: #00cdff;
+  color: #a97e33;
   font-size: 22px;
   line-height: 20px;
 }
@@ -4136,7 +4136,7 @@ table.team tr td:nth-of-type(2) {
 }
 
 .bank-list .bank-item.active {
-  border: 1px solid #00cdff;
+  border: 1px solid #a97e33;
 }
 
 .bank-list .bank-item.active .focus {
@@ -4210,7 +4210,7 @@ table.team tr td:nth-of-type(2) {
   height: 12px;
   border-style: solid;
   border-width: 0px 30px 30px 0px;
-  border-color: transparent #00cdff transparent transparent;
+  border-color: transparent #a97e33 transparent transparent;
   display: none;
 }
 
@@ -4226,7 +4226,7 @@ table.team tr td:nth-of-type(2) {
   list-style-position: outside;
   list-style-type: decimal;
   margin-left: 1.5rem;
-  color: #00cdff;
+  color: #a97e33;
 }
 
 .policy-content ol li {
