@@ -1,5 +1,3 @@
-@import "public/scss/_veriables";
-
 .marquee-box {
   height: 100%;
   overflow: hidden;
@@ -29,18 +27,18 @@
   }
 }
 
-.page-link {
-  color: $primary-color;
-  &:hover {
-    color: #999
-  }
-}
+// .page-link {
+//   color: $primary-color;
+//   &:hover {
+//     color: #999
+//   }
+// }
 
-.page-item.active .page-link {
-  border-color: $primary-color;
-  background-color: $primary-color;
-}
+// .page-item.active .page-link {
+//   border-color: $primary-color;
+//   background-color: $primary-color;
+// }
 
-.page-item.disabled .page-link {
-  color: $second-text-color
-}
+// .page-item.disabled .page-link {
+//   color: $second-text-color
+// }
