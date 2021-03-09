@@ -17,6 +17,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "framer-motion": "^3.3.0",
+    "html-react-parser": "^1.2.4",
     "http-status": "^1.5.0",
     "jquery": "^3.5.1",
     "js-combinatorics": "^1.4.5",

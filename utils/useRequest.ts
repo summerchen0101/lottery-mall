@@ -278,6 +278,7 @@ const useRequest = () => {
    */
 
   const getAboutContent = () => get<PageContent>('page/view/ABOUT')
+  const getPolicyContent = () => get<PageContent>('page/view/POLICY')
 
   /**
    * 個人聯絡資料
@@ -311,6 +312,7 @@ const useRequest = () => {
     getUserContact,
     editUserContact,
     getAboutContent,
+    getPolicyContent,
     getUserInfo,
     editUserInfo,
     getMemberBankList,
