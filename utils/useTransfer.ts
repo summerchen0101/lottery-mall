@@ -65,6 +65,11 @@ const useTransfer = () => {
           start: moment().subtract(1, 'month').startOf('month').unix(),
           end: moment().subtract(1, 'month').endOf('month').unix(),
         }
+      case 'inYear':
+        return {
+          start: moment().subtract(1, 'year').endOf('month').unix(),
+          end: moment().unix(),
+        }
     }
     return { start: 0, end: 0 }
   }, [])
