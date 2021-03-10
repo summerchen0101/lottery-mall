@@ -242,16 +242,17 @@ export interface BetCreateRequest {
 
 export interface Odds {
   id: number
+  away_odds: number
   away_percent: number
   away_point: number
-  single_game_limit: number
   bet_sum: number
   game_code: string
+  home_odds: number
   home_percent: number
   home_point: number
-  odds: number
   play_code: string
   section_code: string
+  single_game_limit: number
 }
 
 export interface OddsListRequest extends BaseListRequest {

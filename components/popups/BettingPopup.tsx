@@ -34,7 +34,7 @@ function BettingPopup() {
     try {
       await API.createBet({
         odds_id: bettingInfo.id,
-        odds: bettingInfo.odds,
+        odds: bettingInfo.home_odds,
         amount: _amount,
       })
       fetchUserInfo()
@@ -81,7 +81,7 @@ function BettingPopup() {
               </Text>
             </HStack>
             <span className="text-blue">
-              @{(bettingInfo.odds * 100).toFixed(2)}
+              @{(bettingInfo.home_odds * 100).toFixed(2)}
             </span>
           </div>
         )}
@@ -124,7 +124,7 @@ function BettingPopup() {
           />
           <div className="w-50 " id="profit">
             可赢 $
-            {numeral(amountToCanWin(amount, bettingInfo?.odds)).format(
+            {numeral(amountToCanWin(amount, bettingInfo?.home_odds)).format(
               '0,0.00',
             )}
           </div>

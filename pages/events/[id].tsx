@@ -141,7 +141,7 @@ const MarketPage: React.FC = () => {
                       {t.home_point}-{t.away_point}
                     </div>
                     <div className="profit text-red">
-                      {(t.odds * 100).toFixed(2)}%
+                      {(t.home_odds * 100).toFixed(2)}%
                     </div>
                     <div className="price">
                       ￥ {toCurrency(t.single_game_limit)}
