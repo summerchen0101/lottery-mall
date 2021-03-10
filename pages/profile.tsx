@@ -20,10 +20,10 @@ import React, { useEffect } from 'react'
 const ProfilePage: React.FC = () => {
   const router = useRouter()
   const API = useRequest()
-  const { fetchUserContact } = useService()
-  const { userContact } = useGlobalProvider()
+  const { fetchUserContact, fetchUserIdentity } = useService()
+  const { userContact, userIdentity } = useGlobalProvider()
   useEffect(() => {
-    fetchUserContact()
+    Promise.all([fetchUserContact(), fetchUserIdentity()])
   }, [])
   return (
     <Layout>
@@ -34,10 +34,15 @@ const ProfilePage: React.FC = () => {
             基本资料
           </li>
           <ProfileField label="實名認證" code="name">
-            {userContact?.name && (
+            {userIdentity?.name && (
               <HStack justify="flex-end">
-                <Text color="red.400">(未認證)</Text>
-                <Text color="gray.400">{userContact?.name}</Text>
+                {!userIdentity.is_confirm ? (
+                  <Text color="red.400">(未認證)</Text>
+                ) : (
+                  <Text color="green.400">(已認證)</Text>
+                )}
+
+                <Text color="gray.400">{userIdentity?.name}</Text>
               </HStack>
             )}
           </ProfileField>

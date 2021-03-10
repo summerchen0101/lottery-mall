@@ -46,6 +46,7 @@ import {
   TransferCreateRequest,
   WalletRecListRequest,
   WalletRec,
+  UserIdentity,
 } from '@/lib/types'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useToast } from '@chakra-ui/toast'
@@ -287,6 +288,10 @@ const useRequest = () => {
   const editUserContact = (req: UserContact) =>
     post<null>('member_contact/edit', req)
 
+  const getUserIdentity = () => get<UserIdentity>('member_identity/view')
+  const editUserIdentity = (req: UserIdentity) =>
+    post<null>('member_identity/edit', req)
+
   const checkLogin = () => get<CheckLoginResponseData>('check_login')
   const getCaptcha = () => get<CaptchaResponse>('captcha')
 
@@ -311,6 +316,8 @@ const useRequest = () => {
   return {
     getUserContact,
     editUserContact,
+    getUserIdentity,
+    editUserIdentity,
     getAboutContent,
     getPolicyContent,
     getUserInfo,

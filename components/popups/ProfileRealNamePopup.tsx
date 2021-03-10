@@ -9,6 +9,7 @@ import useService from '@/utils/useService'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import useHelper from '@/utils/useHelper'
 import ImageUpload from '../ImageUpload'
+import { Image } from '@chakra-ui/image'
 
 const jqEffectFunc = function () {
   $('.mask').fadeIn()
@@ -16,8 +17,8 @@ const jqEffectFunc = function () {
 }
 
 function ProfileRealNamePopup() {
-  const { fetchUserContact } = useService()
-  const { userContact } = useGlobalProvider()
+  const { fetchUserIdentity } = useService()
+  const { userIdentity } = useGlobalProvider()
   const { register, handleSubmit, errors, reset } = useForm<{
     name: string
     id_card_num: string
@@ -29,8 +30,8 @@ function ProfileRealNamePopup() {
 
   const onSubmit = handleSubmit(async (d) => {
     try {
-      await API.editUserContact({
-        ...userContact,
+      await API.editUserIdentity({
+        ...userIdentity,
         name: d.name,
         id_card_num: d.id_card_num,
         id_card_img: await getBase64(d.id_card_img[0]),
@@ -38,7 +39,7 @@ function ProfileRealNamePopup() {
       toast({ status: 'success', title: '更新成功' })
       closeBottomPopup()
       reset()
-      fetchUserContact()
+      fetchUserIdentity()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')
     } catch (err) {}
@@ -60,7 +61,8 @@ function ProfileRealNamePopup() {
             placeholder="請輸入真实姓名"
             name="name"
             ref={register({ required: '不可為空' })}
-            defaultValue={userContact?.name}
+            defaultValue={userIdentity?.name}
+            disabled={userIdentity?.is_confirm}
           />
           <FieldValidateMessage error={errors.name} />
         </div>
@@ -72,20 +74,33 @@ function ProfileRealNamePopup() {
             placeholder="請輸入身分證號"
             name="id_card_num"
             ref={register({ required: '不可為空' })}
-            defaultValue={userContact?.id_card_num}
+            defaultValue={userIdentity?.id_card_num}
+            disabled={userIdentity?.is_confirm}
           />
           <FieldValidateMessage error={errors.id_card_num} />
         </div>
         <label className="form-label">照片上传</label>
-        <ImageUpload
-          ref={register({ required: '不可為空' })}
-          name="id_card_img"
-          defaultValue={userContact?.id_card_img}
-        />
-        <FieldValidateMessage error={errors.id_card_img} />
-        <button type="submit" className="btnbase primary_btn mt-4 mb-2">
-          送出
-        </button>
+        {userIdentity?.is_confirm ? (
+          <Image src={userIdentity.id_card_img} />
+        ) : (
+          <>
+            <ImageUpload
+              ref={register({ required: '不可為空' })}
+              name="id_card_img"
+              defaultValue={userIdentity?.id_card_img}
+            />
+            <FieldValidateMessage error={errors.id_card_img} />
+          </>
+        )}
+        {userIdentity?.is_confirm ? (
+          <button className="btnbase primary_btn mt-4 mb-2" disabled>
+            已通過
+          </button>
+        ) : (
+          <button type="submit" className="btnbase primary_btn mt-4 mb-2">
+            送出
+          </button>
+        )}
       </form>
     </BottomPopup>
   )

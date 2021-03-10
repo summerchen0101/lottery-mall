@@ -5,6 +5,7 @@ import {
   MemberBankOption,
   Odds,
   UserContact,
+  UserIdentity,
   UserInfo,
 } from '@/lib/types'
 import useStorage from '@/utils/useStorage'
@@ -15,6 +16,8 @@ type ContextState = {
   setUser: React.Dispatch<React.SetStateAction<UserInfo>>
   userContact: UserContact
   setUserContact: React.Dispatch<React.SetStateAction<UserContact>>
+  userIdentity: UserIdentity
+  setUserIdentity: React.Dispatch<React.SetStateAction<UserIdentity>>
   token: string
   setToken: React.Dispatch<React.SetStateAction<string>>
   bettingInfo: Odds
@@ -36,6 +39,7 @@ const GlobalProvider: React.FC = ({ children }) => {
   const [bankcardOpts, setBankcardOpts] = useState<MemberBankOption[]>([])
   const [bankcards, setBankcards] = useState<MemberBank[]>([])
   const [userContact, setUserContact] = useState<UserContact>(null)
+  const [userIdentity, setUserIdentity] = useState<UserIdentity>(null)
   const [token, setToken] = useStorage<string>('token', '')
   const [bettingInfo, setBettingInfo] = useState<Odds>(null)
   const [betSettings, setBetSettings] = useState<BetSetting>(null)
@@ -47,6 +51,8 @@ const GlobalProvider: React.FC = ({ children }) => {
         setUser,
         userContact,
         setUserContact,
+        userIdentity,
+        setUserIdentity,
         token,
         setToken,
         bettingInfo,

@@ -26,6 +26,7 @@ const useService = () => {
   const {
     setUser,
     setUserContact,
+    setUserIdentity,
     setBankcardOpts,
     setBankcards,
   } = useGlobalProvider()
@@ -61,6 +62,12 @@ const useService = () => {
     try {
       const res = await API.getUserContact()
       setUserContact(res.data)
+    } catch (err) {}
+  }
+  const fetchUserIdentity = async () => {
+    try {
+      const res = await API.getUserIdentity()
+      setUserIdentity(res.data)
     } catch (err) {}
   }
 
@@ -144,6 +151,7 @@ const useService = () => {
     fetchHandicaps,
     fetchScores,
     fetchUserContact,
+    fetchUserIdentity,
     fetchBankCardOpts,
     fetchMemberBankList,
     applyActivity,

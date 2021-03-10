@@ -372,15 +372,23 @@ export interface PageContent {
 }
 
 export interface UserContact {
-  name?: string
+  // name?: string
   mobile?: string
   email?: string
   line_id?: string
   wechat_id?: string
   qq_id?: string
   telegram_id?: string
+}
+export interface UserIdentity {
+  name?: string
   id_card_num?: string
   id_card_img?: string
+  confirmed_at: number
+  created_at: number
+  id: number
+  is_confirm: boolean
+  updated_at: number
 }
 
 export interface BetSettingRequest {
