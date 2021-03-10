@@ -31,7 +31,6 @@ function ProfileRealNamePopup() {
   const onSubmit = handleSubmit(async (d) => {
     try {
       await API.editUserIdentity({
-        ...userIdentity,
         name: d.name,
         id_card_num: d.id_card_num,
         id_card_img: await getBase64(d.id_card_img[0]),

@@ -380,6 +380,12 @@ export interface UserContact {
   qq_id?: string
   telegram_id?: string
 }
+
+export interface UserIdentityCreateRequest {
+  name: string
+  id_card_num?: string
+  id_card_img?: string
+}
 export interface UserIdentity {
   name?: string
   id_card_num?: string
