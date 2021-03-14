@@ -11,15 +11,11 @@ import ProfileTelegramPopup from '@/components/popups/ProfileTelegramPopup'
 import ProfileWechatPopup from '@/components/popups/ProfileWechatPopup'
 import ProfileField from '@/components/ProfileField'
 import { useGlobalProvider } from '@/context/GlobalProvider'
-import useRequest from '@/utils/useRequest'
 import useService from '@/utils/useService'
 import { Box, HStack, Text } from '@chakra-ui/react'
-import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 
 const ProfilePage: React.FC = () => {
-  const router = useRouter()
-  const API = useRequest()
   const { fetchUserContact, fetchUserIdentity } = useService()
   const { userContact, userIdentity } = useGlobalProvider()
   useEffect(() => {
