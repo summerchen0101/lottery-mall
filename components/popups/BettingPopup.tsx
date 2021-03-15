@@ -11,6 +11,7 @@ import numeral from 'numeral'
 import useService from '@/utils/useService'
 
 function BettingPopup() {
+  const [isDisableBet, setIsDisableBet] = useState(false)
   const { bettingInfo, eventInfo, user, betSettings } = useGlobalProvider()
   const { fetchUserInfo } = useService()
   const { toDateTime, toOptionName, amountToCanWin, toCurrency } = useTransfer()
@@ -26,21 +27,27 @@ function BettingPopup() {
     setVisible(false)
   }
   const onSubmit = async () => {
+    setIsDisableBet(true)
     const _amount = numeral(amount).value()
     if (!_amount) {
       toast({ duration: 2000, status: 'warning', title: '本金不可为空' })
       return
     }
+
     try {
       await API.createBet({
         odds_id: bettingInfo.id,
         odds: bettingInfo.home_odds,
         amount: _amount,
       })
+
       fetchUserInfo()
       toast({ duration: 1000, status: 'success', title: '下注成功' })
       handleReset()
     } catch (err) {}
+    setTimeout(() => {
+      setIsDisableBet(false)
+    }, 3000)
   }
 
   const handleAmountChange = (amount: number) => {
@@ -166,6 +173,7 @@ function BettingPopup() {
           type="button"
           className="btnbase primary_btn"
           onClick={() => onSubmit()}
+          disabled={isDisableBet}
         >
           立即投注
         </button>
