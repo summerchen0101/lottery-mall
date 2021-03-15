@@ -149,6 +149,14 @@ const MyPage: React.FC = () => {
             </li>
             <li
               className="menu-list-item"
+              onClick={() => router.push('/service')}
+            >
+              <img src="/images/ic_service.svg" />
+              <div className="item-title">线上客服</div>
+              <i className="iconfont iconallow-right" />
+            </li>
+            <li
+              className="menu-list-item"
               onClick={() => router.push('/policy')}
             >
               <img src="/images/ic_list.svg" />
