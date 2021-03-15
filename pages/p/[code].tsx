@@ -26,7 +26,6 @@ const register: React.FC = () => {
     const url = new URL(location.href)
     url.hostname = process.env.memberPcHost
     url.port = ''
-    console.log(url.href)
     location.replace(url.href)
   }
   const { setToken } = useGlobalProvider()
