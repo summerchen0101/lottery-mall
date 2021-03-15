@@ -6,7 +6,7 @@ const MetaHead = () => {
     <Head>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <title>AG反波胆</title>
+      <title>ST反波胆</title>
       <meta name="description" content="" />
       <meta
         name="viewport"

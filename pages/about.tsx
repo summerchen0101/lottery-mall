@@ -20,14 +20,14 @@ const AboutPage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar back title="关于AG" />
+      <HeaderTitleBar back title="关于ST" />
       <div className="main-content">
         <div className="about-section section-padding">
           <div className="w-100 text-center py-3 mt-5">
             <Image src="/images/about_ag.png" w="90%" m="auto" />
           </div>
           <div className="w-100 mt-2">
-            {/* <span className="text-blue">AG</span> */}
+            {/* <span className="text-blue">ST</span> */}
             {content}
           </div>
         </div>

@@ -160,7 +160,7 @@ const MyPage: React.FC = () => {
               onClick={() => router.push('/about')}
             >
               <img src="/images/ic_about.svg" />
-              <div className="item-title">关于AG</div>
+              <div className="item-title">关于ST</div>
               <i className="iconfont iconallow-right" />
             </li>
           </ul>

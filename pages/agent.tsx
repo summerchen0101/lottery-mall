@@ -19,7 +19,7 @@ const agent: React.FC = () => {
         >
           申请加入
         </button> */}
-        <Text className="font-weight-bold text-center my-4">AG的优势</Text>
+        <Text className="font-weight-bold text-center my-4">ST的优势</Text>
         <div className="agent-content">
           <Box className="item">
             <Image src="./images/agent-brand.svg" m="auto" />

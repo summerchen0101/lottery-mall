@@ -28,7 +28,7 @@ const PolicyPage: React.FC = () => {
             <Image src="/images/about_ag.png" w="90%" m="auto" />
           </div> */}
           <Box className="w-100 mt-4" whiteSpace="pre-wrap">
-            {/* <span className="text-blue">AG</span> */}
+            {/* <span className="text-blue">ST</span> */}
             {content}
           </Box>
         </div>
