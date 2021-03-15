@@ -25,7 +25,7 @@ function ProfileNickPopup() {
   const onSubmit = handleSubmit(async (d) => {
     try {
       await API.editUserInfo(d)
-      toast({ status: 'success', title: '更新成功' })
+      toast({ duration: 2000, status: 'success', title: '更新成功' })
       closeBottomPopup()
       reset()
       fetchUserInfo()

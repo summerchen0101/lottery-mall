@@ -28,7 +28,7 @@ function BettingPopup() {
   const onSubmit = async () => {
     const _amount = numeral(amount).value()
     if (!_amount) {
-      toast({ status: 'warning', title: '本金不可为空' })
+      toast({ duration: 2000, status: 'warning', title: '本金不可为空' })
       return
     }
     try {
@@ -38,7 +38,7 @@ function BettingPopup() {
         amount: _amount,
       })
       fetchUserInfo()
-      toast({ status: 'success', title: '下注成功' })
+      toast({ duration: 1000, status: 'success', title: '下注成功' })
       handleReset()
     } catch (err) {}
   }

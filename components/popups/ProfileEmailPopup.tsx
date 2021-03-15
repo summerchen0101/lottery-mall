@@ -25,7 +25,7 @@ function ProfileEmailPopup() {
   const onSubmit = handleSubmit(async (d) => {
     try {
       await API.editUserContact({ ...userContact, ...d })
-      toast({ status: 'success', title: '更新成功' })
+      toast({ duration: 2000, status: 'success', title: '更新成功' })
       closeBottomPopup()
       reset()
       fetchUserContact()
@@ -48,7 +48,7 @@ function ProfileEmailPopup() {
             type="text"
             className="form-input account-input"
             name="email"
-            ref={register({ required: '不可為空' })}
+            ref={register({ required: '不可为空' })}
             defaultValue={userContact?.email}
           />
           <FieldValidateMessage error={errors.email} />

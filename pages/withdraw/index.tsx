@@ -41,6 +41,7 @@ const withdraw: React.FC = () => {
       reset()
       fetchUserInfo()
       toast({
+        duration: 2000,
         status: 'success',
         title: '提领',
         description: '提领申请已送出，将尽快为您处理！',

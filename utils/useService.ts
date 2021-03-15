@@ -36,7 +36,7 @@ const useService = () => {
     loadingStart()
     try {
       await API.applyActivity(id)
-      toast({ status: 'success', title: '申請已送出' })
+      toast({ duration: 2000, status: 'success', title: '申請已送出' })
     } catch (err) {}
     loadingEnd()
   }
@@ -49,12 +49,12 @@ const useService = () => {
   }
   const handleSendPhoneCode = async (acc: string) => {
     if (!acc) {
-      toast({ status: 'info', title: '請先填寫帳號/手機' })
+      toast({ duration: 2000, status: 'info', title: '請先填寫帳號/手機' })
       return
     }
     try {
       await API.sendSmsCode(acc)
-      toast({ status: 'success', title: '已送出驗證碼' })
+      toast({ duration: 2000, status: 'success', title: '已送出驗證碼' })
     } catch (err) {}
   }
 
@@ -84,7 +84,7 @@ const useService = () => {
       await API.logout()
       await router.push('/login')
       setUser(null)
-      toast({ status: 'success', title: '登出成功！' })
+      toast({ duration: 2000, status: 'success', title: '登出成功！' })
     } catch (err) {}
     loadingEnd()
   }

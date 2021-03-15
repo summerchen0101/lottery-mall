@@ -35,7 +35,7 @@ function ProfileRealNamePopup() {
         id_card_num: d.id_card_num,
         id_card_img: await getBase64(d.id_card_img[0]),
       })
-      toast({ status: 'success', title: '更新成功' })
+      toast({ duration: 2000, status: 'success', title: '更新成功' })
       closeBottomPopup()
       reset()
       fetchUserIdentity()

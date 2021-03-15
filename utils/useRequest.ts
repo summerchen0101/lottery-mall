@@ -87,7 +87,7 @@ const useRequest = () => {
       errorMsg = '操作错误'
     }
     if (errorMsg) {
-      toast({ status: 'error', title: errorMsg })
+      toast({ duration: 2000, status: 'error', title: errorMsg })
       throw new Error(errorMsg)
     }
     return res.data

@@ -27,7 +27,7 @@ function ProfilePhonePopup() {
   const onSubmit = handleSubmit(async (d) => {
     try {
       await API.editUserContact({ ...userContact, ...d })
-      toast({ status: 'success', title: '更新成功' })
+      toast({ duration: 2000, status: 'success', title: '更新成功' })
       closeBottomPopup()
       reset()
       fetchUserContact()

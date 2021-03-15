@@ -33,7 +33,7 @@ const BankCardPage: React.FC = () => {
       await API.removeMemberBank(id)
       await fetchMemberBankList()
       onClose()
-      toast({ status: 'success', title: '银行卡删除成功' })
+      toast({ duration: 2000, status: 'success', title: '银行卡删除成功' })
     } catch (err) {}
   }
   const onSetDefault = async (id: number) => {

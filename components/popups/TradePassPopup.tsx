@@ -30,7 +30,7 @@ function ProfileTradePassPopup() {
         old_pass: d.old_pass,
         pass: d.pass,
       })
-      toast({ status: 'success', title: '更新成功' })
+      toast({ duration: 2000, status: 'success', title: '更新成功' })
       reset()
       $('.mask').fadeOut()
       $('.slide-up-section').removeClass('slide-up')

@@ -40,10 +40,7 @@ const transfer: React.FC = () => {
       })
       reset()
       fetchUserInfo()
-      toast({
-        status: 'success',
-        title: '转移成功',
-      })
+      toast({ duration: 2000, status: 'success', title: '转移成功' })
     } catch (err) {}
   })
   useEffect(() => {

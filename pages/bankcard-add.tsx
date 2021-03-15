@@ -42,7 +42,7 @@ const BankCardAddPage: React.FC = () => {
         is_default: false,
       })
       await router.push('/bankcard')
-      toast({ status: 'success', title: '新增成功' })
+      toast({ duration: 2000, status: 'success', title: '新增成功' })
     } catch (err) {}
   })
   return (

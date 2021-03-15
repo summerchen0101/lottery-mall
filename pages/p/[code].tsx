@@ -57,22 +57,22 @@ const register: React.FC = () => {
   })
   const handleAccCheck = async () => {
     if (!getValues('acc')) {
-      toast({ status: 'info', title: '请先填写帐号/手机' })
+      toast({ duration: 2000, status: 'info', title: '请先填写帐号/手机' })
       return
     }
     try {
       await API.checkAcc(getValues('acc'))
-      toast({ status: 'success', title: '帐号可用' })
+      toast({ duration: 2000, status: 'success', title: '帐号可用' })
     } catch (err) {}
   }
   const handleNameCheck = async () => {
     if (!getValues('name')) {
-      toast({ status: 'info', title: '请先填写暱称' })
+      toast({ duration: 2000, status: 'info', title: '请先填写暱称' })
       return
     }
     try {
       await API.checkName(getValues('name'))
-      toast({ status: 'success', title: '暱称可用' })
+      toast({ duration: 2000, status: 'success', title: '暱称可用' })
     } catch (err) {}
   }
   return (

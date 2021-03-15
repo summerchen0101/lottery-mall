@@ -14,7 +14,7 @@ const useHelper = () => {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text)
-    toast({ status: 'success', title: '已复制至剪贴簿' })
+    toast({ duration: 2000, status: 'success', title: '已复制至剪贴簿' })
   }
 
   const closeBottomPopup = () => {
