@@ -29,17 +29,17 @@ function AlertPopup({ onOk }: AlertPopupProps) {
       <AlertDialogOverlay>
         <AlertDialogContent mx="15px">
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            刪除銀行卡
+            删除银行卡
           </AlertDialogHeader>
 
           <AlertDialogBody>
-            <Text color="gray">是否確認刪除銀行卡</Text>
+            <Text color="gray">是否确认删除银行卡</Text>
           </AlertDialogBody>
 
           <AlertDialogFooter>
             <HStack>
               <Button colorScheme="brand" onClick={() => onOk(id)}>
-                確認刪除
+                确认删除
               </Button>
               <Button onClick={onClose}>取消</Button>
             </HStack>

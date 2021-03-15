@@ -42,7 +42,7 @@ const transfer: React.FC = () => {
       fetchUserInfo()
       toast({
         status: 'success',
-        title: '轉移成功',
+        title: '转移成功',
       })
     } catch (err) {}
   })
@@ -53,45 +53,45 @@ const transfer: React.FC = () => {
     <Layout>
       <HeaderTitleBar
         back
-        title="轉移"
+        title="转移"
         extra={
           <button
             className="s-btn"
             onClick={() => router.push('/transfer/record')}
           >
-            轉移记录
+            转移记录
           </button>
         }
       />
       <div className="main-content section-padding">
         <Box as="form" onSubmit={onSubmit} noValidate>
-          <label className="form-label2">轉移對象</label>
+          <label className="form-label2">转移对象</label>
           <div className="form-group">
             <input
               className="form-input w-100 mr-2"
-              placeholder="請輸入帳號"
+              placeholder="请输入帐号"
               name="acc"
-              ref={register({ required: '不可為空' })}
+              ref={register({ required: '不可为空' })}
             />
             <FieldValidateMessage error={errors.acc} />
           </div>
           <label className="form-label2">
-            轉移金额
+            转移金额
             <span className="user-wallet text-blue ml-3">
-              餘額 ¥ {toCurrency(user?.balance, 2)}
+              余额 ¥ {toCurrency(user?.balance, 2)}
             </span>
           </label>
           <div className="form-group">
             <input
               type="number"
               className="form-input w-100 mr-2"
-              placeholder="請輸入提領金額"
+              placeholder="请输入提领金额"
               name="amount"
               ref={register({
-                required: '不可為空',
+                required: '不可为空',
                 pattern: {
                   value: pattern.positiveInt,
-                  message: '格式有誤',
+                  message: '格式有误',
                 },
               })}
             />
@@ -104,7 +104,7 @@ const transfer: React.FC = () => {
               className="pointer label-right text-blue"
               onClick={() => router.push('/profile')}
             >
-              前往设定
+              前往设置
             </span>
           </label>
           <div className="form-group">
@@ -112,8 +112,8 @@ const transfer: React.FC = () => {
               type="password"
               className="form-input"
               name="sec_pass"
-              placeholder="请输入轉移密码"
-              ref={register({ required: '不可為空' })}
+              placeholder="请输入转移密码"
+              ref={register({ required: '不可为空' })}
             />
             {/* <i className="iconfont iconeye-close btn_eye" /> */}
             <FieldValidateMessage error={errors.sec_pass} />
@@ -129,7 +129,7 @@ const transfer: React.FC = () => {
             data-target="#withSuccessModal"
             // disabled
           >
-            立即轉移
+            立即转移
           </button>
         </Box>
       </div>

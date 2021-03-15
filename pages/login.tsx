@@ -55,18 +55,18 @@ function login() {
           <Image src="/images/logo.png" m="auto" />
         </Box>
         <Box as="form" className="form" minH="400px" onSubmit={onSubmit}>
-          <div className="form-title">欢迎登入</div>
+          <div className="form-title">欢迎登录</div>
           <Box className="form-group">
             <input
               type="text"
               className="form-input account-input"
               name="acc"
-              placeholder="請輸入帳號"
+              placeholder="请输入帐号"
               ref={register({
-                required: '不可為空',
+                required: '不可为空',
                 pattern: {
                   value: pattern.acc,
-                  message: '格式有誤',
+                  message: '格式有误',
                 },
               })}
             />
@@ -78,7 +78,7 @@ function login() {
               type="password"
               className="form-input"
               name="pass"
-              ref={register({ required: '不可為空' })}
+              ref={register({ required: '不可为空' })}
               placeholder="请输入密码"
             />
             {/* <i className="iconfont iconeye-close btn_eye" /> */}
@@ -89,8 +89,8 @@ function login() {
                 type="text"
                 className="form-input"
                 name="code"
-                placeholder="請輸入驗證碼"
-                ref={register({ required: '不可為空' })}
+                placeholder="请输入验证码"
+                ref={register({ required: '不可为空' })}
               />
               <FieldValidateMessage error={errors.code} />
             </Box>
@@ -102,7 +102,7 @@ function login() {
             <p className="ft-15 text-lighgray">记忆帐密</p>
           </label> */}
           <button type="submit" className="btnbase primary_btn mt-4 mb-2">
-            登入
+            登录
           </button>
           <button
             type="button"

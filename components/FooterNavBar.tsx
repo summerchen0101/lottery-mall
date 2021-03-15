@@ -6,10 +6,10 @@ const FooterNavBar: React.FC = () => {
     <div className="footer">
       <ul className="footer-list">
         <li className="footer-list-item market">
-          <ActiveLink href="/events" label="市場" />
+          <ActiveLink href="/events" label="市场" />
         </li>
         <li className="footer-list-item detail">
-          <ActiveLink href="/bet-record" label="紀錄" />
+          <ActiveLink href="/bet-record" label="纪录" />
         </li>
         <li className="footer-list-item index">
           <ActiveLink href="/home" label="首页" />

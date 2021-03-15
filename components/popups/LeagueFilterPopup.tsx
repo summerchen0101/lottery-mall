@@ -116,7 +116,7 @@ function LeagueFilterPopup() {
           </div>
           <div className="modal-footer d-flex flex-row justify-content-between flex-nowrap">
             <button type="button" className="btnbase outline_btn color-blue">
-              关闭视窗
+              关闭窗口
             </button>
             <button
               type="button"

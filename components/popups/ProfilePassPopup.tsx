@@ -52,7 +52,7 @@ function ProfilePassPopup() {
             className="form-input account-input"
             placeholder="请输入旧密码"
             name="old_pass"
-            ref={register({ required: '不可為空' })}
+            ref={register({ required: '不可为空' })}
           />
           <FieldValidateMessage error={errors.old_pass} />
         </div>
@@ -64,10 +64,10 @@ function ProfilePassPopup() {
             placeholder="新密码"
             name="pass"
             ref={register({
-              required: '不可為空',
+              required: '不可为空',
               pattern: {
                 value: pattern.pass,
-                message: '格式有誤',
+                message: '格式有误',
               },
             })}
           />
@@ -81,7 +81,7 @@ function ProfilePassPopup() {
             placeholder="确认新密码"
             name="pass_confirm"
             ref={register({
-              required: '不可為空',
+              required: '不可为空',
               validate: (value) =>
                 value !== watch('pass') ? '密码不同' : true,
             })}

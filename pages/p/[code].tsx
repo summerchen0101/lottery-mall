@@ -57,22 +57,22 @@ const register: React.FC = () => {
   })
   const handleAccCheck = async () => {
     if (!getValues('acc')) {
-      toast({ status: 'info', title: '請先填寫帳號/手機' })
+      toast({ status: 'info', title: '请先填写帐号/手机' })
       return
     }
     try {
       await API.checkAcc(getValues('acc'))
-      toast({ status: 'success', title: '帳號可用' })
+      toast({ status: 'success', title: '帐号可用' })
     } catch (err) {}
   }
   const handleNameCheck = async () => {
     if (!getValues('name')) {
-      toast({ status: 'info', title: '請先填寫暱稱' })
+      toast({ status: 'info', title: '请先填写暱称' })
       return
     }
     try {
       await API.checkName(getValues('name'))
-      toast({ status: 'success', title: '暱稱可用' })
+      toast({ status: 'success', title: '暱称可用' })
     } catch (err) {}
   }
   return (
@@ -92,13 +92,13 @@ const register: React.FC = () => {
               <input
                 type="text"
                 className="form-input account-input"
-                placeholder="請輸入帳號"
+                placeholder="请输入帐号"
                 name="acc"
                 ref={register({
-                  required: '不可為空',
+                  required: '不可为空',
                   pattern: {
                     value: pattern.acc,
-                    message: '格式有誤',
+                    message: '格式有误',
                   },
                 })}
               />
@@ -108,7 +108,7 @@ const register: React.FC = () => {
                 w="130px"
                 color="gray"
               >
-                帳號可用？
+                帐号可用？
               </Button>
             </HStack>
             <FieldValidateMessage error={errors.acc} />
@@ -119,9 +119,9 @@ const register: React.FC = () => {
               <input
                 type="text"
                 className="form-input"
-                placeholder="請輸入暱稱"
+                placeholder="请输入暱称"
                 name="name"
-                ref={register({ required: '不可為空' })}
+                ref={register({ required: '不可为空' })}
               />
               <Button
                 onClick={handleNameCheck}
@@ -129,7 +129,7 @@ const register: React.FC = () => {
                 w="130px"
                 color="gray"
               >
-                暱稱可用？
+                暱称可用？
               </Button>
             </HStack>
             <FieldValidateMessage error={errors.name} />
@@ -142,10 +142,10 @@ const register: React.FC = () => {
               placeholder="密码"
               name="pass"
               ref={register({
-                required: '不可為空',
+                required: '不可为空',
                 pattern: {
                   value: pattern.pass,
-                  message: '格式有誤',
+                  message: '格式有误',
                 },
               })}
             />
@@ -158,7 +158,7 @@ const register: React.FC = () => {
               placeholder="确认密码"
               name="pass_confirm"
               ref={register({
-                required: '不可為空',
+                required: '不可为空',
                 validate: (value) =>
                   value !== getValues('pass') ? '密码不同' : true,
               })}
@@ -172,13 +172,13 @@ const register: React.FC = () => {
               placeholder="请输入手机号码"
               name="mobile"
               ref={register({
-                required: '不可為空',
+                required: '不可为空',
                 validate: (value) => {
                   if (
                     !pattern.twPhone.test(value) &&
                     !pattern.cnPhone.test(value)
                   ) {
-                    return '手機格式不符'
+                    return '手机格式不符'
                   }
                   return true
                 },
@@ -192,7 +192,7 @@ const register: React.FC = () => {
               type="text"
               className="form-input"
               placeholder="请输入推荐码"
-              ref={register({ required: '不可為空' })}
+              ref={register({ required: '不可为空' })}
             />
             <i className="iconfont iconclear btn_cancel" />
           </div> */}
@@ -201,7 +201,7 @@ const register: React.FC = () => {
               className="input-check"
               type="checkbox"
               name="is_checked_rule"
-              ref={register({ required: '需打勾確認' })}
+              ref={register({ required: '需打勾确认' })}
             />
             <span className="checkmark" />
             <p className="ft-15 text-lighgray">

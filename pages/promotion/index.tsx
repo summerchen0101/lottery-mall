@@ -55,7 +55,7 @@ const PromotionPage: React.FC = () => {
                         {toDate(t.start_at)} 至 {toDate(t.end_at)}
                       </span>
                     ) : (
-                      '無限期'
+                      '无限期'
                     )}
                   </span>
                   <button className="mini_btn color-blue">查看详情</button>

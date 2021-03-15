@@ -28,7 +28,7 @@ const HomeEventItem: React.FC<{ event: Handicap }> = ({ event }) => {
         <div className="count text-blue">
           {numeral(event?.bet_sum).divide(10000).format('0,0.0')}M
         </div>
-        <span>總搶購量</span>
+        <span>总抢购量</span>
       </div>
     </div>
   )

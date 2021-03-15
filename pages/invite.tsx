@@ -43,7 +43,7 @@ const invite: React.FC = () => {
           <div className="form-copy">{promoLink.current}</div>
           <CopyToClipboard
             text={promoLink.current}
-            onCopy={() => toast({ status: 'success', title: '已複製至剪貼簿' })}
+            onCopy={() => toast({ status: 'success', title: '已复制至剪贴簿' })}
           >
             <i className="iconcopy iconfont btn_copy" />
           </CopyToClipboard>
@@ -53,7 +53,7 @@ const invite: React.FC = () => {
           <div className="form-copy">{user?.promo_code}</div>
           <CopyToClipboard
             text={user?.promo_code}
-            onCopy={() => toast({ status: 'success', title: '已複製至剪貼簿' })}
+            onCopy={() => toast({ status: 'success', title: '已复制至剪贴簿' })}
           >
             <i className="iconcopy iconfont btn_copy" />
           </CopyToClipboard>

@@ -36,7 +36,7 @@ const GameResultPage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar back title="比賽結果" />
+      <HeaderTitleBar back title="比赛结果" />
       <div className="main-content">
         <TabGroup justifyContent="space-between">
           {beforeDateRangeOpts.map((t, i) => (

@@ -46,9 +46,9 @@ function ProfileLinePopup() {
           <input
             type="text"
             className="form-input account-input"
-            placeholder="請輸入Line帐号"
+            placeholder="请输入Line帐号"
             name="line_id"
-            ref={register({ required: '不可為空' })}
+            ref={register({ required: '不可为空' })}
             defaultValue={userContact?.line_id}
           />
           <FieldValidateMessage error={errors.line_id} />

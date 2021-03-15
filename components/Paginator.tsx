@@ -50,7 +50,7 @@ const Paginator: React.FC<PaginatorProps> = ({ displayCount = 5 }) => {
         />
       </Pagination>
       <Text mt="2" textAlign="center" fontSize="md" color="gray">
-        共 {totalPages} 頁 <span hidden={!totalCount}>({totalCount} 筆)</span>
+        共 {totalPages} 页 <span hidden={!totalCount}>({totalCount} 笔)</span>
       </Text>
     </Box>
   )

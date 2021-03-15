@@ -38,7 +38,7 @@ const eventList: React.FC = () => {
       <div className="main-content">
         {/* 公告 */}
         <NoticeBar msgs={marquee} />
-        {/* 熱門賽事 */}
+        {/* 热门赛事 */}
         <div className="section-title-bar d-flex justify-content-between section-padding">
           <ColumnTitle>赛事列表</ColumnTitle>
           {/* <div className="d-flex group-btn">
@@ -46,7 +46,7 @@ const eventList: React.FC = () => {
             <CountDownReloadBtn />
           </div> */}
         </div>
-        {/* 日期頁籤 */}
+        {/* 日期页籤 */}
         <TabGroup justifyContent="space-between">
           {afterDateRangeOpts.map((t, i) => (
             <Tab

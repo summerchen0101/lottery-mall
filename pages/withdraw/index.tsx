@@ -95,7 +95,7 @@ const withdraw: React.FC = () => {
             <Select
               placeholder="选择银行卡"
               name="bank_id"
-              ref={register({ required: '不可為空' })}
+              ref={register({ required: '不可为空' })}
             >
               {bankcardOpts.map((t, i) => (
                 <option key={i} value={t.id}>
@@ -108,20 +108,20 @@ const withdraw: React.FC = () => {
           <label className="form-label2">
             提领金额
             <span className="user-wallet text-blue ml-3">
-              餘額 ¥ {toCurrency(user?.balance, 2)}
+              余额 ¥ {toCurrency(user?.balance, 2)}
             </span>
           </label>
           <div className="form-group">
             <input
               type="number"
               className="form-input w-100 mr-2"
-              placeholder="請輸入提領金額"
+              placeholder="请输入提领金额"
               name="amount"
               ref={register({
-                required: '不可為空',
+                required: '不可为空',
                 pattern: {
                   value: pattern.positiveInt,
-                  message: '格式有誤',
+                  message: '格式有误',
                 },
               })}
             />
@@ -134,7 +134,7 @@ const withdraw: React.FC = () => {
               className="pointer label-right text-blue"
               onClick={() => router.push('/profile')}
             >
-              前往设定
+              前往设置
             </span>
           </label>
           <div className="form-group">
@@ -143,7 +143,7 @@ const withdraw: React.FC = () => {
               className="form-input"
               name="sec_pass"
               placeholder="请输入交易密码"
-              ref={register({ required: '不可為空' })}
+              ref={register({ required: '不可为空' })}
             />
             {/* <i className="iconfont iconeye-close btn_eye" /> */}
             <FieldValidateMessage error={errors.sec_pass} />

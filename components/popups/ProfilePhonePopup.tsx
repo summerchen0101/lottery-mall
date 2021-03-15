@@ -50,7 +50,7 @@ function ProfilePhonePopup() {
             type="text"
             className="form-input account-input"
             name="mobile"
-            ref={register({ required: '不可為空' })}
+            ref={register({ required: '不可为空' })}
             defaultValue={userContact?.mobile}
           />
           <FieldValidateMessage error={errors.mobile} />

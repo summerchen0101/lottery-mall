@@ -9,7 +9,7 @@ const agent: React.FC = () => {
   const router = useRouter()
   return (
     <Layout>
-      <HeaderTitleBar back title="合營計畫" />
+      <HeaderTitleBar back title="合营计划" />
       <div className="main-content section-padding agent-section">
         <img src="./images/agent.jpg" className="w-100" />
         {/* <button

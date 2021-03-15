@@ -46,7 +46,7 @@ const BettingsPage: React.FC = () => {
   }, [currentTab])
   return (
     <Layout>
-      <HeaderTitleBar title="投資紀錄" />
+      <HeaderTitleBar title="投资纪录" />
 
       <Box className="main-content background-gray" pb="130px" h="100vh">
         <TabGroup justifyContent="space-between">
@@ -71,17 +71,17 @@ const BettingsPage: React.FC = () => {
         <ul className="acc-inner mt-1">
           <li className="acc-item px-2">
             <p>{toCurrency(betReocrds.length, 0)}</p>
-            <span className="text-lighgray">筆數</span>
+            <span className="text-lighgray">笔数</span>
           </li>
           <li className="divider"></li>
           {/* <li className="acc-item px-2">
             <p>{toCurrency(_.sumBy(betReocrds, 'amount'), 2)}</p>
-            <span className="text-lighgray">累计注額</span>
+            <span className="text-lighgray">累计注额</span>
           </li> */}
           <li className="divider"></li>
           <li className="acc-item px-2">
             <p>{toCurrency(_.sumBy(betReocrds, 'valid_amount'), 2)}</p>
-            <span className="text-lighgray">累計流水</span>
+            <span className="text-lighgray">累计流水</span>
           </li>
           <li className="divider"></li>
           {/* <li className="acc-item px-2">
@@ -91,7 +91,7 @@ const BettingsPage: React.FC = () => {
                 2,
               )}
             </p>
-            <span className="text-lighgray">預估獲利</span>
+            <span className="text-lighgray">预估获利</span>
           </li>
           <li className="divider"></li> */}
           <li className="acc-item px-2">
@@ -101,7 +101,7 @@ const BettingsPage: React.FC = () => {
                 num={_.sumBy(betReocrds, 'result')}
               />
             </p>
-            <span className="text-lighgray">累計收益</span>
+            <span className="text-lighgray">累计收益</span>
           </li>
         </ul>
       </div>

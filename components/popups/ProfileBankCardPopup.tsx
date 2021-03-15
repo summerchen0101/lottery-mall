@@ -22,7 +22,7 @@ function ProfileBankCardPopup() {
     }
   }, [])
   return (
-    <BottomPopup title="銀行卡" id="bank-card-edit">
+    <BottomPopup title="银行卡" id="bank-card-edit">
       {bankcardOpts.map((t, i) => (
         <Text key={i}>{t.name}</Text>
       ))}

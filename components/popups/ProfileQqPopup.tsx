@@ -48,9 +48,9 @@ function ProfileQqPopup() {
           <input
             type="text"
             className="form-input account-input"
-            placeholder="請輸入QQ帐号"
+            placeholder="请输入QQ帐号"
             name="qq_id"
-            ref={register({ required: '不可為空' })}
+            ref={register({ required: '不可为空' })}
             defaultValue={userContact?.qq_id}
           />
           <FieldValidateMessage error={errors.qq_id} />

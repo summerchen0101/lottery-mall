@@ -29,13 +29,13 @@ const ProfilePage: React.FC = () => {
           <li className="thead col-list-item section-padding pointer">
             基本资料
           </li>
-          <ProfileField label="實名認證" code="name">
+          <ProfileField label="实名认证" code="name">
             {userIdentity?.name && (
               <HStack justify="flex-end">
                 {!userIdentity.is_confirm ? (
-                  <Text color="red.400">(未認證)</Text>
+                  <Text color="red.400">(未认证)</Text>
                 ) : (
-                  <Text color="green.400">(已認證)</Text>
+                  <Text color="green.400">(已认证)</Text>
                 )}
 
                 <Text color="gray.400">{userIdentity?.name}</Text>

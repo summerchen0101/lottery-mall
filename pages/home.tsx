@@ -52,7 +52,7 @@ const Home: React.FC = () => {
         extra={<MessageBadge />}
       />
       <div className="main-content">
-        {/* 輪撥BANNER */}
+        {/* 轮拨BANNER */}
         <CarouselBanner banners={banners} />
         {/* 公告 */}
         <NoticeBar msgs={marquee} />
@@ -94,7 +94,7 @@ const Home: React.FC = () => {
             </li>
           </ul>
         </div>
-        {/* 熱門賽事 */}
+        {/* 热门赛事 */}
         <div className="main-section section-padding">
           <div className="section-title-bar d-flex justify-content-between align-items-center">
             <ColumnTitle>热门赛事</ColumnTitle>

@@ -75,7 +75,7 @@ const useTransfer = () => {
   }, [])
 
   const amountToCanWin = useCallback((amount, odds) => {
-    // 手續費5%
+    // 手续费5%
     if (amount && odds) {
       return numeral(amount).multiply(odds).multiply(0.95).value()
     }

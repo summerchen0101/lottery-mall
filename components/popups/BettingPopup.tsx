@@ -28,7 +28,7 @@ function BettingPopup() {
   const onSubmit = async () => {
     const _amount = numeral(amount).value()
     if (!_amount) {
-      toast({ status: 'warning', title: '本金不可為空' })
+      toast({ status: 'warning', title: '本金不可为空' })
       return
     }
     try {
@@ -160,7 +160,7 @@ function BettingPopup() {
           className="btnbase outline_btn color-blue"
           onClick={() => setVisible(false)}
         >
-          关闭视窗
+          关闭窗口
         </button>
         <button
           type="button"

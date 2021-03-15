@@ -48,9 +48,9 @@ function ProfileNickPopup() {
           <input
             type="text"
             className="form-input account-input"
-            placeholder="請輸入昵称"
+            placeholder="请输入昵称"
             name="name"
-            ref={register({ required: '不可為空' })}
+            ref={register({ required: '不可为空' })}
             defaultValue={user?.name}
           />
           <FieldValidateMessage error={errors.name} />

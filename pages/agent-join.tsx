@@ -6,10 +6,10 @@ import React from 'react'
 const agentJoin: React.FC = () => {
   return (
     <Layout>
-      <HeaderTitleBar back title="合營計畫" />
+      <HeaderTitleBar back title="合营计划" />
       <div className="main-content section-padding agent-section">
         <p className="text-gray ft-14 my-2 lh-16">
-          歡迎加入代理聯盟品牌熱度十足，代理可坐享廣告品牌效應。市場策略為業界最佳，口碑也是我們最好的營銷方式。團隊竭誠為您服務！提供多種溝通管道(QQ、微信、Mail)，期待為您服務！
+          欢迎加入代理联盟品牌热度十足，代理可坐享广告品牌效应。市场策略为业界最佳，口碑也是我们最好的营销方式。团队竭诚为您服务！提供多种沟通管道(QQ、微信、Mail)，期待为您服务！
         </p>
         <label className="form-label2">姓名</label>
         <div className="form-group">

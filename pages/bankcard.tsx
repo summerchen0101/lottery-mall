@@ -33,7 +33,7 @@ const BankCardPage: React.FC = () => {
       await API.removeMemberBank(id)
       await fetchMemberBankList()
       onClose()
-      toast({ status: 'success', title: '銀行卡刪除成功' })
+      toast({ status: 'success', title: '银行卡删除成功' })
     } catch (err) {}
   }
   const onSetDefault = async (id: number) => {
@@ -47,14 +47,14 @@ const BankCardPage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar back title="銀行卡帳戶" />
+      <HeaderTitleBar back title="银行卡帐户" />
       <div className="main-content section-padding">
-        {/* 暫無數據 */}
+        {/* 暂无数据 */}
         {/* <div class="data_null"><img src="/images/data_null.svg">
           <p>目前无设置账户</p>
           <button type="submit" class="btnbase primary_btn mt-4 mb-2" data-toggle="modal"
               data-target="#realnameModal">添加账户</button>
-          <div class="ft-13 text-lighgray mt-3 text-left">注意：帐户最多只能设置5个，如需新增帐户請刪減帐户後再進行添加</div>
+          <div class="ft-13 text-lighgray mt-3 text-left">注意：帐户最多只能设置5个，如需新增帐户请删减帐户后再进行添加</div>
       </div> */}
         <Box>
           <ul className="bank-list list-group">
@@ -78,7 +78,7 @@ const BankCardPage: React.FC = () => {
                       )}
                       onClick={() => onSetDefault(t.id)}
                     >
-                      預設
+                      默认
                     </button>
                   )}
 
@@ -89,7 +89,7 @@ const BankCardPage: React.FC = () => {
                     )}
                     onClick={() => onOpen(t.id)}
                   >
-                    刪除
+                    删除
                   </button>
                 </div>
                 <span className="focus">
@@ -105,10 +105,10 @@ const BankCardPage: React.FC = () => {
             data-toggle="modal"
             onClick={() => router.push('/bankcard-add')}
           >
-            添加帳戶
+            添加帐户
           </button>
           <div className="ft-13 text-lighgray mt-3">
-            注意：提款帐户最多只能綁定5个，如需綁定新帐户請刪減舊帐户後再進行添加
+            注意：提款帐户最多只能绑定5个，如需绑定新帐户请删减旧帐户后再进行添加
           </div>
         </Box>
       </div>

@@ -23,7 +23,7 @@ const MyPage: React.FC = () => {
     <Layout>
       <HeaderTitleBar title="我的" extra={<MessageBadge />} />
       <div className="main-content">
-        {/* 個人資訊 */}
+        {/* 个人资讯 */}
         <div className="top-section">
           <div className="user-card">
             <div className="d-flex">
@@ -39,7 +39,7 @@ const MyPage: React.FC = () => {
                   <i className="iconfont iconedit ml-2 nickname" />
                 </div>
                 {/* <div className="last-login-col">
-                  複製推廣碼
+                  复制推广码
                   <span className=" ml-1">{user.promo_code}</span>
                 </div> */}
               </div>
@@ -57,7 +57,7 @@ const MyPage: React.FC = () => {
             </ul>
           </div>
         </div>
-        {/* 中間快速選單 */}
+        {/* 中间快速选单 */}
         <div className="middle-section">
           <ul className="middle-menu-list">
             <li
@@ -86,14 +86,14 @@ const MyPage: React.FC = () => {
               onClick={() => router.push('/transfer')}
             >
               <img src="/images/ic_point.svg" />
-              立即轉點
+              立即转点
             </li>
             <li
               className="menu-list-item"
               onClick={() => router.push('/cash-record')}
             >
               <img src="/images/ic_cashhistory.svg" />
-              資金紀錄
+              资金纪录
             </li>
             {/* <li
               className="menu-list-item"
@@ -123,7 +123,7 @@ const MyPage: React.FC = () => {
             </li>
           </ul>
         </div>
-        {/* 下方List選單 */}
+        {/* 下方List选单 */}
         <div className="bottom-section section-padding">
           <ul className="bottom-menu-list list-group">
             {/* <li
@@ -168,7 +168,7 @@ const MyPage: React.FC = () => {
             className="btnbase outline_btn color-blue mt-4"
             onClick={() => router.push('/login')}
           >
-            登出
+            注销
           </button>
           <div className="version my-2">V.1.01</div>
         </div>

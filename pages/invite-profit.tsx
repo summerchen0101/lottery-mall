@@ -16,7 +16,7 @@ const inviteProfit: React.FC = () => {
           <table className="team">
             <tbody>
               <tr>
-                <th>帐号/暱稱</th>
+                <th>帐号/暱称</th>
                 <th>xxx</th>
                 {/* <th>xxx</th> */}
               </tr>
@@ -24,7 +24,7 @@ const inviteProfit: React.FC = () => {
                 .fill('')
                 .map((t, i) => (
                   <tr key={i}>
-                    <td>bet888 [王曉明]</td>
+                    <td>bet888 [王晓明]</td>
                     <td>0</td>
                     {/* <td>0</td> */}
                   </tr>

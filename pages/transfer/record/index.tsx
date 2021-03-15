@@ -43,7 +43,7 @@ function transferRecord() {
   }, [currentTab])
   return (
     <Layout>
-      <HeaderTitleBar back backPath="/my" title="轉移记录" />
+      <HeaderTitleBar back backPath="/my" title="转移记录" />
       <div className="main-content">
         <TabGroup justifyContent="space-between">
           {beforeDateRangeOpts.map((t, i) => (
@@ -67,16 +67,16 @@ function transferRecord() {
             >
               <div className="info-col">
                 <div className="d-flex align-items-center">
-                  <div className="record-title">轉移</div>
+                  <div className="record-title">转移</div>
                   <div className="time ml-2">{toDateTime(t.created_at)}</div>
                 </div>
                 <div>{toOptionName(processStatusOpts, t.status)}</div>
               </div>
               <div>
-                轉移對象: {t.to_member.acc} [{t.to_member.name}]
+                转移对象: {t.to_member.acc} [{t.to_member.name}]
               </div>
               <div>交易金额: {toCurrency(t.amount, 2)}</div>
-              <div>餘額: {toCurrency(t.from_balance, 2)}</div>
+              <div>余额: {toCurrency(t.from_balance, 2)}</div>
             </div>
           ))}
         </div>

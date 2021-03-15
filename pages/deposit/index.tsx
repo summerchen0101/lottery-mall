@@ -95,7 +95,7 @@ const deposit: React.FC = () => {
             </button>
           </form>
         </div>
-        {/* 彈窗 */}
+        {/* 弹窗 */}
         <div
           className="modal fade"
           id="dpModal"

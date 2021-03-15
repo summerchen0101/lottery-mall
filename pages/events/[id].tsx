@@ -19,8 +19,8 @@ import { useGlobalProvider } from '@/context/GlobalProvider'
 import { usePopupContext } from '@/context/PopupContext'
 
 const tabs = [
-  { label: '全場反波膽', value: 'F' },
-  { label: '半場反波膽', value: 'FH' },
+  { label: '全场反波胆', value: 'F' },
+  { label: '半场反波胆', value: 'FH' },
 ]
 const MarketPage: React.FC = () => {
   const [currentSection, setCurrentSection] = useState('F')
@@ -74,10 +74,10 @@ const MarketPage: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar back title="賽事詳情" />
+      <HeaderTitleBar back title="赛事详情" />
 
       <div className="main-content">
-        {/* 賽事資訊 */}
+        {/* 赛事资讯 */}
         <div className="teaminfo-section background-red">
           <a className="left-item">
             <i className="iconfont iconallow-left" />
@@ -106,7 +106,7 @@ const MarketPage: React.FC = () => {
 
           <div className="section-title-bar d-flex justify-content-between align-items-center">
             <div className="vol-col">
-              交易累計：
+              交易累计：
               <span className="text-blue">
                 {toCurrency(eventInfo?.bet_sum, 2)}
               </span>

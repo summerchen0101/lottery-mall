@@ -49,7 +49,7 @@ const PromotionDetailPage: React.FC = () => {
                       {toDate(activity.start_at)}至{toDate(activity.end_at)}
                     </>
                   ) : (
-                    '無限期'
+                    '无限期'
                   )}
                 </small>
               </div>

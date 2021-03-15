@@ -48,9 +48,9 @@ function ProfileWechatPopup() {
           <input
             type="text"
             className="form-input account-input"
-            placeholder="請輸入微信帐号"
+            placeholder="请输入微信帐号"
             name="wechat_id"
-            ref={register({ required: '不可為空' })}
+            ref={register({ required: '不可为空' })}
             defaultValue={userContact?.wechat_id}
           />
           <FieldValidateMessage error={errors.wechat_id} />

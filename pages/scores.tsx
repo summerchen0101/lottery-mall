@@ -1,16 +1,12 @@
-import DateTabGroup from '@/components/DateTabGroup'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import Tab from '@/components/Tab'
-import TabGroup from '@/components/TabGroup'
-import { beforeDateRangeOpts, gameStatusOpts } from '@/lib/options'
+import { gameStatusOpts } from '@/lib/options'
 import { Score } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useTransfer from '@/utils/useTransfer'
 import { Box, Text } from '@chakra-ui/layout'
 import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table'
-import $ from 'jquery'
 import React, { useEffect, useState } from 'react'
 
 const scores: React.FC = () => {
@@ -33,16 +29,16 @@ const scores: React.FC = () => {
   }, [])
   return (
     <Layout>
-      <HeaderTitleBar back title="即時比分" />
+      <HeaderTitleBar back title="即时比分" />
       <Box className="main-content">
         <Table size="sm" w="full">
           <Thead bgColor="gray.100" whiteSpace="nowrap">
             <Tr>
-              <Th padding=".25rem .9rem">開賽</Th>
-              <Th padding=".25rem .9rem">聯盟</Th>
+              <Th padding=".25rem .9rem">开赛</Th>
+              <Th padding=".25rem .9rem">联盟</Th>
               <Th padding=".25rem .9rem">对阵</Th>
-              <Th padding=".25rem .9rem">全場</Th>
-              <Th padding=".25rem .9rem">半場</Th>
+              <Th padding=".25rem .9rem">全场</Th>
+              <Th padding=".25rem .9rem">半场</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -85,7 +81,7 @@ const scores: React.FC = () => {
             <div className="result-score">全场</div>
             <div className="result-score">上半</div>
             <div className="resul-total-score">总分</div>
-            <div className="resul-total-score">狀態</div>
+            <div className="resul-total-score">状态</div>
           </Box>
           <div className="result-wrap clearfix">
             {scores.map((t, i) => (

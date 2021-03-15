@@ -77,14 +77,14 @@ const useRequest = () => {
     loadingEnd()
     let errorMsg = ''
     if (res.data.code) {
-      errorMsg = errCodes[res.data.code] || `錯誤代碼 ${res.data.code}`
+      errorMsg = errCodes[res.data.code] || `错误代码 ${res.data.code}`
     } else if (res.status === 401) {
       router.push('/login')
       // errorMsg = httpStatus[401]
     } else if (res.status === 500) {
-      errorMsg = '系統錯誤'
+      errorMsg = '系统错误'
     } else if (res.data.error) {
-      errorMsg = '操作錯誤'
+      errorMsg = '操作错误'
     }
     if (errorMsg) {
       toast({ status: 'error', title: errorMsg })
@@ -114,7 +114,7 @@ const useRequest = () => {
   const getNewsDetail = (id: number) => get<NewsDetail>(`news/view/${id}`)
 
   /**
-   * 優惠活動
+   * 优惠活动
    */
   const getActivityList = (req?: BaseListRequest) =>
     post<BaseListResponse<Activity>>('activity/list', {
@@ -129,7 +129,7 @@ const useRequest = () => {
     get<ActivityDetail>(`activity/view/${id}`)
 
   /**
-   * 常見問題
+   * 常见问题
    */
   const getFaqList = (req?: BaseListRequest) =>
     post<BaseListResponse<Faq>>('qa/list', {
@@ -140,19 +140,19 @@ const useRequest = () => {
   const getFaqDetail = (id: number) => get<Faq>(`qa/view/${id}`)
 
   /**
-   * 跑馬燈
+   * 跑马灯
    */
   const getMarqueeList = () =>
     post<BaseListResponse<Marquee>>('marquee/list', { page: 1, perpage: 100 })
 
   /**
-   * 輪播圖
+   * 轮播图
    */
   const getBannerList = () =>
     post<BaseListResponse<Banner>>('banner/list', { page: 1, perpage: 100 })
 
   /**
-   * 站內信
+   * 站内信
    */
   const getMessageList = () =>
     post<BaseListResponse<Message>>('inbox_message/list', {
@@ -164,7 +164,7 @@ const useRequest = () => {
     get<Message>(`inbox_message/view/${id}`)
 
   /**
-   * 銀行卡
+   * 银行卡
    */
   const getMemberBankList = (req?: BaseListRequest) =>
     post<BaseListResponse<MemberBank>>('member_bank/list', {
@@ -192,7 +192,7 @@ const useRequest = () => {
     post<null>('member_bank/add', req)
 
   /**
-   * 資金紀錄
+   * 资金纪录
    */
   const getWalletRecList = (req?: WalletRecListRequest) =>
     post<BaseListResponse<WalletRec>>('wallet_rec/list', {
@@ -201,7 +201,7 @@ const useRequest = () => {
       ...req,
     })
   /**
-   * 轉移
+   * 转移
    */
   const getTransferList = (req?: DateRangeListRequest) =>
     post<BaseListResponse<Transfer>>('transfer_rec/list', {
@@ -213,7 +213,7 @@ const useRequest = () => {
     post<null>('transfer_rec/add', req)
 
   /**
-   * 提領
+   * 提领
    */
   const getWithdrawList = (req?: DateRangeListRequest) =>
     post<BaseListResponse<Withdraw>>('withdraw_rec/list', {
@@ -225,7 +225,7 @@ const useRequest = () => {
     post<null>('withdraw_rec/add', req)
 
   /**
-   * 賽事盤口
+   * 赛事盘口
    */
   const getHandicapList = (req?: DateRangeListRequest) =>
     post<BaseListResponse<Handicap>>('handicap/list', {
@@ -238,7 +238,7 @@ const useRequest = () => {
   const getHandicapDetail = (id: number) => get<Handicap>(`handicap/view/${id}`)
 
   /**
-   * 賠率
+   * 赔率
    */
   const getOddsList = (req?: OddsListRequest) =>
     post<BaseListResponse<Odds>>('odds/list', {
@@ -255,7 +255,7 @@ const useRequest = () => {
     post<BaseListResponse<Score>>('score/list', { game_code: 'SC' })
 
   /**
-   * 注單
+   * 注单
    */
   const getBetRecordList = (req?: DateRangeRequest) =>
     post<BaseListResponse<BetRecord>>('bet_rec/list', {
@@ -266,7 +266,7 @@ const useRequest = () => {
   const createBet = (req: BetCreateRequest) => post<null>('bet_rec/add', req)
 
   /**
-   * 單日注單資訊
+   * 单日注单资讯
    */
   const getBetRecordSummary = (req?: DateRangeRequest) =>
     post<BaseListResponse<BetRecordSummary>>('bet_rec/summary', {
@@ -276,14 +276,14 @@ const useRequest = () => {
     })
 
   /**
-   * 頁面內容
+   * 页面内容
    */
 
   const getAboutContent = () => get<PageContent>('page/view/ABOUT')
-  const getPolicyContent = () => get<PageContent>('page/view/POLICY')
+  const getPolicyContent = () => get<PageContent>('page/view/发布LICY')
 
   /**
-   * 個人聯絡資料
+   * 个人联络资料
    */
   const getUserContact = () => get<UserContact>('member_contact/view')
   const editUserContact = (req: UserContact) =>

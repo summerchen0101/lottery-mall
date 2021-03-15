@@ -31,8 +31,8 @@ function transferRecord() {
   const end_at = useMemo(() => toDateRange(currentTab).end, [currentTab])
   const noteLabelMap = useMemo(() => {
     return {
-      [WalletRecType.Transfer]: '來源帳號',
-      [WalletRecType.Bet]: '注單編號',
+      [WalletRecType.Transfer]: '来源帐号',
+      [WalletRecType.Bet]: '注单编号',
     }
   }, [])
   const fetchWalletRecs = async () => {
@@ -56,7 +56,7 @@ function transferRecord() {
   }, [currentTab])
   return (
     <Layout>
-      <HeaderTitleBar back backPath="/my" title="資金紀錄" />
+      <HeaderTitleBar back backPath="/my" title="资金纪录" />
       <div className="main-content">
         <TabGroup justifyContent="space-between">
           {beforeDateRangeOpts.map((t, i) => (
@@ -89,9 +89,9 @@ function transferRecord() {
               <div>
                 金额: <ColorText num={t.amount} />
               </div>
-              <div>餘額: {toCurrency(t.balance, 2)}</div>
+              <div>余额: {toCurrency(t.balance, 2)}</div>
               <div>
-                {noteLabelMap[t.wallet_rec_type] || '備註'}: {t.note || '-'}
+                {noteLabelMap[t.wallet_rec_type] || '备注'}: {t.note || '-'}
               </div>
             </div>
           ))}
