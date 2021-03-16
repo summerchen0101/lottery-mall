@@ -5,6 +5,7 @@ import { useLoaderProvider } from '@/context/LoaderProvider'
 import { Message } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useTransfer from '@/utils/useTransfer'
+import { Box } from '@chakra-ui/layout'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -35,9 +36,9 @@ const messageDetail: React.FC = () => {
         <div className="main-content section-padding">
           <div className="message-title w-100 my-3">{message.title}</div>
           <div className="message-time w-100">{toDate(message.created_at)}</div>
-          <div className="message-content-col w-100 mt-3">
+          <Box className="message-content-col w-100 mt-3" whiteSpace="pre-wrap">
             {message.content}
-          </div>
+          </Box>
         </div>
       )}
 

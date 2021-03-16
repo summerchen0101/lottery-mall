@@ -5,6 +5,7 @@ import { useLoaderProvider } from '@/context/LoaderProvider'
 import { NewsDetail } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useTransfer from '@/utils/useTransfer'
+import { Box } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 
@@ -36,7 +37,9 @@ const newsDetail: React.FC = () => {
           <div className="message-time w-100">
             {toDateTime(news?.updated_at)}
           </div>
-          <div className="message-content-col w-100 mt-4">{news?.content}</div>
+          <Box className="message-content-col w-100 mt-4" whiteSpace="pre-wrap">
+            {news?.content}
+          </Box>
         </div>
       )}
 
