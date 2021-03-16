@@ -8,8 +8,6 @@ import { Box, Button, HStack, Image, useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { isBrowser } from 'react-device-detect'
-import { GetStaticProps } from 'next'
 
 type FormData = {
   promo_code: string
@@ -22,12 +20,6 @@ type FormData = {
 }
 
 const register: React.FC = () => {
-  if (isBrowser && process.browser) {
-    const url = new URL(location.href)
-    url.hostname = process.env.memberPcHost
-    url.port = ''
-    location.replace(url.href)
-  }
   const { setToken } = useGlobalProvider()
   const { handleSendPhoneCode } = useService()
   const router = useRouter()
