@@ -72,6 +72,13 @@ const MarketPage: React.FC = () => {
   useEffect(() => {
     Promise.all([fetchUserInfo()])
   }, [])
+
+  useEffect(() => {
+    const timer = setInterval(fetchOdds, 1000 * 30)
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
   return (
     <Layout>
       <HeaderTitleBar back title="赛事详情" />

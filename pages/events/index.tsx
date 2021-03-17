@@ -45,6 +45,12 @@ const eventList: React.FC = () => {
     })
   }, [currentTab, page])
 
+  useEffect(() => {
+    const timer = setInterval(handleEventsReload, 1000 * 60)
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
   return (
     <Layout>
       <HeaderTitleBar title="市场列表" />
