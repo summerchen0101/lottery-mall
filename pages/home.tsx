@@ -1,5 +1,6 @@
 import CarouselBanner from '@/components/CarouselBanner'
 import ColumnTitle from '@/components/ColumnTitle'
+import CountDownReloadBtn from '@/components/CountDownReloadBtn'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import HomeEventItem from '@/components/HomeEventItem'
@@ -15,6 +16,7 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
 
 const Home: React.FC = () => {
+  const [isLoading, setIsloading] = useState(false)
   const [handicaps, setHandicaps] = useState<Handicap[]>([])
   const router = useRouter()
   const {
@@ -28,10 +30,12 @@ const Home: React.FC = () => {
   const { user } = useGlobalProvider()
 
   const fetchHotHandicaps = async () => {
+    setIsloading(true)
     try {
       const res = await API.getHotHandicaps()
       setHandicaps(res.data.list)
     } catch (err) {}
+    setIsloading(false)
   }
 
   useEffect(() => {
@@ -100,7 +104,10 @@ const Home: React.FC = () => {
             <ColumnTitle>热门赛事</ColumnTitle>
             <div className="d-flex group-btn">
               {/* <LeagueFilterBtn /> */}
-              {/* <CountDownReloadBtn /> */}
+              <CountDownReloadBtn
+                onClick={fetchHotHandicaps}
+                isLoading={isLoading}
+              />
             </div>
           </div>
           <div className="list-container">

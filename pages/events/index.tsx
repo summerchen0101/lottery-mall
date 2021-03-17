@@ -1,4 +1,5 @@
 import ColumnTitle from '@/components/ColumnTitle'
+import CountDownReloadBtn from '@/components/CountDownReloadBtn'
 import EventItem from '@/components/EventItem'
 import FooterNavBar from '@/components/FooterNavBar'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
@@ -15,6 +16,7 @@ import useTransfer from '@/utils/useTransfer'
 import React, { useEffect, useMemo, useState } from 'react'
 
 const eventList: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const [currentTab, setCurrentTab] = useState('today')
   const { fetchMarquee, fetchHandicaps, marquee, handicaps } = useService()
   const { toDateRange } = useTransfer()
@@ -25,6 +27,16 @@ const eventList: React.FC = () => {
     fetchMarquee()
   }, [])
 
+  const handleEventsReload = async () => {
+    setIsLoading(true)
+    await fetchHandicaps({
+      start_at,
+      end_at,
+      page,
+    })
+    setIsLoading(false)
+  }
+
   useEffect(() => {
     fetchHandicaps({
       start_at,
@@ -32,6 +44,7 @@ const eventList: React.FC = () => {
       page,
     })
   }, [currentTab, page])
+
   return (
     <Layout>
       <HeaderTitleBar title="市场列表" />
@@ -41,10 +54,13 @@ const eventList: React.FC = () => {
         {/* 热门赛事 */}
         <div className="section-title-bar d-flex justify-content-between section-padding">
           <ColumnTitle>赛事列表</ColumnTitle>
-          {/* <div className="d-flex group-btn">
-            <LeagueFilterBtn />
-            <CountDownReloadBtn />
-          </div> */}
+          <div className="d-flex group-btn">
+            {/* <LeagueFilterBtn /> */}
+            <CountDownReloadBtn
+              onClick={handleEventsReload}
+              isLoading={isLoading}
+            />
+          </div>
         </div>
         {/* 日期页籤 */}
         <TabGroup justifyContent="space-between">
