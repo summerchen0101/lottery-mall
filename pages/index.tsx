@@ -5,22 +5,11 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 
 const IndexPage = () => {
-  const API = useRequest()
-  const router = useRouter()
-  const checkUserStatus = async () => {
-    try {
-      const res = await API.checkLogin()
-      if (res.code === 0) {
-        router.push('/home')
-      }
-    } catch (err) {}
-  }
-  useEffect(() => {
-    checkUserStatus()
-  }, [])
   return (
     <Layout>
-      <Center h="100vh" bg="gray.100"></Center>
+      <Center h="100vh" bg="gray.100">
+        <h1>Hello World</h1>
+      </Center>
     </Layout>
   )
 }
