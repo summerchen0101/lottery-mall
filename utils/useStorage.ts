@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import store from 'store2'
 
-const useStorage = function <T>(name: string, initValue: T) {
+const useStorage = function <T>(name: string, initValue?: T) {
   const [value, setValue] = useState<T>(store.session.get(name) ?? initValue)
 
   useEffect(() => {
