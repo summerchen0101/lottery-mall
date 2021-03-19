@@ -1,3 +1,4 @@
+import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { DateRangeType } from '@/lib/enums'
@@ -22,7 +23,8 @@ function rank() {
   )
   return (
     <Layout>
-      <Box p="20px" bg="gray.100" h="100vh" w="100vw" overflowY="auto">
+      <HeaderTitleBar back title="排行榜" />
+      <Box p="20px" flex="1" overflowY="auto">
         <Select
           value={dateRangeType}
           onChange={(e) => setDateRangeType(+e.target.value)}

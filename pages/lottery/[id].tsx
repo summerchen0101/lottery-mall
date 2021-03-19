@@ -25,6 +25,7 @@ import {
 import { BiDollar } from 'react-icons/bi'
 import numeral from 'numeral'
 import Icon from '@chakra-ui/icon'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
 
 function lottery() {
   const { useGoodsList, useCurrentQishu, useUserProfile } = useService()
@@ -36,7 +37,8 @@ function lottery() {
 
   return (
     <Layout>
-      <Box p="20px" bg="gray.100" h="100vh" w="100vw" overflowY="auto">
+      <HeaderTitleBar title={qishuRes?.data.lottery_name} />
+      <Box p="20px" flex="1" overflowY="auto">
         {profileRes && (
           <Flex justify="space-between">
             <HStack fontSize="lg" spacing="20px">
@@ -84,7 +86,7 @@ function lottery() {
             mt="15px"
             borderRadius="md"
             p="15px"
-            mb="20px"
+            mb="10px"
             shadow="md"
             border="2px solid #eee"
           >
@@ -119,9 +121,37 @@ function lottery() {
                 </Circle>
               ))}
             </HStack>
-            <Button onClick={() => router.push('/opened-rec')}>更多紀錄</Button>
           </Box>
         )}
+        <SimpleGrid columns={3} spacing="10px">
+          <Button
+            colorScheme="pink"
+            onClick={() => router.push('/bet-rec')}
+            mb="15px"
+            border="2px solid #eee"
+            shadow="lg"
+          >
+            抢购纪录
+          </Button>
+          <Button
+            colorScheme="purple"
+            onClick={() => router.push('/opened-rec')}
+            mb="15px"
+            border="2px solid #eee"
+            shadow="lg"
+          >
+            结帐纪录
+          </Button>
+          <Button
+            colorScheme="purple"
+            onClick={() => router.push('/rank')}
+            mb="15px"
+            border="2px solid #eee"
+            shadow="lg"
+          >
+            排行榜
+          </Button>
+        </SimpleGrid>
         <SimpleGrid columns={2} spacing="20px">
           {goodRes?.data.map((t) => (
             <Box key={t.id} p="20px" borderRadius="md" bg="white" shadow="md">
@@ -130,6 +160,9 @@ function lottery() {
             </Box>
           ))}
         </SimpleGrid>
+      </Box>
+      <Box display="fixed" bottom="0" zIndex="9">
+        footer
       </Box>
     </Layout>
   )

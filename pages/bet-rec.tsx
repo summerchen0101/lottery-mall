@@ -1,3 +1,4 @@
+import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import useService from '@/utils/useService'
@@ -24,7 +25,8 @@ function betRec() {
   const { data: res, error } = useBetRec()
   return (
     <Layout>
-      <Box p="20px" bg="gray.100" h="100vh" w="100vw" overflowY="auto">
+      <HeaderTitleBar back title="抢购纪录" />
+      <Box p="20px" flex="1" overflowY="auto">
         <SimpleGrid
           columns={3}
           align="center"

@@ -1,4 +1,6 @@
 import {
+  Activity,
+  ActivityListResponse,
   BetRecResponse,
   CaptchaResponse,
   CurrentQishuResponse,
@@ -8,7 +10,7 @@ import {
   LoginResponse,
   LotteryListResponse,
   OpenedRecResponse,
-  ResponseBase,
+  ActivityResponse,
   UserProfileResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
@@ -72,6 +74,10 @@ function useService() {
   const useUserProfile = () =>
     useSWR<UserProfileResponse>('/user/profile', post)
 
+  const useActivityList = () => useSWR<ActivityListResponse>('/activity', get)
+  const useActivity = (id: number) =>
+    useSWR<ActivityResponse>(id && `/activity/${id}`, get)
+
   return {
     useCaptcha,
     doLogin,
@@ -83,6 +89,8 @@ function useService() {
     useOpenedRec,
     useBetRec,
     useLeaderBoard,
+    useActivityList,
+    useActivity,
   }
 }
 

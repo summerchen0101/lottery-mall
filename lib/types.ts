@@ -1,3 +1,8 @@
+export interface OptionType<T = number | string> {
+  label: string
+  value: T
+}
+
 export interface LoginRequest {
   username: string
   password: string
@@ -146,4 +151,24 @@ export interface LeaderBoardResponse {
     total: number
     list: LeaderBoard[]
   }
+}
+
+export interface Activity {
+  id: number
+  type: number
+  title: string
+  summary: string
+  tiny_pic: string
+  content: string
+  sort: number
+  thumbnail: string
+}
+
+export interface ActivityListResponse {
+  success: boolean
+  data: Activity[]
+}
+export interface ActivityResponse {
+  success: boolean
+  data: Activity
 }

@@ -1,5 +1,8 @@
+import Icon from '@chakra-ui/icon'
+import { Box, HStack, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React, { ReactNode } from 'react'
+import { HiArrowLeft } from 'react-icons/hi'
 
 const HeaderTitleBar: React.FC<{
   title?: ReactNode
@@ -9,20 +12,26 @@ const HeaderTitleBar: React.FC<{
 }> = ({ back, backPath, title, extra }) => {
   const router = useRouter()
   return (
-    <nav className="main_nav">
-      <div className="nav-bar">
-        <a
-          hidden={!back}
-          className="left-item"
-          onClick={() => (backPath ? router.push(backPath) : router.back())}
-        >
-          <i className="iconfont iconallow-left"></i>
-        </a>
-        <div className="nav-title">{title}</div>
-        {/* <div class="right-item"><a class="s-btn">删除</a><a class="s-btn">取消</a></div> */}
-        <div className="right-item">{extra}</div>
-      </div>
-    </nav>
+    <HStack
+      display="fixed"
+      top="0"
+      w="100vw"
+      bg="purple.700"
+      color="white"
+      h="50px"
+      align="center"
+      px="15px"
+    >
+      <Text
+        as="a"
+        hidden={!back}
+        onClick={() => (backPath ? router.push(backPath) : router.back())}
+      >
+        <Icon as={HiArrowLeft} fontSize="20px" />
+      </Text>
+      <Text>{title}</Text>
+      <Box>{extra}</Box>
+    </HStack>
   )
 }
 

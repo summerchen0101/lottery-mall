@@ -1,3 +1,4 @@
+import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import useService from '@/utils/useService'
@@ -16,7 +17,8 @@ function openedRec() {
   const { data: OpenedRes, error } = useOpenedRec(currentLottery)
   return (
     <Layout>
-      <Box p="20px" bg="gray.100" h="100vh" w="100vw" overflowY="auto">
+      <HeaderTitleBar back title="结帐纪录" />
+      <Box p="20px" flex="1" overflowY="auto">
         <Select
           value={currentLottery}
           onChange={(e) => setCurrentLottery(+e.target.value)}
@@ -39,10 +41,10 @@ function openedRec() {
                 py="10px"
                 borderRight="1px solid #eee"
               >
-                單號
+                单号
               </Th>
               <Th fontSize="md" color="white">
-                條碼數字
+                条码数字
               </Th>
             </Tr>
           </Thead>
