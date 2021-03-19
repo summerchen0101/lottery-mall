@@ -69,6 +69,8 @@ function betRec() {
               shadow="md"
               fontWeight="500"
               p="10px"
+              borderLeftWidth="3px"
+              borderColor="purple.500"
             >
               <Image
                 src={`${process.env.apiBaseUrl}/${t.pic_icon}`}

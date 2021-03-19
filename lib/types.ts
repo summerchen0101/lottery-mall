@@ -130,3 +130,20 @@ export interface BetRecResponse {
     list: BetRec[]
   }
 }
+
+export interface LeaderBoard {
+  rank: number
+  uid: number
+  username: string
+  count: number
+}
+
+export interface LeaderBoardResponse {
+  success: boolean
+  page: number
+  total: number
+  data: {
+    total: number
+    list: LeaderBoard[]
+  }
+}
