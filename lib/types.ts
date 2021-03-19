@@ -97,3 +97,36 @@ export interface OpenedRecResponse {
   total: number
   list: OpenedRec[]
 }
+
+export interface BetRec {
+  id: number
+  uid: number
+  username: string
+  class: number
+  lottery_id: number
+  lottery: string
+  qishu: number
+  name: string
+  pic_icon: string
+  price: string
+  bet_number: number
+  total_price: number
+  profit: number
+  odds: number
+  bet_values: string
+  is_lose_win: number
+  status: number
+  created_at: string
+}
+
+export interface BetRecResponse {
+  success: boolean
+  page: number
+  total: number
+  data: {
+    bet_money: string
+    win: string
+    profit: string
+    list: BetRec[]
+  }
+}

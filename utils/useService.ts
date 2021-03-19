@@ -1,4 +1,5 @@
 import {
+  BetRecResponse,
   CaptchaResponse,
   CurrentQishuResponse,
   GoodsListResponse,
@@ -46,10 +47,16 @@ function useService() {
       (url, lottery_id) => request('post', url, { lottery_id }),
       { refreshInterval: 1000 },
     )
-  const useOpenedRec = (id: number, page = 1, perpage = 50) =>
+  const useOpenedRec = (id: number, p = 1, per = 50) =>
     useSWR<OpenedRecResponse>(
-      id && ['/lottery/getOpenList', id, page, perpage],
-      (url, lottery_id) => request('post', url, { lottery_id, page, perpage }),
+      id && ['/lottery/getOpenList', id, p, per],
+      (url, lottery_id, page, perpage) =>
+        request('post', url, { lottery_id, page, perpage }),
+    )
+  const useBetRec = (p = 1, per = 50) =>
+    useSWR<BetRecResponse>(
+      ['/lottery/getBetList', p, per],
+      (url, page, perpage) => request('post', url, { page, perpage }),
     )
 
   const useUserProfile = () =>
@@ -64,6 +71,7 @@ function useService() {
     useCurrentQishu,
     useUserProfile,
     useOpenedRec,
+    useBetRec,
   }
 }
 
