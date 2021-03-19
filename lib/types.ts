@@ -81,3 +81,19 @@ export type CurrentQishuResponse = ResponseBase<{
 }>
 
 export type UserProfileResponse = ResponseBase<UserInfo>
+
+export interface OpenedRec {
+  id: number
+  qishu: number
+  numbers: string[]
+  open_time: string
+  value_str: string[]
+  goods_name: string
+}
+
+export interface OpenedRecResponse {
+  success: boolean
+  page: number
+  total: number
+  list: OpenedRec[]
+}

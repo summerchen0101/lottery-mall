@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
-import { IconButton } from '@chakra-ui/button'
+import { Button, IconButton } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
 import {
   Box,
@@ -119,6 +119,7 @@ function lottery() {
                 </Circle>
               ))}
             </HStack>
+            <Button onClick={() => router.push('/opened-rec')}>更多紀錄</Button>
           </Box>
         )}
         <SimpleGrid columns={2} spacing="20px">

@@ -5,6 +5,7 @@ import {
   LoginRequest,
   LoginResponse,
   LotteryListResponse,
+  OpenedRecResponse,
   ResponseBase,
   UserProfileResponse,
 } from '@/lib/types'
@@ -43,7 +44,12 @@ function useService() {
     useSWR<CurrentQishuResponse>(
       id && ['/lottery/getCurrentQishu', id],
       (url, lottery_id) => request('post', url, { lottery_id }),
-      { refreshInterval: 1000},
+      { refreshInterval: 1000 },
+    )
+  const useOpenedRec = (id: number, page = 1, perpage = 50) =>
+    useSWR<OpenedRecResponse>(
+      id && ['/lottery/getOpenList', id, page, perpage],
+      (url, lottery_id) => request('post', url, { lottery_id, page, perpage }),
     )
 
   const useUserProfile = () =>
@@ -57,6 +63,7 @@ function useService() {
     useGoodsList,
     useCurrentQishu,
     useUserProfile,
+    useOpenedRec,
   }
 }
 
