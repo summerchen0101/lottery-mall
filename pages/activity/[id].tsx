@@ -1,3 +1,4 @@
+import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import useService from '@/utils/useService'
@@ -31,6 +32,7 @@ function activity() {
           />
         </Box>
       )}
+      <FooterNav />
     </Layout>
   )
 }

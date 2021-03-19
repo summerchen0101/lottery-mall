@@ -13,7 +13,7 @@ const HeaderTitleBar: React.FC<{
   const router = useRouter()
   return (
     <HStack
-      display="fixed"
+      // pos="fixed"
       top="0"
       w="100vw"
       bg="purple.700"
@@ -29,7 +29,9 @@ const HeaderTitleBar: React.FC<{
       >
         <Icon as={HiArrowLeft} fontSize="20px" />
       </Text>
-      <Text>{title}</Text>
+      <Text fontSize="lg" letterSpacing="2px" fontWeight="600">
+        {title}
+      </Text>
       <Box>{extra}</Box>
     </HStack>
   )

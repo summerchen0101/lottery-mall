@@ -1,7 +1,10 @@
+import FooterNav from '@/components/FooterNav'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button, IconButton } from '@chakra-ui/button'
+import Icon from '@chakra-ui/icon'
 import { Image } from '@chakra-ui/image'
 import {
   Box,
@@ -10,22 +13,13 @@ import {
   Heading,
   HStack,
   SimpleGrid,
-  Stack,
   Text,
 } from '@chakra-ui/layout'
-import moment from 'moment'
 import { useRouter } from 'next/dist/client/router'
-import React, { useMemo } from 'react'
-import {
-  HiSpeakerphone,
-  HiCurrencyDollar,
-  HiUpload,
-  HiOutlineCurrencyDollar,
-} from 'react-icons/hi'
-import { BiDollar } from 'react-icons/bi'
 import numeral from 'numeral'
-import Icon from '@chakra-ui/icon'
-import HeaderTitleBar from '@/components/HeaderTitleBar'
+import React from 'react'
+import { BiDollar } from 'react-icons/bi'
+import { HiCurrencyDollar, HiSpeakerphone, HiUpload } from 'react-icons/hi'
 
 function lottery() {
   const { useGoodsList, useCurrentQishu, useUserProfile } = useService()
@@ -161,9 +155,7 @@ function lottery() {
           ))}
         </SimpleGrid>
       </Box>
-      <Box display="fixed" bottom="0" zIndex="9">
-        footer
-      </Box>
+      <FooterNav />
     </Layout>
   )
 }

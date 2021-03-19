@@ -1,3 +1,4 @@
+import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
@@ -114,6 +115,7 @@ function betRec() {
           ))}
         </Stack>
       </Box>
+      <FooterNav />
       {loadingSpinner}
     </Layout>
   )

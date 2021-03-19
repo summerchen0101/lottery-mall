@@ -1,3 +1,5 @@
+import FooterNav from '@/components/FooterNav'
+import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import useService from '@/utils/useService'
 import { Button } from '@chakra-ui/button'
@@ -12,6 +14,7 @@ function home() {
   const { data } = useLotteryList()
   return (
     <Layout>
+      <HeaderTitleBar title="大厅入口" />
       <Center h="100vh" pb="60px" bg="gray.200">
         <Box>
           <Stack spacing="20px">
@@ -27,6 +30,7 @@ function home() {
           </Stack>
         </Box>
       </Center>
+      <FooterNav />
     </Layout>
   )
 }

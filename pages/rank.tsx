@@ -1,3 +1,4 @@
+import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
@@ -73,6 +74,7 @@ function rank() {
           </Tbody>
         </Table>
       </Box>
+      <FooterNav />
       {loadingSpinner}
     </Layout>
   )
