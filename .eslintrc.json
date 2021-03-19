@@ -26,6 +26,7 @@
         "no-use-before-define": "warn",
         "react/prop-types": "off",
         "camelcase": "off",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "no-undef": "off"
     }
 }

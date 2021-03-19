@@ -6,6 +6,7 @@ import {
   LoginResponse,
   LotteryListResponse,
   ResponseBase,
+  UserProfileResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -42,7 +43,11 @@ function useService() {
     useSWR<CurrentQishuResponse>(
       id && ['/lottery/getCurrentQishu', id],
       (url, lottery_id) => request('post', url, { lottery_id }),
+      { refreshInterval: 1000},
     )
+
+  const useUserProfile = () =>
+    useSWR<UserProfileResponse>('/user/profile', post)
 
   return {
     useCaptcha,
@@ -51,6 +56,7 @@ function useService() {
     getNotices,
     useGoodsList,
     useCurrentQishu,
+    useUserProfile,
   }
 }
 

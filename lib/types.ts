@@ -15,27 +15,28 @@ export type CaptchaResponse = ResponseBase<{
   img: string
 }>
 
-export interface LoginResponse
-  extends ResponseBase<{
-    uid: number
-    class: number
-    username: string
-    name: string
-    money: number
-    phone: string
-    email: string
-    qq: string
-    weixin: string
-    status: number
-    is_security_pwd: true
-    rebate: { '1': number; '2': number; '3': number }
-    login_time: string
-    created_at: string
-    recharge_min: number
-    recharge_max: number
-    withdraw_min: number
-    withdraw_max: number
-  }> {
+export interface UserInfo {
+  uid: number
+  class: number
+  username: string
+  name: string
+  money: number
+  phone: string
+  email: string
+  qq: string
+  weixin: string
+  status: number
+  is_security_pwd: true
+  rebate: { '1': number; '2': number; '3': number }
+  login_time: string
+  created_at: string
+  recharge_min: number
+  recharge_max: number
+  withdraw_min: number
+  withdraw_max: number
+}
+
+export interface LoginResponse extends ResponseBase<UserInfo> {
   token: string
 }
 
@@ -78,3 +79,5 @@ export type CurrentQishuResponse = ResponseBase<{
   wanfa: []
   rank: []
 }>
+
+export type UserProfileResponse = ResponseBase<UserInfo>
