@@ -1,3 +1,4 @@
+import BankcardDetailPopup from '@/components/BankcardDetailPopup'
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
@@ -81,81 +82,11 @@ function bankcardList() {
       </Box>
       <FooterNav />
 
-      <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
-        <ModalOverlay />
-        <ModalContent mx="20px">
-          <ModalHeader>我的银行信息</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {currentCard && (
-              <>
-                <Box borderBottom="1px solid #ccc" py="10px">
-                  <Text fontSize="sm" mb="5px">
-                    状态
-                  </Text>
-                  <Text
-                    fontSize="lg"
-                    fontWeight="600"
-                    color={
-                      currentCard.status === BankCardStatus.On
-                        ? 'pink.500'
-                        : 'gray.500'
-                    }
-                  >
-                    {toOptionName(bankcardStatusOpts, currentCard.status)}
-                  </Text>
-                </Box>
-                <Box borderBottom="1px solid #ccc" py="10px">
-                  <Text fontSize="sm" mb="5px">
-                    银行卡姓名
-                  </Text>
-                  <Text fontSize="lg" fontWeight="600">
-                    {currentCard.name}
-                  </Text>
-                </Box>
-                <Box borderBottom="1px solid #ccc" py="10px">
-                  <Text fontSize="sm" mb="5px">
-                    银行名称
-                  </Text>
-                  <Text fontSize="lg" fontWeight="600">
-                    {currentCard.bank}
-                  </Text>
-                </Box>
-                <Box borderBottom="1px solid #ccc" py="10px">
-                  <Text fontSize="sm" mb="5px">
-                    支行名称
-                  </Text>
-                  <Text fontSize="lg" fontWeight="600">
-                    {currentCard.bank_name}
-                  </Text>
-                </Box>
-                <Box borderBottom="1px solid #ccc" py="10px">
-                  <Text fontSize="sm" mb="5px">
-                    银行帐号
-                  </Text>
-                  <Text fontSize="lg" fontWeight="600">
-                    {currentCard.account}
-                  </Text>
-                </Box>
-                <Box borderBottom="1px solid #ccc" py="10px">
-                  <Text fontSize="sm" mb="5px">
-                    开户省份 / 城市
-                  </Text>
-                  <Text fontSize="lg" fontWeight="600">
-                    {currentCard.province} / {currentCard.city}
-                  </Text>
-                </Box>
-              </>
-            )}
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="purple" onClick={onClose} w="full">
-              关闭
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <BankcardDetailPopup
+        isOpen={isOpen}
+        onClose={onClose}
+        bankcard={currentCard}
+      />
     </Layout>
   )
 }
