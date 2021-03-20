@@ -190,3 +190,22 @@ export interface BankCardListResponse {
   total: number
   list: BankCard[]
 }
+
+export interface BankCardCreateRequest {
+  name: string
+  account: string
+  bank_id: string
+  bank_name: string
+  province: string
+  city: string
+  status: number
+}
+
+export interface BankListResponse {
+  success: boolean
+  list: Record<string, string>
+}
+export interface FirstBankNameResponse {
+  success: boolean
+  data: { name: string }
+}

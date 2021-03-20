@@ -13,6 +13,9 @@ import {
   ActivityResponse,
   UserProfileResponse,
   BankCardListResponse,
+  BankListResponse,
+  FirstBankNameResponse,
+  BankCardCreateRequest,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -33,6 +36,9 @@ function useService() {
   }, [])
 
   const doLogin = (req: LoginRequest) => post<LoginResponse>('/login', req)
+
+  const doCreateBankCard = (req: BankCardCreateRequest) =>
+    post<null>('/user/bankCreate', req)
 
   const getNotices = () => post<any>('/noticelist', { type: [1, 3] })
   // const getLotteryList = () => post<any>('/lottery/getList')
@@ -75,7 +81,13 @@ function useService() {
   const useUserProfile = () =>
     useSWR<UserProfileResponse>('/user/profile', post)
 
-  const useBankList = () => useSWR<BankCardListResponse>('/user/bankList', post)
+  const useBankCardList = () =>
+    useSWR<BankCardListResponse>('/user/bankList', post)
+
+  const useBankList = () => useSWR<BankListResponse>('/finance/bank', post)
+
+  const useFirstBankName = () =>
+    useSWR<FirstBankNameResponse>('/user/bank/first', get)
 
   const useActivityList = () => useSWR<ActivityListResponse>('/activity', get)
 
@@ -95,7 +107,10 @@ function useService() {
     useLeaderBoard,
     useActivityList,
     useActivity,
+    useBankCardList,
     useBankList,
+    useFirstBankName,
+    doCreateBankCard,
   }
 }
 

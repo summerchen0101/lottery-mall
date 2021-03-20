@@ -55,7 +55,7 @@ const login = () => {
               <Input
                 placeholder="帳號"
                 name="username"
-                ref={register({ required: true })}
+                ref={register({ required: '不可为空' })}
               />
               <FieldValidateMessage error={errors.username} />
             </FormControl>
@@ -64,7 +64,7 @@ const login = () => {
               <Input
                 placeholder="密碼"
                 name="password"
-                ref={register({ required: true })}
+                ref={register({ required: '不可为空' })}
               />
               <FieldValidateMessage error={errors.password} />
             </FormControl>
@@ -74,7 +74,7 @@ const login = () => {
                 <Input
                   placeholder="驗證碼"
                   name="captcha"
-                  ref={register({ required: true })}
+                  ref={register({ required: '不可为空' })}
                 />
                 <Image src={captcha} />
               </HStack>

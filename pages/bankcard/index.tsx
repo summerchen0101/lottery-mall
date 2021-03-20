@@ -19,14 +19,16 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { Tag } from '@chakra-ui/tag'
+import { useRouter } from 'next/dist/client/router'
 import React, { useState } from 'react'
 
 function bankcardList() {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const [currentCard, setCurrentCard] = useState<BankCard>(null)
-  const { useBankList } = useService()
+  const { useBankCardList } = useService()
   const { toOptionName } = useTransfer()
-  const { data: res, error } = useBankList()
+  const { data: res, error } = useBankCardList()
+  const router = useRouter()
 
   const handleClickCard = (data: BankCard) => {
     setCurrentCard(data)
@@ -35,8 +37,15 @@ function bankcardList() {
   return (
     <Layout>
       <HeaderTitleBar back title="银行卡管理" />
-      <Box flex="1" overflowY="auto" p="20px">
+      <Box flex="1" overflowY="auto" p="20px" pb="50px">
         <Stack spacing="15px">
+          <Button
+            colorScheme="pink"
+            w="full"
+            onClick={() => router.push('/bankcard/add')}
+          >
+            新增银行卡
+          </Button>
           {res?.list.map((t) => (
             <Stack
               key={t.id}
@@ -141,8 +150,8 @@ function bankcardList() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="purple" onClick={onClose}>
-              Close
+            <Button colorScheme="purple" onClick={onClose} w="full">
+              关闭
             </Button>
           </ModalFooter>
         </ModalContent>

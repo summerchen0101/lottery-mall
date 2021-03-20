@@ -1,17 +1,15 @@
 import { useLoaderProvider } from '@/context/LoaderProvider'
-import errCodes from '@/lib/errCodes'
 import Axios, { AxiosRequestConfig, Method } from 'axios'
-import { ResponseBase } from '@/lib/types'
-import useStorage from './useStorage'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import useErrorHandler from './useErrorHandler'
+import useStorage from './useStorage'
 
 const useRequest = () => {
   const [token] = useStorage('token')
   const { apiErrHandler } = useErrorHandler()
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const request = useCallback(
-    async function <R>(
+    async function <R extends { success?: boolean; message?: string }>(
       method: Method,
       url: string,
       data: any,
@@ -25,7 +23,7 @@ const useRequest = () => {
           data,
           baseURL: process.env.apiBaseUrl,
           validateStatus: function (status) {
-            return status >= 200 && status < 300
+            return (status >= 200 && status < 300) || status === 422
           },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -33,6 +31,9 @@ const useRequest = () => {
           ...config,
         })
         loadingEnd()
+        if (res.data.success === false) {
+          throw Error(res.data?.message || '错误发生')
+        }
         return res.data
       } catch (err) {
         apiErrHandler(err)
