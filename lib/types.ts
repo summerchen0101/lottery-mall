@@ -172,3 +172,21 @@ export interface ActivityResponse {
   success: boolean
   data: Activity
 }
+
+export interface BankCard {
+  id: number
+  name: string
+  account: string
+  bank: string
+  bank_name: string
+  province: string
+  city: string
+  status: number
+}
+
+export interface BankCardListResponse {
+  success: boolean
+  page: number
+  total: number
+  list: BankCard[]
+}

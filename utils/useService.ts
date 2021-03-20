@@ -12,6 +12,7 @@ import {
   OpenedRecResponse,
   ActivityResponse,
   UserProfileResponse,
+  BankCardListResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -74,7 +75,10 @@ function useService() {
   const useUserProfile = () =>
     useSWR<UserProfileResponse>('/user/profile', post)
 
+  const useBankList = () => useSWR<BankCardListResponse>('/user/bankList', post)
+
   const useActivityList = () => useSWR<ActivityListResponse>('/activity', get)
+
   const useActivity = (id: number) =>
     useSWR<ActivityResponse>(id && `/activity/${id}`, get)
 
@@ -91,6 +95,7 @@ function useService() {
     useLeaderBoard,
     useActivityList,
     useActivity,
+    useBankList,
   }
 }
 

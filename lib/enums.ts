@@ -7,3 +7,8 @@ export enum DateRangeType {
   LastMonth = 6,
   Tomorrow = 7,
 }
+
+export enum BankCardStatus {
+  On = 1,
+  Off = 2,
+}

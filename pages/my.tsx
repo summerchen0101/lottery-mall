@@ -5,6 +5,7 @@ import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
 import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import {
   BiArrowFromBottom,
@@ -16,6 +17,7 @@ import {
 
 function my() {
   const { useUserProfile } = useService()
+  const router = useRouter()
   const { data: res, error } = useUserProfile()
   const { toCurrency } = useTransfer()
   return (
@@ -81,6 +83,7 @@ function my() {
             py="15px"
             borderLeftWidth="6px"
             borderColor="purple.600"
+            onClick={() => router.push('/bankcard')}
           >
             银行卡管理
           </Box>
@@ -101,6 +104,7 @@ function my() {
             py="15px"
             borderLeftWidth="6px"
             borderColor="purple.600"
+            onClick={() => router.push('/bet-rec')}
           >
             抢购纪录
           </Box>
