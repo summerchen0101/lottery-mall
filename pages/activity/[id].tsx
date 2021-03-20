@@ -16,22 +16,24 @@ function activity() {
   return (
     <Layout>
       <HeaderTitleBar back title="優惠活動" />
-      {res && (
-        <Box p="20px" flex="1" overflowY="auto">
-          <Text color="purple.600" fontSize="lg" fontWeight="600" mb="10px">
-            {res.data.title}
-          </Text>
-          <Box
-            dangerouslySetInnerHTML={{ __html: htmldecode(res.data.content) }}
-            bg="white"
-            borderRadius="md"
-            shadow="md"
-            color="gray.500"
-            p="15px"
-            minH="550px"
-          />
-        </Box>
-      )}
+      <Box p="20px" flex="1" overflowY="auto">
+        {res && (
+          <>
+            <Text color="purple.600" fontSize="lg" fontWeight="600" mb="10px">
+              {res.data.title}
+            </Text>
+            <Box
+              dangerouslySetInnerHTML={{ __html: htmldecode(res.data.content) }}
+              bg="white"
+              borderRadius="md"
+              shadow="md"
+              color="gray.500"
+              p="15px"
+              minH="550px"
+            />
+          </>
+        )}
+      </Box>
       <FooterNav />
     </Layout>
   )

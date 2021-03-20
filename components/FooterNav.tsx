@@ -24,7 +24,7 @@ function FooterNav() {
       <Icon as={HiShoppingCart} onClick={() => router.push('/lottery/1')} />
       <Icon as={HiStar} onClick={() => router.push('/activity')} />
       <Icon as={HiClock} onClick={() => router.push('/bet-rec')} />
-      <Icon as={HiUser} onClick={() => router.push('/home')} />
+      <Icon as={HiUser} onClick={() => router.push('/my')} />
     </HStack>
   )
 }
