@@ -209,3 +209,66 @@ export interface FirstBankNameResponse {
   success: boolean
   data: { name: string }
 }
+
+export interface BetTarget {
+  id: number
+  odds: number
+  bet_number: number
+  bet_money?: number
+}
+
+export interface GoodInfoRequest {
+  lottery_goods_id: number
+}
+export interface GoodInfoResponse {
+  success: boolean
+  data: {
+    name: string
+    pic_icon: string
+    price: number
+    number: number
+    chart: []
+  }
+}
+export interface BetConfirmRequest {
+  lottery_id: number
+  goods_id: number
+  qishu: number
+  bet_list: BetTarget[]
+}
+export interface BetConfirmResponse {
+  success: boolean
+  data: {
+    bet_number: number
+    total_p_value: number
+    profit: number
+    money: number
+    bet_list: BetTarget[]
+  }
+}
+
+export interface BetActionRequest extends BetConfirmRequest {}
+
+export interface BetActionResponse {
+  success: boolean
+  message: string
+  order_sn: string
+}
+
+export interface BetSuccessRequest {
+  order_sn: string
+}
+export interface BetSuccessResponse {
+  success: boolean
+  data: {
+    order_sn: string
+    profit: number
+    total: number
+    open_time: string
+    qishu: number
+    created_at: string
+    lottery_name: string
+    goods_name: string
+    wanfa: string
+  }
+}

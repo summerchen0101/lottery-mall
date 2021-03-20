@@ -16,6 +16,13 @@ import {
   BankListResponse,
   FirstBankNameResponse,
   BankCardCreateRequest,
+  BetConfirmRequest,
+  BetActionRequest,
+  BetSuccessRequest,
+  BetSuccessResponse,
+  BetActionResponse,
+  BetConfirmResponse,
+  GoodInfoRequest,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -39,6 +46,18 @@ function useService() {
 
   const doCreateBankCard = (req: BankCardCreateRequest) =>
     post<null>('/user/bankCreate', req)
+
+  const getGoodsInfo = (req: GoodInfoRequest) =>
+    post<GoodsListResponse>('/lottery/getGoods', req)
+
+  const doBetConfirm = (req: BetConfirmRequest) =>
+    post<BetConfirmResponse>('/lottery/betConfirm', req)
+
+  const doBetAction = (req: BetActionRequest) =>
+    post<BetActionResponse>('/lottery/betAction', req)
+
+  const doBetSuccess = (req: BetSuccessRequest) =>
+    post<BetSuccessResponse>('/lottery/betSuccess', req)
 
   const getNotices = () => post<any>('/noticelist', { type: [1, 3] })
   // const getLotteryList = () => post<any>('/lottery/getList')
@@ -111,6 +130,10 @@ function useService() {
     useBankList,
     useFirstBankName,
     doCreateBankCard,
+    getGoodsInfo,
+    doBetConfirm,
+    doBetAction,
+    doBetSuccess,
   }
 }
 
