@@ -94,6 +94,7 @@ function my() {
             py="15px"
             borderLeftWidth="6px"
             borderColor="purple.600"
+            onClick={() => router.push('/finance-rec')}
           >
             财务管理
           </Box>

@@ -3,7 +3,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { DateRangeType } from '@/lib/enums'
-import { dateRangeOpts } from '@/lib/options'
+import { rankDateRangeOpts } from '@/lib/options'
 import useDateRange from '@/utils/useDateRange'
 import useService from '@/utils/useService'
 import { Box, HStack, Text, VStack } from '@chakra-ui/layout'
@@ -33,7 +33,7 @@ function rank() {
           shadow="lg"
           bg="white"
         >
-          {dateRangeOpts?.map((t) => (
+          {rankDateRangeOpts?.map((t) => (
             <option key={t.value} value={t.value}>
               {t.label}
             </option>

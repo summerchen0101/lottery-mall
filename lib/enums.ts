@@ -6,6 +6,7 @@ export enum DateRangeType {
   ThisMonth = 5,
   LastMonth = 6,
   Tomorrow = 7,
+  inYear = 8,
 }
 
 export enum BankCardStatus {

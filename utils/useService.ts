@@ -24,6 +24,7 @@ import {
   BetConfirmResponse,
   GoodInfoResponse,
   WanfaListResponse,
+  FinanceRecResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -125,6 +126,13 @@ function useService() {
       (url, order_sn) => post(url, { order_sn }),
     )
 
+  const useFinanceRec = (start: string, end: string) =>
+    useSWR<FinanceRecResponse>(
+      start && end && ['/finance/record', start, end],
+      (url, created_at1, created_at2) =>
+        post(url, { created_at1, created_at2 }),
+    )
+
   return {
     useCaptcha,
     doLogin,
@@ -147,6 +155,7 @@ function useService() {
     doBetAction,
     useBetSuccess,
     useWanfaList,
+    useFinanceRec,
   }
 }
 

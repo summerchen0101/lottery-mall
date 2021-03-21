@@ -1,13 +1,14 @@
-import { beforeDateRangeOpts } from '@/lib/options'
+import { DateRangeType } from '@/lib/enums'
+import { OptionType } from '@/lib/types'
 import React, { useState } from 'react'
 import Tab from './Tab'
 import TabGroup from './TabGroup'
 
-function DateTabGroup() {
-  const [current, setCurrent] = useState('today')
+function DateTabGroup({ options }: { options: OptionType<DateRangeType>[] }) {
+  const [current, setCurrent] = useState(DateRangeType.Today)
   return (
     <TabGroup justifyContent="space-between">
-      {beforeDateRangeOpts.map((t, i) => (
+      {options.map((t, i) => (
         <Tab
           key={i}
           label={t.label}

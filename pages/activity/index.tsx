@@ -22,6 +22,9 @@ function activityList() {
               bg="white"
               align="start"
               onClick={() => router.push(`/activity/${t.id}`)}
+              shadow="sm"
+              borderRadius="md"
+              overflow="hidden"
             >
               <Image
                 src={`${process.env.apiBaseUrl}/${t.tiny_pic}`}

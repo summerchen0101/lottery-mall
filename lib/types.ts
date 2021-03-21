@@ -263,3 +263,8 @@ export type BetSuccessResponse = ResponseBase<{
   goods_name: string
   wanfa: string
 }>
+
+export type FinanceRecResponse = ResponseBase<{
+  recharge: number
+  withdraw: number
+}>

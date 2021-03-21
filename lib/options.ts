@@ -1,6 +1,13 @@
 import { BankCardStatus, DateRangeType } from './enums'
 
-export const dateRangeOpts = [
+export const financeRecDateRangeOpts = [
+  { label: '今日', value: DateRangeType.Today },
+  { label: '本週', value: DateRangeType.ThisWeek },
+  { label: '本月', value: DateRangeType.ThisMonth },
+  { label: '近一年', value: DateRangeType.inYear },
+]
+
+export const rankDateRangeOpts = [
   { label: '今日', value: DateRangeType.Today },
   { label: '本週', value: DateRangeType.ThisWeek },
   { label: '本月', value: DateRangeType.ThisMonth },
