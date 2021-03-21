@@ -11,10 +11,18 @@ const useTransfer = () => {
   const isBeforeDay = (unixTime: number) =>
     moment(unixTime * 1000).isBefore(moment(), 'day')
 
-  const toCurrency = (num: number, decimal?: number) =>
+  const toCurrency = (num: number, decimal: number = 2) =>
     numeral(num).format(
       decimal ? `0,0.${Array(decimal).fill('0').join('')}` : '0,0',
     )
+
+  const toCountDownTimer = (time: number) => {
+    return (
+      numeral(Math.floor(time / 60)).format('00') +
+      ':' +
+      numeral(time % 60).format('00')
+    )
+  }
 
   const toOptionName = function <T extends string | number>(
     options: OptionType<T>[],
@@ -36,6 +44,7 @@ const useTransfer = () => {
     toCurrency,
     toOptionName,
     htmldecode,
+    toCountDownTimer,
   }
 }
 

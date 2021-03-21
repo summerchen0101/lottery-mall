@@ -1,4 +1,10 @@
-import React, { useMemo, useState } from 'react'
+import { usePopupContext } from '@/context/PopupContext'
+import { Wanfa } from '@/lib/types'
+import useService from '@/utils/useService'
+import useTransfer from '@/utils/useTransfer'
+import { Button } from '@chakra-ui/button'
+import { Image } from '@chakra-ui/image'
+import { Box, Flex, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
@@ -8,19 +14,10 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
-import { Box, Flex, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
-import useTransfer from '@/utils/useTransfer'
-import { bankcardStatusOpts } from '@/lib/options'
-import { BankCardStatus } from '@/lib/enums'
-import { BankCard } from '@/lib/types'
-import { Button } from '@chakra-ui/button'
-import useService from '@/utils/useService'
-import { Image } from '@chakra-ui/image'
 import { Tag } from '@chakra-ui/tag'
-import { Input } from '@chakra-ui/input'
 import { useRouter } from 'next/dist/client/router'
-import _ from 'lodash'
-import { usePopupContext } from '@/context/PopupContext'
+import React, { useEffect, useMemo, useState } from 'react'
+import BettingConfirmPopup from './BettingConfirmPopup'
 interface BettingPopupProps {
   goodsId: number
   countdown: string
@@ -29,16 +26,30 @@ interface BettingPopupProps {
 const buyCountOpts = [1, 5, 10, 20, 30, 50, 80, 100]
 
 function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
-  const { toOptionName } = useTransfer()
   const router = useRouter()
+  const { toCurrency, toCountDownTimer } = useTransfer()
   const [visible, setVisible] = usePopupContext('betting')
   const [, setBetConfirmVisible] = usePopupContext('betConfirm')
-  const { useGoodsInfo, useWanfaList, useUserProfile } = useService()
-  const { data: WanfaRes } = useWanfaList(+(router.query.id as string))
-
-  const { data: res, error } = useGoodsInfo(goodsId)
+  const [betWanfaIds, setBetWanfaIds] = useState<number[]>([])
+  const [amount, setAmount] = useState<number>(1)
+  const {
+    useGoodsInfo,
+    useWanfaList,
+    useCurrentQishu,
+    useUserProfile,
+    doBetConfirm,
+  } = useService()
+  const { data: ProfileRes } = useUserProfile()
+  const lotteryId = +(router.query.id as string)
+  const { data: WanfaRes } = useWanfaList(lotteryId)
+  const { data: QishuRes } = useCurrentQishu(lotteryId)
+  const { data: goodsRes, error } = useGoodsInfo(goodsId)
+  const info = goodsRes?.data
+  const totalPrice = useMemo(() => {
+    return info?.price * betWanfaIds.length * amount
+  }, [betWanfaIds, info, amount])
   // const [] = useState()
-  const info = res?.data
+
   const categoryA = useMemo(
     () => WanfaRes?.data.filter((t) => t.category === 1),
     [WanfaRes],
@@ -47,6 +58,34 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
     () => WanfaRes?.data.filter((t) => t.category === 2),
     [WanfaRes],
   )
+  const handleSubmit = async () => {
+    // try {
+    //   const res = await doBetConfirm({
+    //     bet_list: betTargets,
+    //     lottery_id: lotteryId,
+    //     goods_id: goodsId,
+    //     qishu: QishuRes?.data.qishu,
+    //   })
+    // } catch (err) {
+    //   console.log(err)
+    // }
+    setBetConfirmVisible(true)
+  }
+
+  const handleWanfaClicked = (id: number) => {
+    if (betWanfaIds.includes(id)) {
+      setBetWanfaIds((wIds) => wIds.filter((t) => t !== id))
+    } else {
+      setBetWanfaIds((wIds) => [...wIds, id])
+    }
+  }
+
+  // 結帳倒數時間即關閉彈窗
+  useEffect(() => {
+    if (QishuRes?.data.close_time >= QishuRes?.data.countdown) {
+      setVisible(false)
+    }
+  }, [QishuRes])
   return (
     <Modal isOpen={visible} onClose={() => setVisible(false)} autoFocus={false}>
       <ModalOverlay />
@@ -96,7 +135,14 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
                 </HStack>
                 <SimpleGrid columns={4} spacing="5px">
                   {categoryA.map((t) => (
-                    <Button size="sm" key={t.id} colorScheme="purple">
+                    <Button
+                      size="sm"
+                      key={t.id}
+                      colorScheme={
+                        betWanfaIds.includes(t.id) ? 'pink' : 'purple'
+                      }
+                      onClick={() => handleWanfaClicked(t.id)}
+                    >
                       {t.name}
                     </Button>
                   ))}
@@ -113,7 +159,14 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
                 </HStack>
                 <SimpleGrid columns={5} spacing="5px">
                   {categoryB.map((t) => (
-                    <Button size="sm" key={t.id} colorScheme="purple">
+                    <Button
+                      size="sm"
+                      key={t.id}
+                      colorScheme={
+                        betWanfaIds.includes(t.id) ? 'pink' : 'purple'
+                      }
+                      onClick={() => handleWanfaClicked(t.id)}
+                    >
                       {t.name}
                     </Button>
                   ))}
@@ -127,7 +180,12 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
                 </HStack>
                 <SimpleGrid columns={5} spacing="5px">
                   {buyCountOpts.map((t) => (
-                    <Button size="sm" key={t} colorScheme="purple">
+                    <Button
+                      size="sm"
+                      key={t}
+                      colorScheme={amount === t ? 'pink' : 'purple'}
+                      onClick={() => setAmount(t)}
+                    >
                       {t}
                     </Button>
                   ))}
@@ -140,11 +198,11 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
                     支付合计：
                   </Text>
                   <Text color="pink.500" fontWeight="bold" fontSize="2xl">
-                    ¥ 100
+                    ¥ {totalPrice}
                   </Text>
                 </HStack>
                 <Text color="gray.400" fontWeight="bold" fontSize="sm">
-                  余额：100
+                  余额：{toCurrency(ProfileRes?.data.money)}
                 </Text>
               </Stack>
             </Stack>
@@ -154,15 +212,18 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
         <ModalFooter>
           <HStack>
             <Button colorScheme="pink">立即充值</Button>
-            <Button
-              colorScheme="pink"
-              onClick={() => setBetConfirmVisible(true)}
-            >
+            <Button colorScheme="pink" onClick={handleSubmit}>
               立即抢购
             </Button>
           </HStack>
         </ModalFooter>
       </ModalContent>
+      <BettingConfirmPopup
+        goodsId={goodsId}
+        betIds={betWanfaIds}
+        amount={amount}
+        totalPrice={totalPrice}
+      />
     </Modal>
   )
 }

@@ -1,8 +1,10 @@
 import { usePopupContext } from '@/context/PopupContext'
+import { BetConfirmResponse, BetTarget } from '@/lib/types'
 import useCountdown from '@/utils/useCountdown'
 import useService from '@/utils/useService'
+import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { HStack, Text } from '@chakra-ui/layout'
+import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
@@ -13,18 +15,69 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
-function BettingConfirmPopup({ goodsId }: { goodsId: number }) {
+interface BettingConfirmPopupProps {
+  goodsId: number
+  betIds: number[]
+  amount: number
+  totalPrice: number
+}
+
+function BettingConfirmPopup({
+  goodsId,
+  betIds,
+  amount,
+  totalPrice,
+}: BettingConfirmPopupProps) {
   const router = useRouter()
+  const { toCurrency } = useTransfer()
   const [visible, setVisible] = usePopupContext('betConfirm')
-  const { useUserProfile, useGoodsInfo } = useService()
+  const lotteryId = +(router.query.id as string)
+  const [confirmRes, setConfirmRes] = useState<BetConfirmResponse>()
+  const {
+    useUserProfile,
+    useGoodsInfo,
+    useWanfaList,
+    useCurrentQishu,
+    doBetConfirm,
+  } = useService()
+  const { data: WanfaRes } = useWanfaList(lotteryId)
+  const { data: QishuRes } = useCurrentQishu(lotteryId)
   const { data: ProfileRes } = useUserProfile()
   const { data: goodRes, error } = useGoodsInfo(goodsId)
-  const { count, initCount } = useCountdown(30)
+  const { count, initCount } = useCountdown(
+    QishuRes?.data.countdown - QishuRes?.data.close_time,
+  )
+
+  const betTargets: BetTarget[] = useMemo(() => {
+    return WanfaRes?.data
+      .filter((t) => betIds.includes(t.id))
+      .map((t) => ({
+        id: t.id,
+        odds: t.odds,
+        bet_number: amount,
+      }))
+  }, [WanfaRes, betIds])
 
   const onClose = () => {
     setVisible(false)
+  }
+
+  const onSubmit = async () => {}
+
+  const fetchConfirmInfo = async () => {
+    try {
+      const res = await doBetConfirm({
+        bet_list: betTargets,
+        lottery_id: lotteryId,
+        goods_id: goodsId,
+        qishu: QishuRes?.data.next_qishu,
+      })
+      setConfirmRes(res)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
@@ -32,11 +85,21 @@ function BettingConfirmPopup({ goodsId }: { goodsId: number }) {
   }, [count])
 
   useEffect(() => {
-    visible && initCount()
+    if (visible) {
+      initCount()
+      fetchConfirmInfo()
+    }
   }, [visible])
 
+  // 結帳倒數時間即關閉彈窗
+  useEffect(() => {
+    if (QishuRes?.data.close_time >= QishuRes?.data.countdown) {
+      setVisible(false)
+    }
+  }, [QishuRes])
+
   return (
-    <Modal isOpen={visible} onClose={onClose} autoFocus={false}>
+    <Modal isOpen={visible} onClose={onClose} autoFocus={false} isCentered>
       <ModalOverlay />
       <ModalContent mx="20px">
         <ModalHeader justify="center">
@@ -49,16 +112,41 @@ function BettingConfirmPopup({ goodsId }: { goodsId: number }) {
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>您购买了{goodRes?.data.name}</Text>
-          {/* <Text>支付{goodRes?.data.name}</Text> */}
+          <Text fontWeight="600" fontSize="lg" mb="15px">
+            {goodRes?.data.name}{' '}
+          </Text>
+          <Stack>
+            <HStack>
+              <Text>總計金額</Text>
+              <Text color="pink.500" fontSize="2xl" fontWeight="bold">
+                ¥ {totalPrice}
+              </Text>
+            </HStack>
+            <Stack fontSize="sm" color="gray.500" align="flex-end">
+              <HStack justify="space-between">
+                <Text>预估获利：</Text>
+                <Text fontWeight="bold">
+                  ¥ {toCurrency(confirmRes?.data.profit)}
+                </Text>
+              </HStack>
+              <HStack justify="space-between">
+                <Text>可用余额：</Text>
+                <Text fontWeight="bold">
+                  ¥ {toCurrency(ProfileRes?.data.money)}
+                </Text>
+              </HStack>
+            </Stack>
+          </Stack>
         </ModalBody>
 
-        <ModalFooter>
+        <ModalFooter mt="10px">
           <HStack>
             <Button colorScheme="gray" onClick={onClose}>
               取消
             </Button>
-            <Button colorScheme="pink">确认</Button>
+            <Button colorScheme="pink" onSubmit={onSubmit}>
+              确认
+            </Button>
           </HStack>
         </ModalFooter>
       </ModalContent>

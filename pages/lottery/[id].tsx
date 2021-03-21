@@ -17,6 +17,7 @@ import {
   Heading,
   HStack,
   SimpleGrid,
+  Stack,
   Text,
 } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
@@ -35,16 +36,23 @@ function lottery() {
     useWanfaList,
   } = useService()
   const router = useRouter()
-  const { toCurrency } = useTransfer()
+  const { toCurrency, toCountDownTimer } = useTransfer()
   const { data: goodRes } = useGoodsList(+(router.query.id as string))
   const { data: qishuRes } = useCurrentQishu(+(router.query.id as string))
 
   const { data: profileRes } = useUserProfile()
-  const countdown = useMemo(() => {
-    if (qishuRes) {
-      return `${numeral(Math.floor(qishuRes.data.countdown / 60)).format(
-        '00',
-      )}:${numeral(qishuRes.data.countdown % 60).format('00')}`
+  const acoutingCountDown = useMemo(() => {
+    if (qishuRes && qishuRes.data.countdown - qishuRes.data.close_time > 0) {
+      return toCountDownTimer(
+        qishuRes.data.countdown - qishuRes.data.close_time,
+      )
+    }
+    return ''
+  }, [qishuRes])
+
+  const restartCountDown = useMemo(() => {
+    if (qishuRes && qishuRes.data.close_time - qishuRes.data.countdown > 0) {
+      return toCountDownTimer(qishuRes.data.countdown)
     }
     return ''
   }, [qishuRes])
@@ -115,9 +123,26 @@ function lottery() {
               color="gray.600"
               fontWeight="600"
             >
-              <Text>距第 {qishuRes.data.next_qishu} 訂單結帳</Text>
-              <Text>{countdown}</Text>
+              {acoutingCountDown ? (
+                <>
+                  <Text>距第 {qishuRes.data.next_qishu} 订单结帐</Text>
+                  <Text color="red.600" fontWeight="bold">
+                    {acoutingCountDown}
+                  </Text>
+                </>
+              ) : (
+                <>
+                  <Text color="red.500">
+                    订单 {qishuRes.data.next_qishu} 结帐中
+                  </Text>
+                  <HStack color="red.500">
+                    <Text fontWeight="bold">{restartCountDown}</Text>
+                    <Text>后可下注</Text>
+                  </HStack>
+                </>
+              )}
             </Flex>
+
             <Heading mb="15px" color="purple.600">
               {qishuRes.data.lottery_name}
             </Heading>
@@ -170,23 +195,34 @@ function lottery() {
         </SimpleGrid>
         <SimpleGrid columns={2} spacing="20px">
           {goodRes?.data.map((t) => (
-            <Box
-              key={t.id}
-              p="20px"
-              borderRadius="md"
-              bg="white"
-              shadow="md"
-              onClick={() => handleGoodsClicked(t.id)}
-            >
+            <Stack key={t.id} p="20px" borderRadius="md" bg="white" shadow="md">
               <Image src={`${process.env.apiBaseUrl}/${t.pic_icon}`} />
-              <Text color="gray.500">{t.name}</Text>
-            </Box>
+              <Text color="gray.500" fontWeight="bold" noOfLines={1}>
+                {t.name}
+              </Text>
+              <Text color="pink.500" fontWeight="bold">
+                ¥ {toCurrency(t.price, 0)}
+              </Text>
+              {qishuRes?.data.close_time >= qishuRes?.data.countdown ? (
+                <Button disabled size="sm" w="full" colorScheme="purple">
+                  结帐中
+                </Button>
+              ) : (
+                <Button
+                  size="sm"
+                  w="full"
+                  colorScheme="purple"
+                  onClick={() => handleGoodsClicked(t.id)}
+                >
+                  立即购买
+                </Button>
+              )}
+            </Stack>
           ))}
         </SimpleGrid>
       </Box>
       <FooterNav />
-      <BettingPopup goodsId={currentGoodsId} countdown={countdown} />
-      <BettingConfirmPopup goodsId={currentGoodsId} />
+      <BettingPopup goodsId={currentGoodsId} countdown={acoutingCountDown} />
     </Layout>
   )
 }
