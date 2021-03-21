@@ -27,6 +27,7 @@ import {
   FinanceRecResponse,
   RechargeLogResponse,
   WithdrawLogResponse,
+  NoticeListResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -56,9 +57,6 @@ function useService() {
 
   const doBetAction = (req: BetActionRequest) =>
     post<BetActionResponse>('/lottery/betAction', req)
-
-  const getNotices = () => post<any>('/noticelist', { type: [1, 3] })
-  // const getLotteryList = () => post<any>('/lottery/getList')
 
   const useLotteryList = () =>
     useSWR<LotteryListResponse>('/lottery/getList', post)
@@ -147,12 +145,18 @@ function useService() {
       (url, created_at1, created_at2) =>
         post(url, { created_at1, created_at2 }),
     )
+  const useFaqList = () =>
+    useSWR<NoticeListResponse>('/noticelist', (url) => post(url, { type: 2 }))
+
+  const useNewsList = () =>
+    useSWR<NoticeListResponse>('/noticelist', (url) =>
+      post(url, { type: [1, 3] }),
+    )
 
   return {
     useCaptcha,
     doLogin,
     useLotteryList,
-    getNotices,
     useGoodsList,
     useCurrentQishu,
     useUserProfile,
@@ -173,6 +177,8 @@ function useService() {
     useFinanceRec,
     useRechargeLog,
     useWithdrawLog,
+    useFaqList,
+    useNewsList,
   }
 }
 

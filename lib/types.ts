@@ -300,3 +300,16 @@ export interface WithdrawLogResponse {
   total: number
   list: WithdrawLog[]
 }
+
+export interface Notice {
+  id: number
+  name: string
+  content: string
+}
+
+export interface NoticeListResponse {
+  success: boolean
+  page: number
+  total: number
+  list: Notice[]
+}

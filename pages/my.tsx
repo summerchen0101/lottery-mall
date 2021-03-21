@@ -116,6 +116,7 @@ function my() {
             py="15px"
             borderLeftWidth="6px"
             borderColor="purple.600"
+            onClick={() => router.push('/faq')}
           >
             常见问题
           </Box>
