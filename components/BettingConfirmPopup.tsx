@@ -1,3 +1,4 @@
+import { useGlobalProvider } from '@/context/GlobalProvider'
 import { usePopupContext } from '@/context/PopupContext'
 import { BetConfirmResponse, BetTarget } from '@/lib/types'
 import useCountdown from '@/utils/useCountdown'
@@ -16,6 +17,7 @@ import {
 } from '@chakra-ui/modal'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
+import BettingSuccessPopup from './BettingSuccessPopup'
 
 interface BettingConfirmPopupProps {
   goodsId: number
@@ -33,14 +35,17 @@ function BettingConfirmPopup({
   const router = useRouter()
   const { toCurrency } = useTransfer()
   const [visible, setVisible] = usePopupContext('betConfirm')
+  const [, setBetSuccessVisible] = usePopupContext('betSuccess')
   const lotteryId = +(router.query.id as string)
   const [confirmRes, setConfirmRes] = useState<BetConfirmResponse>()
+  const { setOrderSn } = useGlobalProvider()
   const {
     useUserProfile,
     useGoodsInfo,
     useWanfaList,
     useCurrentQishu,
     doBetConfirm,
+    doBetAction,
   } = useService()
   const { data: WanfaRes } = useWanfaList(lotteryId)
   const { data: QishuRes } = useCurrentQishu(lotteryId)
@@ -64,7 +69,21 @@ function BettingConfirmPopup({
     setVisible(false)
   }
 
-  const onSubmit = async () => {}
+  const onSubmit = async () => {
+    try {
+      const res = await doBetAction({
+        bet_list: betTargets,
+        lottery_id: lotteryId,
+        goods_id: goodsId,
+        qishu: QishuRes?.data.next_qishu,
+      })
+      setOrderSn(res.order_sn)
+      setBetSuccessVisible(true)
+      setVisible(false)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const fetchConfirmInfo = async () => {
     try {
@@ -144,7 +163,7 @@ function BettingConfirmPopup({
             <Button colorScheme="gray" onClick={onClose}>
               取消
             </Button>
-            <Button colorScheme="pink" onSubmit={onSubmit}>
+            <Button colorScheme="pink" onClick={onSubmit}>
               确认
             </Button>
           </HStack>

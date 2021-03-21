@@ -54,9 +54,6 @@ function useService() {
   const doBetAction = (req: BetActionRequest) =>
     post<BetActionResponse>('/lottery/betAction', req)
 
-  const doBetSuccess = (req: BetSuccessRequest) =>
-    post<BetSuccessResponse>('/lottery/betSuccess', req)
-
   const getNotices = () => post<any>('/noticelist', { type: [1, 3] })
   // const getLotteryList = () => post<any>('/lottery/getList')
 
@@ -122,6 +119,11 @@ function useService() {
       id && ['/lottery/getGoods', id],
       (url, lottery_goods_id) => post(url, { lottery_goods_id }),
     )
+  const useBetSuccess = (sn: string) =>
+    useSWR<BetSuccessResponse>(
+      sn && ['/lottery/betSuccess', sn],
+      (url, order_sn) => post(url, { order_sn }),
+    )
 
   return {
     useCaptcha,
@@ -143,7 +145,7 @@ function useService() {
     useGoodsInfo,
     doBetConfirm,
     doBetAction,
-    doBetSuccess,
+    useBetSuccess,
     useWanfaList,
   }
 }
