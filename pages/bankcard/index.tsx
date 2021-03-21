@@ -10,15 +10,6 @@ import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { useDisclosure } from '@chakra-ui/hooks'
 import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-} from '@chakra-ui/modal'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
 import React, { useState } from 'react'

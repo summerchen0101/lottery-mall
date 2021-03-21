@@ -1,9 +1,13 @@
+import BettingConfirmPopup from '@/components/BettingConfirmPopup'
+import BettingPopup from '@/components/BettingPopup'
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import { usePopupContext } from '@/context/PopupContext'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button, IconButton } from '@chakra-ui/button'
+import { useDisclosure } from '@chakra-ui/hooks'
 import Icon from '@chakra-ui/icon'
 import { Image } from '@chakra-ui/image'
 import {
@@ -17,17 +21,38 @@ import {
 } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import numeral from 'numeral'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { BiDollar } from 'react-icons/bi'
 import { HiCurrencyDollar, HiSpeakerphone, HiUpload } from 'react-icons/hi'
 
 function lottery() {
-  const { useGoodsList, useCurrentQishu, useUserProfile } = useService()
+  const [currentGoodsId, setCurrentGoodsId] = useState<number>()
+  const [, setBettingVisible] = usePopupContext('betting')
+  const {
+    useGoodsList,
+    useCurrentQishu,
+    useUserProfile,
+    useWanfaList,
+  } = useService()
   const router = useRouter()
   const { toCurrency } = useTransfer()
   const { data: goodRes } = useGoodsList(+(router.query.id as string))
   const { data: qishuRes } = useCurrentQishu(+(router.query.id as string))
+
   const { data: profileRes } = useUserProfile()
+  const countdown = useMemo(() => {
+    if (qishuRes) {
+      return `${numeral(Math.floor(qishuRes.data.countdown / 60)).format(
+        '00',
+      )}:${numeral(qishuRes.data.countdown % 60).format('00')}`
+    }
+    return ''
+  }, [qishuRes])
+
+  const handleGoodsClicked = async (id: number) => {
+    setCurrentGoodsId(id)
+    setBettingVisible(true)
+  }
 
   return (
     <Layout>
@@ -91,18 +116,15 @@ function lottery() {
               fontWeight="600"
             >
               <Text>距第 {qishuRes.data.next_qishu} 訂單結帳</Text>
-              <Text>
-                {numeral(Math.floor(qishuRes.data.countdown / 60)).format('00')}
-                :{numeral(qishuRes.data.countdown % 60).format('00')}
-              </Text>
+              <Text>{countdown}</Text>
             </Flex>
             <Heading mb="15px" color="purple.600">
               {qishuRes.data.lottery_name}
             </Heading>
             <HStack>
-              {qishuRes.data.numbers.map((t) => (
+              {qishuRes.data.numbers.map((t, i) => (
                 <Circle
-                  key={t}
+                  key={i}
                   size="35px"
                   bg="purple.600"
                   color="white"
@@ -148,7 +170,14 @@ function lottery() {
         </SimpleGrid>
         <SimpleGrid columns={2} spacing="20px">
           {goodRes?.data.map((t) => (
-            <Box key={t.id} p="20px" borderRadius="md" bg="white" shadow="md">
+            <Box
+              key={t.id}
+              p="20px"
+              borderRadius="md"
+              bg="white"
+              shadow="md"
+              onClick={() => handleGoodsClicked(t.id)}
+            >
               <Image src={`${process.env.apiBaseUrl}/${t.pic_icon}`} />
               <Text color="gray.500">{t.name}</Text>
             </Box>
@@ -156,6 +185,8 @@ function lottery() {
         </SimpleGrid>
       </Box>
       <FooterNav />
+      <BettingPopup goodsId={currentGoodsId} countdown={countdown} />
+      <BettingConfirmPopup goodsId={currentGoodsId} />
     </Layout>
   )
 }

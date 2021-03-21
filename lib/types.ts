@@ -71,6 +71,14 @@ export interface Goods {
 
 export type GoodsListResponse = ResponseBase<Goods[]>
 
+export interface Wanfa {
+  id: number
+  category: number
+  name: string
+  odds: number
+}
+export type WanfaListResponse = ResponseBase<Wanfa[]>
+
 export type CurrentQishuResponse = ResponseBase<{
   lottery_name: string
   lottery_logo: string
@@ -164,10 +172,7 @@ export interface Activity {
   thumbnail: string
 }
 
-export interface ActivityListResponse {
-  success: boolean
-  data: Activity[]
-}
+export type ActivityListResponse = ResponseBase<Activity[]>
 export interface ActivityResponse {
   success: boolean
   data: Activity
@@ -205,10 +210,7 @@ export interface BankListResponse {
   success: boolean
   list: Record<string, string>
 }
-export interface FirstBankNameResponse {
-  success: boolean
-  data: { name: string }
-}
+export type FirstBankNameResponse = ResponseBase<{ name: string }>
 
 export interface BetTarget {
   id: number
@@ -217,35 +219,27 @@ export interface BetTarget {
   bet_money?: number
 }
 
-export interface GoodInfoRequest {
-  lottery_goods_id: number
-}
-export interface GoodInfoResponse {
-  success: boolean
-  data: {
-    name: string
-    pic_icon: string
-    price: number
-    number: number
-    chart: []
-  }
-}
+export type GoodInfoResponse = ResponseBase<{
+  name: string
+  pic_icon: string
+  price: number
+  number: number
+  chart: []
+}>
 export interface BetConfirmRequest {
   lottery_id: number
   goods_id: number
   qishu: number
   bet_list: BetTarget[]
 }
-export interface BetConfirmResponse {
-  success: boolean
-  data: {
-    bet_number: number
-    total_p_value: number
-    profit: number
-    money: number
-    bet_list: BetTarget[]
-  }
-}
+
+export type BetConfirmResponse = ResponseBase<{
+  bet_number: number
+  total_p_value: number
+  profit: number
+  money: number
+  bet_list: BetTarget[]
+}>
 
 export interface BetActionRequest extends BetConfirmRequest {}
 
@@ -258,17 +252,14 @@ export interface BetActionResponse {
 export interface BetSuccessRequest {
   order_sn: string
 }
-export interface BetSuccessResponse {
-  success: boolean
-  data: {
-    order_sn: string
-    profit: number
-    total: number
-    open_time: string
-    qishu: number
-    created_at: string
-    lottery_name: string
-    goods_name: string
-    wanfa: string
-  }
-}
+export type BetSuccessResponse = ResponseBase<{
+  order_sn: string
+  profit: number
+  total: number
+  open_time: string
+  qishu: number
+  created_at: string
+  lottery_name: string
+  goods_name: string
+  wanfa: string
+}>

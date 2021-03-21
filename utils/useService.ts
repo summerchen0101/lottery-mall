@@ -22,7 +22,8 @@ import {
   BetSuccessResponse,
   BetActionResponse,
   BetConfirmResponse,
-  GoodInfoRequest,
+  GoodInfoResponse,
+  WanfaListResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -47,9 +48,6 @@ function useService() {
   const doCreateBankCard = (req: BankCardCreateRequest) =>
     post<null>('/user/bankCreate', req)
 
-  const getGoodsInfo = (req: GoodInfoRequest) =>
-    post<GoodsListResponse>('/lottery/getGoods', req)
-
   const doBetConfirm = (req: BetConfirmRequest) =>
     post<BetConfirmResponse>('/lottery/betConfirm', req)
 
@@ -64,6 +62,12 @@ function useService() {
 
   const useLotteryList = () =>
     useSWR<LotteryListResponse>('/lottery/getList', post)
+
+  const useWanfaList = (id: number) =>
+    useSWR<WanfaListResponse>(
+      id && ['/lottery/getWanfaList', id],
+      (url, lottery_id) => request('post', url, { lottery_id }),
+    )
 
   const useGoodsList = (id: number) =>
     useSWR<GoodsListResponse>(
@@ -113,6 +117,12 @@ function useService() {
   const useActivity = (id: number) =>
     useSWR<ActivityResponse>(id && `/activity/${id}`, get)
 
+  const useGoodsInfo = (id: number) =>
+    useSWR<GoodInfoResponse>(
+      id && ['/lottery/getGoods', id],
+      (url, lottery_goods_id) => post(url, { lottery_goods_id }),
+    )
+
   return {
     useCaptcha,
     doLogin,
@@ -130,10 +140,11 @@ function useService() {
     useBankList,
     useFirstBankName,
     doCreateBankCard,
-    getGoodsInfo,
+    useGoodsInfo,
     doBetConfirm,
     doBetAction,
     doBetSuccess,
+    useWanfaList,
   }
 }
 
