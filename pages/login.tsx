@@ -30,7 +30,7 @@ const login = () => {
 
   const onSubmit = handleSubmit(async (d) => {
     const res = await doLogin({ ...d, ckey: key })
-    setToken(res.token)
+    setToken(res?.token)
     router.push('/home')
   })
   return (

@@ -6,6 +6,7 @@ interface IState {
   betting: PopupProps<boolean>
   betConfirm: PopupProps<boolean>
   betSuccess: PopupProps<boolean>
+  rechargeLog: PopupProps<boolean>
 }
 
 const PopupContext = createContext<IState | null>(null)
@@ -15,6 +16,7 @@ const PopupProvider: React.FC = ({ children }) => {
     betting: useState(false),
     betConfirm: useState(false),
     betSuccess: useState(false),
+    rechargeLog: useState(false),
   }
   return (
     <PopupContext.Provider value={initialState}>

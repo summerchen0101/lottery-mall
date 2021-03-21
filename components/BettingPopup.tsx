@@ -59,16 +59,6 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
     [WanfaRes],
   )
   const handleSubmit = async () => {
-    // try {
-    //   const res = await doBetConfirm({
-    //     bet_list: betTargets,
-    //     lottery_id: lotteryId,
-    //     goods_id: goodsId,
-    //     qishu: QishuRes?.data.qishu,
-    //   })
-    // } catch (err) {
-    //   console.log(err)
-    // }
     setBetConfirmVisible(true)
   }
 

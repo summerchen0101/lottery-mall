@@ -25,6 +25,7 @@ import {
   GoodInfoResponse,
   WanfaListResponse,
   FinanceRecResponse,
+  RechargeLogResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -133,6 +134,13 @@ function useService() {
         post(url, { created_at1, created_at2 }),
     )
 
+  const useRechargeLog = (start: string, end: string) =>
+    useSWR<RechargeLogResponse>(
+      start && end && ['/finance/rechargeLog', start, end],
+      (url, created_at1, created_at2) =>
+        post(url, { created_at1, created_at2 }),
+    )
+
   return {
     useCaptcha,
     doLogin,
@@ -156,6 +164,7 @@ function useService() {
     useBetSuccess,
     useWanfaList,
     useFinanceRec,
+    useRechargeLog,
   }
 }
 

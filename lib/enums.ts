@@ -13,3 +13,8 @@ export enum BankCardStatus {
   On = 1,
   Off = 2,
 }
+
+export enum RechargeStatus {
+  Success = 1,
+  Fail = 2,
+}

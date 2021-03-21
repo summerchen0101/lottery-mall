@@ -268,3 +268,20 @@ export type FinanceRecResponse = ResponseBase<{
   recharge: number
   withdraw: number
 }>
+
+export interface RechargeLog {
+  id: number
+  order_sn: string
+  description: string
+  money: number
+  status: number
+  remark: string
+  created_at: string
+}
+
+export interface RechargeLogResponse {
+  success: boolean
+  page: number
+  total: number
+  list: RechargeLog[]
+}

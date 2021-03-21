@@ -1,27 +1,22 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import RechargeLogPopup from '@/components/RechargeLogPopup'
 import { useLoaderProvider } from '@/context/LoaderProvider'
+import { usePopupContext } from '@/context/PopupContext'
 import { DateRangeType } from '@/lib/enums'
 import { financeRecDateRangeOpts } from '@/lib/options'
 import useDateRange from '@/utils/useDateRange'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
-import {
-  Box,
-  Center,
-  HStack,
-  SimpleGrid,
-  Square,
-  Stack,
-  Text,
-} from '@chakra-ui/layout'
+import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { useRouter } from 'next/dist/client/router'
 import React, { useState } from 'react'
 
 function rank() {
   const router = useRouter()
+  const [, setRechargeLogVisible] = usePopupContext('rechargeLog')
   const { loadingSpinner } = useLoaderProvider()
   const [dateRangeType, setDateRangeType] = useState(DateRangeType.Today)
   const { useFinanceRec } = useService()
@@ -56,6 +51,7 @@ function rank() {
             borderRadius="md"
             shadow="md"
             justify="space-between"
+            onClick={() => setRechargeLogVisible(true)}
           >
             <Text fontWeight="600" fontSize="lg">
               存款总计
@@ -80,6 +76,7 @@ function rank() {
             </Text>
           </HStack>
         </Stack>
+        <RechargeLogPopup dateType={dateRangeType} />
       </Box>
       <FooterNav />
       {loadingSpinner}
