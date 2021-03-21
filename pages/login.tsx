@@ -35,54 +35,57 @@ const login = () => {
   })
   return (
     <Layout>
-      <Center h="100vh" bg="pink.200">
+      <Center h="100vh" bg="purple.600">
         <Box
           as="form"
           pb="60px"
           bg="white"
           py="40px"
           px="50px"
-          shadow="md"
+          shadow="lg"
+          mx="20px"
           w="full"
+          borderRadius="lg"
           onSubmit={onSubmit}
         >
           <Heading mb="30px" color="gray.600" align="center">
-            LOGIN PAGE
+            99购商城
           </Heading>
           <Stack spacing="20px">
             <FormControl isRequired>
-              <FormLabel>帳號</FormLabel>
+              <FormLabel>帐号</FormLabel>
               <Input
-                placeholder="帳號"
+                placeholder="帐号"
                 name="username"
                 ref={register({ required: '不可为空' })}
               />
               <FieldValidateMessage error={errors.username} />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>密碼</FormLabel>
+              <FormLabel>密码</FormLabel>
               <Input
-                placeholder="密碼"
+                placeholder="密码"
                 name="password"
+                type="password"
                 ref={register({ required: '不可为空' })}
               />
               <FieldValidateMessage error={errors.password} />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>驗證碼</FormLabel>
+              <FormLabel>验证码</FormLabel>
               <HStack>
                 <Input
-                  placeholder="驗證碼"
+                  placeholder="验证码"
                   name="captcha"
                   ref={register({ required: '不可为空' })}
                 />
-                <Image src={captcha} />
+                <Image h="34px" src={captcha} />
               </HStack>
               <FieldValidateMessage error={errors.password} />
             </FormControl>
             <Button
               mt={4}
-              colorScheme="gray"
+              colorScheme="pink"
               w="full"
               // isLoading={props.isSubmitting}
               type="submit"

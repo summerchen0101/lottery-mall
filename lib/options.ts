@@ -1,4 +1,9 @@
-import { BankCardStatus, DateRangeType, RechargeStatus } from './enums'
+import {
+  BankCardStatus,
+  DateRangeType,
+  RechargeStatus,
+  WithdrawStatus,
+} from './enums'
 
 export const financeRecDateRangeOpts = [
   { label: '今日', value: DateRangeType.Today },
@@ -21,4 +26,9 @@ export const bankcardStatusOpts = [
 export const rechargeStatusOpts = [
   { label: '充值成功', value: RechargeStatus.Success },
   { label: '充值失败', value: RechargeStatus.Fail },
+]
+
+export const withdrawStatusOpts = [
+  { label: '提领成功', value: WithdrawStatus.Success },
+  { label: '提领失败', value: WithdrawStatus.Fail },
 ]

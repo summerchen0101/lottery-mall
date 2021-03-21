@@ -285,3 +285,18 @@ export interface RechargeLogResponse {
   total: number
   list: RechargeLog[]
 }
+
+export interface WithdrawLog {
+  id: number
+  order_sn: string
+  money: number
+  remark: string
+  status: number
+  created_at: string
+}
+export interface WithdrawLogResponse {
+  success: boolean
+  page: number
+  total: number
+  list: WithdrawLog[]
+}

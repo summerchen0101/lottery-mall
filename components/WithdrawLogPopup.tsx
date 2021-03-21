@@ -1,8 +1,8 @@
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { usePopupContext } from '@/context/PopupContext'
-import { DateRangeType, RechargeStatus } from '@/lib/enums'
-import { rechargeStatusOpts } from '@/lib/options'
+import { DateRangeType, WithdrawStatus } from '@/lib/enums'
+import { withdrawStatusOpts } from '@/lib/options'
 import useDateRange from '@/utils/useDateRange'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
@@ -20,13 +20,13 @@ import {
 import { Tag } from '@chakra-ui/tag'
 import React, { useState } from 'react'
 
-function RechargeLogPopup({ dateType }: { dateType: DateRangeType }) {
-  const { useRechargeLog } = useService()
-  const [visible, setVisible] = usePopupContext('rechargeLog')
+function WithdrawLogPopup({ dateType }: { dateType: DateRangeType }) {
+  const { useWithdrawLog } = useService()
+  const [visible, setVisible] = usePopupContext('withdrawLog')
   const { loadingSpinner } = useLoaderProvider()
   const { toCurrency, toOptionName } = useTransfer()
   const [startM, endM] = useDateRange(dateType)
-  const { data: res, error } = useRechargeLog(
+  const { data: res, error } = useWithdrawLog(
     visible && startM.format('YYYY-MM-DD'),
     visible && endM.format('YYYY-MM-DD'),
   )
@@ -36,7 +36,7 @@ function RechargeLogPopup({ dateType }: { dateType: DateRangeType }) {
     <Modal isOpen={visible} onClose={onClose} autoFocus={false} isCentered>
       <ModalOverlay />
       <ModalContent mx="20px" bg="gray.100">
-        <ModalHeader>充值纪录</ModalHeader>
+        <ModalHeader>提领纪录</ModalHeader>
         <ModalCloseButton />
         <ModalBody minH="70vh" maxH="70vh" overflowY="auto">
           <Stack spacing="15px">
@@ -59,10 +59,10 @@ function RechargeLogPopup({ dateType }: { dateType: DateRangeType }) {
                   <Tag
                     variant="solid"
                     colorScheme={
-                      t.status === RechargeStatus.Success ? 'pink' : 'gray'
+                      t.status === WithdrawStatus.Success ? 'pink' : 'gray'
                     }
                   >
-                    {toOptionName(rechargeStatusOpts, t.status)}
+                    {toOptionName(withdrawStatusOpts, t.status)}
                   </Tag>
                 </HStack>
                 <HStack justify="space-between" fontWeight="bold">
@@ -70,14 +70,10 @@ function RechargeLogPopup({ dateType }: { dateType: DateRangeType }) {
                   <Text>{t.order_sn}</Text>
                 </HStack>
                 <HStack justify="space-between" fontWeight="bold">
-                  <Text color="gray.500">充值金额：</Text>
+                  <Text color="gray.500">提领金额：</Text>
                   <Text color="purple.600" fontSize="lg">
                     ¥ {t.money}
                   </Text>
-                </HStack>
-                <HStack justify="space-between" fontWeight="bold">
-                  <Text color="gray.500">支付管道：</Text>
-                  <Text>{t.description}</Text>
                 </HStack>
               </Stack>
             ))}
@@ -95,4 +91,4 @@ function RechargeLogPopup({ dateType }: { dateType: DateRangeType }) {
   )
 }
 
-export default RechargeLogPopup
+export default WithdrawLogPopup

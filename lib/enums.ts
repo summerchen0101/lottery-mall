@@ -18,3 +18,8 @@ export enum RechargeStatus {
   Success = 1,
   Fail = 2,
 }
+
+export enum WithdrawStatus {
+  Success = 1,
+  Fail = 2,
+}

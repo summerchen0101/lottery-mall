@@ -2,6 +2,7 @@ import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import RechargeLogPopup from '@/components/RechargeLogPopup'
+import WithdrawLogPopup from '@/components/WithdrawLogPopup'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { usePopupContext } from '@/context/PopupContext'
 import { DateRangeType } from '@/lib/enums'
@@ -17,6 +18,7 @@ import React, { useState } from 'react'
 function rank() {
   const router = useRouter()
   const [, setRechargeLogVisible] = usePopupContext('rechargeLog')
+  const [, setWithdrawLogVisible] = usePopupContext('withdrawLog')
   const { loadingSpinner } = useLoaderProvider()
   const [dateRangeType, setDateRangeType] = useState(DateRangeType.Today)
   const { useFinanceRec } = useService()
@@ -67,6 +69,7 @@ function rank() {
             borderRadius="md"
             shadow="md"
             justify="space-between"
+            onClick={() => setWithdrawLogVisible(true)}
           >
             <Text fontWeight="600" fontSize="lg">
               提款总计
@@ -77,6 +80,7 @@ function rank() {
           </HStack>
         </Stack>
         <RechargeLogPopup dateType={dateRangeType} />
+        <WithdrawLogPopup dateType={dateRangeType} />
       </Box>
       <FooterNav />
       {loadingSpinner}

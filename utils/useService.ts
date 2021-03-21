@@ -26,6 +26,7 @@ import {
   WanfaListResponse,
   FinanceRecResponse,
   RechargeLogResponse,
+  WithdrawLogResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -140,6 +141,12 @@ function useService() {
       (url, created_at1, created_at2) =>
         post(url, { created_at1, created_at2 }),
     )
+  const useWithdrawLog = (start: string, end: string) =>
+    useSWR<WithdrawLogResponse>(
+      start && end && ['/finance/withdrawLog', start, end],
+      (url, created_at1, created_at2) =>
+        post(url, { created_at1, created_at2 }),
+    )
 
   return {
     useCaptcha,
@@ -165,6 +172,7 @@ function useService() {
     useWanfaList,
     useFinanceRec,
     useRechargeLog,
+    useWithdrawLog,
   }
 }
 
