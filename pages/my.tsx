@@ -68,21 +68,22 @@ function my() {
         </Box>
 
         <Stack
-          mt="100px"
+          mt="60px"
           fontSize="xl"
           color="purple.600"
           fontWeight="bold"
           textAlign="center"
           p="10px"
-          spacing="10px"
+          spacing="15px"
         >
           <Box
             bg="white"
             shadow="md"
             px="15px"
             py="15px"
-            borderLeftWidth="6px"
+            borderLeftWidth="4px"
             borderColor="purple.600"
+            borderRadius="md"
             onClick={() => router.push('/bankcard')}
           >
             银行卡管理
@@ -92,8 +93,9 @@ function my() {
             shadow="md"
             px="15px"
             py="15px"
-            borderLeftWidth="6px"
+            borderLeftWidth="4px"
             borderColor="purple.600"
+            borderRadius="md"
             onClick={() => router.push('/finance-rec')}
           >
             财务管理
@@ -103,8 +105,9 @@ function my() {
             shadow="md"
             px="15px"
             py="15px"
-            borderLeftWidth="6px"
+            borderLeftWidth="4px"
             borderColor="purple.600"
+            borderRadius="md"
             onClick={() => router.push('/bet-rec')}
           >
             抢购纪录
@@ -114,8 +117,9 @@ function my() {
             shadow="md"
             px="15px"
             py="15px"
-            borderLeftWidth="6px"
+            borderLeftWidth="4px"
             borderColor="purple.600"
+            borderRadius="md"
             onClick={() => router.push('/faq')}
           >
             常见问题
