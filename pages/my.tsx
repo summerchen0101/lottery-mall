@@ -56,7 +56,7 @@ function my() {
               <Icon fontSize="30px" as={BiArrowToBottom} />
               <Text fontSize="sm">充值</Text>
             </Box>
-            <Box>
+            <Box onClick={() => router.push('/news')}>
               <Icon fontSize="30px" as={BiEnvelope} />
               <Text fontSize="sm">讯息</Text>
             </Box>
