@@ -39,11 +39,18 @@ function useService() {
   const { post, get, request } = useRequest()
 
   const useCaptcha = useCallback(() => {
-    const { data, error } = useSWR<CaptchaResponse>('/captcha', post)
+    const { data, mutate, isValidating } = useSWR<CaptchaResponse>(
+      '/captcha',
+      post,
+      {
+        revalidateOnFocus: false,
+      },
+    )
     return {
       captcha: data?.data?.img,
       key: data?.data?.key,
-      isLoading: !data && !error,
+      isLoading: isValidating,
+      refresh: mutate,
     }
   }, [])
 

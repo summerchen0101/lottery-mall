@@ -13,6 +13,7 @@ import {
   HStack,
   Image,
   Input,
+  Spinner,
   Stack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
@@ -26,13 +27,14 @@ const login = () => {
   const { useCaptcha, doLogin } = useService()
   const [, setToken] = useStorage('token')
   const router = useRouter()
-  const { captcha, key } = useCaptcha()
+  const { captcha, key, isLoading, refresh } = useCaptcha()
 
   const onSubmit = handleSubmit(async (d) => {
     const res = await doLogin({ ...d, ckey: key })
     setToken(res?.token)
     router.push('/home')
   })
+
   return (
     <Layout>
       <Center h="100vh" bg="purple.600">
@@ -79,7 +81,13 @@ const login = () => {
                   name="captcha"
                   ref={register({ required: '不可为空' })}
                 />
-                <Image h="34px" src={captcha} />
+                <Center h="34px" w="120px">
+                  {isLoading ? (
+                    <Spinner size="md" color="rgba(0,0,0,0.3)" />
+                  ) : (
+                    <Image h="full" src={captcha} onClick={() => refresh()} />
+                  )}
+                </Center>
               </HStack>
               <FieldValidateMessage error={errors.password} />
             </FormControl>
