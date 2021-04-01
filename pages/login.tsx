@@ -32,7 +32,7 @@ const login = () => {
   const onSubmit = handleSubmit(async (d) => {
     const res = await doLogin({ ...d, ckey: key })
     setToken(res?.token)
-    router.push('/home')
+    router.push('/lottery/6')
   })
 
   return (
@@ -49,6 +49,7 @@ const login = () => {
           w="full"
           borderRadius="lg"
           onSubmit={onSubmit}
+          noValidate
         >
           <Heading mb="30px" color="gray.600" align="center">
             99购商城
@@ -79,7 +80,10 @@ const login = () => {
                 <Input
                   placeholder="验证码"
                   name="captcha"
-                  ref={register({ required: '不可为空' })}
+                  ref={register({
+                    required: '不可为空',
+                    pattern: { value: /^[0-9]{5}$/, message: '格式有误' },
+                  })}
                 />
                 <Center h="34px" w="120px">
                   {isLoading ? (
@@ -89,7 +93,7 @@ const login = () => {
                   )}
                 </Center>
               </HStack>
-              <FieldValidateMessage error={errors.password} />
+              <FieldValidateMessage error={errors.captcha} />
             </FormControl>
             <Button
               mt={4}
