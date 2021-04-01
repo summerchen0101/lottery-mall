@@ -60,7 +60,7 @@ function my() {
               <Icon fontSize="30px" as={BiEnvelope} />
               <Text fontSize="sm">讯息</Text>
             </Box>
-            <Box>
+            <Box onClick={() => router.push('/profile')}>
               <Icon fontSize="30px" as={BiUser} />
               <Text fontSize="sm">设置</Text>
             </Box>
