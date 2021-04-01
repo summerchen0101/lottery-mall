@@ -1,5 +1,5 @@
 import Icon from '@chakra-ui/icon'
-import { Box, HStack, Text } from '@chakra-ui/layout'
+import { Box, HStack, Spacer, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React, { ReactNode } from 'react'
 import { HiArrowLeft } from 'react-icons/hi'
@@ -32,6 +32,7 @@ const HeaderTitleBar: React.FC<{
       <Text fontSize="lg" letterSpacing="2px" fontWeight="600">
         {title}
       </Text>
+      <Spacer />
       <Box>{extra}</Box>
     </HStack>
   )

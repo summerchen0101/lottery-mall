@@ -313,3 +313,7 @@ export interface NoticeListResponse {
   total: number
   list: Notice[]
 }
+export interface LogoutResponse {
+  success: boolean
+  message: string
+}

@@ -1,6 +1,7 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import useAlert from '@/utils/useAlert'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
@@ -11,18 +12,30 @@ import {
   BiArrowFromBottom,
   BiArrowToBottom,
   BiEnvelope,
-  BiUser,
   BiRefresh,
+  BiUser,
 } from 'react-icons/bi'
-
+import { HiOutlineLogout } from 'react-icons/hi'
 function my() {
-  const { useUserProfile } = useService()
+  const { useUserProfile, doLogout } = useService()
   const router = useRouter()
+  const alert = useAlert()
   const { data: res, error } = useUserProfile()
   const { toCurrency } = useTransfer()
+  const handleLogout = async () => {
+    const res = await doLogout()
+    await router.push('/login')
+    alert.success(res.message)
+  }
   return (
     <Layout>
-      <HeaderTitleBar back title="我的" />
+      <HeaderTitleBar
+        back
+        title="我的"
+        extra={
+          <Icon as={HiOutlineLogout} fontSize="20px" onClick={handleLogout} />
+        }
+      />
       <Box flex="1" overflowY="auto">
         <Box bg="purple.100" p="20px">
           <Text fontSize="sm" color="pink.500" fontWeight="bold">

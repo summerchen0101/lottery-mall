@@ -28,6 +28,7 @@ import {
   RechargeLogResponse,
   WithdrawLogResponse,
   NoticeListResponse,
+  LogoutResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
 import { useCallback } from 'react'
@@ -57,6 +58,8 @@ function useService() {
   const checkLoginStatus = () => post<UserProfileResponse>('/user/profile')
 
   const doLogin = (req: LoginRequest) => post<LoginResponse>('/login', req)
+
+  const doLogout = () => post<LogoutResponse>('/logout')
 
   const doCreateBankCard = (req: BankCardCreateRequest) =>
     post<null>('/user/bankCreate', req)
@@ -189,6 +192,7 @@ function useService() {
     useFaqList,
     useNewsList,
     checkLoginStatus,
+    doLogout,
   }
 }
 
