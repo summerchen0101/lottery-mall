@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 8082",
+    "start": "next start",
+    "startdev": "next start -p 9001",
     "post-update": "yarn upgrade --latest",
     "export": "next export"
   },
