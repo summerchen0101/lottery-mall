@@ -54,6 +54,8 @@ function useService() {
     }
   }, [])
 
+  const checkLoginStatus = () => post<UserProfileResponse>('/user/profile')
+
   const doLogin = (req: LoginRequest) => post<LoginResponse>('/login', req)
 
   const doCreateBankCard = (req: BankCardCreateRequest) =>
@@ -186,6 +188,7 @@ function useService() {
     useWithdrawLog,
     useFaqList,
     useNewsList,
+    checkLoginStatus,
   }
 }
 
