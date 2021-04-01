@@ -31,8 +31,10 @@ const login = () => {
 
   const onSubmit = handleSubmit(async (d) => {
     const res = await doLogin({ ...d, ckey: key })
-    setToken(res?.token)
-    router.push('/lottery/6')
+    if (res?.success) {
+      setToken(res?.token)
+      router.push('/lottery/6')
+    }
   })
 
   return (
