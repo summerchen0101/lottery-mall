@@ -88,7 +88,12 @@ export type CurrentQishuResponse = ResponseBase<{
   countdown: number
   close_time: number
   status: number
-  goods: []
+  goods: {
+    name: string
+    number: number
+    pic_icon: string
+    type_name: string
+  }
   wanfa: []
   rank: []
 }>
