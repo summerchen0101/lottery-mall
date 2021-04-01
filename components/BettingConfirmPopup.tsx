@@ -63,7 +63,7 @@ function BettingConfirmPopup({
         odds: t.odds,
         bet_number: amount,
       }))
-  }, [WanfaRes, betIds])
+  }, [WanfaRes, betIds, amount])
 
   const onClose = () => {
     setVisible(false)
