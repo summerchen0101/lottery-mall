@@ -28,6 +28,7 @@ import { HiCurrencyDollar, HiSpeakerphone, HiUpload } from 'react-icons/hi'
 import _ from 'lodash'
 import GoodsItem from '@/components/GoodsItem'
 import HomeQishuBox from '@/components/HomeQishuBox'
+import { Goods } from '@/lib/types'
 
 function lottery() {
   const [currentGoodsId, setCurrentGoodsId] = useState<number>()
@@ -60,8 +61,8 @@ function lottery() {
     return ''
   }, [qishuRes])
 
-  const handleGoodsClicked = async (id: number) => {
-    setCurrentGoodsId(id)
+  const handleGoodsClicked = async (goods: Goods) => {
+    setCurrentGoodsId(goods.id)
     setBettingVisible(true)
   }
 
@@ -153,7 +154,7 @@ function lottery() {
               isAccounting={
                 qishuRes?.data.close_time >= qishuRes?.data.countdown
               }
-              onBetClicked={() => handleGoodsClicked(t.id)}
+              onBetClicked={() => handleGoodsClicked(t)}
             />
           ))}
         </SimpleGrid>

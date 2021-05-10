@@ -224,12 +224,17 @@ export interface BetTarget {
   bet_money?: number
 }
 
+export interface ChartItem {
+  date: string
+  profit: string
+}
+
 export type GoodInfoResponse = ResponseBase<{
   name: string
   pic_icon: string
   price: number
   number: number
-  chart: []
+  chart: ChartItem[]
 }>
 export interface BetConfirmRequest {
   lottery_id: number

@@ -21,15 +21,13 @@ import BettingSuccessPopup from './BettingSuccessPopup'
 
 interface BettingConfirmPopupProps {
   goodsId: number
-  betIds: number[]
-  amount: number
+  odds: number
   totalPrice: number
 }
 
 function BettingConfirmPopup({
   goodsId,
-  betIds,
-  amount,
+  odds,
   totalPrice,
 }: BettingConfirmPopupProps) {
   const router = useRouter()
@@ -50,20 +48,18 @@ function BettingConfirmPopup({
   const { data: WanfaRes } = useWanfaList(lotteryId)
   const { data: QishuRes } = useCurrentQishu(lotteryId)
   const { data: ProfileRes } = useUserProfile()
-  const { data: goodRes, error } = useGoodsInfo(goodsId)
+  const { data: goodRes, error } = useGoodsInfo(goodsId, lotteryId)
   const { count, initCount } = useCountdown(
     QishuRes?.data.countdown - QishuRes?.data.close_time,
   )
 
   const betTargets: BetTarget[] = useMemo(() => {
-    return WanfaRes?.data
-      .filter((t) => betIds.includes(t.id))
-      .map((t) => ({
-        id: t.id,
-        odds: t.odds,
-        bet_number: amount,
-      }))
-  }, [WanfaRes, betIds, amount])
+    return WanfaRes?.data.map((t) => ({
+      id: t.id,
+      odds: 1 + odds / 100,
+      bet_number: 1,
+    }))
+  }, [WanfaRes, odds])
 
   const onClose = () => {
     setVisible(false)

@@ -127,11 +127,13 @@ function useService() {
   const useActivity = (id: number) =>
     useSWR<ActivityResponse>(id && `/activity/${id}`, get)
 
-  const useGoodsInfo = (id: number) =>
+  const useGoodsInfo = (id: number, lottery_id: number) =>
     useSWR<GoodInfoResponse>(
-      id && ['/lottery/getGoods', id],
-      (url, lottery_goods_id) => post(url, { lottery_goods_id }),
+      id && lottery_id && ['/lottery/getGoods', id, lottery_id],
+      (url, lottery_goods_id, lottery_id) =>
+        post(url, { lottery_goods_id, lottery_id }),
     )
+
   const useBetSuccess = (sn: string) =>
     useSWR<BetSuccessResponse>(
       sn && ['/lottery/betSuccess', sn],

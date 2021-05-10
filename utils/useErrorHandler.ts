@@ -9,7 +9,7 @@ import useStorage from './useStorage'
 function useErrorHandler() {
   const toast = useToast()
   const router = useRouter()
-  const [, setToken] = useStorage('token')
+  const { setToken } = useGlobalProvider()
   const apiErrHandler = useCallback((error: AxiosError<any>) => {
     if (error.response) {
       // 错误来自回传参数

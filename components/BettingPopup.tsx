@@ -3,7 +3,9 @@ import { Wanfa } from '@/lib/types'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
+import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Image } from '@chakra-ui/image'
+import { Input } from '@chakra-ui/input'
 import { Box, Flex, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import {
   Modal,
@@ -18,59 +20,30 @@ import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import BettingConfirmPopup from './BettingConfirmPopup'
+import _ from 'lodash'
 interface BettingPopupProps {
   goodsId: number
   countdown: string
 }
-
-const buyCountOpts = [1, 5, 10, 20, 30, 50, 80, 100]
 
 function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
   const router = useRouter()
   const { toCurrency, toCountDownTimer } = useTransfer()
   const [visible, setVisible] = usePopupContext('betting')
   const [, setBetConfirmVisible] = usePopupContext('betConfirm')
-  const [betWanfaIds, setBetWanfaIds] = useState<number[]>([])
-  const [amount, setAmount] = useState<number>(1)
-  const {
-    useGoodsInfo,
-    useWanfaList,
-    useCurrentQishu,
-    useUserProfile,
-    doBetConfirm,
-  } = useService()
+  const [amount, setAmount] = useState<number>(null)
+  const { useGoodsInfo, useCurrentQishu, useUserProfile } = useService()
   const { data: ProfileRes } = useUserProfile()
   const lotteryId = +(router.query.id as string)
-  const { data: WanfaRes } = useWanfaList(lotteryId)
   const { data: QishuRes } = useCurrentQishu(lotteryId)
-  const { data: goodsRes, error } = useGoodsInfo(goodsId)
+  const { data: goodsRes, error } = useGoodsInfo(goodsId, lotteryId)
   const info = goodsRes?.data
-  const totalPrice = useMemo(() => {
-    return info?.price * betWanfaIds.length * amount
-  }, [betWanfaIds, info, amount])
-  // const [] = useState()
-
-  const categoryA = useMemo(
-    () => WanfaRes?.data.filter((t) => t.category === 1),
-    [WanfaRes],
-  )
-  const categoryB = useMemo(
-    () => WanfaRes?.data.filter((t) => t.category === 2),
-    [WanfaRes],
-  )
+  const odds = useMemo(() => +_.takeRight(info?.chart)?.[0]?.profit, [info])
   const handleSubmit = async () => {
     setBetConfirmVisible(true)
   }
 
-  const handleWanfaClicked = (id: number) => {
-    if (betWanfaIds.includes(id)) {
-      setBetWanfaIds((wIds) => wIds.filter((t) => t !== id))
-    } else {
-      setBetWanfaIds((wIds) => [...wIds, id])
-    }
-  }
-
-  // 結帳倒數時間即關閉彈窗
+  // 结帐倒数时间即关闭弹窗
   useEffect(() => {
     if (QishuRes?.data.close_time >= QishuRes?.data.countdown) {
       setVisible(false)
@@ -105,7 +78,7 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
                   </Text>
                   <Flex justify="space-between" align="flex-end">
                     <Text color="pink.500" fontWeight="bold" fontSize="xl">
-                      ¥ {info.price}
+                      收益率：{odds}%
                     </Text>
                     {/* <Tag colorScheme="red" variant="solid">
                       抢购倒数：2
@@ -115,72 +88,26 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
               </HStack>
 
               <Box>
-                <HStack mb="5px">
-                  <Text color="gray.600" fontWeight="bold">
-                    ABCD选边
-                  </Text>
-                  <Tag colorScheme="yellow">
-                    收益比例 1:{categoryA?.[0].odds}
-                  </Tag>
-                </HStack>
-                <SimpleGrid columns={4} spacing="5px">
-                  {categoryA.map((t) => (
+                {/* <Text color="gray.600" fontWeight="bold">
+                  投资金额
+                </Text> */}
+                <FormControl>
+                  <FormLabel>投资金额</FormLabel>
+                  <HStack>
+                    <Input
+                      w="full"
+                      bg="gray.100"
+                      onChange={(e) => setAmount(+e.target.value)}
+                    />
                     <Button
-                      size="sm"
-                      key={t.id}
-                      colorScheme={
-                        betWanfaIds.includes(t.id) ? 'pink' : 'purple'
-                      }
-                      onClick={() => handleWanfaClicked(t.id)}
+                      w="full"
+                      colorScheme="purple"
+                      onClick={() => setAmount(ProfileRes?.data.money)}
                     >
-                      {t.name}
+                      余额全投
                     </Button>
-                  ))}
-                </SimpleGrid>
-              </Box>
-              <Box>
-                <HStack mb="5px">
-                  <Text color="gray.600" fontWeight="bold">
-                    尾号数字抢购
-                  </Text>
-                  <Tag colorScheme="yellow">
-                    收益比例 1:{categoryB?.[0].odds}
-                  </Tag>
-                </HStack>
-                <SimpleGrid columns={5} spacing="5px">
-                  {categoryB.map((t) => (
-                    <Button
-                      size="sm"
-                      key={t.id}
-                      colorScheme={
-                        betWanfaIds.includes(t.id) ? 'pink' : 'purple'
-                      }
-                      onClick={() => handleWanfaClicked(t.id)}
-                    >
-                      {t.name}
-                    </Button>
-                  ))}
-                </SimpleGrid>
-              </Box>
-              <Box>
-                <HStack mb="5px">
-                  <Text color="gray.600" fontWeight="bold">
-                    抢购数量
-                  </Text>
-                </HStack>
-                <SimpleGrid columns={5} spacing="5px">
-                  {buyCountOpts.map((t) => (
-                    <Button
-                      size="sm"
-                      key={t}
-                      colorScheme={amount === t ? 'pink' : 'purple'}
-                      onClick={() => setAmount(t)}
-                    >
-                      {t}
-                    </Button>
-                  ))}
-                  {/* <Input size="sm" placeholder="输入" /> */}
-                </SimpleGrid>
+                  </HStack>
+                </FormControl>
               </Box>
               <Stack spacing="0" align="flex-end">
                 <HStack>
@@ -188,7 +115,7 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
                     支付合计：
                   </Text>
                   <Text color="pink.500" fontWeight="bold" fontSize="2xl">
-                    ¥ {totalPrice}
+                    ¥ {toCurrency(amount || 0)}
                   </Text>
                 </HStack>
                 <Text color="gray.400" fontWeight="bold" fontSize="sm">
@@ -208,12 +135,7 @@ function BettingPopup({ goodsId, countdown }: BettingPopupProps) {
           </HStack>
         </ModalFooter>
       </ModalContent>
-      <BettingConfirmPopup
-        goodsId={goodsId}
-        betIds={betWanfaIds}
-        amount={amount}
-        totalPrice={totalPrice}
-      />
+      <BettingConfirmPopup goodsId={goodsId} odds={odds} totalPrice={amount} />
     </Modal>
   )
 }

@@ -1,3 +1,4 @@
+import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import Axios, { AxiosRequestConfig, Method } from 'axios'
 import { useCallback } from 'react'
@@ -5,7 +6,7 @@ import useErrorHandler from './useErrorHandler'
 import useStorage from './useStorage'
 
 const useRequest = () => {
-  const [token] = useStorage('token')
+  const { token } = useGlobalProvider()
   const { apiErrHandler } = useErrorHandler()
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const request = useCallback(

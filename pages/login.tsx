@@ -1,5 +1,6 @@
 import FieldValidateMessage from '@/components/FieldValidateMessage'
 import Layout from '@/components/Layout'
+import { useGlobalProvider } from '@/context/GlobalProvider'
 import { LoginRequest } from '@/lib/types'
 import useService from '@/utils/useService'
 import useStorage from '@/utils/useStorage'
@@ -25,7 +26,7 @@ type LoginFormProps = LoginRequest
 const login = () => {
   const { register, errors, handleSubmit } = useForm<LoginFormProps>()
   const { useCaptcha, doLogin } = useService()
-  const [, setToken] = useStorage('token')
+  const { setToken } = useGlobalProvider()
   const router = useRouter()
   const { captcha, key, isLoading, refresh } = useCaptcha()
 
