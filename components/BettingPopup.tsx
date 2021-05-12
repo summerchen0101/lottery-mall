@@ -21,6 +21,7 @@ import {
 } from '@chakra-ui/modal'
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
+import { useToast } from '@chakra-ui/toast'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
@@ -40,15 +41,20 @@ function BettingPopup({ countdown }: BettingPopupProps) {
   const { userInfo } = useUserInfo()
   const { data: qishuData } = useCurrentQishu()
   const { goodsInfo, isLoading } = useGoodsInfo(goodsId)
+  const toast = useToast()
 
   const handleSubmit = async () => {
+    if (!totalPrice) {
+      toast({ status: 'error', title: '请输入金额' })
+      return
+    }
     setVisible(false)
     setBetConfirmVisible(true)
   }
 
   const handleAmountChanged = (e) => {
-    const value = +e.target.value
-    setTotalPrice(value > 0 ? value : 0)
+    const value = e.target.value
+    setTotalPrice(value > 0 ? value : null)
   }
 
   const handleCancel = () => {
@@ -122,6 +128,7 @@ function BettingPopup({ countdown }: BettingPopupProps) {
                     <Input
                       w="full"
                       bg="gray.100"
+                      type="number"
                       value={totalPrice ?? ''}
                       onChange={handleAmountChanged}
                     />
