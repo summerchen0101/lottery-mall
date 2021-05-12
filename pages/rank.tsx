@@ -4,6 +4,7 @@ import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { DateRangeType } from '@/lib/enums'
 import { rankDateRangeOpts } from '@/lib/options'
+import useRankList from '@/service/useRankList'
 import useDateRange from '@/utils/useDateRange'
 import useService from '@/utils/useService'
 import { Box, HStack, Text, VStack } from '@chakra-ui/layout'
@@ -16,9 +17,8 @@ function rank() {
   const router = useRouter()
   const { loadingSpinner } = useLoaderProvider()
   const [dateRangeType, setDateRangeType] = useState(DateRangeType.Today)
-  const { useLeaderBoard } = useService()
   const [startM, endM] = useDateRange(dateRangeType)
-  const { data: res, error } = useLeaderBoard(
+  const { rankList } = useRankList(
     startM.format('YYYY-MM-DD'),
     endM.format('YYYY-MM-DD'),
   )
@@ -60,7 +60,7 @@ function rank() {
             </Tr>
           </Thead>
           <Tbody bg="white">
-            {res?.data.list.map((t) => (
+            {rankList?.map((t) => (
               <Tr key={t.uid} fontWeight="bold">
                 <Td py="20px" fontSize="lg">
                   {t.rank}

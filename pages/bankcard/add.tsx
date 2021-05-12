@@ -2,15 +2,12 @@ import FieldValidateMessage from '@/components/FieldValidateMessage'
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import { BankCard, BankCardCreateRequest } from '@/lib/types'
+import { BankCardCreateRequest } from '@/lib/types'
+import useBankList from '@/service/useBankList'
+import useFirstBankName from '@/service/useFirstBankName'
 import useService from '@/utils/useService'
 import { Button } from '@chakra-ui/button'
-import {
-  FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-} from '@chakra-ui/form-control'
+import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { Box, Stack } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
@@ -19,13 +16,13 @@ import { useForm } from 'react-hook-form'
 
 type BankCardFormProps = BankCardCreateRequest
 function bankAdd() {
-  const { useFirstBankName, useBankList, doCreateBankCard } = useService()
-  const { data: bankRes } = useBankList()
-  const { data: NameRes } = useFirstBankName()
+  const { doCreateBankCard } = useService()
+  const { bankList } = useBankList()
+  const { firstBankName } = useFirstBankName()
   const { register, errors, handleSubmit } = useForm<BankCardFormProps>()
   const onSubmit = handleSubmit(async (d) => {
     try {
-      const res = await doCreateBankCard({ ...d, name: NameRes?.data.name })
+      const res = await doCreateBankCard({ ...d, name: firstBankName })
     } catch (err) {}
   })
   return (
@@ -39,8 +36,8 @@ function bankAdd() {
               name="name"
               bg="white"
               ref={register({ required: '不可为空' })}
-              defaultValue={NameRes?.data.name}
-              disabled={!!NameRes?.data.name}
+              defaultValue={firstBankName}
+              disabled={!!firstBankName}
             />
             <FieldValidateMessage error={errors.name} />
             <FormHelperText>
@@ -55,8 +52,8 @@ function bankAdd() {
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
             >
-              {bankRes &&
-                Object.entries(bankRes.list).map(([id, name]) => (
+              {bankList &&
+                Object.entries(bankList).map(([id, name]) => (
                   <option key={id} value={id}>
                     {name}
                   </option>

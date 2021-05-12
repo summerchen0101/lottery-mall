@@ -1,6 +1,7 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import useFaqList from '@/service/useFaqList'
 import useService from '@/utils/useService'
 import Icon from '@chakra-ui/icon'
 import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/layout'
@@ -9,15 +10,14 @@ import React from 'react'
 import { HiChevronRight } from 'react-icons/hi'
 
 function faq() {
-  const { useFaqList } = useService()
-  const { data: res, error } = useFaqList()
+  const { faqList } = useFaqList()
   const router = useRouter()
   return (
     <Layout>
       <HeaderTitleBar back title="常见问题" />
       <Box p="20px" flex="1" overflowY="auto">
         <Stack spacing="15px">
-          {res?.list.map((t) => (
+          {faqList?.map((t) => (
             <HStack
               bg="white"
               h="60px"

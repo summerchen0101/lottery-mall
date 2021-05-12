@@ -1,6 +1,10 @@
 import { useBetInfoContext } from '@/context/BetInfoProvider'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { BetConfirmResponse, BetTarget } from '@/lib/types'
+import useCurrentQishu from '@/service/useCurrentQishu'
+import useGoodsInfo from '@/service/useGoodsInfo'
+import useUserInfo from '@/service/useUserInfo'
+import useWanfaList from '@/service/useWanfaList'
 import useCountdown from '@/utils/useCountdown'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
@@ -21,37 +25,28 @@ import React, { useEffect, useMemo, useState } from 'react'
 function BettingConfirmPopup() {
   const router = useRouter()
   const { toCurrency } = useTransfer()
-  const [, setBettingVisible] = useBetInfoContext().betting
   const [, setBetSuccessVisible] = useBetInfoContext().betSuccess
   const [odds] = useBetInfoContext().odds
   const [goodsId] = useBetInfoContext().goodsId
   const [totalPrice] = useBetInfoContext().totalPrice
   const [visible, setVisible] = useBetInfoContext().betConfirm
-  const lotteryId = +(router.query.id as string)
   const [confirmRes, setConfirmRes] = useState<BetConfirmResponse>()
   const { setOrderSn } = useGlobalProvider()
-  const {
-    useUserProfile,
-    useGoodsInfo,
-    useWanfaList,
-    useCurrentQishu,
-    doBetConfirm,
-    doBetAction,
-  } = useService()
-  const { data: WanfaRes } = useWanfaList(lotteryId)
-  const { data: QishuRes } = useCurrentQishu(lotteryId)
-  const { data: ProfileRes } = useUserProfile()
-  const { data: goodRes, error } = useGoodsInfo(goodsId, lotteryId)
+  const { doBetConfirm, doBetAction } = useService()
+  const { wanfaList } = useWanfaList()
+  const { data: QishuData } = useCurrentQishu()
+  const { userInfo } = useUserInfo()
+  const { goodsInfo } = useGoodsInfo(goodsId)
   const { count, initCount } = useCountdown(
-    QishuRes?.data.countdown - QishuRes?.data.close_time,
+    QishuData?.countdown - QishuData?.close_time,
   )
   const betTargets: BetTarget[] = useMemo(() => {
-    return WanfaRes?.data.map((t) => ({
+    return wanfaList?.map((t) => ({
       id: t.id,
       odds: 1 + odds / 100,
       bet_number: totalPrice / 100,
     }))
-  }, [WanfaRes, odds, totalPrice])
+  }, [wanfaList, odds, totalPrice])
 
   const onClose = () => {
     setVisible(false)
@@ -61,9 +56,9 @@ function BettingConfirmPopup() {
     try {
       const res = await doBetAction({
         bet_list: betTargets,
-        lottery_id: lotteryId,
+        lottery_id: 6,
         goods_id: goodsId,
-        qishu: QishuRes?.data.next_qishu,
+        qishu: QishuData?.next_qishu,
       })
       setOrderSn(res.order_sn)
       setBetSuccessVisible(true)
@@ -77,9 +72,9 @@ function BettingConfirmPopup() {
     try {
       const res = await doBetConfirm({
         bet_list: betTargets,
-        lottery_id: lotteryId,
+        lottery_id: 6,
         goods_id: goodsId,
-        qishu: QishuRes?.data.next_qishu,
+        qishu: QishuData?.next_qishu,
       })
       setConfirmRes(res)
     } catch (err) {
@@ -100,10 +95,10 @@ function BettingConfirmPopup() {
 
   // 結帳倒數時間即關閉彈窗
   useEffect(() => {
-    if (QishuRes?.data.close_time >= QishuRes?.data.countdown) {
+    if (QishuData?.close_time >= QishuData?.countdown) {
       setVisible(false)
     }
-  }, [QishuRes])
+  }, [QishuData])
 
   useEffect(() => {
     setVisible(false)
@@ -124,7 +119,7 @@ function BettingConfirmPopup() {
         <ModalCloseButton />
         <ModalBody>
           <Text fontWeight="600" fontSize="lg" mb="15px">
-            {goodRes?.data.name}{' '}
+            {goodsInfo?.name}{' '}
           </Text>
           <Stack>
             <HStack>
@@ -142,9 +137,7 @@ function BettingConfirmPopup() {
               </HStack>
               <HStack justify="space-between">
                 <Text>可用余额：</Text>
-                <Text fontWeight="bold">
-                  ¥ {toCurrency(ProfileRes?.data.money)}
-                </Text>
+                <Text fontWeight="bold">¥ {toCurrency(userInfo?.money)}</Text>
               </HStack>
             </Stack>
           </Stack>

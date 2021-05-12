@@ -12,7 +12,7 @@ const index = () => {
     try {
       const res = await checkLoginStatus()
       if (res.success) {
-        router.push('/lottery/6')
+        router.push('/lottery')
       }
     } catch (err) {}
   }

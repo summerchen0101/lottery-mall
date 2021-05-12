@@ -2,28 +2,17 @@ import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
-import useService from '@/utils/useService'
+import useBetRec from '@/service/useBetRec'
 import { Image } from '@chakra-ui/image'
-import {
-  Box,
-  Flex,
-  HStack,
-  SimpleGrid,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/layout'
-import { Select } from '@chakra-ui/select'
-import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table'
+import { Box, Flex, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
-import React, { useState } from 'react'
+import React from 'react'
 
 function betRec() {
   const router = useRouter()
   const { loadingSpinner } = useLoaderProvider()
-  const { useBetRec } = useService()
-  const { data: res, error } = useBetRec()
+  const { betRecData } = useBetRec()
   return (
     <Layout>
       <HeaderTitleBar back title="下单纪录" />
@@ -42,7 +31,7 @@ function betRec() {
               总抢购金额
             </Text>
             <Text fontSize="xl" color="purple.600" fontWeight="600">
-              {res?.data.bet_money}
+              {betRecData?.bet_money}
             </Text>
           </Box>
           <Box>
@@ -50,7 +39,7 @@ function betRec() {
               抢购成功
             </Text>
             <Text fontSize="xl" color="purple.600" fontWeight="600">
-              {res?.data.win}
+              {betRecData?.win}
             </Text>
           </Box>
           <Box>
@@ -58,12 +47,12 @@ function betRec() {
               总收益
             </Text>
             <Text fontSize="xl" color="pink.500" fontWeight="600">
-              {res?.data.profit}
+              {betRecData?.profit}
             </Text>
           </Box>
         </SimpleGrid>
         <Stack spacing="15px">
-          {res?.data.list.map((t) => (
+          {betRecData?.list.map((t) => (
             <HStack
               key={t.id}
               justify="space-between"

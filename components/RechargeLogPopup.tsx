@@ -1,13 +1,12 @@
-import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { usePopupContext } from '@/context/PopupContext'
 import { DateRangeType, RechargeStatus } from '@/lib/enums'
 import { rechargeStatusOpts } from '@/lib/options'
+import useRechargeLog from '@/service/useRechargeLog'
 import useDateRange from '@/utils/useDateRange'
-import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { HStack, Stack, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
@@ -18,15 +17,14 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { Tag } from '@chakra-ui/tag'
-import React, { useState } from 'react'
+import React from 'react'
 
 function RechargeLogPopup({ dateType }: { dateType: DateRangeType }) {
-  const { useRechargeLog } = useService()
   const [visible, setVisible] = usePopupContext('rechargeLog')
   const { loadingSpinner } = useLoaderProvider()
   const { toCurrency, toOptionName } = useTransfer()
   const [startM, endM] = useDateRange(dateType)
-  const { data: res, error } = useRechargeLog(
+  const { rechargeList } = useRechargeLog(
     visible && startM.format('YYYY-MM-DD'),
     visible && endM.format('YYYY-MM-DD'),
   )
@@ -40,7 +38,7 @@ function RechargeLogPopup({ dateType }: { dateType: DateRangeType }) {
         <ModalCloseButton />
         <ModalBody minH="70vh" maxH="70vh" overflowY="auto">
           <Stack spacing="15px">
-            {res?.list.map((t) => (
+            {rechargeList?.map((t) => (
               <Stack
                 key={t.id}
                 bg="white"

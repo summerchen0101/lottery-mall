@@ -1,6 +1,7 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import useUserInfo from '@/service/useUserInfo'
 import useAlert from '@/utils/useAlert'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
@@ -17,10 +18,10 @@ import {
 } from 'react-icons/bi'
 import { HiOutlineLogout } from 'react-icons/hi'
 function my() {
-  const { useUserProfile, doLogout } = useService()
+  const { doLogout } = useService()
   const router = useRouter()
   const alert = useAlert()
-  const { data: res, error } = useUserProfile()
+  const { userInfo } = useUserInfo()
   const { toCurrency } = useTransfer()
   const handleLogout = async () => {
     const res = await doLogout()
@@ -39,7 +40,7 @@ function my() {
       <Box flex="1" overflowY="auto">
         <Box bg="purple.100" p="20px">
           <Text fontSize="sm" color="pink.500" fontWeight="bold">
-            会员编号：{res?.data.uid}
+            会员编号：{userInfo?.uid}
           </Text>
           <HStack
             spacing="20px"
@@ -48,7 +49,7 @@ function my() {
             fontWeight="bold"
             fontSize="3xl"
           >
-            <Text>$ {toCurrency(res?.data.money)}</Text>
+            <Text>$ {toCurrency(userInfo?.money)}</Text>
             <Icon as={BiRefresh} />
           </HStack>
 

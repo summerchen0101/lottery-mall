@@ -1,17 +1,17 @@
-import { UserProfileResponse } from '@/lib/types'
+import { BankCardListResponse } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useSWR from 'swr'
 
-export default function useUserInfo() {
+export default function useBankCardList() {
   const { post } = useRequest()
   const {
     data: res,
     error,
     mutate,
     isValidating,
-  } = useSWR<UserProfileResponse>('/user/profile', post)
+  } = useSWR<BankCardListResponse>('/user/bankList', post)
   return {
-    userInfo: res?.data,
+    bankcardList: res?.list,
     isLoading: isValidating,
     isError: error,
     refresh: mutate,

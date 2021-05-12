@@ -1,22 +1,21 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useService from '@/utils/useService'
+import useActivityList from '@/service/useActivityList'
 import { Image } from '@chakra-ui/image'
-import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, Flex, Stack, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 
 function activityList() {
   const router = useRouter()
-  const { useActivityList } = useService()
-  const { data: res, error } = useActivityList()
+  const { activityList } = useActivityList()
   return (
     <Layout>
       <HeaderTitleBar title="优惠活动" />
       <Box p="20px" flex="1" overflowY="auto">
         <Stack spacing="15px">
-          {res?.data.map((t) => (
+          {activityList?.map((t) => (
             <Flex
               key={t.id}
               bg="white"

@@ -5,6 +5,7 @@ import Layout from '@/components/Layout'
 import { BankCardStatus } from '@/lib/enums'
 import { bankcardStatusOpts } from '@/lib/options'
 import { BankCard } from '@/lib/types'
+import useBankCardList from '@/service/useBankCardList'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
@@ -17,9 +18,8 @@ import React, { useState } from 'react'
 function bankcardList() {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const [currentCard, setCurrentCard] = useState<BankCard>(null)
-  const { useBankCardList } = useService()
   const { toOptionName } = useTransfer()
-  const { data: res, error } = useBankCardList()
+  const { bankcardList } = useBankCardList()
   const router = useRouter()
 
   const handleClickCard = (data: BankCard) => {
@@ -38,7 +38,7 @@ function bankcardList() {
           >
             新增银行卡
           </Button>
-          {res?.list.map((t) => (
+          {bankcardList?.map((t) => (
             <Stack
               key={t.id}
               bg="white"

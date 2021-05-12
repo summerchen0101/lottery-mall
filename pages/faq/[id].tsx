@@ -1,8 +1,7 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useHelper from '@/utils/useHelper'
-import useService from '@/utils/useService'
+import useFaqList from '@/service/useFaqList'
 import useTransfer from '@/utils/useTransfer'
 import { Box, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
@@ -10,13 +9,12 @@ import React, { useMemo } from 'react'
 
 function activity() {
   const router = useRouter()
-  const { useFaqList } = useService()
   const { htmldecode } = useTransfer()
-  const { data: res, error } = useFaqList()
+  const { faqList } = useFaqList()
 
   const faqDetail = useMemo(() => {
-    return res?.list.find((t) => t.id === +router.query.id)
-  }, [res, router])
+    return faqList?.find((t) => t.id === +router.query.id)
+  }, [faqList, router])
 
   return (
     <Layout>

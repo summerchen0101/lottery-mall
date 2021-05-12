@@ -6,37 +6,34 @@ import GoodsItem from '@/components/GoodsItem'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import HomeQishuBox from '@/components/HomeQishuBox'
 import Layout from '@/components/Layout'
-import BetInfoProvider, { useBetInfoContext } from '@/context/BetInfoProvider'
-import { usePopupContext } from '@/context/PopupContext'
+import { useBetInfoContext } from '@/context/BetInfoProvider'
 import { Goods } from '@/lib/types'
-import useService from '@/utils/useService'
+import useCurrentQishu from '@/service/useCurrentQishu'
+import useGoodsList from '@/service/useGoodsList'
+import useUserInfo from '@/service/useUserInfo'
 import useTransfer from '@/utils/useTransfer'
 import { Button, IconButton } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
 import { Box, Flex, HStack, SimpleGrid, Text } from '@chakra-ui/layout'
-import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { BiDollar } from 'react-icons/bi'
 import { HiCurrencyDollar, HiSpeakerphone, HiUpload } from 'react-icons/hi'
 
 function lottery() {
   const [, setBettingVisible] = useBetInfoContext().betting
   const [, setGoodsId] = useBetInfoContext().goodsId
-  const { useGoodsList, useCurrentQishu, useUserProfile } = useService()
   const router = useRouter()
   const { toCurrency, toCountDownTimer } = useTransfer()
-  const { data: goodRes } = useGoodsList(+(router.query.id as string))
-  const { data: qishuRes } = useCurrentQishu(+(router.query.id as string))
-  const { data: profileRes } = useUserProfile()
+  const { goodsList } = useGoodsList()
+  const { data: qishuData } = useCurrentQishu()
+  const { userInfo } = useUserInfo()
   const acoutingCountDown = useMemo(() => {
-    if (qishuRes && qishuRes.data.countdown - qishuRes.data.close_time > 0) {
-      return toCountDownTimer(
-        qishuRes.data.countdown - qishuRes.data.close_time,
-      )
+    if (qishuData?.countdown - qishuData?.close_time > 0) {
+      return toCountDownTimer(qishuData?.countdown - qishuData?.close_time)
     }
     return ''
-  }, [qishuRes])
+  }, [qishuData])
 
   const handleGoodsClicked = async (goods: Goods) => {
     setGoodsId(goods.id)
@@ -45,13 +42,13 @@ function lottery() {
 
   return (
     <Layout>
-      <HeaderTitleBar title={qishuRes?.data.lottery_name} />
+      <HeaderTitleBar title={qishuData?.lottery_name} />
       <Box p="20px" flex="1" overflowY="auto">
-        {profileRes && (
+        {userInfo && (
           <Flex justify="space-between">
             <HStack fontSize="lg" spacing="20px">
               <Text color="gray.600" fontWeight="600">
-                {profileRes.data.username}
+                {userInfo?.username}
               </Text>
               <Text color="purple.600" fontWeight="600">
                 <Icon
@@ -60,7 +57,7 @@ function lottery() {
                   fontWeight="bold"
                   color="purple.600"
                 />
-                {toCurrency(profileRes.data.money)}
+                {toCurrency(userInfo?.money)}
               </Text>
             </HStack>
             <HStack>
@@ -88,10 +85,10 @@ function lottery() {
             </HStack>
           </Flex>
         )}
-        {qishuRes && (
+        {qishuData && (
           <HomeQishuBox
             acoutingCountDown={acoutingCountDown}
-            data={qishuRes.data}
+            data={qishuData}
           />
         )}
         <SimpleGrid columns={3} spacing="10px">
@@ -124,13 +121,11 @@ function lottery() {
           </Button>
         </SimpleGrid>
         <SimpleGrid columns={2} spacing="20px">
-          {goodRes?.data.map((t) => (
+          {goodsList?.map((t) => (
             <GoodsItem
               key={t.id}
               item={t}
-              isAccounting={
-                qishuRes?.data.close_time >= qishuRes?.data.countdown
-              }
+              isAccounting={qishuData?.close_time >= qishuData?.countdown}
               onBetClicked={() => handleGoodsClicked(t)}
             />
           ))}

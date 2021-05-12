@@ -16,7 +16,6 @@ const useRequest = () => {
       data: any,
       config?: AxiosRequestConfig,
     ) {
-      loadingStart()
       try {
         const res = await Axios.request<R>({
           method,
@@ -31,7 +30,6 @@ const useRequest = () => {
           },
           ...config,
         })
-        loadingEnd()
         if (res.data.success === false) {
           throw Error(res.data?.message || '错误发生')
         }
@@ -39,7 +37,6 @@ const useRequest = () => {
       } catch (err) {
         apiErrHandler(err)
       }
-      loadingEnd()
       return null
     },
     [token],

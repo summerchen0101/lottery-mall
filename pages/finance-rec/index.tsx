@@ -7,8 +7,8 @@ import { useLoaderProvider } from '@/context/LoaderProvider'
 import { usePopupContext } from '@/context/PopupContext'
 import { DateRangeType } from '@/lib/enums'
 import { financeRecDateRangeOpts } from '@/lib/options'
+import useFinanceRec from '@/service/useFinanceRec'
 import useDateRange from '@/utils/useDateRange'
-import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
@@ -21,10 +21,9 @@ function rank() {
   const [, setWithdrawLogVisible] = usePopupContext('withdrawLog')
   const { loadingSpinner } = useLoaderProvider()
   const [dateRangeType, setDateRangeType] = useState(DateRangeType.Today)
-  const { useFinanceRec } = useService()
   const { toCurrency } = useTransfer()
   const [startM, endM] = useDateRange(dateRangeType)
-  const { data: res, error } = useFinanceRec(
+  const { withdraw, recharge } = useFinanceRec(
     startM.format('YYYY-MM-DD'),
     endM.format('YYYY-MM-DD'),
   )
@@ -59,7 +58,7 @@ function rank() {
               存款总计
             </Text>
             <Text fontWeight="bold" fontSize="xl" color="purple.600">
-              ¥ {toCurrency(res?.data.recharge, 0)}
+              ¥ {toCurrency(recharge, 0)}
             </Text>
           </HStack>
           <HStack
@@ -75,7 +74,7 @@ function rank() {
               提款总计
             </Text>
             <Text fontWeight="bold" fontSize="xl" color="purple.600">
-              ¥ {toCurrency(res?.data.withdraw, 0)}
+              ¥ {toCurrency(withdraw, 0)}
             </Text>
           </HStack>
         </Stack>

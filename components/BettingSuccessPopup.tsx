@@ -1,5 +1,6 @@
 import { useBetInfoContext } from '@/context/BetInfoProvider'
 import { useGlobalProvider } from '@/context/GlobalProvider'
+import useBetSuccess from '@/service/useBetSuccess'
 import useService from '@/utils/useService'
 import { Button } from '@chakra-ui/button'
 import { HStack, Text } from '@chakra-ui/layout'
@@ -16,11 +17,10 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 
 function BettingSuccessPopup() {
-  const { useBetSuccess } = useService()
   const router = useRouter()
   const [visible, setVisible] = useBetInfoContext().betSuccess
   const { orderSn } = useGlobalProvider()
-  const { data: SuccessRes, error } = useBetSuccess(visible && orderSn)
+  const { betInfo } = useBetSuccess(visible && orderSn)
 
   const onClose = () => setVisible(false)
 
@@ -36,31 +36,31 @@ function BettingSuccessPopup() {
         <ModalBody>
           <HStack justify="space-between">
             <Text>單號</Text>
-            <Text>{SuccessRes?.data.order_sn}</Text>
+            <Text>{betInfo?.order_sn}</Text>
           </HStack>
           <HStack justify="space-between">
             <Text>結算時間</Text>
-            <Text>{SuccessRes?.data.created_at}</Text>
+            <Text>{betInfo?.created_at}</Text>
           </HStack>
           <HStack justify="space-between">
             <Text>搶購專區</Text>
-            <Text>{SuccessRes?.data.lottery_name}</Text>
+            <Text>{betInfo?.lottery_name}</Text>
           </HStack>
           <HStack justify="space-between">
             <Text>搶購商品</Text>
-            <Text>{SuccessRes?.data.goods_name}</Text>
+            <Text>{betInfo?.goods_name}</Text>
           </HStack>
           <HStack justify="space-between">
             <Text>商品分類</Text>
-            <Text>{SuccessRes?.data.wanfa}</Text>
+            <Text>{betInfo?.wanfa}</Text>
           </HStack>
           <HStack justify="space-between">
             <Text>金額</Text>
-            <Text>{SuccessRes?.data.total}</Text>
+            <Text>{betInfo?.total}</Text>
           </HStack>
           <HStack justify="space-between">
             <Text>預估獲利</Text>
-            <Text>{SuccessRes?.data.profit}</Text>
+            <Text>{betInfo?.profit}</Text>
           </HStack>
         </ModalBody>
 

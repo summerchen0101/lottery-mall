@@ -1,6 +1,7 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import useNewsList from '@/service/useNewsList'
 import useService from '@/utils/useService'
 import Icon from '@chakra-ui/icon'
 import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/layout'
@@ -9,15 +10,14 @@ import React from 'react'
 import { HiChevronRight } from 'react-icons/hi'
 
 function news() {
-  const { useNewsList } = useService()
-  const { data: res, error } = useNewsList()
+  const { newsList } = useNewsList()
   const router = useRouter()
   return (
     <Layout>
       <HeaderTitleBar back title="公告" />
       <Box p="20px" flex="1" overflowY="auto">
         <Stack spacing="15px">
-          {res?.list.map((t) => (
+          {newsList?.map((t) => (
             <HStack
               bg="white"
               h="60px"

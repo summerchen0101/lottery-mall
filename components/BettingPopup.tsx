@@ -1,4 +1,7 @@
 import { useBetInfoContext } from '@/context/BetInfoProvider'
+import useCurrentQishu from '@/service/useCurrentQishu'
+import useGoodsInfo from '@/service/useGoodsInfo'
+import useUserInfo from '@/service/useUserInfo'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
@@ -31,28 +34,26 @@ function BettingPopup({ countdown }: BettingPopupProps) {
   const [goodsId] = useBetInfoContext().goodsId
   const [totalPrice, setTotalPrice] = useBetInfoContext().totalPrice
   const [odds, setOdds] = useBetInfoContext().odds
-  const { useGoodsInfo, useCurrentQishu, useUserProfile } = useService()
-  const { data: ProfileRes } = useUserProfile()
+  const { userInfo } = useUserInfo()
   const lotteryId = +(router.query.id as string)
-  const { data: QishuRes } = useCurrentQishu(lotteryId)
-  const { data: goodsRes, error } = useGoodsInfo(goodsId, lotteryId)
-  const info = goodsRes?.data
-  // const odds = useMemo(() => +_.takeRight(info?.chart)?.[0]?.profit, [info])
+  const { data: qishuData } = useCurrentQishu()
+  const { goodsInfo } = useGoodsInfo(goodsId)
+  // const odds = useMemo(() => +_.takeRight(goodsInfo?.chart)?.[0]?.profit, [goodsInfo])
   const handleSubmit = async () => {
     setVisible(false)
     setBetConfirmVisible(true)
   }
 
   useEffect(() => {
-    info && setOdds(+_.takeRight(info?.chart)?.[0]?.profit)
-  }, [info])
+    goodsInfo && setOdds(+_.takeRight(goodsInfo?.chart)?.[0]?.profit)
+  }, [goodsInfo])
 
   // 结帐倒数时间即关闭弹窗
   useEffect(() => {
-    if (QishuRes?.data.close_time >= QishuRes?.data.countdown) {
+    if (qishuData?.close_time >= qishuData?.countdown) {
       setVisible(false)
     }
-  }, [QishuRes])
+  }, [qishuData])
 
   useEffect(() => {
     setVisible(false)
@@ -68,11 +69,11 @@ function BettingPopup({ countdown }: BettingPopupProps) {
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {info && (
+          {goodsInfo && (
             <Stack spacing="15px">
               <HStack>
                 <Image
-                  src={`${process.env.apiBaseUrl}/${info.pic_icon}`}
+                  src={`${process.env.apiBaseUrl}/${goodsInfo.pic_icon}`}
                   boxSize="100px"
                 />
                 <Box flex="1">
@@ -82,7 +83,7 @@ function BettingPopup({ countdown }: BettingPopupProps) {
                     fontSize="lg"
                     mb="5px"
                   >
-                    {info.name}
+                    {goodsInfo.name}
                   </Text>
                   <Flex justify="space-between" align="flex-end">
                     <Text color="pink.500" fontWeight="bold" fontSize="xl">
@@ -110,7 +111,7 @@ function BettingPopup({ countdown }: BettingPopupProps) {
                     <Button
                       w="full"
                       colorScheme="purple"
-                      onClick={() => setTotalPrice(ProfileRes?.data.money)}
+                      onClick={() => setTotalPrice(userInfo?.money)}
                     >
                       余额全投
                     </Button>
@@ -127,7 +128,7 @@ function BettingPopup({ countdown }: BettingPopupProps) {
                   </Text>
                 </HStack>
                 <Text color="gray.400" fontWeight="bold" fontSize="sm">
-                  余额：{toCurrency(ProfileRes?.data.money)}
+                  余额：{toCurrency(userInfo?.money)}
                 </Text>
               </Stack>
             </Stack>

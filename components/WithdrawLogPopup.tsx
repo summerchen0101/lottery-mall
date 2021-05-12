@@ -1,13 +1,12 @@
-import { useGlobalProvider } from '@/context/GlobalProvider'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { usePopupContext } from '@/context/PopupContext'
 import { DateRangeType, WithdrawStatus } from '@/lib/enums'
 import { withdrawStatusOpts } from '@/lib/options'
+import useWithdrawLog from '@/service/useWithdrawLog'
 import useDateRange from '@/utils/useDateRange'
-import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { HStack, Stack, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
@@ -18,15 +17,14 @@ import {
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { Tag } from '@chakra-ui/tag'
-import React, { useState } from 'react'
+import React from 'react'
 
 function WithdrawLogPopup({ dateType }: { dateType: DateRangeType }) {
-  const { useWithdrawLog } = useService()
   const [visible, setVisible] = usePopupContext('withdrawLog')
   const { loadingSpinner } = useLoaderProvider()
   const { toCurrency, toOptionName } = useTransfer()
   const [startM, endM] = useDateRange(dateType)
-  const { data: res, error } = useWithdrawLog(
+  const { withdrawList } = useWithdrawLog(
     visible && startM.format('YYYY-MM-DD'),
     visible && endM.format('YYYY-MM-DD'),
   )
@@ -40,7 +38,7 @@ function WithdrawLogPopup({ dateType }: { dateType: DateRangeType }) {
         <ModalCloseButton />
         <ModalBody minH="70vh" maxH="70vh" overflowY="auto">
           <Stack spacing="15px">
-            {res?.list.map((t) => (
+            {withdrawList?.map((t) => (
               <Stack
                 key={t.id}
                 bg="white"

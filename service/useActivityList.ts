@@ -1,17 +1,17 @@
-import { UserProfileResponse } from '@/lib/types'
+import { ActivityListResponse } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useSWR from 'swr'
 
-export default function useUserInfo() {
-  const { post } = useRequest()
+export default function useActivityList() {
+  const { get } = useRequest()
   const {
     data: res,
     error,
     mutate,
     isValidating,
-  } = useSWR<UserProfileResponse>('/user/profile', post)
+  } = useSWR<ActivityListResponse>('/activity', get)
   return {
-    userInfo: res?.data,
+    activityList: res?.data,
     isLoading: isValidating,
     isError: error,
     refresh: mutate,

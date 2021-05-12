@@ -2,6 +2,7 @@ import FieldValidateMessage from '@/components/FieldValidateMessage'
 import Layout from '@/components/Layout'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { LoginRequest } from '@/lib/types'
+import useCaptcha from '@/service/useCaptcha'
 import useService from '@/utils/useService'
 import useStorage from '@/utils/useStorage'
 import {
@@ -25,7 +26,7 @@ type LoginFormProps = LoginRequest
 
 const login = () => {
   const { register, errors, handleSubmit } = useForm<LoginFormProps>()
-  const { useCaptcha, doLogin } = useService()
+  const { doLogin } = useService()
   const { setToken } = useGlobalProvider()
   const router = useRouter()
   const { captcha, key, isLoading, refresh } = useCaptcha()
@@ -34,7 +35,7 @@ const login = () => {
     const res = await doLogin({ ...d, ckey: key })
     if (res?.success) {
       setToken(res?.token)
-      router.push('/lottery/6')
+      router.push('/lottery')
     }
   })
 
