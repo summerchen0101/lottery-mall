@@ -20,6 +20,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
+import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 
@@ -106,9 +107,9 @@ function BettingConfirmPopup({ countdown }: { countdown: number }) {
         <ModalHeader justify="center">
           <HStack>
             <Text>交易确认</Text>
-            <Text fontSize="sm" color="gray.500" fontWeight="400">
-              {secToTimer(countdown)} 后结算
-            </Text>
+            <Tag colorScheme="red" variant="solid">
+              抢购倒数：{secToTimer(countdown)}
+            </Tag>
           </HStack>
         </ModalHeader>
         <ModalCloseButton />
