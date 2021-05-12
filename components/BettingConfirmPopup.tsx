@@ -6,6 +6,7 @@ import useGoodsInfo from '@/service/useGoodsInfo'
 import useUserInfo from '@/service/useUserInfo'
 import useWanfaList from '@/service/useWanfaList'
 import useCountdown from '@/utils/useCountdown'
+import useHelper from '@/utils/useHelper'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
@@ -22,9 +23,10 @@ import {
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 
-function BettingConfirmPopup() {
+function BettingConfirmPopup({ countdown }: { countdown: number }) {
   const router = useRouter()
   const { toCurrency } = useTransfer()
+  const { secToTimer } = useHelper()
   const [, setBetSuccessVisible] = useBetInfoContext().betSuccess
   const [odds] = useBetInfoContext().odds
   const [goodsId] = useBetInfoContext().goodsId
@@ -34,12 +36,10 @@ function BettingConfirmPopup() {
   const { setOrderSn } = useGlobalProvider()
   const { doBetConfirm, doBetAction } = useService()
   const { wanfaList } = useWanfaList()
-  const { data: QishuData } = useCurrentQishu()
+  const { data: qishuData } = useCurrentQishu()
   const { userInfo } = useUserInfo()
   const { goodsInfo } = useGoodsInfo(goodsId)
-  const { count, initCount } = useCountdown(
-    QishuData?.countdown - QishuData?.close_time,
-  )
+
   const betTargets: BetTarget[] = useMemo(() => {
     return wanfaList?.map((t) => ({
       id: t.id,
@@ -58,7 +58,7 @@ function BettingConfirmPopup() {
         bet_list: betTargets,
         lottery_id: 6,
         goods_id: goodsId,
-        qishu: QishuData?.next_qishu,
+        qishu: qishuData?.next_qishu,
       })
       setOrderSn(res.order_sn)
       setBetSuccessVisible(true)
@@ -74,7 +74,7 @@ function BettingConfirmPopup() {
         bet_list: betTargets,
         lottery_id: 6,
         goods_id: goodsId,
-        qishu: QishuData?.next_qishu,
+        qishu: qishuData?.next_qishu,
       })
       setConfirmRes(res)
     } catch (err) {
@@ -83,22 +83,17 @@ function BettingConfirmPopup() {
   }
 
   useEffect(() => {
-    count === 0 && setVisible(false)
-  }, [count])
-
-  useEffect(() => {
     if (visible) {
-      initCount()
       fetchConfirmInfo()
     }
   }, [visible])
 
   // 結帳倒數時間即關閉彈窗
   useEffect(() => {
-    if (QishuData?.close_time >= QishuData?.countdown) {
+    if (countdown <= 0) {
       setVisible(false)
     }
-  }, [QishuData])
+  }, [countdown])
 
   useEffect(() => {
     setVisible(false)
@@ -112,7 +107,7 @@ function BettingConfirmPopup() {
           <HStack>
             <Text>交易确认</Text>
             <Text fontSize="sm" color="gray.500" fontWeight="400">
-              {count} 秒后结算
+              {secToTimer(countdown)} 后结算
             </Text>
           </HStack>
         </ModalHeader>

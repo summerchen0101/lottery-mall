@@ -139,7 +139,7 @@ function lottery() {
       </Box>
       <FooterNav />
       <BettingPopup countdown={countdown} />
-      <BettingConfirmPopup />
+      <BettingConfirmPopup countdown={countdown} />
       <BettingSuccessPopup />
     </Layout>
   )

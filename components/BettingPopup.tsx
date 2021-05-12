@@ -25,11 +25,8 @@ import { useToast } from '@chakra-ui/toast'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
-interface BettingPopupProps {
-  countdown: number
-}
 
-function BettingPopup({ countdown }: BettingPopupProps) {
+function BettingPopup({ countdown }: { countdown: number }) {
   const router = useRouter()
   const { secToTimer } = useHelper()
   const { toCurrency } = useTransfer()
@@ -46,6 +43,9 @@ function BettingPopup({ countdown }: BettingPopupProps) {
   const handleSubmit = async () => {
     if (!totalPrice) {
       toast({ status: 'error', title: '请输入金额' })
+      return
+    } else if (totalPrice < 100) {
+      toast({ status: 'error', title: '最低限额为100' })
       return
     }
     setVisible(false)
