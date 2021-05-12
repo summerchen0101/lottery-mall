@@ -1,11 +1,11 @@
+import { useBetInfoContext } from '@/context/BetInfoProvider'
 import { useGlobalProvider } from '@/context/GlobalProvider'
-import { usePopupContext } from '@/context/PopupContext'
 import { BetConfirmResponse, BetTarget } from '@/lib/types'
 import useCountdown from '@/utils/useCountdown'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { HStack, Stack, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
@@ -17,23 +17,16 @@ import {
 } from '@chakra-ui/modal'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
-import BettingSuccessPopup from './BettingSuccessPopup'
 
-interface BettingConfirmPopupProps {
-  goodsId: number
-  odds: number
-  totalPrice: number
-}
-
-function BettingConfirmPopup({
-  goodsId,
-  odds,
-  totalPrice,
-}: BettingConfirmPopupProps) {
+function BettingConfirmPopup() {
   const router = useRouter()
   const { toCurrency } = useTransfer()
-  const [visible, setVisible] = usePopupContext('betConfirm')
-  const [, setBetSuccessVisible] = usePopupContext('betSuccess')
+  const [, setBettingVisible] = useBetInfoContext().betting
+  const [, setBetSuccessVisible] = useBetInfoContext().betSuccess
+  const [odds] = useBetInfoContext().odds
+  const [goodsId] = useBetInfoContext().goodsId
+  const [totalPrice] = useBetInfoContext().totalPrice
+  const [visible, setVisible] = useBetInfoContext().betConfirm
   const lotteryId = +(router.query.id as string)
   const [confirmRes, setConfirmRes] = useState<BetConfirmResponse>()
   const { setOrderSn } = useGlobalProvider()
@@ -52,14 +45,13 @@ function BettingConfirmPopup({
   const { count, initCount } = useCountdown(
     QishuRes?.data.countdown - QishuRes?.data.close_time,
   )
-
   const betTargets: BetTarget[] = useMemo(() => {
     return WanfaRes?.data.map((t) => ({
       id: t.id,
       odds: 1 + odds / 100,
-      bet_number: 1,
+      bet_number: totalPrice / 100,
     }))
-  }, [WanfaRes, odds])
+  }, [WanfaRes, odds, totalPrice])
 
   const onClose = () => {
     setVisible(false)
@@ -112,6 +104,10 @@ function BettingConfirmPopup({
       setVisible(false)
     }
   }, [QishuRes])
+
+  useEffect(() => {
+    setVisible(false)
+  }, [router])
 
   return (
     <Modal isOpen={visible} onClose={onClose} autoFocus={false} isCentered>

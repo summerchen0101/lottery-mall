@@ -7,6 +7,7 @@ import 'swiper/swiper.scss'
 import '@/style/global.scss'
 import PopupProvider from '@/context/PopupContext'
 import PaginationProvider from '@/context/PaginationProvider'
+import BetInfoProvider from '@/context/BetInfoProvider'
 
 const MyApp = ({ Component, props }) => {
   return (
@@ -15,7 +16,9 @@ const MyApp = ({ Component, props }) => {
         <LoaderProvider>
           <PopupProvider>
             <PaginationProvider>
-              <Component {...props} />
+              <BetInfoProvider>
+                <Component {...props} />
+              </BetInfoProvider>
             </PaginationProvider>
           </PopupProvider>
         </LoaderProvider>

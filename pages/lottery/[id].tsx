@@ -1,49 +1,33 @@
 import BettingConfirmPopup from '@/components/BettingConfirmPopup'
 import BettingPopup from '@/components/BettingPopup'
+import BettingSuccessPopup from '@/components/BettingSuccessPopup'
 import FooterNav from '@/components/FooterNav'
+import GoodsItem from '@/components/GoodsItem'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
+import HomeQishuBox from '@/components/HomeQishuBox'
 import Layout from '@/components/Layout'
+import BetInfoProvider, { useBetInfoContext } from '@/context/BetInfoProvider'
 import { usePopupContext } from '@/context/PopupContext'
+import { Goods } from '@/lib/types'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button, IconButton } from '@chakra-ui/button'
-import { useDisclosure } from '@chakra-ui/hooks'
 import Icon from '@chakra-ui/icon'
-import { Image } from '@chakra-ui/image'
-import {
-  Box,
-  Circle,
-  Flex,
-  Heading,
-  HStack,
-  SimpleGrid,
-  Stack,
-  Text,
-} from '@chakra-ui/layout'
+import { Box, Flex, HStack, SimpleGrid, Text } from '@chakra-ui/layout'
+import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
-import numeral from 'numeral'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { BiDollar } from 'react-icons/bi'
 import { HiCurrencyDollar, HiSpeakerphone, HiUpload } from 'react-icons/hi'
-import _ from 'lodash'
-import GoodsItem from '@/components/GoodsItem'
-import HomeQishuBox from '@/components/HomeQishuBox'
-import { Goods } from '@/lib/types'
 
 function lottery() {
-  const [currentGoodsId, setCurrentGoodsId] = useState<number>()
-  const [, setBettingVisible] = usePopupContext('betting')
-  const {
-    useGoodsList,
-    useCurrentQishu,
-    useUserProfile,
-    useWanfaList,
-  } = useService()
+  const [, setBettingVisible] = useBetInfoContext().betting
+  const [, setGoodsId] = useBetInfoContext().goodsId
+  const { useGoodsList, useCurrentQishu, useUserProfile } = useService()
   const router = useRouter()
   const { toCurrency, toCountDownTimer } = useTransfer()
   const { data: goodRes } = useGoodsList(+(router.query.id as string))
   const { data: qishuRes } = useCurrentQishu(+(router.query.id as string))
-  const toQishuNo = (qishu: number) => _.takeRight(qishu.toString(), 2)
   const { data: profileRes } = useUserProfile()
   const acoutingCountDown = useMemo(() => {
     if (qishuRes && qishuRes.data.countdown - qishuRes.data.close_time > 0) {
@@ -54,15 +38,8 @@ function lottery() {
     return ''
   }, [qishuRes])
 
-  const restartCountDown = useMemo(() => {
-    if (qishuRes && qishuRes.data.close_time - qishuRes.data.countdown > 0) {
-      return toCountDownTimer(qishuRes.data.countdown)
-    }
-    return ''
-  }, [qishuRes])
-
   const handleGoodsClicked = async (goods: Goods) => {
-    setCurrentGoodsId(goods.id)
+    setGoodsId(goods.id)
     setBettingVisible(true)
   }
 
@@ -160,7 +137,9 @@ function lottery() {
         </SimpleGrid>
       </Box>
       <FooterNav />
-      <BettingPopup goodsId={currentGoodsId} countdown={acoutingCountDown} />
+      <BettingPopup countdown={acoutingCountDown} />
+      <BettingConfirmPopup />
+      <BettingSuccessPopup />
     </Layout>
   )
 }

@@ -1,7 +1,7 @@
 import { Goods } from '@/lib/types'
 import { Button } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
-import { Circle, Stack, Text } from '@chakra-ui/layout'
+import { Box, Circle, Stack, Text } from '@chakra-ui/layout'
 import React from 'react'
 
 function GoodsItem({
@@ -39,14 +39,14 @@ function GoodsItem({
         mx="auto"
         src={`${process.env.apiBaseUrl}/${item.pic_icon}`}
       />
-      <Text textAlign="center">
+      <Box textAlign="center">
         <Text color="gray.500" fontWeight="bold" noOfLines={1}>
           {item.name}
         </Text>
         <Text color="pink.500" fontSize="sm" fontWeight="bold">
           价差收益率 {item.odds}%
         </Text>
-      </Text>
+      </Box>
       {/* <Text color="pink.500" fontWeight="bold">
                 ¥ {toCurrency(item.price, 0)}
               </Text> */}

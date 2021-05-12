@@ -23,7 +23,6 @@ const PopupProvider: React.FC = ({ children }) => {
   return (
     <PopupContext.Provider value={initialState}>
       {children}
-      <BettingSuccessPopup />
     </PopupContext.Provider>
   )
 }

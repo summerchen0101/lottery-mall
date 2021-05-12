@@ -26,7 +26,7 @@ function betRec() {
   const { data: res, error } = useBetRec()
   return (
     <Layout>
-      <HeaderTitleBar back title="抢购纪录" />
+      <HeaderTitleBar back title="下单纪录" />
       <Box p="20px" flex="1" overflowY="auto">
         <SimpleGrid
           columns={3}

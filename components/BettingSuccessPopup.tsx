@@ -1,5 +1,5 @@
+import { useBetInfoContext } from '@/context/BetInfoProvider'
 import { useGlobalProvider } from '@/context/GlobalProvider'
-import { usePopupContext } from '@/context/PopupContext'
 import useService from '@/utils/useService'
 import { Button } from '@chakra-ui/button'
 import { HStack, Text } from '@chakra-ui/layout'
@@ -12,15 +12,21 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
-import React from 'react'
+import { useRouter } from 'next/dist/client/router'
+import React, { useEffect } from 'react'
 
 function BettingSuccessPopup() {
   const { useBetSuccess } = useService()
-  const [visible, setVisible] = usePopupContext('betSuccess')
+  const router = useRouter()
+  const [visible, setVisible] = useBetInfoContext().betSuccess
   const { orderSn } = useGlobalProvider()
   const { data: SuccessRes, error } = useBetSuccess(visible && orderSn)
 
   const onClose = () => setVisible(false)
+
+  useEffect(() => {
+    setVisible(false)
+  }, [router])
   return (
     <Modal isOpen={visible} onClose={onClose} autoFocus={false} isCentered>
       <ModalOverlay />
