@@ -16,14 +16,6 @@ const useTransfer = () => {
       decimal ? `0,0.${Array(decimal).fill('0').join('')}` : '0,0',
     )
 
-  const toCountDownTimer = (time: number) => {
-    return (
-      numeral(Math.floor(time / 60)).format('00') +
-      ':' +
-      numeral(time % 60).format('00')
-    )
-  }
-
   const toOptionName = function <T extends string | number>(
     options: OptionType<T>[],
     code: number | string,
@@ -45,7 +37,6 @@ const useTransfer = () => {
     toCurrency,
     toOptionName,
     htmldecode,
-    toCountDownTimer,
   }
 }
 

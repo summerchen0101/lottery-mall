@@ -2,6 +2,7 @@ import { useBetInfoContext } from '@/context/BetInfoProvider'
 import useCurrentQishu from '@/service/useCurrentQishu'
 import useGoodsInfo from '@/service/useGoodsInfo'
 import useUserInfo from '@/service/useUserInfo'
+import useHelper from '@/utils/useHelper'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
@@ -18,30 +19,40 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
+import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
 interface BettingPopupProps {
-  countdown: string
+  countdown: number
 }
 
 function BettingPopup({ countdown }: BettingPopupProps) {
   const router = useRouter()
-  const { toCurrency, toCountDownTimer } = useTransfer()
+  const { secToTimer } = useHelper()
+  const { toCurrency } = useTransfer()
   const [visible, setVisible] = useBetInfoContext().betting
   const [, setBetConfirmVisible] = useBetInfoContext().betConfirm
   const [goodsId] = useBetInfoContext().goodsId
   const [totalPrice, setTotalPrice] = useBetInfoContext().totalPrice
   const [odds, setOdds] = useBetInfoContext().odds
   const { userInfo } = useUserInfo()
-  const lotteryId = +(router.query.id as string)
   const { data: qishuData } = useCurrentQishu()
-  const { goodsInfo } = useGoodsInfo(goodsId)
-  // const odds = useMemo(() => +_.takeRight(goodsInfo?.chart)?.[0]?.profit, [goodsInfo])
+  const { goodsInfo, isLoading } = useGoodsInfo(goodsId)
+
   const handleSubmit = async () => {
     setVisible(false)
     setBetConfirmVisible(true)
+  }
+
+  const handleAmountChanged = (e) => {
+    const value = +e.target.value
+    setTotalPrice(value > 0 ? value : 0)
+  }
+
+  const handleCancel = () => {
+    setVisible(false)
   }
 
   useEffect(() => {
@@ -50,7 +61,7 @@ function BettingPopup({ countdown }: BettingPopupProps) {
 
   // 结帐倒数时间即关闭弹窗
   useEffect(() => {
-    if (qishuData?.close_time >= qishuData?.countdown) {
+    if (countdown <= 0) {
       setVisible(false)
     }
   }, [qishuData])
@@ -58,18 +69,23 @@ function BettingPopup({ countdown }: BettingPopupProps) {
   useEffect(() => {
     setVisible(false)
   }, [router])
+  useEffect(() => {
+    visible && setTotalPrice(null)
+  }, [visible])
   return (
-    <Modal isOpen={visible} onClose={() => setVisible(false)} autoFocus={false}>
+    <Modal isOpen={visible} onClose={handleCancel} autoFocus={false}>
       <ModalOverlay />
       <ModalContent mx="20px">
         <ModalHeader justify="center">
           <Tag colorScheme="red" variant="solid">
-            抢购倒数：{countdown}
+            抢购倒数：{secToTimer(countdown)}
           </Tag>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {goodsInfo && (
+          {isLoading ? (
+            <Spinner />
+          ) : (
             <Stack spacing="15px">
               <HStack>
                 <Image
@@ -106,7 +122,8 @@ function BettingPopup({ countdown }: BettingPopupProps) {
                     <Input
                       w="full"
                       bg="gray.100"
-                      onChange={(e) => setTotalPrice(+e.target.value)}
+                      value={totalPrice ?? ''}
+                      onChange={handleAmountChanged}
                     />
                     <Button
                       w="full"

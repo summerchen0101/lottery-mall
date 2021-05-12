@@ -11,28 +11,39 @@ import { Goods } from '@/lib/types'
 import useCurrentQishu from '@/service/useCurrentQishu'
 import useGoodsList from '@/service/useGoodsList'
 import useUserInfo from '@/service/useUserInfo'
+import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
 import { Button, IconButton } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
 import { Box, Flex, HStack, SimpleGrid, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { BiDollar } from 'react-icons/bi'
 import { HiCurrencyDollar, HiSpeakerphone, HiUpload } from 'react-icons/hi'
 
 function lottery() {
   const [, setBettingVisible] = useBetInfoContext().betting
   const [, setGoodsId] = useBetInfoContext().goodsId
+
   const router = useRouter()
-  const { toCurrency, toCountDownTimer } = useTransfer()
+  const { toCurrency } = useTransfer()
+  const { secToTimer } = useHelper()
   const { goodsList } = useGoodsList()
   const { data: qishuData } = useCurrentQishu()
+  const [countdown, setCountdown] = useState(
+    qishuData?.countdown - qishuData?.close_time,
+  )
   const { userInfo } = useUserInfo()
-  const acoutingCountDown = useMemo(() => {
-    if (qishuData?.countdown - qishuData?.close_time > 0) {
-      return toCountDownTimer(qishuData?.countdown - qishuData?.close_time)
+
+  useEffect(() => {
+    setCountdown(qishuData?.countdown - qishuData?.close_time)
+    const interval = setInterval(
+      () => setCountdown((sec) => (sec ? sec - 1 : 0)),
+      1000,
+    )
+    return () => {
+      clearInterval(interval)
     }
-    return ''
   }, [qishuData])
 
   const handleGoodsClicked = async (goods: Goods) => {
@@ -85,12 +96,7 @@ function lottery() {
             </HStack>
           </Flex>
         )}
-        {qishuData && (
-          <HomeQishuBox
-            acoutingCountDown={acoutingCountDown}
-            data={qishuData}
-          />
-        )}
+        {qishuData && <HomeQishuBox countdown={countdown} data={qishuData} />}
         <SimpleGrid columns={3} spacing="10px">
           <Button
             colorScheme="pink"
@@ -132,7 +138,7 @@ function lottery() {
         </SimpleGrid>
       </Box>
       <FooterNav />
-      <BettingPopup countdown={acoutingCountDown} />
+      <BettingPopup countdown={countdown} />
       <BettingConfirmPopup />
       <BettingSuccessPopup />
     </Layout>

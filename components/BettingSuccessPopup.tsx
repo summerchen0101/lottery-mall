@@ -13,6 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
+import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect } from 'react'
 
@@ -20,7 +21,7 @@ function BettingSuccessPopup() {
   const router = useRouter()
   const [visible, setVisible] = useBetInfoContext().betSuccess
   const { orderSn } = useGlobalProvider()
-  const { betInfo } = useBetSuccess(visible && orderSn)
+  const { betInfo, isLoading } = useBetSuccess(visible && orderSn)
 
   const onClose = () => setVisible(false)
 
@@ -34,34 +35,40 @@ function BettingSuccessPopup() {
         <ModalHeader>交易成功</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <HStack justify="space-between">
-            <Text>單號</Text>
-            <Text>{betInfo?.order_sn}</Text>
-          </HStack>
-          <HStack justify="space-between">
-            <Text>結算時間</Text>
-            <Text>{betInfo?.created_at}</Text>
-          </HStack>
-          <HStack justify="space-between">
-            <Text>搶購專區</Text>
-            <Text>{betInfo?.lottery_name}</Text>
-          </HStack>
-          <HStack justify="space-between">
-            <Text>搶購商品</Text>
-            <Text>{betInfo?.goods_name}</Text>
-          </HStack>
-          <HStack justify="space-between">
-            <Text>商品分類</Text>
-            <Text>{betInfo?.wanfa}</Text>
-          </HStack>
-          <HStack justify="space-between">
-            <Text>金額</Text>
-            <Text>{betInfo?.total}</Text>
-          </HStack>
-          <HStack justify="space-between">
-            <Text>預估獲利</Text>
-            <Text>{betInfo?.profit}</Text>
-          </HStack>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              <HStack justify="space-between">
+                <Text>單號</Text>
+                <Text>{betInfo?.order_sn}</Text>
+              </HStack>
+              <HStack justify="space-between">
+                <Text>結算時間</Text>
+                <Text>{betInfo?.created_at}</Text>
+              </HStack>
+              <HStack justify="space-between">
+                <Text>搶購專區</Text>
+                <Text>{betInfo?.lottery_name}</Text>
+              </HStack>
+              <HStack justify="space-between">
+                <Text>搶購商品</Text>
+                <Text>{betInfo?.goods_name}</Text>
+              </HStack>
+              <HStack justify="space-between">
+                <Text>商品分類</Text>
+                <Text>{betInfo?.wanfa}</Text>
+              </HStack>
+              <HStack justify="space-between">
+                <Text>金額</Text>
+                <Text>{betInfo?.total}</Text>
+              </HStack>
+              <HStack justify="space-between">
+                <Text>預估獲利</Text>
+                <Text>{betInfo?.profit}</Text>
+              </HStack>
+            </>
+          )}
         </ModalBody>
 
         <ModalFooter mt="10px">

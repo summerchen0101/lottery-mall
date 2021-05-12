@@ -12,7 +12,7 @@ export default function useCurrentQishu() {
   } = useSWR<CurrentQishuResponse>(
     '/lottery/getCurrentQishu',
     (url) => request('post', url, { lottery_id: 6 }),
-    { refreshInterval: 1000 },
+    { refreshInterval: 1000 * 60 },
   )
   return {
     data: res?.data,

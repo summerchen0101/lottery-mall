@@ -12,17 +12,10 @@ const useHelper = () => {
     })
   }
 
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text)
-    toast({ duration: 2000, status: 'success', title: '已复制至剪贴簿' })
-  }
+  const secToTimer = (seconds: number) =>
+    seconds ? new Date(seconds * 1000).toISOString().substr(14, 5) : ''
 
-  const closeBottomPopup = () => {
-    $('.mask').fadeOut()
-    $('.slide-up-section').removeClass('slide-up')
-  }
-
-  return { getBase64, copyToClipboard, closeBottomPopup }
+  return { getBase64, secToTimer }
 }
 
 export default useHelper

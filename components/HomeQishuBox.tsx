@@ -1,21 +1,21 @@
 import { CurrentQishuResponse } from '@/lib/types'
+import useHelper from '@/utils/useHelper'
 import { Image } from '@chakra-ui/image'
 import { Box, Circle, Flex, Heading, HStack, Text } from '@chakra-ui/layout'
-import React, { useMemo } from 'react'
 import _ from 'lodash'
-import useTransfer from '@/utils/useTransfer'
+import React, { useMemo } from 'react'
 
 interface HomeQishuBoxProps {
-  acoutingCountDown: string
+  countdown: number
   data: CurrentQishuResponse['data']
 }
-function HomeQishuBox({ acoutingCountDown, data }: HomeQishuBoxProps) {
-  const { toCountDownTimer } = useTransfer()
+function HomeQishuBox({ countdown, data }: HomeQishuBoxProps) {
+  const { secToTimer } = useHelper()
   const toQishuNo = (qishu: number) => _.takeRight(qishu.toString(), 2)
 
   const restartCountDown = useMemo(() => {
     if (data.close_time - data.countdown > 0) {
-      return toCountDownTimer(data.countdown)
+      return secToTimer(data.countdown)
     }
     return ''
   }, [data])
@@ -30,11 +30,11 @@ function HomeQishuBox({ acoutingCountDown, data }: HomeQishuBoxProps) {
       border="2px solid #eee"
     >
       <Flex justify="space-between" mb="10px" color="gray.600" fontWeight="600">
-        {acoutingCountDown ? (
+        {countdown ? (
           <>
             <Text>距第 No.{toQishuNo(data.next_qishu)} 订单结帐</Text>
             <Text color="red.600" fontWeight="bold">
-              {acoutingCountDown}
+              {secToTimer(countdown)}
             </Text>
           </>
         ) : (
