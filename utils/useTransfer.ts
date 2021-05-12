@@ -32,6 +32,7 @@ const useTransfer = () => {
   }
 
   const htmldecode = function (s: string) {
+    if (!s) return
     const div = document.createElement('div')
     div.innerHTML = s
     return div.innerText || div.textContent
