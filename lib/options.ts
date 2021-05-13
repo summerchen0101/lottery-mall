@@ -20,6 +20,13 @@ export const rankDateRangeOpts = [
   { label: '本月', value: DateRangeType.ThisMonth },
 ]
 
+export const betDateRangeOpts = [
+  { label: '今日', value: DateRangeType.Today },
+  { label: '本週', value: DateRangeType.ThisWeek },
+  { label: '上週', value: DateRangeType.LastWeek },
+  { label: '本月', value: DateRangeType.ThisMonth },
+]
+
 export const bankcardStatusOpts = [
   { label: '启用', value: BankCardStatus.On },
   { label: '未启用', value: BankCardStatus.Off },

@@ -12,8 +12,9 @@ import React from 'react'
 
 function betRec() {
   const router = useRouter()
+  const date = router.query.date as string
   const { loadingSpinner } = useLoaderProvider()
-  const { betRecData, isLoading } = useBetRec()
+  const { betRecData, isLoading } = useBetRec(date, date)
   return (
     <Layout>
       <HeaderTitleBar back title="下单纪录" />

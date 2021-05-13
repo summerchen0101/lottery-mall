@@ -10,12 +10,10 @@ const useRequest = () => {
   const { apiErrHandler } = useErrorHandler()
   const { loadingStart, loadingEnd } = useLoaderProvider()
   const request = useCallback(
-    async function <R extends { success?: boolean; message?: string }>(
-      method: Method,
-      url: string,
-      data: any,
-      config?: AxiosRequestConfig,
-    ) {
+    async function <
+      R extends { success?: boolean; message?: string },
+      B extends {}
+    >(method: Method, url: string, data: B, config?: AxiosRequestConfig) {
       try {
         const res = await Axios.request<R>({
           method,
@@ -42,11 +40,11 @@ const useRequest = () => {
     [token],
   )
 
-  const get = function <R>(url: string, params?: any) {
-    return request<R>('get', url, null, { params })
+  const get = function <R, B>(url: string, params?: B) {
+    return request<R, B>('get', url, null, { params })
   }
-  const post = function <R>(url: string, data?: any) {
-    return request<R>('post', url, data)
+  const post = function <R, B>(url: string, data?: B) {
+    return request<R, B>('post', url, data)
   }
 
   return {
