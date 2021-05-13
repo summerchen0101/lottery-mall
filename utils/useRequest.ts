@@ -43,7 +43,7 @@ const useRequest = () => {
   const get = function <R, B>(url: string, params?: B) {
     return request<R, B>('get', url, null, { params })
   }
-  const post = function <R, B>(url: string, data?: B) {
+  const post = function <R, B = {}>(url: string, data?: B) {
     return request<R, B>('post', url, data)
   }
 
