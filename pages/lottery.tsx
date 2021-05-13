@@ -105,7 +105,7 @@ function lottery() {
             border="2px solid #eee"
             shadow="lg"
           >
-            更多纪录
+            下单纪录
           </Button>
           <Button
             colorScheme="purple"
