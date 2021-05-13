@@ -15,11 +15,19 @@ export enum BankCardStatus {
 }
 
 export enum RechargeStatus {
+  Waiting = 0,
   Success = 1,
-  Fail = 2,
+  Failed = 2,
+  Expired = 3,
+  OrderFailed = 4,
+  WaitPay = 5,
+  Processing = 6,
 }
 
 export enum WithdrawStatus {
-  Success = 1,
-  Fail = 2,
+  Waiting = 0,
+  Pending = 1,
+  Success = 2,
+  ReviewFailed = 3,
+  WithdrawFailed = 4,
 }

@@ -33,11 +33,19 @@ export const bankcardStatusOpts = [
 ]
 
 export const rechargeStatusOpts = [
+  { label: '待審核', value: RechargeStatus.Waiting },
   { label: '充值成功', value: RechargeStatus.Success },
-  { label: '充值失败', value: RechargeStatus.Fail },
+  { label: '充值失败', value: RechargeStatus.Failed },
+  { label: '订单超时', value: RechargeStatus.Expired },
+  { label: '订单建立失败', value: RechargeStatus.OrderFailed },
+  { label: '待付款', value: RechargeStatus.WaitPay },
+  { label: '处理中', value: RechargeStatus.Processing },
 ]
 
 export const withdrawStatusOpts = [
+  { label: '待審核', value: WithdrawStatus.Waiting },
+  { label: '待出款', value: WithdrawStatus.Pending },
   { label: '提领成功', value: WithdrawStatus.Success },
-  { label: '提领失败', value: WithdrawStatus.Fail },
+  { label: '審核失敗', value: WithdrawStatus.ReviewFailed },
+  { label: '出款失敗', value: WithdrawStatus.WithdrawFailed },
 ]
