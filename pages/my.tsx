@@ -124,7 +124,7 @@ function my() {
             borderRadius="md"
             onClick={() => router.push('/bet-rec')}
           >
-            抢购纪录
+            下单纪录
           </Box>
           <Box
             bg="white"
