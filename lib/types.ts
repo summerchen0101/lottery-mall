@@ -327,3 +327,9 @@ export interface LogoutResponse {
   success: boolean
   message: string
 }
+
+export interface WithdrawCreateRequest {
+  user_bank_id: string
+  money: number
+  security_pwd: string
+}

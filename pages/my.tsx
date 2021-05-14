@@ -62,7 +62,7 @@ function my() {
             h="70px"
             shadow="lg"
           >
-            <Box>
+            <Box onClick={() => router.push('/withdraw')}>
               <Icon fontSize="30px" as={BiArrowFromBottom} />
               <Text fontSize="sm">提现</Text>
             </Box>

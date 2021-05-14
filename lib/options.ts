@@ -26,6 +26,13 @@ export const betDateRangeOpts = [
   { label: '上週', value: DateRangeType.LastWeek },
   { label: '本月', value: DateRangeType.ThisMonth },
 ]
+export const codeAmountDateRangeOpts = [
+  { label: '今日', value: DateRangeType.Today },
+  { label: '本週', value: DateRangeType.ThisWeek },
+  { label: '上週', value: DateRangeType.LastWeek },
+  { label: '本月', value: DateRangeType.ThisMonth },
+  { label: '一年內', value: DateRangeType.inYear },
+]
 
 export const bankcardStatusOpts = [
   { label: '启用', value: BankCardStatus.On },

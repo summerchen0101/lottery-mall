@@ -17,6 +17,7 @@ import {
   NoticeListResponse,
   RechargeLogResponse,
   UserProfileResponse,
+  WithdrawCreateRequest,
   WithdrawLogResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
@@ -36,6 +37,9 @@ function useService() {
   const doCreateBankCard = (req: BankCardCreateRequest) =>
     post<null>('/user/bankCreate', req)
 
+  const doCreateWithdraw = (req: WithdrawCreateRequest) =>
+    post<{ success: boolean; data: number }>('/finance/withdraw', req)
+
   const doBetConfirm = (req: BetConfirmRequest) =>
     post<BetConfirmResponse>('/lottery/betConfirm', req)
 
@@ -45,6 +49,7 @@ function useService() {
   return {
     doLogin,
     doCreateBankCard,
+    doCreateWithdraw,
     doBetConfirm,
     doBetAction,
     checkLoginStatus,
