@@ -16,6 +16,8 @@ function useErrorHandler() {
       if (error.response.status === 401) {
         router.push({ pathname: '/login', query: { from: router.asPath } })
         setToken('')
+      } else if (error.response.data.message) {
+        toast({ title: error.response.data.message, status: 'error' })
       } else {
         toast({ title: httpStatus[error.response.status], status: 'error' })
       }

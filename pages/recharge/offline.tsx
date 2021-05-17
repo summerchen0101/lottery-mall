@@ -6,6 +6,7 @@ import { WithdrawCreateRequest } from '@/lib/types'
 import useBankCardList from '@/service/useBankCardList'
 import usePaymentBranchList from '@/service/usePaymentBranchList'
 import usePaymentChannelList from '@/service/usePaymentChannelList'
+import useRecharge, { RechargeReq } from '@/service/useRecharge'
 import useUserInfo from '@/service/useUserInfo'
 import useWithdrawCount from '@/service/useWithdrawCount'
 import useService from '@/utils/useService'
@@ -19,9 +20,9 @@ import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-type WithdrawFormProps = WithdrawCreateRequest
+type RechargeFormProps = RechargeReq
 function rechargeForm() {
-  const { doCreateWithdraw } = useService()
+  const { mutate } = useRecharge()
   const { toCurrency } = useTransfer()
   const { userInfo } = useUserInfo()
   const {
@@ -30,21 +31,22 @@ function rechargeForm() {
     handleSubmit,
     watch,
     setValue,
-  } = useForm<WithdrawFormProps>()
-  const { count } = useWithdrawCount()
+  } = useForm<RechargeFormProps>()
   const router = useRouter()
   const { paymentBranchs } = usePaymentBranchList(+router.query.id)
   const { paymentChannels } = usePaymentChannelList(watch('payments_branch_id'))
   const onSubmit = handleSubmit(async (d) => {
     try {
-      const res = await doCreateWithdraw({
-        user_bank_id: d.user_bank_id,
+      const res = await mutate({
+        name: d.name,
         money: d.money,
-        security_pwd: d.security_pwd,
+        bank: d.bank,
+        line_id: d.line_id,
+        rate: d.rate,
       })
-      if (res.success) {
-        router.push(`/withdraw/success/${res.data}`)
-      }
+      // if (res.success) {
+      //   router.push(`/withdraw/success/${res.data}`)
+      // }
     } catch (err) {}
   })
 
