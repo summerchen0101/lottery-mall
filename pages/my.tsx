@@ -31,7 +31,6 @@ function my() {
   return (
     <Layout>
       <HeaderTitleBar
-        back
         title="我的"
         extra={
           <Icon as={HiOutlineLogout} fontSize="20px" onClick={handleLogout} />
@@ -66,7 +65,7 @@ function my() {
               <Icon fontSize="30px" as={BiArrowFromBottom} />
               <Text fontSize="sm">提现</Text>
             </Box>
-            <Box>
+            <Box onClick={() => router.push('/recharge')}>
               <Icon fontSize="30px" as={BiArrowToBottom} />
               <Text fontSize="sm">充值</Text>
             </Box>

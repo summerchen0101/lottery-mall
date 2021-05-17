@@ -31,3 +31,8 @@ export enum WithdrawStatus {
   ReviewFailed = 3,
   WithdrawFailed = 4,
 }
+
+export enum OfflinePayment {
+  Bankcard = 1,
+  USDT = 4,
+}

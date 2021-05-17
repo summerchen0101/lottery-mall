@@ -30,7 +30,7 @@ function betRec() {
 
   return (
     <Layout>
-      <HeaderTitleBar back backPath="/lottery" title="下单纪录" />
+      <HeaderTitleBar backPath="/lottery" title="下单纪录" />
       <Box p="20px" flex="1" overflowY="auto">
         <Select
           value={dateRangeType}

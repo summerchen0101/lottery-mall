@@ -1,6 +1,7 @@
 import {
   BankCardStatus,
   DateRangeType,
+  OfflinePayment,
   RechargeStatus,
   WithdrawStatus,
 } from './enums'
@@ -31,7 +32,7 @@ export const codeAmountDateRangeOpts = [
   { label: '本週', value: DateRangeType.ThisWeek },
   { label: '上週', value: DateRangeType.LastWeek },
   { label: '本月', value: DateRangeType.ThisMonth },
-  { label: '一年內', value: DateRangeType.inYear },
+  { label: '一年内', value: DateRangeType.inYear },
 ]
 
 export const bankcardStatusOpts = [
@@ -40,7 +41,7 @@ export const bankcardStatusOpts = [
 ]
 
 export const rechargeStatusOpts = [
-  { label: '待審核', value: RechargeStatus.Waiting },
+  { label: '待审核', value: RechargeStatus.Waiting },
   { label: '充值成功', value: RechargeStatus.Success },
   { label: '充值失败', value: RechargeStatus.Failed },
   { label: '订单超时', value: RechargeStatus.Expired },
@@ -50,9 +51,14 @@ export const rechargeStatusOpts = [
 ]
 
 export const withdrawStatusOpts = [
-  { label: '待審核', value: WithdrawStatus.Waiting },
+  { label: '待审核', value: WithdrawStatus.Waiting },
   { label: '待出款', value: WithdrawStatus.Pending },
   { label: '提领成功', value: WithdrawStatus.Success },
-  { label: '審核失敗', value: WithdrawStatus.ReviewFailed },
-  { label: '出款失敗', value: WithdrawStatus.WithdrawFailed },
+  { label: '审核失败', value: WithdrawStatus.ReviewFailed },
+  { label: '出款失败', value: WithdrawStatus.WithdrawFailed },
+]
+
+export const offlinePaymentOpts = [
+  { label: '银行卡', value: OfflinePayment.Bankcard },
+  { label: 'USDT转帐', value: OfflinePayment.USDT },
 ]

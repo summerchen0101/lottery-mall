@@ -1,26 +1,20 @@
-import BankcardDetailPopup from '@/components/BankcardDetailPopup'
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { DateRangeType } from '@/lib/enums'
 import { codeAmountDateRangeOpts } from '@/lib/options'
-import { BankCard } from '@/lib/types'
 import useUserInfo from '@/service/useUserInfo'
 import useCodeAmountList from '@/service/useWithdrawRec'
 import useDateRange from '@/utils/useDateRange'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { useDisclosure } from '@chakra-ui/hooks'
-import Icon from '@chakra-ui/icon'
 import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 
 function withdrawIndex() {
-  const { isOpen, onClose, onOpen } = useDisclosure()
-  const [currentCard, setCurrentCard] = useState<BankCard>(null)
   const { toCurrency } = useTransfer()
   const router = useRouter()
   const { userInfo } = useUserInfo()
@@ -104,12 +98,6 @@ function withdrawIndex() {
         </Stack>
       </Box>
       <FooterNav />
-
-      <BankcardDetailPopup
-        isOpen={isOpen}
-        onClose={onClose}
-        bankcard={currentCard}
-      />
     </Layout>
   )
 }
