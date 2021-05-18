@@ -7,7 +7,7 @@ const Layout: React.FC = ({
   ...props
 }: { children: ReactNode } & BoxProps) => {
   return (
-    <Flex bg="gray.100" h="100vh" w="100vw" direction="column" {...props}>
+    <Flex bg="gray.100" h="100%" direction="column" {...props}>
       <MetaHead />
       {children}
     </Flex>

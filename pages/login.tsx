@@ -41,7 +41,7 @@ const login = () => {
 
   return (
     <Layout>
-      <Center h="100vh" bg="purple.600">
+      <Center h="100%" bg="purple.600">
         <Box
           as="form"
           pb="60px"

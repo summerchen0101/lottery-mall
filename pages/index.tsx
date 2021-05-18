@@ -21,7 +21,7 @@ const index = () => {
   }, [])
   return (
     <Layout>
-      <Center h="100vh" bg="gray.100">
+      <Center h="100%" bg="gray.100">
         <Spinner size="xl" thickness="3px" color="gray.400" />
       </Center>
     </Layout>
