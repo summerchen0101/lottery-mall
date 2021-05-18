@@ -6,7 +6,7 @@ import { WithdrawCreateRequest } from '@/lib/types'
 import useBankCardList from '@/service/useBankCardList'
 import usePaymentBranchList from '@/service/usePaymentBranchList'
 import usePaymentChannelList from '@/service/usePaymentChannelList'
-import useRecharge, { RechargeReq } from '@/service/useRecharge'
+import useRecharge, { OfflineRechargeReq } from '@/service/useOfflineRecharge'
 import useUserInfo from '@/service/useUserInfo'
 import useWithdrawCount from '@/service/useWithdrawCount'
 import useService from '@/utils/useService'
@@ -20,7 +20,7 @@ import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-type RechargeFormProps = RechargeReq
+type RechargeFormProps = OfflineRechargeReq
 function rechargeForm() {
   const { mutate } = useRecharge()
   const { toCurrency } = useTransfer()
@@ -53,7 +53,7 @@ function rechargeForm() {
   return (
     <Layout>
       <HeaderTitleBar back title={router.query.name} />
-      <Box flex="1" overflowY="auto" p="20px" pb="50px">
+      {/* <Box flex="1" overflowY="auto" p="20px" pb="50px">
         <Stack as="form" spacing="12px" onSubmit={onSubmit} noValidate>
           <Text color="purple.600" fontWeight="600" fontSize="lg" mb="1">
             余额： $ {toCurrency(userInfo?.money)}
@@ -104,7 +104,7 @@ function rechargeForm() {
             确认送出
           </Button>
         </Stack>
-      </Box>
+      </Box> */}
       <FooterNav />
     </Layout>
   )
