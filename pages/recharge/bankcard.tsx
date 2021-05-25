@@ -4,7 +4,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import bankCodes from '@/lib/bankCodes'
 import { OfflinePayment } from '@/lib/enums'
-import useOfflineBankcard from '@/service/useOfflineBankcard'
+import useOfflinePayment from '@/service/useOfflinePayment'
 import useOfflineRecharge, {
   OfflineRechargeReq,
 } from '@/service/useOfflineRecharge'
@@ -32,36 +32,33 @@ function rechargeForm() {
     setValue,
   } = useForm<RechargeFormProps>()
   const router = useRouter()
-  const { bankcardList } = useOfflineBankcard(OfflinePayment.Bankcard)
+  const { paymentList } = useOfflinePayment(OfflinePayment.Bankcard)
   const info = useMemo(() => {
     if (watch('line_id')) {
-      return bankcardList.find((t) => t.id === +watch('line_id'))
+      return paymentList.find((t) => t.id === +watch('line_id'))
     }
   }, [watch('line_id')])
   const onSubmit = handleSubmit(async (d) => {
     try {
-      const res = await mutate({
+      await mutate({
         name: d.name,
         money: d.money,
         bank: d.bank,
         line_id: d.line_id,
         rate: d.rate,
       })
-      // if (res.success) {
-      //   router.push(`/withdraw/success/${res.data}`)
-      // }
     } catch (err) {}
   })
 
   useEffect(() => {
     if (result?.success) {
-      router.push(`/recharge/success/bankcard/${result.data}`)
+      router.push(`/recharge/success/usdt/${result.data}`)
     }
   }, [result])
 
   return (
     <Layout>
-      <HeaderTitleBar back title={router.query.name} />
+      <HeaderTitleBar back title="银行卡充值" />
       <Box flex="1" overflowY="auto" p="20px" pb="50px">
         <Stack as="form" spacing="12px" onSubmit={onSubmit} noValidate>
           <Text color="purple.600" fontWeight="600" fontSize="lg" mb="1">
@@ -75,7 +72,7 @@ function rechargeForm() {
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
             >
-              {bankcardList?.map((t) => (
+              {paymentList?.map((t) => (
                 <option key={t.id} value={t.id}>
                   {t.bank}
                 </option>
@@ -83,7 +80,7 @@ function rechargeForm() {
             </Select>
             <FieldValidateMessage error={errors.line_id} />
             <FormHelperText>
-              必須與您的銀行帳戶姓名一致，否则会导致无法到帐
+              必须与您的银行帐户姓名一致，否则会导致无法到帐
             </FormHelperText>
           </FormControl>
           <FormControl isRequired isInvalid={!!errors.bank}>
@@ -143,7 +140,7 @@ function rechargeForm() {
               spacing={1}
             >
               <Text>
-                單次存款限額：
+                单次存款限额：
                 <Text as="span" fontWeight="bold">
                   {info.money_min}~{info.money_max}
                 </Text>

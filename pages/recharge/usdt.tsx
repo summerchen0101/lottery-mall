@@ -2,26 +2,27 @@ import FieldValidateMessage from '@/components/FieldValidateMessage'
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useOnlineRecharge, {
-  OnlineRechargeReq,
-} from '@/service/useOnlineRecharge'
-import usePaymentBranchList from '@/service/usePaymentBranchList'
-import usePaymentChannelList from '@/service/usePaymentChannelList'
+import bankCodes from '@/lib/bankCodes'
+import { OfflinePayment } from '@/lib/enums'
+import useOfflinePayment from '@/service/useOfflinePayment'
+import useUsdtRate from '@/service/useUsdtRate'
+import useOfflineRecharge, {
+  OfflineRechargeReq,
+} from '@/service/useOfflineRecharge'
 import useUserInfo from '@/service/useUserInfo'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { FormControl, FormLabel } from '@chakra-ui/form-control'
+import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { Box, Divider, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
-import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 
-type RechargeFormProps = OnlineRechargeReq
+type RechargeFormProps = OfflineRechargeReq
 function rechargeForm() {
-  const { mutate, isLoading, result } = useOnlineRecharge()
+  const { mutate, result, isLoading } = useOfflineRecharge()
   const { toCurrency } = useTransfer()
   const { userInfo } = useUserInfo()
   const {
@@ -32,76 +33,69 @@ function rechargeForm() {
     setValue,
   } = useForm<RechargeFormProps>()
   const router = useRouter()
-  const { paymentBranchs } = usePaymentBranchList(+router.query.id)
-  const { paymentChannels } = usePaymentChannelList(watch('payments_branch_id'))
+  const { rate } = useUsdtRate()
+  const { paymentList } = useOfflinePayment(OfflinePayment.USDT)
   const info = useMemo(() => {
-    if (watch('interface')) {
-      return paymentChannels.find((t) => t.interface === +watch('interface'))
+    if (watch('line_id')) {
+      return paymentList.find((t) => t.id === +watch('line_id'))
     }
-  }, [watch('interface')])
+  }, [watch('line_id')])
   const onSubmit = handleSubmit(async (d) => {
     try {
       await mutate({
+        name: d.name,
         money: d.money,
-        interface: +d.interface,
-        payments_branch_id: +d.payments_branch_id,
+        bank: d.bank,
+        line_id: d.line_id,
+        rate: d.rate,
       })
     } catch (err) {}
   })
+
   useEffect(() => {
-    if (result?.success && result?.data.dataType === 1) {
-      location.href = result.data.url
+    rate && setValue('rate', rate)
+  }, [rate])
+
+  useEffect(() => {
+    if (result?.success) {
+      router.push(`/recharge/success/usdt/${result.data}`)
     }
   }, [result])
 
   return (
     <Layout>
-      <HeaderTitleBar back title={`${router.query.name}充值`} />
+      <HeaderTitleBar back title="USDT转帐充值" />
       <Box flex="1" overflowY="auto" p="20px" pb="50px">
         <Stack as="form" spacing="12px" onSubmit={onSubmit} noValidate>
           <Text color="purple.600" fontWeight="600" fontSize="lg" mb="1">
             余额： $ {toCurrency(userInfo?.money)}
           </Text>
-          <FormControl isRequired isInvalid={!!errors.payments_branch_id}>
-            <FormLabel>存款媒介</FormLabel>
+          <FormControl isRequired isInvalid={!!errors.line_id}>
+            <FormLabel>鏈名稱</FormLabel>
             <Select
-              name="payments_branch_id"
+              name="line_id"
               bg="white"
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
-              // onChange={(e) => setValue('')}
             >
-              {paymentBranchs?.map((t) => (
+              {paymentList?.map((t) => (
                 <option key={t.id} value={t.id}>
                   {t.name}
                 </option>
               ))}
             </Select>
-            <FieldValidateMessage error={errors.payments_branch_id} />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>支付通道</FormLabel>
-            <Select
-              name="interface"
-              bg="white"
-              ref={register({ required: '不可为空' })}
-              placeholder="请选择"
-            >
-              {paymentChannels?.map((t) => (
-                <option key={t.id} value={t.interface}>
-                  {t.name}
-                </option>
-              ))}
-            </Select>
+            <FieldValidateMessage error={errors.line_id} />
+            <FormHelperText>
+              必须与您的银行帐户姓名一致，否则会导致无法到帐
+            </FormHelperText>
           </FormControl>
 
           <FormControl isRequired isInvalid={!!errors.money}>
             <FormLabel>存款金额</FormLabel>
             <Input
               name="money"
-              bg="white"
               type="number"
+              bg="white"
               ref={register({
                 required: '不可为空',
                 min: {
@@ -115,8 +109,10 @@ function rechargeForm() {
               })}
             />
             <FieldValidateMessage error={errors.money} />
+            <FormHelperText>
+              当前汇率: {rate} USDT/CNY (汇率实时波动，仅供参考)
+            </FormHelperText>
           </FormControl>
-
           {info && (
             <Stack
               p="3"
@@ -131,15 +127,8 @@ function rechargeForm() {
                   {info.money_min}~{info.money_max}
                 </Text>
               </Text>
-              <Text>
-                单日存款限额：
-                <Text as="span" fontWeight="bold">
-                  {info.day_limit}
-                </Text>
-              </Text>
             </Stack>
           )}
-
           <Divider h="2" />
           <Button
             type="submit"

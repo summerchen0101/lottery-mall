@@ -18,14 +18,14 @@ interface OfflineBankcardRes {
   list: OfflineBankcard[]
 }
 
-export default function useOfflineBankcard(payment: OfflinePayment) {
+export default function useOfflinePayment(payment: OfflinePayment) {
   const { post } = useRequest()
   const { data: res, error, mutate, isValidating } = useSWR<OfflineBankcardRes>(
     payment && ['/finance/rechargeOffline', payment],
     (url, channel) => post(url, { channel }),
   )
   return {
-    bankcardList: res?.list,
+    paymentList: res?.list,
     isLoading: !error && !res,
     isError: error,
     refresh: mutate,

@@ -47,7 +47,11 @@ function rechargeIndex() {
                 银行卡
               </BarItem>
             )}
-            {offline[OfflinePayment.USDT] && <BarItem>USDT转帐</BarItem>}
+            {offline[OfflinePayment.USDT] && (
+              <BarItem onClick={() => router.push('/recharge/usdt')}>
+                USDT转帐
+              </BarItem>
+            )}
           </Stack>
         )}
       </Box>

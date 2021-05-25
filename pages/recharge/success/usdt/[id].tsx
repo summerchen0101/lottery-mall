@@ -1,15 +1,17 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import TextCopy from '@/components/TextCopy'
 import useRechargeDetail from '@/service/useRechargeDetail'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
-import { Box, HStack, Stack, Text, VStack } from '@chakra-ui/layout'
+import { Image } from '@chakra-ui/image'
+import { Box, Center, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import { HiCheckCircle } from 'react-icons/hi'
+import { BiCopyAlt } from 'react-icons/bi'
 
 function rechargeForm() {
   const { toCurrency } = useTransfer()
@@ -17,7 +19,7 @@ function rechargeForm() {
   const { info, isLoading } = useRechargeDetail(+router.query.id)
   return (
     <Layout>
-      <HeaderTitleBar back title="充值信息" />
+      <HeaderTitleBar back title="USDT转帐充值" />
       <Box flex="1" overflowY="auto" p="20px" pb="50px">
         {isLoading ? (
           <Spinner />
@@ -31,56 +33,74 @@ function rechargeForm() {
             color="gray.500"
             mb="20px"
           >
-            <VStack mb="4">
-              <Icon as={HiCheckCircle} fontSize="100px" color="green.500" />
-              <Text fontSize="2xl" color="gray.500">
-                充值成功
-              </Text>
-            </VStack>
             <Stack>
-              <Box borderBottom="1px solid #ccc" py="5px">
-                <Text fontSize="sm" mb="5px">
-                  订单号
-                </Text>
-                <Text fontSize="lg" fontWeight="600">
-                  {info.order_sn}
-                </Text>
-              </Box>
               <Box borderBottom="1px solid #ccc" py="5px">
                 <Text fontSize="sm" mb="5px">
                   充值金额
                 </Text>
                 <Text fontSize="2xl" fontWeight="600" color="pink.500">
                   {info.money}
+                  <TextCopy text={info.money}>
+                    <Icon as={BiCopyAlt} float="right" fontSize="22px" />
+                  </TextCopy>
                 </Text>
               </Box>
               <Box borderBottom="1px solid #ccc" py="5px">
                 <Text fontSize="sm" mb="5px">
-                  申请时间
+                  汇率
                 </Text>
-                <Text fontSize="lg" fontWeight="600">
-                  {info.created_at}
+                <Text fontSize="2xl" fontWeight="600">
+                  {info.rate}
+                  <TextCopy text={info.rate}>
+                    <Icon as={BiCopyAlt} float="right" fontSize="22px" />
+                  </TextCopy>
                 </Text>
               </Box>
               <Box borderBottom="1px solid #ccc" py="5px">
                 <Text fontSize="sm" mb="5px">
-                  持卡人
+                  实际付款
+                </Text>
+                <Text fontSize="2xl" fontWeight="600">
+                  {info.real_money}U
+                  <TextCopy text={info.real_money}>
+                    <Icon as={BiCopyAlt} float="right" fontSize="22px" />
+                  </TextCopy>
+                </Text>
+              </Box>
+
+              <Box borderBottom="1px solid #ccc" py="5px">
+                <Text fontSize="sm" mb="5px">
+                  链名称
                 </Text>
                 <Text fontSize="lg" fontWeight="600">
                   {info.name}
+                  <TextCopy text={info.name}>
+                    <Icon as={BiCopyAlt} float="right" fontSize="22px" />
+                  </TextCopy>
                 </Text>
               </Box>
               <Box borderBottom="1px solid #ccc" py="5px">
                 <Text fontSize="sm" mb="5px">
-                  收款账户
+                  充值地址
                 </Text>
                 <Text fontSize="lg" fontWeight="600">
-                  {info.account} ({info.bank})
+                  {info.account}
+                  <TextCopy text={info.account}>
+                    <Icon as={BiCopyAlt} float="right" fontSize="22px" />
+                  </TextCopy>
                 </Text>
               </Box>
             </Stack>
+            <Center mt="30px">
+              <Image
+                src={`${process.env.apiBaseUrl}/${info.qrcode}`}
+                boxSize="220px"
+                objectFit="contain"
+              />
+            </Center>
           </Box>
         )}
+
         <HStack>
           <Button
             w="full"

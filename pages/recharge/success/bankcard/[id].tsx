@@ -1,17 +1,15 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import TextCopy from '@/components/TextCopy'
 import useRechargeDetail from '@/service/useRechargeDetail'
 import useTransfer from '@/utils/useTransfer'
-import { Button, IconButton } from '@chakra-ui/button'
+import { Button } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
-import { Box, Divider, HStack, Stack, Text, VStack } from '@chakra-ui/layout'
+import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import { HiCheckCircle, HiOutlineClipboardCopy } from 'react-icons/hi'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import TextCopy from '@/components/TextCopy'
 import { BiCopyAlt } from 'react-icons/bi'
 
 function rechargeForm() {
@@ -20,7 +18,7 @@ function rechargeForm() {
   const { info, isLoading } = useRechargeDetail(+router.query.id)
   return (
     <Layout>
-      <HeaderTitleBar back title="充值信息" />
+      <HeaderTitleBar back title="銀行卡充值" />
       <Box flex="1" overflowY="auto" p="20px" pb="50px">
         <Box
           bg="red.500"
