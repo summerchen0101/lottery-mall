@@ -78,6 +78,7 @@ function lottery() {
                 size="sm"
                 colorScheme="pink"
                 fontSize="20px"
+                onClick={() => router.push('/news')}
               />
               <IconButton
                 aria-label="recharge"
@@ -85,6 +86,7 @@ function lottery() {
                 size="sm"
                 colorScheme="pink"
                 fontSize="20px"
+                onClick={() => router.push('/recharge')}
               />
               <IconButton
                 aria-label="withdraw"
@@ -92,6 +94,7 @@ function lottery() {
                 size="sm"
                 colorScheme="pink"
                 fontSize="20px"
+                onClick={() => router.push('/withdraw')}
               />
             </HStack>
           </Flex>

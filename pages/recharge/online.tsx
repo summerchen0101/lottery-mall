@@ -80,7 +80,7 @@ function rechargeForm() {
             <FieldValidateMessage error={errors.payments_branch_id} />
           </FormControl>
 
-          <FormControl>
+          <FormControl isRequired isInvalid={!!errors.interface}>
             <FormLabel>支付通道</FormLabel>
             <Select
               name="interface"
@@ -94,6 +94,7 @@ function rechargeForm() {
                 </option>
               ))}
             </Select>
+            <FieldValidateMessage error={errors.interface} />
           </FormControl>
 
           <FormControl isRequired isInvalid={!!errors.money}>

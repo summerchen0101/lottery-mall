@@ -62,15 +62,16 @@ function withdrawForm() {
             </Select>
             <FieldValidateMessage error={errors.user_bank_id} />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired isInvalid={!!errors.money}>
             <FormLabel>提款金额</FormLabel>
             <Input
               name="money"
               bg="white"
               ref={register({ required: '不可为空' })}
             />
+            <FieldValidateMessage error={errors.money} />
           </FormControl>
-          <FormControl>
+          <FormControl isRequired isInvalid={!!errors.security_pwd}>
             <FormLabel>提领密码</FormLabel>
             <Input
               name="security_pwd"
@@ -78,6 +79,7 @@ function withdrawForm() {
               type="password"
               ref={register({ required: '不可为空' })}
             />
+            <FieldValidateMessage error={errors.security_pwd} />
           </FormControl>
           <Divider h="2" />
           <Button type="submit" w="full" colorScheme="purple">
