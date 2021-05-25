@@ -1,32 +1,23 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useBankCardList from '@/service/useBankCardList'
-import useWithdrawDetail from '@/service/useWithdrawDetail'
+import useRechargeDetail from '@/service/useRechargeDetail'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
-import {
-  Box,
-  Center,
-  Heading,
-  HStack,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/layout'
+import { Box, HStack, Stack, Text, VStack } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { HiCheckCircle } from 'react-icons/hi'
 
-function withdrawForm() {
+function rechargeForm() {
   const { toCurrency } = useTransfer()
   const router = useRouter()
-  const { info, isLoading } = useWithdrawDetail(+router.query.id)
+  const { info, isLoading } = useRechargeDetail(+router.query.id)
   return (
     <Layout>
-      <HeaderTitleBar back title="提款信息" />
+      <HeaderTitleBar back title="充值信息" />
       <Box flex="1" overflowY="auto" p="20px" pb="50px">
         {isLoading ? (
           <Spinner />
@@ -43,7 +34,7 @@ function withdrawForm() {
             <VStack mb="4">
               <Icon as={HiCheckCircle} fontSize="100px" color="green.500" />
               <Text fontSize="2xl" color="gray.500">
-                提款成功
+                充值成功
               </Text>
             </VStack>
             <Stack>
@@ -57,7 +48,7 @@ function withdrawForm() {
               </Box>
               <Box borderBottom="1px solid #ccc" py="5px">
                 <Text fontSize="sm" mb="5px">
-                  提款金额
+                  充值金额
                 </Text>
                 <Text fontSize="2xl" fontWeight="600" color="pink.500">
                   {info.money}
@@ -112,4 +103,4 @@ function withdrawForm() {
   )
 }
 
-export default withdrawForm
+export default rechargeForm

@@ -42,7 +42,11 @@ function rechargeIndex() {
                 {t.name}
               </BarItem>
             ))}
-            {offline[OfflinePayment.Bankcard] && <BarItem>银行卡</BarItem>}
+            {offline[OfflinePayment.Bankcard] && (
+              <BarItem onClick={() => router.push('/recharge/bankcard')}>
+                银行卡
+              </BarItem>
+            )}
             {offline[OfflinePayment.USDT] && <BarItem>USDT转帐</BarItem>}
           </Stack>
         )}

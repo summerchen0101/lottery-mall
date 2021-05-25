@@ -11,11 +11,7 @@ export interface OfflineRechargeReq {
 
 export interface OfflineRechargeRes {
   success: boolean
-  data: {
-    url: string
-    dataType: number
-    orderSn: string
-  }
+  data: number
 }
 
 export default function useOfflineRecharge() {
@@ -35,7 +31,7 @@ export default function useOfflineRecharge() {
   return {
     isLoading,
     mutate,
-    data: resData,
+    result: resData,
     isSuccess: !isLoading && resData?.success,
     isError: !isLoading && resData?.success === false,
   }
