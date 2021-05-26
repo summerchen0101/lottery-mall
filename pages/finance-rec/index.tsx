@@ -1,39 +1,51 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import RechargeLogPopup from '@/components/RechargeLogPopup'
-import WithdrawLogPopup from '@/components/WithdrawLogPopup'
+import RecItem from '@/components/RecItem'
 import { useLoaderProvider } from '@/context/LoaderProvider'
-import { usePopupContext } from '@/context/PopupContext'
 import { DateRangeType } from '@/lib/enums'
 import { financeRecDateRangeOpts } from '@/lib/options'
 import useFinanceRec from '@/service/useFinanceRec'
 import useDateRange from '@/utils/useDateRange'
 import useTransfer from '@/utils/useTransfer'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, Stack } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { useRouter } from 'next/dist/client/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-function rank() {
+export default function financeRec() {
   const router = useRouter()
-  const [, setRechargeLogVisible] = usePopupContext('rechargeLog')
-  const [, setWithdrawLogVisible] = usePopupContext('withdrawLog')
   const { loadingSpinner } = useLoaderProvider()
   const [dateRangeType, setDateRangeType] = useState(DateRangeType.Today)
   const { toCurrency } = useTransfer()
   const [startM, endM] = useDateRange(dateRangeType)
-  const { withdraw, recharge } = useFinanceRec(
+  const { withdraw, recharge, discount, agentDiscount } = useFinanceRec(
     startM.format('YYYY-MM-DD'),
     endM.format('YYYY-MM-DD'),
   )
+
+  useEffect(() => {
+    const range = (router.query.range as unknown) as DateRangeType
+    range
+      ? setDateRangeType(range)
+      : router.push({
+          pathname: router.pathname,
+          query: { range: DateRangeType.Today },
+        })
+  }, [router])
+
   return (
     <Layout>
-      <HeaderTitleBar back title="财务纪录" />
+      <HeaderTitleBar back backPath="/my" title="财务纪录" />
       <Box p="20px" flex="1" overflowY="auto">
         <Select
           value={dateRangeType}
-          onChange={(e) => setDateRangeType(+e.target.value)}
+          onChange={(e) =>
+            router.push({
+              pathname: router.pathname,
+              query: { range: e.target.value },
+            })
+          }
           mb="20px"
           shadow="lg"
           bg="white"
@@ -45,46 +57,32 @@ function rank() {
           ))}
         </Select>
         <Stack spacing="15px" mt="30px">
-          <HStack
-            bg="white"
-            h="60px"
-            px="15px"
-            borderRadius="md"
-            shadow="md"
-            justify="space-between"
-            onClick={() => setRechargeLogVisible(true)}
-          >
-            <Text fontWeight="600" fontSize="lg">
-              存款总计
-            </Text>
-            <Text fontWeight="bold" fontSize="xl" color="purple.600">
-              ¥ {toCurrency(recharge, 0)}
-            </Text>
-          </HStack>
-          <HStack
-            bg="white"
-            h="60px"
-            px="15px"
-            borderRadius="md"
-            shadow="md"
-            justify="space-between"
-            onClick={() => setWithdrawLogVisible(true)}
-          >
-            <Text fontWeight="600" fontSize="lg">
-              提款总计
-            </Text>
-            <Text fontWeight="bold" fontSize="xl" color="purple.600">
-              ¥ {toCurrency(withdraw, 0)}
-            </Text>
-          </HStack>
+          <RecItem
+            title="存款总计"
+            num={recharge}
+            onClick={() =>
+              router.push({
+                pathname: '/finance-rec/recharge',
+                query: router.query,
+              })
+            }
+          />
+          <RecItem
+            title="提款总计"
+            num={withdraw}
+            onClick={() =>
+              router.push({
+                pathname: '/finance-rec/withdraw',
+                query: router.query,
+              })
+            }
+          />
+          <RecItem title="优惠总计" num={discount} />
+          <RecItem title="代理优惠总计" num={agentDiscount} />
         </Stack>
-        <RechargeLogPopup dateType={dateRangeType} />
-        <WithdrawLogPopup dateType={dateRangeType} />
       </Box>
       <FooterNav />
       {loadingSpinner}
     </Layout>
   )
 }
-
-export default rank

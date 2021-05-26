@@ -28,8 +28,8 @@ const dateRanges = {
   [DateRangeType.inYear]: [moment().subtract(1, 'year'), moment()],
 }
 
-function useDateRange(dateType: DateRangeType) {
-  return dateRanges[dateType]
+function useDateRange(dateType: DateRangeType | null) {
+  return dateType && dateRanges[dateType]
 }
 
 export default useDateRange

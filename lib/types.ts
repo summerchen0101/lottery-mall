@@ -277,6 +277,8 @@ export type BetSuccessResponse = ResponseBase<{
 export type FinanceRecResponse = ResponseBase<{
   recharge: number
   withdraw: number
+  discount: number
+  discount_offline: number
 }>
 
 export interface RechargeLog {
@@ -303,6 +305,7 @@ export interface WithdrawLog {
   remark: string
   status: number
   created_at: string
+  description: string
 }
 export interface WithdrawLogResponse {
   success: boolean

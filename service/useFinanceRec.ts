@@ -11,6 +11,8 @@ export default function useFinanceRec(start: string, end: string) {
   return {
     recharge: res?.data.recharge,
     withdraw: res?.data.withdraw,
+    discount: res?.data.discount,
+    agentDiscount: res?.data.discount_offline,
     isLoading: isValidating,
     isError: error,
     refresh: mutate,
