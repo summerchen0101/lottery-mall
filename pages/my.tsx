@@ -6,7 +6,7 @@ import useAlert from '@/utils/useAlert'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import {
@@ -17,6 +17,19 @@ import {
   BiUser,
 } from 'react-icons/bi'
 import { HiOutlineLogout } from 'react-icons/hi'
+
+const linkItemProps = {
+  bg: 'white',
+  shadow: 'md',
+  px: '15px',
+  py: '15px',
+  color: 'gray.600',
+  fontWeight: 'bold',
+  fontSize: 'lg',
+  // borderLeftWidth: '5px',
+  // borderColor: 'gray.300',
+  borderRadius: 'md',
+}
 function my() {
   const { doLogout } = useService()
   const router = useRouter()
@@ -36,8 +49,8 @@ function my() {
           <Icon as={HiOutlineLogout} fontSize="20px" onClick={handleLogout} />
         }
       />
-      <Box flex="1" overflowY="auto">
-        <Box bg="purple.100" p="20px">
+      <Box flex="1" overflowY="auto" bg="gray.400">
+        <Box bg="gray.200" p="20px">
           <Text fontSize="sm" color="pink.500" fontWeight="bold">
             会员编号：{userInfo?.uid}
           </Text>
@@ -80,64 +93,35 @@ function my() {
           </HStack>
         </Box>
 
-        <Stack
+        <SimpleGrid
+          columns={2}
           mt="60px"
           fontSize="xl"
-          color="purple.600"
+          color="gray.500"
           fontWeight="bold"
           textAlign="center"
           p="10px"
           spacing="15px"
         >
-          <Box
-            bg="white"
-            shadow="md"
-            px="15px"
-            py="15px"
-            borderLeftWidth="4px"
-            borderColor="purple.600"
-            borderRadius="md"
-            onClick={() => router.push('/bankcard')}
-          >
+          <Box {...linkItemProps} onClick={() => router.push('/bankcard')}>
             银行卡管理
           </Box>
-          <Box
-            bg="white"
-            shadow="md"
-            px="15px"
-            py="15px"
-            borderLeftWidth="4px"
-            borderColor="purple.600"
-            borderRadius="md"
-            onClick={() => router.push('/finance-rec')}
-          >
+          <Box {...linkItemProps} onClick={() => router.push('/finance-rec')}>
             财务管理
           </Box>
-          <Box
-            bg="white"
-            shadow="md"
-            px="15px"
-            py="15px"
-            borderLeftWidth="4px"
-            borderColor="purple.600"
-            borderRadius="md"
-            onClick={() => router.push('/bet-rec')}
-          >
+          <Box {...linkItemProps} onClick={() => router.push('/bet-rec')}>
             下单纪录
           </Box>
-          <Box
-            bg="white"
-            shadow="md"
-            px="15px"
-            py="15px"
-            borderLeftWidth="4px"
-            borderColor="purple.600"
-            borderRadius="md"
-            onClick={() => router.push('/faq')}
-          >
+          <Box {...linkItemProps} onClick={() => router.push('/faq')}>
             常见问题
           </Box>
-        </Stack>
+          <Box {...linkItemProps} onClick={() => router.push('/about')}>
+            GEM介紹
+          </Box>
+          <Box {...linkItemProps} onClick={() => router.push('/hiring')}>
+            人才招聘
+          </Box>
+        </SimpleGrid>
       </Box>
       <FooterNav />
     </Layout>
