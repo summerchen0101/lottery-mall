@@ -24,9 +24,11 @@ import {
 import FastMarquee from 'react-fast-marquee'
 import { BiVolume } from 'react-icons/bi'
 import { Image } from '@chakra-ui/image'
+import { useRouter } from 'next/dist/client/router'
 
 export default function home() {
   const { marquee, video, isLoading } = useSiteParams()
+  const router = useRouter()
   return (
     <Layout>
       <Center h="100px" bg="pink.500" color="white">
@@ -43,6 +45,10 @@ export default function home() {
               allowFullScreen
               allow="autoplay"
             />
+            {/* <video controls loop>
+              <source src={video} type="video/mp4" />
+              Your browser does not support playing this Video
+            </video> */}
           </AspectRatio>
           <HStack px="3" bg="gray.500" h="30px" color="white">
             <Icon as={BiVolume} fontSize="20px" />
@@ -56,7 +62,7 @@ export default function home() {
             </FastMarquee>
           </HStack>
           <SimpleGrid columns={3} spacing="3" m="3">
-            <HomeIconBtn>
+            <HomeIconBtn onClick={() => router.push('/faq')}>
               <Stack align="center" spacing="0">
                 <Icon as={HiUserCircle} fontSize="40px" color="purple.500" />
                 <Text fontWeight="bold" color="gray.500">
@@ -64,7 +70,7 @@ export default function home() {
                 </Text>
               </Stack>
             </HomeIconBtn>
-            <HomeIconBtn>
+            <HomeIconBtn onClick={() => router.push('/bankcard')}>
               <Stack align="center" spacing="0">
                 <Icon as={HiUserCircle} fontSize="40px" color="purple.500" />
                 <Text fontWeight="bold" color="gray.500">
@@ -72,7 +78,7 @@ export default function home() {
                 </Text>
               </Stack>
             </HomeIconBtn>
-            <HomeIconBtn>
+            <HomeIconBtn onClick={() => router.push('/news')}>
               <Stack align="center" spacing="0">
                 <Icon as={HiUserCircle} fontSize="40px" color="purple.500" />
                 <Text fontWeight="bold" color="gray.500">
@@ -80,7 +86,7 @@ export default function home() {
                 </Text>
               </Stack>
             </HomeIconBtn>
-            <HomeIconBtn>
+            <HomeIconBtn onClick={() => router.push('/recharge')}>
               <Stack align="center" spacing="0">
                 <Icon as={HiUserCircle} fontSize="40px" color="purple.500" />
                 <Text fontWeight="bold" color="gray.500">
@@ -88,7 +94,7 @@ export default function home() {
                 </Text>
               </Stack>
             </HomeIconBtn>
-            <HomeIconBtn>
+            <HomeIconBtn onClick={() => router.push('/lottery')}>
               <Stack align="center" spacing="0">
                 <Icon as={HiUserCircle} fontSize="40px" color="purple.500" />
                 <Text fontWeight="bold" color="gray.500">
