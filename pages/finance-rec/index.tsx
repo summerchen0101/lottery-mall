@@ -3,7 +3,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import RecItem from '@/components/RecItem'
 import { useLoaderProvider } from '@/context/LoaderProvider'
-import { DateRangeType } from '@/lib/enums'
+import { DateRangeType, DiscountLogType } from '@/lib/enums'
 import { financeRecDateRangeOpts } from '@/lib/options'
 import useFinanceRec from '@/service/useFinanceRec'
 import useDateRange from '@/utils/useDateRange'
@@ -77,8 +77,32 @@ export default function financeRec() {
               })
             }
           />
-          <RecItem title="优惠总计" num={discount} />
-          <RecItem title="代理优惠总计" num={agentDiscount} />
+          <RecItem
+            title="优惠总计"
+            num={discount}
+            onClick={() =>
+              router.push({
+                pathname: '/finance-rec/discount',
+                query: {
+                  range: router.query.range,
+                  type: DiscountLogType.Normal,
+                },
+              })
+            }
+          />
+          <RecItem
+            title="代理优惠总计"
+            num={agentDiscount}
+            onClick={() =>
+              router.push({
+                pathname: '/finance-rec/discount',
+                query: {
+                  range: router.query.range,
+                  type: DiscountLogType.Agent,
+                },
+              })
+            }
+          />
         </Stack>
       </Box>
       <FooterNav />

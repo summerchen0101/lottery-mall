@@ -16,6 +16,7 @@ import useTransfer from '@/utils/useTransfer'
 import { Button, IconButton } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
 import { Box, Flex, HStack, SimpleGrid, Text } from '@chakra-ui/layout'
+import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import { BiDollar } from 'react-icons/bi'
@@ -28,7 +29,7 @@ function lottery() {
   const router = useRouter()
   const { toCurrency } = useTransfer()
   const { secToTimer } = useHelper()
-  const { goodsList } = useGoodsList()
+  const { goodsList, isLoading } = useGoodsList()
   const { data: qishuData } = useCurrentQishu()
   const [countdown, setCountdown] = useState(
     qishuData?.countdown - qishuData?.close_time,
@@ -129,16 +130,20 @@ function lottery() {
             排行榜
           </Button>
         </SimpleGrid>
-        <SimpleGrid columns={2} spacing="20px">
-          {goodsList?.map((t) => (
-            <GoodsItem
-              key={t.id}
-              item={t}
-              isAccounting={qishuData?.close_time >= qishuData?.countdown}
-              onBetClicked={() => handleGoodsClicked(t)}
-            />
-          ))}
-        </SimpleGrid>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <SimpleGrid columns={2} spacing="20px">
+            {goodsList?.map((t) => (
+              <GoodsItem
+                key={t.id}
+                item={t}
+                isAccounting={qishuData?.close_time >= qishuData?.countdown}
+                onBetClicked={() => handleGoodsClicked(t)}
+              />
+            ))}
+          </SimpleGrid>
+        )}
       </Box>
       <FooterNav />
       <BettingPopup countdown={countdown} />

@@ -10,7 +10,7 @@ export default function useGoodsList() {
   )
   return {
     goodsList: res?.data,
-    isLoading: isValidating,
+    isLoading: !error && !res,
     isError: error,
     refresh: mutate,
   }

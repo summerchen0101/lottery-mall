@@ -36,3 +36,8 @@ export enum OfflinePayment {
   Bankcard = 1,
   USDT = 4,
 }
+
+export enum DiscountLogType {
+  Normal = 5,
+  Agent = 6,
+}
