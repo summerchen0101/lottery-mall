@@ -35,7 +35,7 @@ const login = () => {
     const res = await doLogin({ ...d, ckey: key })
     if (res?.success) {
       setToken(res?.token)
-      router.push('/lottery')
+      router.push('/home')
     }
   })
 

@@ -5,7 +5,7 @@ import Layout from '@/components/Layout'
 import bankCodes from '@/lib/bankCodes'
 import { OfflinePayment } from '@/lib/enums'
 import useOfflinePayment from '@/service/useOfflinePayment'
-import useUsdtRate from '@/service/useUsdtRate'
+import useSiteParams from '@/service/useSiteParams'
 import useOfflineRecharge, {
   OfflineRechargeReq,
 } from '@/service/useOfflineRecharge'
@@ -33,7 +33,7 @@ function rechargeForm() {
     setValue,
   } = useForm<RechargeFormProps>()
   const router = useRouter()
-  const { rate } = useUsdtRate()
+  const { rate } = useSiteParams()
   const { paymentList } = useOfflinePayment(OfflinePayment.USDT)
   const info = useMemo(() => {
     if (watch('line_id')) {

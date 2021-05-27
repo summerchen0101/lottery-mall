@@ -20,6 +20,7 @@ function FooterNav() {
       // borderTopWidth="2px"
       // borderTopColor="gray.300"
     >
+      <Icon as={HiHome} onClick={() => router.push('/home')} />
       <Icon as={HiShoppingCart} onClick={() => router.push('/lottery')} />
       <Icon as={HiStar} onClick={() => router.push('/activity')} />
       <Icon as={HiClock} onClick={() => router.push('/bet-rec')} />
