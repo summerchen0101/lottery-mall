@@ -2,6 +2,7 @@ import {
   BankCardStatus,
   DateRangeType,
   OfflinePayment,
+  PasswordType,
   RechargeStatus,
   WithdrawStatus,
 } from './enums'
@@ -61,4 +62,8 @@ export const withdrawStatusOpts = [
 export const offlinePaymentOpts = [
   { label: '银行卡', value: OfflinePayment.Bankcard },
   { label: 'USDT转帐', value: OfflinePayment.USDT },
+]
+export const passTypeOpts = [
+  { label: '登入密码', value: PasswordType.Normal },
+  { label: '交易密码', value: PasswordType.Trade },
 ]

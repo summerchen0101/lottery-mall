@@ -8,6 +8,7 @@ import {
   BetConfirmRequest,
   BetConfirmResponse,
   BetSuccessResponse,
+  EditPassRequest,
   FinanceRecResponse,
   FirstBankNameResponse,
   LeaderBoardResponse,
@@ -46,6 +47,9 @@ function useService() {
   const doBetAction = (req: BetActionRequest) =>
     post<BetActionResponse>('/lottery/betAction', req)
 
+  const doEditPass = (req: EditPassRequest) =>
+    post<{ success: boolean }>('/user/editpwd', req)
+
   return {
     doLogin,
     doCreateBankCard,
@@ -54,6 +58,7 @@ function useService() {
     doBetAction,
     checkLoginStatus,
     doLogout,
+    doEditPass,
   }
 }
 

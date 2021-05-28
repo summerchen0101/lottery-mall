@@ -1,3 +1,5 @@
+import { PasswordType } from './enums'
+
 export interface OptionType<T = number | string> {
   label: string
   value: T
@@ -335,4 +337,11 @@ export interface WithdrawCreateRequest {
   user_bank_id: string
   money: number
   security_pwd: string
+}
+
+export interface EditPassRequest {
+  type: PasswordType
+  pwd: string
+  new_pwd: string
+  c_new_pwd: string
 }

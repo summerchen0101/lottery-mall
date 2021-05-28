@@ -41,3 +41,7 @@ export enum DiscountLogType {
   Normal = 5,
   Agent = 6,
 }
+export enum PasswordType {
+  Normal = 1,
+  Trade = 2,
+}
