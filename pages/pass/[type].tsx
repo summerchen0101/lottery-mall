@@ -10,7 +10,7 @@ import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
-import { Box, Divider, HStack, Stack } from '@chakra-ui/layout'
+import { Box, Divider, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useToast } from '@chakra-ui/toast'
 import { useRouter } from 'next/dist/client/router'
@@ -61,6 +61,9 @@ function pass() {
     <Layout>
       <HeaderTitleBar back title={toOptionName(passTypeOpts, passType)} />
       <Box flex="1" overflowY="auto" p="20px">
+        <Text color="gray.500" fontSize="sm" mb="3">
+          您可以在下方修改您的密码, 或直接联系我们的线上客服
+        </Text>
         <Stack
           as="form"
           spacing="12px"
@@ -109,10 +112,19 @@ function pass() {
               bg="gray.300"
               size="lg"
               w="full"
+              onClick={() => router.back()}
+            >
+              取消
+            </Button>
+            {/* <Button
+              colorScheme="gray"
+              bg="gray.300"
+              size="lg"
+              w="full"
               type="reset"
             >
               重置
-            </Button>
+            </Button> */}
             <Button colorScheme="pink" size="lg" w="full" type="submit">
               确认送出
             </Button>
