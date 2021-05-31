@@ -230,6 +230,7 @@ export interface BetTarget {
 export interface ChartItem {
   date: string
   profit: string
+  bet_total: number
 }
 
 export type GoodInfoResponse = ResponseBase<{

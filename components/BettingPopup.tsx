@@ -3,32 +3,29 @@ import useCurrentQishu from '@/service/useCurrentQishu'
 import useGoodsInfo from '@/service/useGoodsInfo'
 import useUserInfo from '@/service/useUserInfo'
 import useHelper from '@/utils/useHelper'
-import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { FormControl, FormLabel } from '@chakra-ui/form-control'
-import { Image } from '@chakra-ui/image'
+import { FormControl } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
-import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
 import { Spinner } from '@chakra-ui/spinner'
-import { Tag } from '@chakra-ui/tag'
 import { useToast } from '@chakra-ui/toast'
+import { Chart, Interval, Line, Point, Tooltip } from 'bizcharts'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
+import { HiArrowRight } from 'react-icons/hi'
 
 function BettingPopup({ countdown }: { countdown: number }) {
   const router = useRouter()
-  const { secToTimer } = useHelper()
+  const { toNumString } = useHelper()
   const { toCurrency } = useTransfer()
   const [visible, setVisible] = useBetInfoContext().betting
   const [, setBetConfirmVisible] = useBetInfoContext().betConfirm
@@ -82,48 +79,52 @@ function BettingPopup({ countdown }: { countdown: number }) {
     <Modal isOpen={visible} onClose={handleCancel} autoFocus={false}>
       <ModalOverlay />
       <ModalContent mx="20px">
-        <ModalHeader justify="center">
-          <Tag colorScheme="red" variant="solid">
-            抢购倒数：{secToTimer(countdown)}
-          </Tag>
-        </ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
+        <ModalBody p="4">
           {isLoading ? (
             <Spinner />
           ) : (
             <Stack spacing="15px">
               <HStack>
-                <Image
-                  src={`${process.env.apiBaseUrl}/${goodsInfo.pic_icon}`}
-                  boxSize="100px"
-                />
-                <Box flex="1">
-                  <Text
-                    color="gray.700"
-                    fontWeight="bold"
-                    fontSize="lg"
-                    mb="5px"
-                  >
-                    {goodsInfo.name}
+                <HStack flex="1" bg="gray.200" borderRadius="md" p="2" h="40px">
+                  <Text fontSize="lg" lineHeight="18px">
+                    GEM-{toNumString(goodsInfo?.number)}
                   </Text>
-                  <Flex justify="space-between" align="flex-end">
-                    <Text color="pink.500" fontWeight="bold" fontSize="xl">
-                      收益率：{odds}%
-                    </Text>
-                    {/* <Tag colorScheme="red" variant="solid">
-                      抢购倒数：2
-                    </Tag> */}
-                  </Flex>
-                </Box>
+                  <Text fontSize="sm">{goodsInfo?.name}</Text>
+                </HStack>
+                <HiArrowRight />
+                <HStack flex="1" bg="gray.200" borderRadius="md" p="2" h="40px">
+                  <Text fontSize="10px">目前收益率：</Text>
+                  <Text
+                    fontSize="xl"
+                    lineHeight="18px"
+                    color="red.500"
+                    textAlign="center"
+                  >
+                    {odds}%
+                  </Text>
+                </HStack>
               </HStack>
-
               <Box>
-                {/* <Text color="gray.600" fontWeight="bold">
+                <Text fontWeight="600" color="purple.500" mb="1">
+                  市场行情(6小时)
+                </Text>
+                <Box>
+                  <Chart autoFit height={200} data={goodsInfo.chart}>
+                    <Line position="date*profit" />
+                    <Point position="date*profit" />
+                    <Tooltip showCrosshairs />
+                  </Chart>
+                  <Chart height={100} autoFit data={goodsInfo.chart}>
+                    <Interval position="date*bet_total" />
+                    <Tooltip shared />
+                  </Chart>
+                </Box>
+              </Box>
+              <Box>
+                <Text fontWeight="600" color="purple.500" mb="1">
                   投资金额
-                </Text> */}
+                </Text>
                 <FormControl>
-                  <FormLabel>投资金额</FormLabel>
                   <HStack>
                     <Input
                       w="full"
@@ -159,13 +160,13 @@ function BettingPopup({ countdown }: { countdown: number }) {
           )}
         </ModalBody>
 
-        <ModalFooter>
-          <HStack>
-            <Button colorScheme="pink">立即充值</Button>
-            <Button colorScheme="pink" onClick={handleSubmit}>
-              立即抢购
-            </Button>
-          </HStack>
+        <ModalFooter p="4" as={HStack}>
+          <Button colorScheme="gray" flex="1">
+            立即充值
+          </Button>
+          <Button colorScheme="pink" flex="1" onClick={handleSubmit}>
+            立即抢购
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

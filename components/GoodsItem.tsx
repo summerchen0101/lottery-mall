@@ -18,8 +18,14 @@ function GoodsItem({
   const { toNumString } = useHelper()
   return (
     <HStack bg="white" borderBottom="1px solid #ccc" spacing="1" py="1" px="1">
-      <Box w="full">
-        <HStack justify="space-between" bg="gray.200" px="2" fontSize="sm">
+      <Box w="full" onClick={onBetClicked}>
+        <HStack
+          justify="space-between"
+          bg="gray.200"
+          px="2"
+          fontSize="sm"
+          lineHeight="25px"
+        >
           <Text>GEM-{toNumString(item.number)}</Text>
           <Text>{item.name}</Text>
         </HStack>
