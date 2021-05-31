@@ -69,6 +69,7 @@ export interface Goods {
   price: number
   number: number
   odds: number
+  chart: { date: string; profit: string }[]
 }
 
 export type GoodsListResponse = ResponseBase<Goods[]>

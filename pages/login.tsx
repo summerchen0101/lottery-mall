@@ -86,7 +86,7 @@ const login = () => {
                   name="captcha"
                   ref={register({
                     required: '不可为空',
-                    pattern: { value: /^[0-9]{5}$/, message: '格式有误' },
+                    pattern: { value: /^\w{5}$/, message: '格式有误' },
                   })}
                 />
                 <Center h="34px" w="120px">

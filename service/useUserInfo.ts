@@ -12,7 +12,7 @@ export default function useUserInfo() {
   } = useSWR<UserProfileResponse>('/user/profile', post)
   return {
     userInfo: res?.data,
-    isLoading: isValidating,
+    isLoading: !error && !res,
     isError: error,
     refresh: mutate,
   }

@@ -1,8 +1,10 @@
 import { Goods } from '@/lib/types'
 import { Button } from '@chakra-ui/button'
 import { Image } from '@chakra-ui/image'
-import { Box, Circle, Stack, Text } from '@chakra-ui/layout'
-import React from 'react'
+import { Box, Circle, HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
+import React, { useMemo } from 'react'
+import { Chart, Line, Point, Tooltip } from 'bizcharts'
+import useHelper from '@/utils/useHelper'
 
 function GoodsItem({
   item,
@@ -13,53 +15,41 @@ function GoodsItem({
   isAccounting: boolean
   onBetClicked: () => void
 }) {
+  const { toNumString } = useHelper()
   return (
-    <Stack
-      p="20px"
-      borderRadius="md"
-      bg="white"
-      shadow="md"
-      spacing="1"
-      pos="relative"
-    >
-      <Circle
-        size="30px"
-        bg="pink.500"
-        color="white"
-        fontWeight="bold"
-        pos="absolute"
-        top="0"
-        left="0"
-        m="2"
-      >
-        {item.number}
-      </Circle>
-      <Image
-        boxSize="120px"
-        mx="auto"
-        src={`${process.env.apiBaseUrl}/${item.pic_icon}`}
-      />
-      <Box textAlign="center">
-        <Text color="gray.500" fontWeight="bold" noOfLines={1}>
-          {item.name}
+    <HStack bg="white" borderBottom="1px solid #ccc" spacing="1" py="1" px="1">
+      <Box w="full">
+        <HStack justify="space-between" bg="gray.200" px="2" fontSize="sm">
+          <Text>GEM-{toNumString(item.number)}</Text>
+          <Text>{item.name}</Text>
+        </HStack>
+        <Text fontSize="10px" px="2">
+          目前收益率：
         </Text>
-        <Text color="pink.500" fontSize="sm" fontWeight="bold">
-          价差收益率 {item.odds}%
+        <Text
+          fontSize="28px"
+          color="red.500"
+          lineHeight="28px"
+          textAlign="center"
+        >
+          {item.odds}%
         </Text>
+        <Text fontSize="10px" px="2">
+          比較上次：
+        </Text>
+        <HStack fontSize="20px" justify="center" lineHeight="20px">
+          <Text>0.7%</Text>
+          <Text color="red.500">▲0.2%</Text>
+        </HStack>
       </Box>
-      {/* <Text color="pink.500" fontWeight="bold">
-                ¥ {toCurrency(item.price, 0)}
-              </Text> */}
-      {isAccounting ? (
-        <Button disabled size="sm" w="full" colorScheme="purple">
-          结帐中
-        </Button>
-      ) : (
-        <Button size="sm" w="full" colorScheme="purple" onClick={onBetClicked}>
-          立即下单
-        </Button>
-      )}
-    </Stack>
+      <Box w="full">
+        <Chart autoFit height={100} data={item.chart}>
+          <Line position="date*profit" />
+          {/* <Point position="year*value" /> */}
+          <Tooltip showCrosshairs />
+        </Chart>
+      </Box>
+    </HStack>
   )
 }
 

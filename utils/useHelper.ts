@@ -1,6 +1,7 @@
 import moment from 'moment'
 import $ from 'jquery'
 import { useToast } from '@chakra-ui/toast'
+import numeral from 'numeral'
 
 const useHelper = () => {
   const toast = useToast()
@@ -15,7 +16,10 @@ const useHelper = () => {
   const secToTimer = (seconds: number) =>
     seconds ? new Date(seconds * 1000).toISOString().substr(14, 5) : ''
 
-  return { getBase64, secToTimer }
+  const toNumString = (value?: number, num = 3) =>
+    value?.toString().padStart(num, '0')
+
+  return { getBase64, secToTimer, toNumString }
 }
 
 export default useHelper

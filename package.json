@@ -17,6 +17,7 @@
     "@types/numeral": "^0.0.29",
     "@types/react-copy-to-clipboard": "^5.0.0",
     "axios": "^0.21.1",
+    "bizcharts": "^4.1.10",
     "classnames": "^2.2.6",
     "framer-motion": "^3.3.0",
     "html-react-parser": "^1.2.4",
