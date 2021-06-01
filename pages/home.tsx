@@ -14,17 +14,11 @@ import {
   Text,
 } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import {
-  HiAnnotation,
-  HiOutlineSpeakerphone,
-  HiSpeakerphone,
-  HiUserCircle,
-} from 'react-icons/hi'
 import FastMarquee from 'react-fast-marquee'
 import { BiVolume } from 'react-icons/bi'
-import { Image } from '@chakra-ui/image'
-import { useRouter } from 'next/dist/client/router'
+import { HiUserCircle } from 'react-icons/hi'
 
 export default function home() {
   const { marquee, video, isLoading } = useSiteParams()
@@ -42,8 +36,9 @@ export default function home() {
             <iframe
               title="公司影片"
               src={video}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              allow="autoplay"
             />
             {/* <video controls loop>
               <source src={video} type="video/mp4" />
