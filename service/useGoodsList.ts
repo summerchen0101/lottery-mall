@@ -2,15 +2,15 @@ import { GoodsListResponse } from '@/lib/types'
 import useRequest from '@/utils/useRequest'
 import useSWR from 'swr'
 
-export default function useGoodsList() {
+export default function useGoodsList(goodsCode?: number) {
   const { request } = useRequest()
   const { data: res, error, mutate, isValidating } = useSWR<GoodsListResponse>(
-    '/lottery/getGoodsList',
-    (url) => request('post', url, { lottery_id: 6 }),
+    ['/lottery/getGoodsList', goodsCode],
+    (url, code) => request('post', url, { lottery_id: 6, code }),
   )
   return {
     goodsList: res?.data,
-    isLoading: !error && !res,
+    isLoading: isValidating,
     isError: error,
     refresh: mutate,
   }

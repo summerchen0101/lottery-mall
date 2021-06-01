@@ -13,28 +13,32 @@ import useUserInfo from '@/service/useUserInfo'
 import useTransfer from '@/utils/useTransfer'
 import { IconButton } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
-import { Input } from '@chakra-ui/input'
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/input'
 import { Box, Flex, HStack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { BiDollar } from 'react-icons/bi'
 import {
   HiCurrencyDollar,
+  HiRefresh,
   HiSearch,
   HiSpeakerphone,
   HiSun,
+  HiTrash,
   HiUpload,
+  HiX,
 } from 'react-icons/hi'
 
 function lottery() {
   const [, setBettingVisible] = useBetInfoContext().betting
   const [, setGoodsId] = useBetInfoContext().goodsId
-
+  const [code, setCode] = useState<number>()
+  const searchInput = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const { toCurrency } = useTransfer()
-  const { goodsList, isLoading } = useGoodsList()
+  const { goodsList, isLoading: isGoodsListLoading } = useGoodsList(code)
   const { data: qishuData } = useCurrentQishu()
   const toQishuNo = (qishu: number) => _.takeRight(qishu?.toString(), 2)
   const { userInfo } = useUserInfo()
@@ -42,6 +46,14 @@ function lottery() {
   const handleGoodsClicked = async (goods: Goods) => {
     setGoodsId(goods.id)
     setBettingVisible(true)
+  }
+
+  const handleSearchCode = () => {
+    setCode(parseInt(searchInput.current.value.trim().replace('GEM-', '')))
+  }
+  const handleResetSearch = () => {
+    searchInput.current.value = ''
+    setCode(null)
   }
 
   return (
@@ -87,68 +99,72 @@ function lottery() {
         </Flex>
       )}
       <Box p="20px" flex="1" overflowY="auto">
-        {isLoading ? (
+        <HStack mb="2">
+          <HStack
+            flex="1"
+            bg="gray.300"
+            color="gray.500"
+            borderRadius="md"
+            p="1"
+          >
+            <Text fontSize="10px">
+              No.{toQishuNo(qishuData?.next_qishu)}
+              <br />
+              订单
+            </Text>
+            <LotteryCountdown />
+          </HStack>
+          <Icon as={HiSun} fontSize="23px" />
+          <HStack
+            flex="1"
+            bg="gray.300"
+            color="gray.500"
+            borderRadius="md"
+            p="1"
+          >
+            <Text fontSize="10px">
+              No.{toQishuNo(qishuData?.qishu)}
+              <br />
+              订单
+            </Text>
+            <Text fontSize="xl" flex="1" textAlign="center">
+              {qishuData?.goods.name}
+            </Text>
+          </HStack>
+        </HStack>
+        <HStack justify="center" bg="purple.500" p="2" borderRadius="md" mb="2">
+          <InputGroup>
+            <Input
+              bg="gray.200"
+              placeholder="请输入投资代号"
+              ref={searchInput}
+            />
+            {code && (
+              <InputRightElement>
+                <Icon as={HiX} fontSize="18px" onClick={handleResetSearch} />
+              </InputRightElement>
+            )}
+          </InputGroup>
+          <IconButton
+            colorScheme="pink"
+            aria-label="Search database"
+            icon={<HiSearch />}
+            fontSize="xl"
+            onClick={handleSearchCode}
+          />
+        </HStack>
+        {isGoodsListLoading ? (
           <Spinner />
         ) : (
-          <>
-            <HStack mb="2">
-              <HStack
-                flex="1"
-                bg="gray.300"
-                color="gray.500"
-                borderRadius="md"
-                p="1"
-              >
-                <Text fontSize="10px">
-                  No.{toQishuNo(qishuData?.next_qishu)}
-                  <br />
-                  订单
-                </Text>
-                <LotteryCountdown />
-              </HStack>
-              <Icon as={HiSun} fontSize="23px" />
-              <HStack
-                flex="1"
-                bg="gray.300"
-                color="gray.500"
-                borderRadius="md"
-                p="1"
-              >
-                <Text fontSize="10px">
-                  No.{toQishuNo(qishuData?.qishu)}
-                  <br />
-                  订单
-                </Text>
-                <Text fontSize="xl" flex="1" textAlign="center">
-                  {qishuData?.goods.name}
-                </Text>
-              </HStack>
-            </HStack>
-            <HStack
-              justify="center"
-              bg="purple.500"
-              p="2"
-              borderRadius="md"
-              mb="2"
-            >
-              <Input bg="gray.200" placeholder="请输入投资代号" />
-              <IconButton
-                colorScheme="pink"
-                aria-label="Search database"
-                icon={<HiSearch />}
-                fontSize="xl"
+          <Box>
+            {goodsList?.map((t) => (
+              <GoodsItem
+                key={t.id}
+                item={t}
+                onBetClicked={() => handleGoodsClicked(t)}
               />
-            </HStack>
-            <Box>
-              {goodsList?.map((t) => (
-                <GoodsItem
-                  key={t.id}
-                  item={t}
-                  onBetClicked={() => handleGoodsClicked(t)}
-                />
-              ))}
-            </Box>
-          </>
+            ))}
+          </Box>
         )}
       </Box>
       <FooterNav />

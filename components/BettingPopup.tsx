@@ -169,7 +169,11 @@ function BettingPopup() {
         </ModalBody>
 
         <ModalFooter p="4" as={HStack}>
-          <Button colorScheme="gray" flex="1">
+          <Button
+            colorScheme="gray"
+            flex="1"
+            onClick={() => router.push('/recharge')}
+          >
             立即充值
           </Button>
           <Button colorScheme="pink" flex="1" onClick={handleSubmit}>
