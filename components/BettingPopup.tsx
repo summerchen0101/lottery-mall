@@ -21,7 +21,7 @@ import { useToast } from '@chakra-ui/toast'
 import { Chart, Interval, Line, Point, Tooltip } from 'bizcharts'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
 
 function BettingPopup() {
@@ -31,11 +31,12 @@ function BettingPopup() {
   const [visible, setVisible] = useBetInfoContext().betting
   const [, setBetConfirmVisible] = useBetInfoContext().betConfirm
   const [goodsId] = useBetInfoContext().goodsId
-  const [totalPrice, setTotalPrice] = useBetInfoContext().totalPrice
+  const [, setTotalPrice] = useBetInfoContext().totalPrice
   const [odds, setOdds] = useBetInfoContext().odds
   const { userInfo } = useUserInfo()
   const { data: qishuData } = useCurrentQishu()
   const { goodsInfo, isLoading } = useGoodsInfo(goodsId)
+  const priceInput = useRef<HTMLInputElement>(null)
   const toast = useToast()
   const { countdown } = useCountdown(
     qishuData?.countdown - qishuData?.close_time,
@@ -52,20 +53,17 @@ function BettingPopup() {
   )
 
   const handleSubmit = async () => {
-    if (!totalPrice) {
+    const value = +priceInput.current.value
+    setTotalPrice(value > 0 ? value : null)
+    if (!value) {
       toast({ status: 'error', title: '请输入金额' })
       return
-    } else if (totalPrice < 100) {
+    } else if (value < 100) {
       toast({ status: 'error', title: '最低限额为100' })
       return
     }
     setVisible(false)
     setBetConfirmVisible(true)
-  }
-
-  const handleAmountChanged = (e) => {
-    const value = e.target.value
-    setTotalPrice(value > 0 ? value : null)
   }
 
   const handleCancel = () => {
@@ -141,11 +139,10 @@ function BettingPopup() {
                 <FormControl>
                   <HStack>
                     <Input
+                      ref={priceInput}
                       w="full"
                       bg="gray.100"
                       type="number"
-                      value={totalPrice ?? ''}
-                      onChange={handleAmountChanged}
                     />
                     <Button
                       w="full"
@@ -160,15 +157,12 @@ function BettingPopup() {
               <Stack spacing="0" align="flex-end">
                 <HStack>
                   <Text color="gray.500" fontWeight="bold" fontSize="md">
-                    支付合计：
+                    余额：
                   </Text>
-                  <Text color="pink.500" fontWeight="bold" fontSize="2xl">
-                    ¥ {toCurrency(totalPrice || 0)}
+                  <Text color="pink.500" fontWeight="bold" fontSize="lg">
+                    ¥ {toCurrency(userInfo?.money)}
                   </Text>
                 </HStack>
-                <Text color="gray.400" fontWeight="bold" fontSize="sm">
-                  余额：{toCurrency(userInfo?.money)}
-                </Text>
               </Stack>
             </Stack>
           )}
