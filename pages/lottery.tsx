@@ -138,6 +138,7 @@ function lottery() {
               bg="gray.200"
               placeholder="请输入投资代号"
               ref={searchInput}
+              type="number"
             />
             {code && (
               <InputRightElement>
