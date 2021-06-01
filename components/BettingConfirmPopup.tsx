@@ -1,6 +1,7 @@
 import { useBetInfoContext } from '@/context/BetInfoProvider'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { BetConfirmResponse, BetTarget } from '@/lib/types'
+import useBetAction from '@/service/useBetAction'
 import useCurrentQishu from '@/service/useCurrentQishu'
 import useGoodsInfo from '@/service/useGoodsInfo'
 import useUserInfo from '@/service/useUserInfo'
@@ -20,6 +21,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
+import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -35,7 +37,7 @@ function BettingConfirmPopup() {
   const [visible, setVisible] = useBetInfoContext().betConfirm
   const [confirmRes, setConfirmRes] = useState<BetConfirmResponse>()
   const { setOrderSn } = useGlobalProvider()
-  const { doBetConfirm, doBetAction } = useService()
+  const { doBetConfirm } = useService()
   const { wanfaList } = useWanfaList()
   const { data: qishuData } = useCurrentQishu()
   const { userInfo } = useUserInfo()
@@ -43,6 +45,7 @@ function BettingConfirmPopup() {
   const { countdown } = useCountdown(
     qishuData?.countdown - qishuData?.close_time,
   )
+  const { mutate, isLoading, orderSn } = useBetAction()
   const betTargets: BetTarget[] = useMemo(() => {
     return wanfaList?.map((t) => ({
       id: t.id,
@@ -57,19 +60,21 @@ function BettingConfirmPopup() {
 
   const onSubmit = async () => {
     try {
-      const res = await doBetAction({
+      mutate({
         bet_list: betTargets,
         lottery_id: 6,
         goods_id: goodsId,
         qishu: qishuData?.next_qishu,
       })
-      setOrderSn(res.order_sn)
-      setBetSuccessVisible(true)
-      setVisible(false)
     } catch (err) {
       console.log(err)
     }
   }
+  useEffect(() => {
+    setOrderSn(orderSn)
+    setBetSuccessVisible(true)
+    setVisible(false)
+  }, [orderSn])
 
   const fetchConfirmInfo = async () => {
     try {
@@ -146,8 +151,9 @@ function BettingConfirmPopup() {
             <Button colorScheme="gray" onClick={onClose}>
               取消
             </Button>
-            <Button colorScheme="pink" onClick={onSubmit}>
+            <Button colorScheme="pink" onClick={onSubmit} disabled={isLoading}>
               确认
+              {isLoading && <Spinner ml="1" />}
             </Button>
           </HStack>
         </ModalFooter>

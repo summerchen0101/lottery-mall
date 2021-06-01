@@ -44,9 +44,6 @@ function useService() {
   const doBetConfirm = (req: BetConfirmRequest) =>
     post<BetConfirmResponse>('/lottery/betConfirm', req)
 
-  const doBetAction = (req: BetActionRequest) =>
-    post<BetActionResponse>('/lottery/betAction', req)
-
   const doEditPass = (req: EditPassRequest) =>
     post<{ success: boolean }>('/user/editpwd', req)
 
@@ -55,7 +52,6 @@ function useService() {
     doCreateBankCard,
     doCreateWithdraw,
     doBetConfirm,
-    doBetAction,
     checkLoginStatus,
     doLogout,
     doEditPass,
