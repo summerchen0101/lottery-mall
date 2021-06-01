@@ -1,3 +1,4 @@
+import { ResponseBase } from '@/lib/types'
 import { request } from '@/utils/request'
 import { useState } from 'react'
 
@@ -8,27 +9,29 @@ export interface BetTarget {
   bet_money?: number
 }
 
-export interface BetActionReq {
+export interface BetConfirmReq {
   lottery_id: number
   goods_id: number
   qishu: number
   bet_list: BetTarget[]
 }
 
-export interface BetActionRes {
-  success: boolean
-  message: string
-  order_sn: string
-}
+export type BetConfirmRes = ResponseBase<{
+  bet_number: number
+  total_p_value: number
+  profit: number
+  money: number
+  bet_list: BetTarget[]
+}>
 
-export default function useBetAction() {
+export default function useBetConfirm() {
   const [isLoading, setIsLoading] = useState(false)
-  const [resData, setResData] = useState<BetActionRes>()
-  const handler = async (data: BetActionReq) => {
+  const [resData, setResData] = useState<BetConfirmRes>()
+  const handler = async (data: BetConfirmReq) => {
     setIsLoading(true)
-    const res = await request<BetActionRes>({
+    const res = await request<BetConfirmRes>({
       method: 'post',
-      url: 'lottery/betAction',
+      url: 'lottery/betConfirm',
       data,
     })
     setResData(res)
@@ -37,7 +40,7 @@ export default function useBetAction() {
   return {
     isLoading,
     handler,
-    orderSn: resData?.order_sn,
+    data: resData?.data,
     isError: !isLoading && resData?.success === false,
   }
 }

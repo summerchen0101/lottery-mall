@@ -1,28 +1,15 @@
 import {
-  ActivityListResponse,
-  ActivityResponse,
   BankCardCreateRequest,
-  BankListResponse,
-  BetActionRequest,
-  BetActionResponse,
   BetConfirmRequest,
   BetConfirmResponse,
-  BetSuccessResponse,
   EditPassRequest,
-  FinanceRecResponse,
-  FirstBankNameResponse,
-  LeaderBoardResponse,
   LoginRequest,
   LoginResponse,
   LogoutResponse,
-  NoticeListResponse,
-  RechargeLogResponse,
   UserProfileResponse,
   WithdrawCreateRequest,
-  WithdrawLogResponse,
 } from '@/lib/types'
 import { useToast } from '@chakra-ui/toast'
-import useSWR from 'swr'
 import useRequest from './useRequest'
 
 function useService() {
@@ -41,9 +28,6 @@ function useService() {
   const doCreateWithdraw = (req: WithdrawCreateRequest) =>
     post<{ success: boolean; data: number }>('/finance/withdraw', req)
 
-  const doBetConfirm = (req: BetConfirmRequest) =>
-    post<BetConfirmResponse>('/lottery/betConfirm', req)
-
   const doEditPass = (req: EditPassRequest) =>
     post<{ success: boolean }>('/user/editpwd', req)
 
@@ -51,7 +35,6 @@ function useService() {
     doLogin,
     doCreateBankCard,
     doCreateWithdraw,
-    doBetConfirm,
     checkLoginStatus,
     doLogout,
     doEditPass,

@@ -2,6 +2,7 @@ import { useBetInfoContext } from '@/context/BetInfoProvider'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { BetConfirmResponse, BetTarget } from '@/lib/types'
 import useBetAction from '@/service/useBetAction'
+import useBetConfirm from '@/service/useBetConfirm'
 import useCurrentQishu from '@/service/useCurrentQishu'
 import useGoodsInfo from '@/service/useGoodsInfo'
 import useUserInfo from '@/service/useUserInfo'
@@ -35,9 +36,7 @@ function BettingConfirmPopup() {
   const [goodsId] = useBetInfoContext().goodsId
   const [totalPrice] = useBetInfoContext().totalPrice
   const [visible, setVisible] = useBetInfoContext().betConfirm
-  const [confirmRes, setConfirmRes] = useState<BetConfirmResponse>()
   const { setOrderSn } = useGlobalProvider()
-  const { doBetConfirm } = useService()
   const { wanfaList } = useWanfaList()
   const { data: qishuData } = useCurrentQishu()
   const { userInfo } = useUserInfo()
@@ -45,7 +44,8 @@ function BettingConfirmPopup() {
   const { countdown } = useCountdown(
     qishuData?.countdown - qishuData?.close_time,
   )
-  const { mutate, isLoading, orderSn } = useBetAction()
+  const { handler: doBetAction, isLoading, orderSn } = useBetAction()
+  const { handler: doBetConfirm, data: confirmData } = useBetConfirm()
   const betTargets: BetTarget[] = useMemo(() => {
     return wanfaList?.map((t) => ({
       id: t.id,
@@ -60,7 +60,7 @@ function BettingConfirmPopup() {
 
   const onSubmit = async () => {
     try {
-      mutate({
+      doBetAction({
         bet_list: betTargets,
         lottery_id: 6,
         goods_id: goodsId,
@@ -78,13 +78,12 @@ function BettingConfirmPopup() {
 
   const fetchConfirmInfo = async () => {
     try {
-      const res = await doBetConfirm({
+      doBetConfirm({
         bet_list: betTargets,
         lottery_id: 6,
         goods_id: goodsId,
         qishu: qishuData?.next_qishu,
       })
-      setConfirmRes(res)
     } catch (err) {
       console.log(err)
     }
@@ -135,7 +134,7 @@ function BettingConfirmPopup() {
               <HStack justify="space-between">
                 <Text>预估获利：</Text>
                 <Text fontWeight="bold">
-                  ¥ {toCurrency(confirmRes?.data.profit)}
+                  ¥ {toCurrency(confirmData?.profit)}
                 </Text>
               </HStack>
               <HStack justify="space-between">
