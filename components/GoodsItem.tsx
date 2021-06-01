@@ -1,21 +1,46 @@
 import { Goods } from '@/lib/types'
-import { Button } from '@chakra-ui/button'
-import { Image } from '@chakra-ui/image'
-import { Box, Circle, HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
-import React, { useMemo } from 'react'
-import { Chart, Line, Point, Tooltip } from 'bizcharts'
 import useHelper from '@/utils/useHelper'
+import { Box, HStack, Text } from '@chakra-ui/layout'
+import { Chart, Line, Tooltip } from 'bizcharts'
+import numeral from 'numeral'
+import React, { useMemo } from 'react'
 
 function GoodsItem({
   item,
-  isAccounting,
   onBetClicked,
 }: {
   item: Goods
-  isAccounting: boolean
   onBetClicked: () => void
 }) {
   const { toNumString } = useHelper()
+  const chart = useMemo(
+    () => item.chart.map((t) => ({ ...t, profit: +t.profit })),
+    [item.chart],
+  )
+  const lastOdds = useMemo(() => +chart?.[chart.length - 2].profit, [chart])
+  const diff = useMemo(() => numeral(item.odds).subtract(lastOdds).value(), [
+    lastOdds,
+  ])
+  const diffComp = useMemo(() => {
+    const param = {
+      color: 'gray.500',
+      icon: '▲',
+    }
+    if (diff > 0) {
+      param.color = 'red.500'
+      param.icon = '▲'
+    }
+    if (diff < 0) {
+      param.color = 'green.500'
+      param.icon = '▼'
+    }
+    return (
+      <Text color={param.color}>
+        {param.icon}
+        {diff}%
+      </Text>
+    )
+  }, [diff])
   return (
     <HStack bg="white" borderBottom="1px solid #ccc" spacing="1" py="1" px="1">
       <Box w="full" onClick={onBetClicked}>
@@ -44,12 +69,12 @@ function GoodsItem({
           比較上次：
         </Text>
         <HStack fontSize="20px" justify="center" lineHeight="20px">
-          <Text>0.7%</Text>
-          <Text color="red.500">▲0.2%</Text>
+          <Text>{lastOdds}%</Text>
+          {diffComp}
         </HStack>
       </Box>
       <Box w="full">
-        <Chart autoFit height={100} data={item.chart}>
+        <Chart autoFit height={100} data={chart}>
           <Line position="date*profit" />
           {/* <Point position="year*value" /> */}
           <Tooltip showCrosshairs />
@@ -59,4 +84,4 @@ function GoodsItem({
   )
 }
 
-export default GoodsItem
+export default React.memo(GoodsItem)

@@ -2,6 +2,7 @@ import { useBetInfoContext } from '@/context/BetInfoProvider'
 import useCurrentQishu from '@/service/useCurrentQishu'
 import useGoodsInfo from '@/service/useGoodsInfo'
 import useUserInfo from '@/service/useUserInfo'
+import useCountdown from '@/utils/useCountdown'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
@@ -20,10 +21,10 @@ import { useToast } from '@chakra-ui/toast'
 import { Chart, Interval, Line, Point, Tooltip } from 'bizcharts'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
 
-function BettingPopup({ countdown }: { countdown: number }) {
+function BettingPopup() {
   const router = useRouter()
   const { toNumString } = useHelper()
   const { toCurrency } = useTransfer()
@@ -36,6 +37,19 @@ function BettingPopup({ countdown }: { countdown: number }) {
   const { data: qishuData } = useCurrentQishu()
   const { goodsInfo, isLoading } = useGoodsInfo(goodsId)
   const toast = useToast()
+  const { countdown } = useCountdown(
+    qishuData?.countdown - qishuData?.close_time,
+  )
+
+  const chart = useMemo(
+    () =>
+      goodsInfo?.chart.map((t) => ({
+        date: t.date,
+        profit: +t.profit,
+        bet_total: +t.bet_total,
+      })),
+    [goodsInfo],
+  )
 
   const handleSubmit = async () => {
     if (!totalPrice) {
@@ -59,15 +73,15 @@ function BettingPopup({ countdown }: { countdown: number }) {
   }
 
   useEffect(() => {
-    goodsInfo && setOdds(+_.takeRight(goodsInfo?.chart)?.[0]?.profit)
-  }, [goodsInfo])
+    chart && setOdds(+_.takeRight(chart)?.[0]?.profit)
+  }, [chart])
 
   // 结帐倒数时间即关闭弹窗
   useEffect(() => {
     if (countdown <= 0) {
       setVisible(false)
     }
-  }, [qishuData])
+  }, [countdown])
 
   useEffect(() => {
     setVisible(false)
@@ -109,12 +123,12 @@ function BettingPopup({ countdown }: { countdown: number }) {
                   市场行情(6小时)
                 </Text>
                 <Box>
-                  <Chart autoFit height={200} data={goodsInfo.chart}>
+                  <Chart autoFit height={200} data={chart}>
                     <Line position="date*profit" />
                     <Point position="date*profit" />
                     <Tooltip showCrosshairs />
                   </Chart>
-                  <Chart height={100} autoFit data={goodsInfo.chart}>
+                  <Chart height={100} autoFit data={chart}>
                     <Interval position="date*bet_total" />
                     <Tooltip shared />
                   </Chart>

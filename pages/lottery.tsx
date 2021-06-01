@@ -3,24 +3,22 @@ import BettingPopup from '@/components/BettingPopup'
 import BettingSuccessPopup from '@/components/BettingSuccessPopup'
 import FooterNav from '@/components/FooterNav'
 import GoodsItem from '@/components/GoodsItem'
-import HeaderTitleBar from '@/components/HeaderTitleBar'
-import HomeQishuBox from '@/components/HomeQishuBox'
 import Layout from '@/components/Layout'
+import LotteryCountdown from '@/components/LotteryCountdown'
 import { useBetInfoContext } from '@/context/BetInfoProvider'
 import { Goods } from '@/lib/types'
 import useCurrentQishu from '@/service/useCurrentQishu'
 import useGoodsList from '@/service/useGoodsList'
 import useUserInfo from '@/service/useUserInfo'
-import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
-import { Button, IconButton } from '@chakra-ui/button'
+import { IconButton } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
 import { Input } from '@chakra-ui/input'
-import { Box, Flex, HStack, SimpleGrid, Text } from '@chakra-ui/layout'
+import { Box, Flex, HStack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
-import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
+import { useRouter } from 'next/dist/client/router'
+import React from 'react'
 import { BiDollar } from 'react-icons/bi'
 import {
   HiCurrencyDollar,
@@ -36,25 +34,10 @@ function lottery() {
 
   const router = useRouter()
   const { toCurrency } = useTransfer()
-  const { secToTimer } = useHelper()
   const { goodsList, isLoading } = useGoodsList()
   const { data: qishuData } = useCurrentQishu()
   const toQishuNo = (qishu: number) => _.takeRight(qishu?.toString(), 2)
-  const [countdown, setCountdown] = useState(
-    qishuData?.countdown - qishuData?.close_time,
-  )
   const { userInfo } = useUserInfo()
-
-  useEffect(() => {
-    setCountdown(qishuData?.countdown - qishuData?.close_time)
-    const interval = setInterval(
-      () => setCountdown((sec) => (sec ? sec - 1 : 0)),
-      1000,
-    )
-    return () => {
-      clearInterval(interval)
-    }
-  }, [qishuData])
 
   const handleGoodsClicked = async (goods: Goods) => {
     setGoodsId(goods.id)
@@ -121,11 +104,7 @@ function lottery() {
                   <br />
                   订单
                 </Text>
-                <Text
-                  fontSize="xl"
-                  flex="1"
-                  textAlign="center"
-                >{`00:${secToTimer(countdown)}`}</Text>
+                <LotteryCountdown />
               </HStack>
               <Icon as={HiSun} fontSize="23px" />
               <HStack
@@ -165,7 +144,6 @@ function lottery() {
                 <GoodsItem
                   key={t.id}
                   item={t}
-                  isAccounting={qishuData?.close_time >= qishuData?.countdown}
                   onBetClicked={() => handleGoodsClicked(t)}
                 />
               ))}
@@ -174,8 +152,8 @@ function lottery() {
         )}
       </Box>
       <FooterNav />
-      <BettingPopup countdown={countdown} />
-      <BettingConfirmPopup countdown={countdown} />
+      <BettingPopup />
+      <BettingConfirmPopup />
       <BettingSuccessPopup />
     </Layout>
   )

@@ -24,7 +24,7 @@ import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
 
-function BettingConfirmPopup({ countdown }: { countdown: number }) {
+function BettingConfirmPopup() {
   const router = useRouter()
   const { toCurrency } = useTransfer()
   const { secToTimer } = useHelper()
@@ -40,7 +40,9 @@ function BettingConfirmPopup({ countdown }: { countdown: number }) {
   const { data: qishuData } = useCurrentQishu()
   const { userInfo } = useUserInfo()
   const { goodsInfo } = useGoodsInfo(goodsId)
-
+  const { countdown } = useCountdown(
+    qishuData?.countdown - qishuData?.close_time,
+  )
   const betTargets: BetTarget[] = useMemo(() => {
     return wanfaList?.map((t) => ({
       id: t.id,
