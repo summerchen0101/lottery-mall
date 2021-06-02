@@ -1,6 +1,8 @@
 import FooterNav from '@/components/FooterNav'
 import HomeIconBtn from '@/components/HomeIconBtn'
 import Layout from '@/components/Layout'
+import NewsPopup from '@/components/NewsPopup'
+import { usePopupContext } from '@/context/PopupContext'
 import useSiteParams from '@/service/useSiteParams'
 import Icon from '@chakra-ui/icon'
 import {
@@ -15,14 +17,20 @@ import {
 } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import FastMarquee from 'react-fast-marquee'
 import { BiVolume } from 'react-icons/bi'
 import { HiUserCircle } from 'react-icons/hi'
 
 export default function home() {
   const { marquee, video, isLoading } = useSiteParams()
+  const [, setNewsVisible] = usePopupContext('news')
   const router = useRouter()
+  useEffect(() => {
+    if (router.query.n) {
+      setNewsVisible(true)
+    }
+  }, [router])
   return (
     <Layout>
       <Center h="100px" bg="pink.500" color="white">
@@ -117,6 +125,7 @@ export default function home() {
           <Center h="150px" bg="gray.300">
             IMAGE
           </Center>
+          <NewsPopup />
         </Box>
       )}
 

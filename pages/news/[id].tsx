@@ -7,7 +7,7 @@ import { Box, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
 
-function activity() {
+function newsDetail() {
   const router = useRouter()
   const { htmldecode } = useTransfer()
   const { newsList } = useNewsList()
@@ -44,4 +44,4 @@ function activity() {
   )
 }
 
-export default activity
+export default newsDetail
