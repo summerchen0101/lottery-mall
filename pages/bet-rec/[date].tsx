@@ -93,8 +93,11 @@ function betRec() {
                       <Text color="gray.500" fontSize="lg">
                         ¥ {t.total_price}
                       </Text>
-                      <Text color="pink.500" fontSize="xl" fontWeight="600">
-                        {t.profit}
+                      <Text color="pink.500" fontSize="sm" fontWeight="600">
+                        收益：
+                        <Text fontSize="xl" as="span">
+                          {t.profit}
+                        </Text>
                       </Text>
                     </HStack>
                     <HStack justify="space-between">
