@@ -105,7 +105,11 @@ export default function home() {
               </Stack>
             </HomeIconBtn>
             <HomeIconBtn>
-              <Stack align="center" spacing="0">
+              <Stack
+                align="center"
+                spacing="0"
+                onClick={() => router.push('/withdraw')}
+              >
                 <Icon as={HiUserCircle} fontSize="40px" color="purple.500" />
                 <Text fontWeight="bold" color="gray.500">
                   G币提现

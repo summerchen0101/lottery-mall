@@ -6,6 +6,7 @@ import { DateRangeType } from '@/lib/enums'
 import { betDateRangeOpts } from '@/lib/options'
 import useBetRecByDate from '@/service/useBetRecByDate'
 import useDateRange from '@/utils/useDateRange'
+import useTransfer from '@/utils/useTransfer'
 import { Box, Center, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { Spinner } from '@chakra-ui/spinner'
@@ -14,6 +15,7 @@ import React, { useMemo, useState } from 'react'
 
 function betRec() {
   const router = useRouter()
+  const { toCurrency } = useTransfer()
   const { loadingSpinner } = useLoaderProvider()
   const dateRangeType = useMemo(
     () =>
@@ -76,7 +78,7 @@ function betRec() {
                   投资结算
                 </Text>
                 <Text fontSize="xl" color="purple.600" fontWeight="600">
-                  {dateBetData?.win_money}
+                  {toCurrency(+dateBetData?.win_money)}
                 </Text>
               </Box>
               <Box>
@@ -84,7 +86,7 @@ function betRec() {
                   交易金额
                 </Text>
                 <Text fontSize="xl" color="pink.500" fontWeight="600">
-                  {dateBetData?.bet_money}
+                  {toCurrency(+dateBetData?.bet_money)}
                 </Text>
               </Box>
             </SimpleGrid>
@@ -109,19 +111,19 @@ function betRec() {
                     <Text>
                       实际损益：
                       <Text as="span" fontWeight="600" color="green.500">
-                        {t.profit}
+                        {toCurrency(t.profit)}
                       </Text>
                     </Text>
                     <Text>
                       投资节算：
                       <Text as="span" fontWeight="600" color="pink.500">
-                        {t.win_money}
+                        {toCurrency(t.win_money)}
                       </Text>
                     </Text>
                     <Text>
                       交易金额：
                       <Text as="span" fontWeight="600" color="gray.500">
-                        {t.bet_money}
+                        {toCurrency(t.bet_money)}
                       </Text>
                     </Text>
                   </Stack>

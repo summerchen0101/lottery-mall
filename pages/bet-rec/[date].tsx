@@ -3,6 +3,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import useBetRec from '@/service/useBetRec'
+import useTransfer from '@/utils/useTransfer'
 import { Image } from '@chakra-ui/image'
 import { Box, Flex, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
@@ -12,6 +13,7 @@ import React from 'react'
 
 function betRec() {
   const router = useRouter()
+  const { toCurrency } = useTransfer()
   const date = router.query.date as string
   const { loadingSpinner } = useLoaderProvider()
   const { betRecData, isLoading } = useBetRec(date, date)
@@ -37,15 +39,15 @@ function betRec() {
                   总抢购金额
                 </Text>
                 <Text fontSize="xl" color="purple.600" fontWeight="600">
-                  {betRecData?.bet_money}
+                  {toCurrency(+betRecData?.bet_money)}
                 </Text>
               </Box>
               <Box>
                 <Text fontSize="sm" color="gray.500">
-                  抢购成功
+                  抢购成功(笔)
                 </Text>
                 <Text fontSize="xl" color="purple.600" fontWeight="600">
-                  {betRecData?.win}
+                  {toCurrency(+betRecData?.win, 0)}
                 </Text>
               </Box>
               <Box>
@@ -53,7 +55,7 @@ function betRec() {
                   总收益
                 </Text>
                 <Text fontSize="xl" color="pink.500" fontWeight="600">
-                  {betRecData?.profit}
+                  {toCurrency(+betRecData?.profit)}
                 </Text>
               </Box>
             </SimpleGrid>
@@ -91,12 +93,12 @@ function betRec() {
                     <Text color="purple.600">{t.name}</Text>
                     <HStack justify="space-between">
                       <Text color="gray.500" fontSize="lg">
-                        ¥ {t.total_price}
+                        ¥ {toCurrency(t.total_price)}
                       </Text>
                       <Text color="pink.500" fontSize="sm" fontWeight="600">
                         收益：
                         <Text fontSize="xl" as="span">
-                          {t.profit}
+                          {toCurrency(t.profit)}
                         </Text>
                       </Text>
                     </HStack>
