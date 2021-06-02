@@ -1,17 +1,18 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useNoticeList from '@/service/useNoticeList'
-import Icon from '@chakra-ui/icon'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import useNotice from '@/service/useNotice'
+import useTransfer from '@/utils/useTransfer'
+import { Box, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import { HiChevronRight } from 'react-icons/hi'
 
-function faq() {
-  const { noticeList, isLoading } = useNoticeList(2)
+function newsDetail() {
   const router = useRouter()
+  const { htmldecode } = useTransfer()
+  const { notice, isLoading } = useNotice(+router.query.id)
+
   return (
     <Layout>
       <HeaderTitleBar back title="常见问题" />
@@ -19,32 +20,22 @@ function faq() {
         {isLoading ? (
           <Spinner />
         ) : (
-          <Stack spacing="15px">
-            {noticeList?.map((t) => (
-              <HStack
-                bg="white"
-                h="60px"
-                px="15px"
-                borderRadius="md"
-                shadow="md"
-                justify="space-between"
-                key={t.id}
-                borderLeftWidth="4px"
-                borderColor="purple.600"
-                onClick={() => router.push(`/faq/${t.id}`)}
-              >
-                <Text fontSize="lg" fontWeight="600" color="gray.700">
-                  {t.name}
-                </Text>
-                <Icon
-                  as={HiChevronRight}
-                  fontWeight="600"
-                  fontSize="23px"
-                  color="purple.600"
-                />
-              </HStack>
-            ))}
-          </Stack>
+          <>
+            <Text color="purple.600" fontSize="lg" fontWeight="600" mb="10px">
+              {notice?.name}
+            </Text>
+            <Box
+              dangerouslySetInnerHTML={{
+                __html: htmldecode(notice?.content),
+              }}
+              bg="white"
+              borderRadius="md"
+              shadow="md"
+              color="gray.500"
+              p="15px"
+              minH="550px"
+            />
+          </>
         )}
       </Box>
       <FooterNav />
@@ -52,4 +43,4 @@ function faq() {
   )
 }
 
-export default faq
+export default newsDetail

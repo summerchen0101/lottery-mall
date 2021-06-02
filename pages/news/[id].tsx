@@ -1,7 +1,6 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useNews from '@/service/useNews'
 import useNotice from '@/service/useNotice'
 import useTransfer from '@/utils/useTransfer'
 import { Box, Text } from '@chakra-ui/layout'

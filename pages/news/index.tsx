@@ -1,7 +1,8 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useNewsList from '@/service/useNewsList'
+import { NoticeType } from '@/lib/enums'
+import useNoticeList from '@/service/useNoticeList'
 import Icon from '@chakra-ui/icon'
 import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
@@ -10,7 +11,7 @@ import React from 'react'
 import { HiChevronRight } from 'react-icons/hi'
 
 function news() {
-  const { newsList, isLoading } = useNewsList()
+  const { noticeList, isLoading } = useNoticeList(NoticeType.News)
   const router = useRouter()
   return (
     <Layout>
@@ -20,7 +21,7 @@ function news() {
           <Spinner />
         ) : (
           <Stack spacing="15px">
-            {newsList?.map((t) => (
+            {noticeList?.map((t) => (
               <HStack
                 bg="white"
                 h="60px"

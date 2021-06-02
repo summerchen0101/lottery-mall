@@ -1,7 +1,7 @@
 import useRequest from '@/utils/useRequest'
 import useSWR from 'swr'
 
-interface NewsRes {
+interface NoticeRes {
   success: boolean
   data: {
     name: string
@@ -9,14 +9,14 @@ interface NewsRes {
   }
 }
 
-export default function useNews(id: number) {
+export default function useNotice(id: number) {
   const { request } = useRequest()
-  const { data: res, error, mutate, isValidating } = useSWR<NewsRes>(
+  const { data: res, error, mutate, isValidating } = useSWR<NoticeRes>(
     id && ['/notice', id],
     (url, id) => request('post', url, { id }),
   )
   return {
-    news: res?.data,
+    notice: res?.data,
     isLoading: isValidating,
     isError: error,
     refresh: mutate,

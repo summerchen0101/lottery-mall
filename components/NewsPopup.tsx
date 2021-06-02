@@ -1,11 +1,8 @@
-import { useBetInfoContext } from '@/context/BetInfoProvider'
-import { useGlobalProvider } from '@/context/GlobalProvider'
 import { usePopupContext } from '@/context/PopupContext'
-import useBetSuccess from '@/service/useBetSuccess'
-import useNewsList from '@/service/useNewsList'
-import useService from '@/utils/useService'
+import { NoticeType } from '@/lib/enums'
+import useNoticeList from '@/service/useNoticeList'
 import { Button } from '@chakra-ui/button'
-import { HStack, Stack, StackDivider, Text } from '@chakra-ui/layout'
+import { Stack, StackDivider, Text } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
@@ -22,7 +19,7 @@ import React, { useEffect } from 'react'
 function NewsPopup() {
   const router = useRouter()
   const [visible, setVisible] = usePopupContext('news')
-  const { newsList, isLoading } = useNewsList()
+  const { noticeList, isLoading } = useNoticeList(NoticeType.News)
 
   const onClose = () => {
     setVisible(false)
@@ -43,7 +40,7 @@ function NewsPopup() {
             <Spinner />
           ) : (
             <Stack divider={<StackDivider />}>
-              {newsList?.map((t, i) => (
+              {noticeList?.map((t, i) => (
                 <Text
                   key={i}
                   onClick={() => router.push(`/news/${t.id}`)}
