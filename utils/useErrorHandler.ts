@@ -4,7 +4,6 @@ import { AxiosError } from 'axios'
 import httpStatus from 'http-status'
 import { useRouter } from 'next/dist/client/router'
 import { useCallback } from 'react'
-import useStorage from './useStorage'
 
 function useErrorHandler() {
   const toast = useToast()
@@ -13,11 +12,11 @@ function useErrorHandler() {
   const apiErrHandler = useCallback((error: AxiosError<any>) => {
     if (error.response) {
       // 错误来自回传参数
-      if (error.response.status === 401) {
+      if (error.response.data.message) {
+        toast({ title: error.response.data.message, status: 'error' })
+      } else if (error.response.status === 401) {
         router.push({ pathname: '/login', query: { from: router.asPath } })
         setToken('')
-      } else if (error.response.data.message) {
-        toast({ title: error.response.data.message, status: 'error' })
       } else {
         toast({ title: httpStatus[error.response.status], status: 'error' })
       }
