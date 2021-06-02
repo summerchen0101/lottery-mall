@@ -78,7 +78,7 @@ function rechargeForm() {
                   充值金额
                 </Text>
                 <Text fontSize="2xl" fontWeight="600" color="pink.500">
-                  {info.money}
+                  {toCurrency(+info.money, 0)}
                   <TextCopy text={info.money}>
                     <Icon as={BiCopyAlt} float="right" fontSize="22px" />
                   </TextCopy>

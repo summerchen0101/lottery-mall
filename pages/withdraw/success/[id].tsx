@@ -60,7 +60,7 @@ function withdrawForm() {
                   提款金额
                 </Text>
                 <Text fontSize="2xl" fontWeight="600" color="pink.500">
-                  {info.money}
+                  {toCurrency(+info.money)}
                 </Text>
               </Box>
               <Box borderBottom="1px solid #ccc" py="5px">

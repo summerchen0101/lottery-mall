@@ -90,9 +90,9 @@ function withdrawIndex() {
                   {t.status ? '通过' : '未通过'}
                 </Tag>
               </HStack>
-              <Text>存款金额：{t.money}</Text>
-              <Text>提款限制额：{t.need}</Text>
-              <Text>累积下单额：{t.effect}</Text>
+              <Text>存款金额：{toCurrency(+t.money)}</Text>
+              <Text>提款限制额：{toCurrency(+t.need)}</Text>
+              <Text>累积下单额：{toCurrency(+t.effect)}</Text>
             </Stack>
           ))}
         </Stack>

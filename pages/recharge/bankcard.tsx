@@ -118,11 +118,11 @@ function rechargeForm() {
                 required: '不可为空',
                 min: {
                   value: info?.money_min,
-                  message: `不可小于${info?.money_min}`,
+                  message: `不可小于${toCurrency(info?.money_min, 0)}`,
                 },
                 max: {
                   value: info?.money_max,
-                  message: `不可大于${info?.money_max}`,
+                  message: `不可大于${toCurrency(info?.money_max, 0)}`,
                 },
               })}
             />
@@ -142,7 +142,8 @@ function rechargeForm() {
               <Text>
                 单次存款限额：
                 <Text as="span" fontWeight="bold">
-                  {info.money_min}~{info.money_max}
+                  {toCurrency(info.money_min, 0)}~
+                  {toCurrency(info.money_max, 0)}
                 </Text>
               </Text>
             </Stack>
