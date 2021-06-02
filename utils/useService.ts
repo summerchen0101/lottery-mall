@@ -1,7 +1,5 @@
 import {
   EditPassRequest,
-  LoginRequest,
-  LoginResponse,
   LogoutResponse,
   UserProfileResponse,
 } from '@/lib/types'
@@ -14,15 +12,12 @@ function useService() {
 
   const checkLoginStatus = () => post<UserProfileResponse>('/user/profile')
 
-  const doLogin = (req: LoginRequest) => post<LoginResponse>('/login', req)
-
   const doLogout = () => post<LogoutResponse>('/logout')
 
   const doEditPass = (req: EditPassRequest) =>
     post<{ success: boolean }>('/user/editpwd', req)
 
   return {
-    doLogin,
     checkLoginStatus,
     doLogout,
     doEditPass,

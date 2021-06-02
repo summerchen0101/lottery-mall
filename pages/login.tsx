@@ -3,6 +3,7 @@ import Layout from '@/components/Layout'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { LoginRequest } from '@/lib/types'
 import useCaptcha from '@/service/useCaptcha'
+import useLogin from '@/service/useLogin'
 import useService from '@/utils/useService'
 import useStorage from '@/utils/useStorage'
 import {
@@ -26,10 +27,10 @@ type LoginFormProps = LoginRequest
 
 const login = () => {
   const { register, errors, handleSubmit } = useForm<LoginFormProps>()
-  const { doLogin } = useService()
+  const { handler: doLogin, isLoading } = useLogin()
   const { setToken } = useGlobalProvider()
   const router = useRouter()
-  const { captcha, key, isLoading, refresh } = useCaptcha()
+  const { captcha, key, isLoading: isCaptchaLoading, refresh } = useCaptcha()
 
   const onSubmit = handleSubmit(async (d) => {
     const res = await doLogin({ ...d, ckey: key })
@@ -90,7 +91,7 @@ const login = () => {
                   })}
                 />
                 <Center h="34px" w="120px">
-                  {isLoading ? (
+                  {isCaptchaLoading ? (
                     <Spinner size="md" color="rgba(0,0,0,0.3)" />
                   ) : (
                     <Image h="full" src={captcha} onClick={() => refresh()} />
@@ -103,7 +104,7 @@ const login = () => {
               mt={4}
               colorScheme="pink"
               w="full"
-              // isLoading={props.isSubmitting}
+              isLoading={isLoading}
               type="submit"
             >
               送出
