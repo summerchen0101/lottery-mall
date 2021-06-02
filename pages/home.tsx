@@ -45,6 +45,12 @@ export default function home() {
               <source src="/companyfilm.mp4" type="video/mp4" />
               Your browser does not support playing this Video
             </video>
+            {/* <iframe
+              title="公司影片"
+              src={video}
+              allowFullScreen
+              allow="autoplay"
+            /> */}
           </AspectRatio>
           <HStack px="3" bg="gray.500" h="30px" color="white">
             <Icon as={BiVolume} fontSize="20px" />
@@ -125,9 +131,10 @@ export default function home() {
           <Center h="150px" bg="gray.300">
             IMAGE
           </Center>
-          <NewsPopup />
         </Box>
       )}
+
+      <NewsPopup />
 
       <FooterNav />
     </Layout>
