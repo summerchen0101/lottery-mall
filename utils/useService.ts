@@ -1,5 +1,4 @@
 import {
-  BankCardCreateRequest,
   EditPassRequest,
   LoginRequest,
   LoginResponse,
@@ -19,15 +18,11 @@ function useService() {
 
   const doLogout = () => post<LogoutResponse>('/logout')
 
-  const doCreateBankCard = (req: BankCardCreateRequest) =>
-    post<null>('/user/bankCreate', req)
-
   const doEditPass = (req: EditPassRequest) =>
     post<{ success: boolean }>('/user/editpwd', req)
 
   return {
     doLogin,
-    doCreateBankCard,
     checkLoginStatus,
     doLogout,
     doEditPass,

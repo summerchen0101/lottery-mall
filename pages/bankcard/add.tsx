@@ -4,26 +4,25 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { BankCardCreateRequest } from '@/lib/types'
 import useBankList from '@/service/useBankList'
+import useCreateBankcard from '@/service/useCreateBankcard'
 import useFirstBankName from '@/service/useFirstBankName'
-import useService from '@/utils/useService'
 import { Button } from '@chakra-ui/button'
 import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { Box, Stack } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
+import { Spinner } from '@chakra-ui/spinner'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
 type BankCardFormProps = BankCardCreateRequest
 function bankAdd() {
-  const { doCreateBankCard } = useService()
+  const { handler: doCreateBankCard, isLoading } = useCreateBankcard()
   const { bankList } = useBankList()
   const { firstBankName } = useFirstBankName()
   const { register, errors, handleSubmit } = useForm<BankCardFormProps>()
   const onSubmit = handleSubmit(async (d) => {
-    try {
-      const res = await doCreateBankCard({ ...d, name: firstBankName })
-    } catch (err) {}
+    await doCreateBankCard({ ...d, name: firstBankName })
   })
   return (
     <Layout>
@@ -89,8 +88,14 @@ function bankAdd() {
             <FormLabel>开户城市</FormLabel>
             <Input name="city" bg="white" ref={register} />
           </FormControl>
-          <Button type="submit" w="full" colorScheme="purple">
+          <Button
+            type="submit"
+            w="full"
+            colorScheme="purple"
+            disabled={isLoading}
+          >
             确认送出
+            {isLoading && <Spinner ml="2" />}
           </Button>
         </Stack>
       </Box>
