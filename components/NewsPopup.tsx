@@ -43,7 +43,7 @@ function NewsPopup() {
             <Spinner />
           ) : (
             <Stack divider={<StackDivider />}>
-              {newsList.map((t, i) => (
+              {newsList?.map((t, i) => (
                 <Text
                   key={i}
                   onClick={() => router.push(`/news/${t.id}`)}

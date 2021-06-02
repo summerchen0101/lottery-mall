@@ -45,3 +45,8 @@ export enum PasswordType {
   Normal = 1,
   Trade = 2,
 }
+
+export enum NoticeType {
+  News,
+  Faq,
+}

@@ -1,33 +1,33 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useNewsList from '@/service/useNewsList'
+import useNews from '@/service/useNews'
+import useNotice from '@/service/useNotice'
 import useTransfer from '@/utils/useTransfer'
 import { Box, Text } from '@chakra-ui/layout'
+import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 function newsDetail() {
   const router = useRouter()
   const { htmldecode } = useTransfer()
-  const { newsList } = useNewsList()
-
-  const newsDetail = useMemo(() => {
-    return newsList?.find((t) => t.id === +router.query.id)
-  }, [newsList, router])
+  const { notice, isLoading } = useNotice(+router.query.id)
 
   return (
     <Layout>
       <HeaderTitleBar back title="公告" />
       <Box p="20px" flex="1" overflowY="auto">
-        {newsDetail && (
+        {isLoading ? (
+          <Spinner />
+        ) : (
           <>
             <Text color="purple.600" fontSize="lg" fontWeight="600" mb="10px">
-              {newsDetail.name}
+              {notice?.name}
             </Text>
             <Box
               dangerouslySetInnerHTML={{
-                __html: htmldecode(newsDetail.content),
+                __html: htmldecode(notice?.content),
               }}
               bg="white"
               borderRadius="md"
