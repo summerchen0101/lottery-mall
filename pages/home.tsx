@@ -41,16 +41,16 @@ export default function home() {
       ) : (
         <Box flex="1" overflowY="auto">
           <AspectRatio maxW="full" ratio={16 / 9}>
-            <video controls loop autoPlay>
+            {/* <video controls loop autoPlay>
               <source src="/companyfilm.mp4" type="video/mp4" />
               Your browser does not support playing this Video
-            </video>
-            {/* <iframe
+            </video> */}
+            <iframe
               title="公司影片"
               src={video}
               allowFullScreen
               allow="autoplay"
-            /> */}
+            />
           </AspectRatio>
           <HStack px="3" bg="gray.500" h="30px" color="white">
             <Icon as={BiVolume} fontSize="20px" />
