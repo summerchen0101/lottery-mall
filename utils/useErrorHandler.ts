@@ -26,7 +26,7 @@ function useErrorHandler() {
       console.log(error.request)
     } else {
       // 错误来自其他因素
-      toast({ title: error.message, status: 'error' })
+      toast({ title: error.message, status: 'error', duration: 2000 })
     }
     // console.log(error.config)
   }, [])

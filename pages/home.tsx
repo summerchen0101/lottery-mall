@@ -23,6 +23,7 @@ import {
   BiArchiveOut,
   BiBook,
   BiCartAlt,
+  BiDollarCircle,
   BiNews,
   BiUser,
   BiVolume,
@@ -106,11 +107,7 @@ export default function home() {
               </HomeIconBtn>
               <HomeIconBtn onClick={() => router.push('/recharge')}>
                 <Stack align="center" spacing="0">
-                  <Icon
-                    as={HiCurrencyDollar}
-                    fontSize="40px"
-                    color="gray.500"
-                  />
+                  <Icon as={BiDollarCircle} fontSize="40px" color="gray.500" />
                   <Text fontWeight="bold" color="gray.500">
                     充值增仓
                   </Text>

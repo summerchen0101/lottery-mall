@@ -4,6 +4,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { WithdrawCreateRequest } from '@/lib/types'
 import useBankCardList from '@/service/useBankCardList'
+import useCreateWithdraw from '@/service/useCreateWithdraw'
 import useUserInfo from '@/service/useUserInfo'
 import useWithdrawCount from '@/service/useWithdrawCount'
 import useService from '@/utils/useService'
@@ -13,31 +14,34 @@ import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { Box, Divider, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
+import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 type WithdrawFormProps = WithdrawCreateRequest
 function withdrawForm() {
-  const { doCreateWithdraw } = useService()
+  const { handler: doCreateWithdraw, isLoading } = useCreateWithdraw()
   const { toCurrency } = useTransfer()
   const { bankcardList } = useBankCardList()
   const { userInfo } = useUserInfo()
   const { register, errors, handleSubmit } = useForm<WithdrawFormProps>()
   const { count } = useWithdrawCount()
   const router = useRouter()
+
   const onSubmit = handleSubmit(async (d) => {
     try {
-      const res = await doCreateWithdraw({
+      const orderId = await doCreateWithdraw({
         user_bank_id: d.user_bank_id,
         money: d.money,
         security_pwd: d.security_pwd,
       })
-      if (res.success) {
-        router.push(`/withdraw/success/${res.data}`)
+      if (orderId) {
+        router.push(`/withdraw/success/${orderId}`)
       }
     } catch (err) {}
   })
+
   return (
     <Layout>
       <HeaderTitleBar back title="会员提款" />
@@ -82,8 +86,14 @@ function withdrawForm() {
             <FieldValidateMessage error={errors.security_pwd} />
           </FormControl>
           <Divider h="2" />
-          <Button type="submit" w="full" colorScheme="purple">
+          <Button
+            type="submit"
+            w="full"
+            colorScheme="purple"
+            disabled={isLoading}
+          >
             确认送出
+            {isLoading && <Spinner ml="2" />}
           </Button>
           {count && (
             <Text color="red.500" fontWeight="600">
