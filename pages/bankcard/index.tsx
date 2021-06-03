@@ -39,7 +39,7 @@ function bankcardList() {
               colorScheme="pink"
               w="full"
               onClick={() => router.push('/bankcard/add')}
-              disabled={bankcardList.length >= 5}
+              disabled={bankcardList?.length >= 5}
             >
               新增银行卡 (上限5张)
             </Button>
