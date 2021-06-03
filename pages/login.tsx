@@ -4,12 +4,13 @@ import { useGlobalProvider } from '@/context/GlobalProvider'
 import { LoginRequest } from '@/lib/types'
 import useCaptcha from '@/service/useCaptcha'
 import useLogin from '@/service/useLogin'
-import useService from '@/utils/useService'
+import useHelper from '@/utils/useHelper'
 import useStorage from '@/utils/useStorage'
 import {
   Box,
   Button,
   Center,
+  Checkbox,
   FormControl,
   FormLabel,
   Heading,
@@ -18,14 +19,27 @@ import {
   Input,
   Spinner,
   Stack,
+  Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 
-type LoginFormProps = LoginRequest
+type LoginFormProps = LoginRequest & {
+  isRemAccPass: boolean
+}
 
 const login = () => {
+  const { jsonEncode, jsonDecode } = useHelper()
+  const [encodeAccPass, setEncodeAccPass] = useStorage(
+    'encodeAccPass',
+    '',
+    'local',
+  )
+  const decodeAccPass = useMemo(
+    () => jsonDecode<{ acc: string; pass: string }>(encodeAccPass),
+    [encodeAccPass],
+  )
   const { register, errors, handleSubmit } = useForm<LoginFormProps>()
   const { handler: doLogin, isLoading } = useLogin()
   const { setToken } = useGlobalProvider()
@@ -33,6 +47,9 @@ const login = () => {
   const { captcha, key, isLoading: isCaptchaLoading, refresh } = useCaptcha()
 
   const onSubmit = handleSubmit(async (d) => {
+    d.isRemAccPass
+      ? setEncodeAccPass(jsonEncode({ acc: d.username, pass: d.password }))
+      : setEncodeAccPass('')
     const res = await doLogin({ ...d, ckey: key })
     if (res?.success) {
       setToken(res?.token)
@@ -66,6 +83,7 @@ const login = () => {
                 placeholder="帐号"
                 name="username"
                 ref={register({ required: '不可为空' })}
+                defaultValue={decodeAccPass?.acc}
               />
               <FieldValidateMessage error={errors.username} />
             </FormControl>
@@ -76,6 +94,7 @@ const login = () => {
                 name="password"
                 type="password"
                 ref={register({ required: '不可为空' })}
+                defaultValue={decodeAccPass?.pass}
               />
               <FieldValidateMessage error={errors.password} />
             </FormControl>
@@ -100,6 +119,11 @@ const login = () => {
               </HStack>
               <FieldValidateMessage error={errors.captcha} />
             </FormControl>
+            <HStack>
+              <Checkbox name="isRemAccPass" ref={register} defaultChecked />
+              <Text>记住帐密</Text>
+            </HStack>
+
             <Button
               mt={4}
               colorScheme="pink"

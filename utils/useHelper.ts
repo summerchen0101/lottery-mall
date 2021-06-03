@@ -19,7 +19,15 @@ const useHelper = () => {
   const toNumString = (value?: number, num = 3) =>
     value?.toString().padStart(num, '0')
 
-  return { getBase64, secToTimer, toNumString }
+  const jsonEncode = function <T extends {}>(obj: T) {
+    return obj && Buffer.from(JSON.stringify(obj)).toString('base64')
+  }
+
+  const jsonDecode = function <R>(str: string) {
+    return str && (JSON.parse(Buffer.from(str, 'base64').toString()) as R)
+  }
+
+  return { getBase64, secToTimer, toNumString, jsonEncode, jsonDecode }
 }
 
 export default useHelper
