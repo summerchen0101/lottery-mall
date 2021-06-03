@@ -147,7 +147,9 @@ function BettingPopup() {
                     <Button
                       w="full"
                       colorScheme="purple"
-                      onClick={() => setTotalPrice(userInfo?.money)}
+                      onClick={() => {
+                        priceInput.current.value = userInfo?.money + ''
+                      }}
                     >
                       余额全投
                     </Button>
