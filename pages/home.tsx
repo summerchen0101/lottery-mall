@@ -25,18 +25,10 @@ import {
   BiCartAlt,
   BiDollarCircle,
   BiNews,
+  BiStoreAlt,
   BiUser,
   BiVolume,
 } from 'react-icons/bi'
-import {
-  HiCurrencyDollar,
-  HiDocument,
-  HiNewspaper,
-  HiPlay,
-  HiPlusCircle,
-  HiUser,
-  HiUserCircle,
-} from 'react-icons/hi'
 
 export default function home() {
   const { marquee, video, isLoading } = useSiteParams()
@@ -115,7 +107,7 @@ export default function home() {
               </HomeIconBtn>
               <HomeIconBtn onClick={() => router.push('/lottery')}>
                 <Stack align="center" spacing="0">
-                  <Icon as={BiCartAlt} fontSize="40px" color="gray.500" />
+                  <Icon as={BiStoreAlt} fontSize="40px" color="gray.500" />
                   <Text fontWeight="bold" color="gray.500">
                     开始投资
                   </Text>
