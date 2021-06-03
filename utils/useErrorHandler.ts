@@ -14,7 +14,8 @@ function useErrorHandler() {
       // 错误来自回传参数
       if (error.response.data.message) {
         toast({ title: error.response.data.message, status: 'error' })
-      } else if (error.response.status === 401) {
+      }
+      if (error.response.status === 401) {
         router.push({ pathname: '/login', query: { from: router.asPath } })
         setToken('')
       } else {

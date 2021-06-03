@@ -21,7 +21,7 @@ const useRequest = () => {
           data,
           baseURL: process.env.apiBaseUrl,
           validateStatus: function (status) {
-            return true
+            return (status >= 200 && status < 300) || status === 422
           },
           headers: {
             Authorization: `Bearer ${token}`,
