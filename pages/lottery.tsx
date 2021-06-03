@@ -60,7 +60,7 @@ function lottery() {
     <Layout>
       {/* <HeaderTitleBar title={qishuData?.lottery_name} /> */}
       {userInfo && (
-        <Flex justify="space-between" p="3" bg="purple.500">
+        <Flex justify="space-between" p="3" bg="purple.700">
           <HStack fontSize="lg" spacing="20px">
             <Text color="white" fontWeight="600">
               {userInfo?.username}

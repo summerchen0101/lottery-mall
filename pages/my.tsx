@@ -6,13 +6,25 @@ import useAlert from '@/utils/useAlert'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
-import { Box, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
+import {
+  Box,
+  Circle,
+  HStack,
+  SimpleGrid,
+  Square,
+  Stack,
+  Text,
+} from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import {
+  BiArchiveOut,
   BiArrowFromBottom,
   BiArrowToBottom,
+  BiCog,
+  BiDollarCircle,
   BiEnvelope,
+  BiNews,
   BiRefresh,
   BiUser,
 } from 'react-icons/bi'
@@ -50,14 +62,14 @@ function my() {
         }
       />
       <Box flex="1" overflowY="auto" bg="gray.400">
-        <Box bg="gray.200" p="20px">
-          <Text fontSize="sm" color="pink.500" fontWeight="bold">
+        <Box bg="white" p="20px">
+          <Text fontSize="sm" color="gray.500" fontWeight="bold">
             会员编号：{userInfo?.uid}
           </Text>
           <HStack
             spacing="20px"
             mb="15px"
-            color="purple.600"
+            color="gray.700"
             fontWeight="bold"
             fontSize="3xl"
           >
@@ -65,31 +77,59 @@ function my() {
             <Icon as={BiRefresh} />
           </HStack>
 
-          <HStack
-            bg="purple.600"
-            justify="space-evenly"
-            mb="-50px"
-            color="white"
-            borderRadius="lg"
-            h="70px"
-            shadow="lg"
-          >
-            <Box onClick={() => router.push('/withdraw')}>
-              <Icon fontSize="30px" as={BiArrowFromBottom} />
-              <Text fontSize="sm">提现</Text>
-            </Box>
-            <Box onClick={() => router.push('/recharge')}>
-              <Icon fontSize="30px" as={BiArrowToBottom} />
-              <Text fontSize="sm">充值</Text>
-            </Box>
-            <Box onClick={() => router.push('/news')}>
-              <Icon fontSize="30px" as={BiEnvelope} />
-              <Text fontSize="sm">讯息</Text>
-            </Box>
-            <Box onClick={() => router.push('/profile')}>
-              <Icon fontSize="30px" as={BiUser} />
-              <Text fontSize="sm">设置</Text>
-            </Box>
+          <HStack justify="space-evenly" mb="-50px">
+            <Circle
+              onClick={() => router.push('/withdraw')}
+              size="70px"
+              shadow="lg"
+              bg="gray.700"
+              color="white"
+              flexDirection="column"
+            >
+              <Icon fontSize="30px" as={BiArchiveOut} />
+              <Text fontSize="10px" fontWeight="600">
+                提现
+              </Text>
+            </Circle>
+            <Circle
+              onClick={() => router.push('/recharge')}
+              size="70px"
+              shadow="lg"
+              bg="gray.700"
+              color="white"
+              flexDirection="column"
+            >
+              <Icon fontSize="30px" as={BiDollarCircle} />
+              <Text fontSize="10px" fontWeight="600">
+                充值
+              </Text>
+            </Circle>
+            <Circle
+              onClick={() => router.push('/news')}
+              size="70px"
+              shadow="lg"
+              bg="gray.700"
+              color="white"
+              flexDirection="column"
+            >
+              <Icon fontSize="30px" as={BiNews} />
+              <Text fontSize="10px" fontWeight="600">
+                讯息
+              </Text>
+            </Circle>
+            <Circle
+              onClick={() => router.push('/profile')}
+              size="70px"
+              shadow="lg"
+              bg="gray.700"
+              color="white"
+              flexDirection="column"
+            >
+              <Icon fontSize="30px" as={BiCog} />
+              <Text fontSize="10px" fontWeight="600">
+                设置
+              </Text>
+            </Circle>
           </HStack>
         </Box>
 
