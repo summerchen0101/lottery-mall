@@ -6,32 +6,14 @@ import useAlert from '@/utils/useAlert'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
-import {
-  Box,
-  Circle,
-  HStack,
-  SimpleGrid,
-  Square,
-  Stack,
-  Text,
-} from '@chakra-ui/layout'
+import { Box, Circle, HStack, SimpleGrid, Text } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import {
-  BiArchiveOut,
-  BiArrowFromBottom,
-  BiArrowToBottom,
-  BiCog,
-  BiDollarCircle,
-  BiEnvelope,
-  BiNews,
-  BiRefresh,
-  BiUser,
-} from 'react-icons/bi'
+import { BiArchiveOut, BiDollarCircle, BiNews, BiUser } from 'react-icons/bi'
 import { HiOutlineLogout } from 'react-icons/hi'
 
 const linkItemProps = {
-  bg: 'white',
+  bg: 'gray.200',
   shadow: 'md',
   px: '15px',
   py: '15px',
@@ -39,8 +21,8 @@ const linkItemProps = {
   fontWeight: 'bold',
   fontSize: 'lg',
   // borderLeftWidth: '5px',
-  // borderColor: 'gray.300',
-  borderRadius: 'md',
+  // borderColor: 'gray.500',
+  borderRadius: 'sm',
 }
 function my() {
   const { doLogout } = useService()
@@ -64,17 +46,16 @@ function my() {
       <Box flex="1" overflowY="auto" bg="gray.400">
         <Box bg="white" p="20px">
           <Text fontSize="sm" color="gray.500" fontWeight="bold">
-            会员编号：{userInfo?.uid}
+            帐户余额：
           </Text>
           <HStack
             spacing="20px"
             mb="15px"
-            color="gray.700"
+            color="pink.500"
             fontWeight="bold"
             fontSize="3xl"
           >
             <Text>$ {toCurrency(userInfo?.money)}</Text>
-            <Icon as={BiRefresh} />
           </HStack>
 
           <HStack justify="space-evenly" mb="-50px">
@@ -125,7 +106,7 @@ function my() {
               color="white"
               flexDirection="column"
             >
-              <Icon fontSize="30px" as={BiCog} />
+              <Icon fontSize="30px" as={BiUser} />
               <Text fontSize="10px" fontWeight="600">
                 设置
               </Text>
@@ -156,7 +137,7 @@ function my() {
             常见问题
           </Box>
           <Box {...linkItemProps} onClick={() => router.push('/about')}>
-            GEM介紹
+            GEM介绍
           </Box>
           <Box {...linkItemProps} onClick={() => router.push('/hiring')}>
             人才招聘

@@ -43,7 +43,7 @@ function profile() {
                 电子邮件
               </Text>
               <Text fontSize="lg" fontWeight="600">
-                {userInfo?.email}
+                {userInfo?.email || '-'}
               </Text>
             </Box>
             <Box borderBottom="1px solid #ccc" py="5px">
@@ -51,7 +51,7 @@ function profile() {
                 手机号码
               </Text>
               <Text fontSize="lg" fontWeight="600">
-                {userInfo?.phone}
+                {userInfo?.phone || '-'}
               </Text>
             </Box>
             <Box borderBottom="1px solid #ccc" py="5px">
@@ -59,7 +59,7 @@ function profile() {
                 QQ
               </Text>
               <Text fontSize="lg" fontWeight="600">
-                {userInfo?.qq}
+                {userInfo?.qq || '-'}
               </Text>
             </Box>
             <Box borderBottom="1px solid #ccc" py="5px">
@@ -67,7 +67,7 @@ function profile() {
                 微信
               </Text>
               <Text fontSize="lg" fontWeight="600">
-                {userInfo?.weixin}
+                {userInfo?.weixin || '-'}
               </Text>
             </Box>
             <Divider h="3" />
