@@ -1,0 +1,90 @@
+/* ------------------------------_buttons-------------------------- */
+.btnbase {
+	display: inline-block;
+	font-size: 1rem;
+	vertical-align: middle;
+	cursor: pointer;
+	width: 100%;
+	outline: none;
+	border: none;
+	text-align: center;
+	padding: 0;
+	&:hover {
+		outline: none;
+	}
+	&:focus {
+		outline: none;
+	}
+}
+.primary_btn {
+	line-height: 45px;
+	outline: none;
+	background: $primary-color;
+	color: #fff;
+	border-radius: 3px;
+	transition: color 0.15s ease-in-out;
+    &.round{
+        border-radius: 22.5px;
+    }
+}
+// .primary_btn.color-yellow {
+// 	background: #f9ad0a;
+// 	color: #fff;
+// 	&:hover {
+// 		color: #fff;
+// 		background: #fabe3c;
+// 	}
+// }
+// .primary_btn.color-red {
+// 	background: $red-color;
+// 	color: #fff;
+// 	&:hover {
+// 		color: #fff;
+// 		background: #f87970;
+// 	}
+// }
+// .nulldata_btn {
+// 	background: #ddd;
+// 	color: #fff;
+// 	border-radius: 3px;
+// }
+// .secondary_btn{
+// 	line-height: 45px;
+// 	padding: 0 0.75rem;
+// 	background: rgba(255,255,255,.4);
+// 	color: #fff;
+// 	border-radius: 3px;
+// 	transition: color 0.15s ease-in-out;
+
+//   }
+// .outline_btn {
+// 	line-height: 43px;
+// 	outline: none;
+// 	background: transparent;
+// 	border-radius: 3px;
+// 	-webkit-border-radius: 3px;
+// 	-moz-border-radius: 3px;
+// 	-ms-border-radius: 3px;
+// 	-o-border-radius: 3px;
+// }
+// .outline_btn.color-gray {
+// 	color: $base-text-color;
+// 	border: 1px solid $input-border;
+// 	// &:hover {
+// 	// 	color: #fff;
+// 	// 	background: $primary-color;
+// 	// }
+// }
+// .outline_btn.color-blue {
+// 	border: 1px solid $primary-color;
+// 	color: $primary-color;
+// 	&:hover {
+// 		background: $primary-color;
+// 		color: #fff;
+// 	}
+// }
+// .outline_btn.color-blue.active {
+// 	color: $primary-color;
+// 	border: 1px solid $primary-color;
+// }
+

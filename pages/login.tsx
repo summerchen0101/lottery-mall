@@ -11,6 +11,7 @@ import {
   Button,
   Center,
   Checkbox,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
@@ -20,6 +21,7 @@ import {
   Spinner,
   Stack,
   Text,
+  VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
@@ -59,38 +61,43 @@ const login = () => {
 
   return (
     <Layout>
-      <Center h="100%" bg="purple.600">
+      <VStack h="100%" bg="baseBg.500">
+        <Image
+          m="40px auto 1rem auto"
+          w="35vw"
+          h="auto"
+          src="./img/logo.png"
+        ></Image>
         <Box
           as="form"
-          pb="60px"
-          bg="white"
-          py="40px"
-          px="50px"
-          shadow="lg"
-          mx="20px"
+          // pb="60px"
+          // pt="40px"
+          px="1rem"
           w="full"
           borderRadius="lg"
           onSubmit={onSubmit}
           noValidate
         >
-          <Heading mb="30px" color="gray.600" align="center">
+          {/* <Heading mb="30px" color="gray.600" align="center">
             99购商城
-          </Heading>
-          <Stack spacing="20px">
-            <FormControl isRequired>
-              <FormLabel>帐号</FormLabel>
+          </Heading> */}
+          <Stack spacing=".5rem">
+            <FormControl className="formGroup">
+              <FormLabel>* 会员账号</FormLabel>
               <Input
-                placeholder="帐号"
+                className="formInput"
+                placeholder="请输入会员账号"
                 name="username"
                 ref={register({ required: '不可为空' })}
                 defaultValue={decodeAccPass?.acc}
               />
               <FieldValidateMessage error={errors.username} />
             </FormControl>
-            <FormControl isRequired>
-              <FormLabel>密码</FormLabel>
+            <FormControl className="formGroup">
+              <FormLabel>* 密码</FormLabel>
               <Input
-                placeholder="密码"
+                className="formInput"
+                placeholder="请输入会员密码"
                 name="password"
                 type="password"
                 ref={register({ required: '不可为空' })}
@@ -98,11 +105,12 @@ const login = () => {
               />
               <FieldValidateMessage error={errors.password} />
             </FormControl>
-            <FormControl isRequired>
-              <FormLabel>验证码</FormLabel>
+            <FormControl className="formGroup">
+              <FormLabel>* 验证码</FormLabel>
               <HStack>
                 <Input
                   placeholder="验证码"
+                    className="formInput"
                   name="captcha"
                   ref={register({
                     required: '不可为空',
@@ -119,23 +127,40 @@ const login = () => {
               </HStack>
               <FieldValidateMessage error={errors.captcha} />
             </FormControl>
-            <HStack>
-              <Checkbox name="isRemAccPass" ref={register} defaultChecked />
+            <HStack mb="2rem">
+              <Checkbox
+                colorScheme="brand"
+                name="isRemAccPass"
+                ref={register}
+                defaultChecked
+              />
               <Text>记住帐密</Text>
             </HStack>
 
             <Button
-              mt={4}
-              colorScheme="pink"
+              height="45px"
+              borderRadius="22.5px"
+              colorScheme="brand"
               w="full"
               isLoading={isLoading}
               type="submit"
             >
               送出
             </Button>
+            <VStack pt=".5rem">
+              <Text mr="1">
+                立即加入 GEM100
+                <Box as="span" cursor="pointer" color="#fff">
+                  免费注册
+                </Box>
+              </Text>
+              <Text cursor="pointer" color="#fff">
+                联系客服
+              </Text>
+            </VStack>
           </Stack>
         </Box>
-      </Center>
+      </VStack>
     </Layout>
   )
 }
