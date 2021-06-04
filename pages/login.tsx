@@ -148,9 +148,9 @@ const login = () => {
               送出
             </Button>
             <VStack pt=".5rem">
-              <Text mr="1">
+              <Text >
                 立即加入 GEM100
-                <Box as="span" cursor="pointer" color="#fff">
+                <Box ml="1" as="span" cursor="pointer" color="#fff">
                   免费注册
                 </Box>
               </Text>
