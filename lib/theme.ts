@@ -17,6 +17,9 @@ const colors = {
   gray: {
     500: '#4A5359',
   },
+  darkblue: {
+    500: '#0b4e79',
+  },
 }
 const theme = extendTheme({ colors })
 

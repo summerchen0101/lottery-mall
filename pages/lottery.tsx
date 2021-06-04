@@ -13,8 +13,9 @@ import useUserInfo from '@/service/useUserInfo'
 import useTransfer from '@/utils/useTransfer'
 import { IconButton } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
+import { Image } from '@chakra-ui/image'
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input'
-import { Box, Flex, HStack, Text } from '@chakra-ui/layout'
+import { Box, Center, Flex, HStack, Text, VStack } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
@@ -60,52 +61,72 @@ function lottery() {
     <Layout>
       {/* <HeaderTitleBar title={qishuData?.lottery_name} /> */}
       {userInfo && (
-        <Flex justify="space-between" p="3" bg="purple.700">
-          <HStack fontSize="lg" spacing="20px">
-            <Text color="white" fontWeight="600">
+        <Flex justify="space-between" p="15px" bg="containerBg.500" h="80px">
+          <VStack spacing="5px" align="flex-start">
+            <Text fontSize="1rem" color="white" fontWeight="600">
               {userInfo?.username}
             </Text>
-            <Text color="purple.100" fontWeight="600">
-              <Icon as={BiDollar} fontSize="20px" fontWeight="bold" />
+            <Text color="brand.500" fontWeight="600" fontSize="1.125rem">
+              <Box as="span" fontSize="13px" color="#fff" mr="1">
+                G币
+              </Box>
               {toCurrency(userInfo?.money)}
             </Text>
-          </HStack>
-          <HStack>
-            <IconButton
-              aria-label="news"
-              icon={<HiSpeakerphone />}
-              size="sm"
-              colorScheme="pink"
-              fontSize="20px"
-              onClick={() => router.push('/news')}
-            />
-            <IconButton
-              aria-label="recharge"
-              icon={<HiCurrencyDollar />}
-              size="sm"
-              colorScheme="pink"
-              fontSize="20px"
-              onClick={() => router.push('/recharge')}
-            />
-            <IconButton
-              aria-label="withdraw"
-              icon={<HiUpload />}
-              size="sm"
-              colorScheme="pink"
-              fontSize="20px"
-              onClick={() => router.push('/withdraw')}
-            />
+          </VStack>
+          <HStack spacing="1rem">
+            <VStack spacing="2px" onClick={() => router.push('/news')}>
+              <Center
+                bg="brand.500"
+                w="2rem"
+                h="2rem"
+                fontSize="1.4rem"
+                className="ic-news iconfont"
+                color="#fff"
+                borderRadius="50%"
+              ></Center>
+              <Text fontSize="0.8125rem" color="#fff">
+                消息
+              </Text>
+            </VStack>
+            <VStack spacing="2px" onClick={() => router.push('/recharge')}>
+              <Center
+                bg="brand.500"
+                w="2rem"
+                h="2rem"
+                fontSize="1.4rem"
+                className="ic-deposit iconfont"
+                color="#fff"
+                borderRadius="50%"
+              ></Center>
+              <Text fontSize="0.8125rem" color="#fff">
+                充值
+              </Text>
+            </VStack>
+            <VStack spacing="2px" onClick={() => router.push('/withdraw')}>
+              <Center
+                bg="brand.500"
+                w="2rem"
+                h="2rem"
+                fontSize="1.4rem"
+                className="ic-withdrawal iconfont"
+                color="#fff"
+                borderRadius="50%"
+              ></Center>
+              <Text fontSize="0.8125rem" color="#fff">
+                提现
+              </Text>
+            </VStack>
           </HStack>
         </Flex>
       )}
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box p="10px 15px" flex="1" overflowY="auto">
         <HStack mb="2">
           <HStack
             flex="1"
-            bg="gray.300"
-            color="gray.500"
-            borderRadius="md"
-            p="1"
+            bg="contentBg.500"
+            color="#fff"
+            borderRadius="sm"
+            p="2"
           >
             <Text fontSize="10px">
               No.{toQishuNo(qishuData?.next_qishu)}
@@ -114,31 +135,41 @@ function lottery() {
             </Text>
             <LotteryCountdown />
           </HStack>
-          <Icon as={HiSun} fontSize="23px" />
+          <Image w="50px" h="auto" src="/img/logo.png" />
+          {/* <Icon as={HiSun} fontSize="23px" /> */}
           <HStack
             flex="1"
-            bg="gray.300"
-            color="gray.500"
-            borderRadius="md"
-            p="1"
+            bg="contentBg.500"
+            color="#fff"
+            borderRadius="sm"
+            p="2"
           >
             <Text fontSize="10px">
               No.{toQishuNo(qishuData?.qishu)}
               <br />
               订单
             </Text>
-            <Text fontSize="xl" flex="1" textAlign="center">
+            <Text fontSize="lg" flex="1" textAlign="center">
               {qishuData?.goods.name}
             </Text>
           </HStack>
         </HStack>
-        <HStack justify="center" bg="purple.500" p="2" borderRadius="md" mb="2">
+        <HStack
+          justify="center"
+          bg="contentBg.500"
+          p="2"
+          borderRadius="sm"
+          mb="2"
+        >
           <InputGroup>
             <Input
-              bg="gray.200"
+              bg="containerBg.500"
+              borderColor="containerBg.500"
+              borderRadius="sm"
               placeholder="请输入投资代号"
               ref={searchInput}
               type="number"
+              _focus={{ borderColor: 'brand.500', boxShadow: 'none' }}
             />
             {code && (
               <InputRightElement>
@@ -147,7 +178,7 @@ function lottery() {
             )}
           </InputGroup>
           <IconButton
-            colorScheme="pink"
+            colorScheme="brand"
             aria-label="Search database"
             icon={<HiSearch />}
             fontSize="xl"

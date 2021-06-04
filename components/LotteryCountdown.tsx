@@ -11,7 +11,7 @@ export default function LotteryCountdown() {
     qishuData?.countdown - qishuData?.close_time,
   )
   return (
-    <Text fontSize="xl" flex="1" textAlign="center">{`00:${secToTimer(
+    <Text fontSize="lg" flex="1" textAlign="center">{`00:${secToTimer(
       countdown,
     )}`}</Text>
   )

@@ -32,20 +32,22 @@ function NewsPopup() {
   return (
     <Modal isOpen={visible} onClose={onClose} autoFocus={false} isCentered>
       <ModalOverlay />
-      <ModalContent mx="20px">
-        <ModalHeader>最新公告</ModalHeader>
+      <ModalContent mx="20px" bg="#2c3c44">
+        <ModalHeader textAlign="center" color="#fff">
+          交易所公告
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           {isLoading ? (
             <Spinner />
           ) : (
-            <Stack divider={<StackDivider />}>
+            <Stack divider={<StackDivider />} borderColor="#3d4448">
               {noticeList?.map((t, i) => (
                 <Text
                   key={i}
                   onClick={() => router.push(`/news/${t.id}`)}
                   cursor="pointer"
-                  color="gray.600"
+                  color="#fff"
                 >
                   {t.name}
                 </Text>
@@ -55,8 +57,8 @@ function NewsPopup() {
         </ModalBody>
 
         <ModalFooter mt="10px">
-          <Button colorScheme="brand" w="full" onClick={onClose}>
-            确认
+          <Button colorScheme="darkblue" w="full" onClick={onClose}>
+            关闭
           </Button>
         </ModalFooter>
       </ModalContent>

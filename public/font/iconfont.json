@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5634246",
+      "name": "money-check-alt",
+      "font_class": "deposit",
+      "unicode": "f056",
+      "unicode_decimal": 61526
+    },
+    {
+      "icon_id": "11522456",
+      "name": "money_cashwithdrawal_fill",
+      "font_class": "withdrawal",
+      "unicode": "e71b",
+      "unicode_decimal": 59163
+    },
+    {
+      "icon_id": "19959064",
+      "name": "news-fill",
+      "font_class": "news",
+      "unicode": "e728",
+      "unicode_decimal": 59176
+    },
+    {
       "icon_id": "704630",
       "name": "shopping",
       "font_class": "shopping",
