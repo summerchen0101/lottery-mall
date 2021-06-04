@@ -6,12 +6,14 @@ const MetaHead = () => {
     <Head>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <title>購物彩票</title>
+      <title>GEM100</title>
       <meta name="description" content="" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0"
       />
+      <link rel="stylesheet" href="/font/iconfont.css" />
+      <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
     </Head>
   )
 }

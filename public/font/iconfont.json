@@ -1,0 +1,44 @@
+{
+  "id": "2591962",
+  "name": "GEM100",
+  "font_family": "iconfont",
+  "css_prefix_text": "ic-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "704630",
+      "name": "shopping",
+      "font_class": "shopping",
+      "unicode": "ea8b",
+      "unicode_decimal": 60043
+    },
+    {
+      "icon_id": "7239492",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e6f9",
+      "unicode_decimal": 59129
+    },
+    {
+      "icon_id": "9207716",
+      "name": "love2",
+      "font_class": "love",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "11913492",
+      "name": "tags",
+      "font_class": "tags",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
+      "icon_id": "12696608",
+      "name": "user",
+      "font_class": "user",
+      "unicode": "e821",
+      "unicode_decimal": 59425
+    }
+  ]
+}

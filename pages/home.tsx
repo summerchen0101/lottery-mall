@@ -5,6 +5,7 @@ import NewsPopup from '@/components/NewsPopup'
 import { usePopupContext } from '@/context/PopupContext'
 import useSiteParams from '@/service/useSiteParams'
 import Icon from '@chakra-ui/icon'
+import { Image } from '@chakra-ui/react'
 import {
   AspectRatio,
   Box,
@@ -41,8 +42,8 @@ export default function home() {
   }, [router])
   return (
     <Layout>
-      <Center h="100px" bg="pink.500" color="white">
-        GEM100
+      <Center w="full" h="auto">
+        <Image src="/img/banner.png"></Image>
       </Center>
       <Box flex="1" overflowY="auto">
         {isLoading ? (
