@@ -55,7 +55,7 @@ function NewsPopup() {
         </ModalBody>
 
         <ModalFooter mt="10px">
-          <Button colorScheme="purple" w="full" onClick={onClose}>
+          <Button colorScheme="brand" w="full" onClick={onClose}>
             确认
           </Button>
         </ModalFooter>

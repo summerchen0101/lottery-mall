@@ -61,7 +61,7 @@ const login = () => {
 
   return (
     <Layout>
-      <VStack h="100%" bg="baseBg.500">
+      <VStack h="100%" bg="containerBg.500">
         <Image
           m="40px auto 1rem auto"
           w="35vw"
@@ -110,7 +110,7 @@ const login = () => {
               <HStack>
                 <Input
                   placeholder="验证码"
-                    className="formInput"
+                  className="formInput"
                   name="captcha"
                   ref={register({
                     required: '不可为空',
@@ -148,7 +148,7 @@ const login = () => {
               送出
             </Button>
             <VStack pt=".5rem">
-              <Text >
+              <Text>
                 立即加入 GEM100
                 <Box ml="1" as="span" cursor="pointer" color="#fff">
                   免费注册

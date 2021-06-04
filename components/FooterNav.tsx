@@ -60,11 +60,6 @@ function FooterNav() {
         <Box as="i" className="ic-user iconfont"></Box>
         <Text>我的</Text>
       </div>
-      {/* <Icon as={BiHomeAlt} onClick={() => router.push('/home')} />
-      <Icon as={BiStoreAlt} onClick={() => router.push('/lottery')} />
-      <Icon as={BiPurchaseTag} onClick={() => router.push('/activity')} />
-      <Icon as={BiFileFind} onClick={() => router.push('/bet-rec')} />
-      <Icon as={BiCog} onClick={() => router.push('/my')} /> */}
     </Flex>
   )
 }
