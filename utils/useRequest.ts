@@ -12,8 +12,8 @@ const useRequest = () => {
   const request = useCallback(
     async function <
       R extends { success?: boolean; message?: string },
-      B extends {}
-    >(method: Method, url: string, data: B, config?: AxiosRequestConfig) {
+      B extends {} = {}
+    >(method: Method, url: string, data?: B, config?: AxiosRequestConfig) {
       try {
         const res = await Axios.request<R>({
           method,
