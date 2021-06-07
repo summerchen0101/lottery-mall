@@ -149,7 +149,7 @@ function lottery() {
               <br />
               订单
             </Text>
-            <Text fontSize="lg" flex="1" textAlign="center">
+            <Text fontSize="md" flex="1" textAlign="center">
               {qishuData?.goods.name}
             </Text>
           </HStack>
@@ -166,6 +166,7 @@ function lottery() {
               bg="containerBg.500"
               borderColor="containerBg.500"
               borderRadius="sm"
+              fontSize="15px"
               placeholder="请输入投资代号"
               ref={searchInput}
               type="number"

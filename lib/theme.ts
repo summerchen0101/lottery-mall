@@ -5,6 +5,7 @@ const colors = {
     500: '#202629',
   },
   contentBg: {
+    400: '#535b60',
     500: '#3d4448',
   },
   baseText: {

@@ -42,19 +42,28 @@ function GoodsItem({
     )
   }, [diff])
   return (
-    <HStack bg="white" borderBottom="1px solid #ccc" spacing="1" py="1" px="1">
+    <HStack
+      align="flex-end"
+      bg=""
+      spacing="1"
+      mb="1"
+      pb="1"
+      borderBottom="1px"
+      borderColor="#3d4448"
+    >
       <Box w="full" onClick={onBetClicked}>
         <HStack
           justify="space-between"
-          bg="gray.200"
+          bg="contentBg.500"
           px="2"
           fontSize="sm"
+          borderRadius="sm"
           lineHeight="25px"
         >
-          <Text>GEM-{toNumString(item.number)}</Text>
-          <Text>{item.name}</Text>
+          <Text color="gray.400">GEM-{toNumString(item.number)}</Text>
+          <Text color="gray.400">{item.name}</Text>
         </HStack>
-        <Text fontSize="10px" px="2">
+        <Text fontSize="10px" px="2" color="#fff">
           目前收益率：
         </Text>
         <Text
@@ -65,7 +74,7 @@ function GoodsItem({
         >
           {item.odds}%
         </Text>
-        <Text fontSize="10px" px="2">
+        <Text fontSize="10px" px="2" color="#fff">
           比較上次：
         </Text>
         <HStack fontSize="20px" justify="center" lineHeight="20px">

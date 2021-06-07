@@ -8,7 +8,7 @@ import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { FormControl } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, Flex, HStack, Stack, Text, VStack } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
@@ -30,6 +30,7 @@ function BettingPopup() {
   const { toCurrency } = useTransfer()
   const [visible, setVisible] = useBetInfoContext().betting
   const [, setBetConfirmVisible] = useBetInfoContext().betConfirm
+  const [scrollBehavior, setScrollBehavior] = React.useState('inside')
   const [goodsId] = useBetInfoContext().goodsId
   const [, setTotalPrice] = useBetInfoContext().totalPrice
   const [odds, setOdds] = useBetInfoContext().odds
@@ -88,27 +89,54 @@ function BettingPopup() {
     visible && setTotalPrice(null)
   }, [visible])
   return (
-    <Modal isOpen={visible} onClose={handleCancel} autoFocus={false}>
+    <Modal
+      isOpen={visible}
+      onClose={handleCancel}
+      autoFocus={false}
+      // scrollBehavior={scrollBehavior}
+    >
       <ModalOverlay />
-      <ModalContent mx="20px">
-        <ModalBody p="4">
+      <ModalContent bg="#3a3a3a" mb="0">
+        <ModalBody p="15px 15px 0 15px">
           {isLoading ? (
             <Spinner />
           ) : (
-            <Stack spacing="15px">
+            <Stack spacing=".5rem">
               <HStack>
-                <HStack flex="1" bg="gray.200" borderRadius="md" p="2" h="40px">
-                  <Text fontSize="lg" lineHeight="18px">
-                    GEM-{toNumString(goodsInfo?.number)}
-                  </Text>
-                  <Text fontSize="sm">{goodsInfo?.name}</Text>
+                <HStack
+                  alignItems="flex-start"
+                  flex="1"
+                  bg="containerBg.500"
+                  borderRadius="sm"
+                  p=".3rem .5rem"
+                  h="45px"
+                >
+                  <Text fontSize="10px">投资选择：</Text>
+                  <Flex
+                    fontSize="sm"
+                    color="gray.400"
+                    flexDir="column"
+                    lineHeight="15px"
+                  >
+                    <Text lineHeight="18px">
+                      GEM-{toNumString(goodsInfo?.number)}
+                    </Text>
+                    <Text>{goodsInfo?.name}</Text>
+                  </Flex>
                 </HStack>
                 <HiArrowRight />
-                <HStack flex="1" bg="gray.200" borderRadius="md" p="2" h="40px">
+                <HStack
+                  alignItems="flex-start"
+                  flex="1"
+                  bg="containerBg.500"
+                  borderRadius="sm"
+                  p=".3rem .5rem"
+                  h="45px"
+                >
                   <Text fontSize="10px">目前收益率：</Text>
                   <Text
-                    fontSize="xl"
-                    lineHeight="18px"
+                    fontSize="2xl"
+                    lineHeight="33px"
                     color="red.500"
                     textAlign="center"
                   >
@@ -117,15 +145,26 @@ function BettingPopup() {
                 </HStack>
               </HStack>
               <Box>
-                <Text fontWeight="600" color="purple.500" mb="1">
+                <Text fontWeight="600" color="gray.400" mb="1">
+                  <Text
+                    as="span"
+                    display="inline-block"
+                    w="10px"
+                    h="10px"
+                    borderRadius="50%"
+                    bg="#fa4764"
+                    mr="1"
+                  ></Text>
                   市场行情(6小时)
                 </Text>
-                <Box>
+                <Box bg="containerBg.500" p="2" mb="1">
                   <Chart autoFit height={200} data={chart}>
                     <Line position="date*profit" />
                     <Point position="date*profit" />
                     <Tooltip showCrosshairs />
                   </Chart>
+                </Box>
+                <Box bg="containerBg.500" p="2">
                   <Chart height={100} autoFit data={chart}>
                     <Interval position="date*bet_total" />
                     <Tooltip shared />
@@ -133,7 +172,16 @@ function BettingPopup() {
                 </Box>
               </Box>
               <Box>
-                <Text fontWeight="600" color="purple.500" mb="1">
+                <Text fontWeight="600" color="gray.400" mb=".5rem">
+                  <Text
+                    as="span"
+                    display="inline-block"
+                    w="10px"
+                    h="10px"
+                    borderRadius="50%"
+                    bg="#fa4764"
+                    mr="1"
+                  ></Text>
                   投资金额
                 </Text>
                 <FormControl>
@@ -141,12 +189,20 @@ function BettingPopup() {
                     <Input
                       ref={priceInput}
                       w="full"
-                      bg="gray.100"
+                      borderRadius="sm"
+                      placeholder="请输入投资金额"
+                      bg="containerBg.500"
+                      borderColor="containerBg.500"
+                      fontSize="0.9375rem"
                       type="number"
+                      _focus={{ boxShadow: 'none', borderColor: '#bca16f' }}
                     />
                     <Button
                       w="full"
-                      colorScheme="purple"
+                      borderRadius="sm"
+                      colorScheme="brand"
+                      variant="outline"
+                      fontSize="0.9375rem"
                       onClick={() => {
                         priceInput.current.value = userInfo?.money + ''
                       }}
@@ -158,10 +214,10 @@ function BettingPopup() {
               </Box>
               <Stack spacing="0" align="flex-end">
                 <HStack>
-                  <Text color="gray.500" fontWeight="bold" fontSize="md">
+                  <Text color="gray.400" fontSize="md">
                     余额：
                   </Text>
-                  <Text color="pink.500" fontWeight="bold" fontSize="lg">
+                  <Text color="brand.500" fontSize="md">
                     ¥ {toCurrency(userInfo?.money)}
                   </Text>
                 </HStack>
@@ -170,15 +226,21 @@ function BettingPopup() {
           )}
         </ModalBody>
 
-        <ModalFooter p="4" as={HStack}>
+        <ModalFooter px="15px" py=".8rem" as={HStack}>
           <Button
-            colorScheme="gray"
+            colorScheme="brand"
             flex="1"
+            borderRadius="20px"
             onClick={() => router.push('/recharge')}
           >
             立即充值
           </Button>
-          <Button colorScheme="pink" flex="1" onClick={handleSubmit}>
+          <Button
+            colorScheme="brand"
+            flex="1"
+            borderRadius="20px"
+            onClick={handleSubmit}
+          >
             立即抢购
           </Button>
         </ModalFooter>
