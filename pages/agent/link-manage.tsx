@@ -1,7 +1,7 @@
 import AgentPageTabs from '@/components/AgentPageTabs'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import useInviteList from '@/service/useInviteList'
+import useInviteList, { Invite } from '@/service/useInviteList'
 import { Box, HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import React, { useCallback, useMemo, useState } from 'react'
@@ -12,6 +12,10 @@ import { Button } from '@chakra-ui/button'
 import TextCopy from '@/components/TextCopy'
 import InviteQrcodePopup from '@/components/InviteQrcodePopup'
 import QRcode from 'qrcode'
+import AlertPopup from '@/components/AlertPopup'
+import useInviteUpdate from '@/service/useInviteStatusEdit'
+import { useToast } from '@chakra-ui/toast'
+import useAlert from '@/utils/useAlert'
 const statusColorMap = {
   [InviteStatus.On]: 'green.500',
   [InviteStatus.Off]: 'red.500',
@@ -20,8 +24,15 @@ const statusColorMap = {
 export default function createInvite() {
   const { toOptionName } = useTransfer()
   const [isShowQRCode, setIsShowQRCode] = useState(false)
+  const [isShowAlert, setIsShowAlert] = useState(false)
   const [qrcodeImg, setQrcodeImg] = useState('')
-  const { inviteList, isLoading } = useInviteList()
+  const [alertId, setAlertId] = useState(null)
+  const { inviteList, isLoading, refresh } = useInviteList()
+  const alert = useAlert()
+  const {
+    handler: doStatusChange,
+    isLoading: isUpdateLoading,
+  } = useInviteUpdate()
   const baseUrl = useMemo(() => {
     if (process.browser) {
       return `${location.protocol}//${location.host}/register`
@@ -33,7 +44,27 @@ export default function createInvite() {
     setQrcodeImg(imgSrc)
     setIsShowQRCode(true)
   }, [])
+  const handleStatusChange = useCallback(
+    async (id: number, status: InviteStatus) => {
+      try {
+        const res = await doStatusChange({
+          invite_id: id,
+          status,
+        })
+        if (res.success) {
+          alert.success('状态已更新')
+          setIsShowAlert(false)
+          refresh()
+        }
+      } catch (err) {}
+    },
+    [],
+  )
 
+  const handleDisableStatus = (id: number) => {
+    setAlertId(id)
+    setIsShowAlert(true)
+  }
   return (
     <Layout>
       <HeaderTitleBar back title="链结管理" />
@@ -43,9 +74,15 @@ export default function createInvite() {
         {isLoading ? (
           <Spinner />
         ) : (
-          <Stack>
+          <Stack spacing="3">
             {inviteList?.map((t) => (
-              <Box key={t.id} bg="gray.700" borderRadius="md" p="4">
+              <Box
+                key={t.id}
+                bg="gray.700"
+                borderRadius="md"
+                p="4"
+                color="gray.200"
+              >
                 <HStack>
                   <Text>{t.name}</Text>
                   <Spacer />
@@ -61,7 +98,7 @@ export default function createInvite() {
                   注册链结：
                   {t.invite}
                 </Text>
-                <HStack>
+                <HStack mt="2">
                   <TextCopy text={t.invite}>
                     <Button colorScheme="red" size="sm">
                       复制邀请码
@@ -79,9 +116,25 @@ export default function createInvite() {
                   >
                     QRCode
                   </Button>
-                  <Button colorScheme="red" size="sm">
-                    停用
-                  </Button>
+                  {t.status === InviteStatus.On ? (
+                    <Button
+                      colorScheme="red"
+                      size="sm"
+                      onClick={() => handleDisableStatus(t.id)}
+                      isLoading={isUpdateLoading}
+                    >
+                      停用
+                    </Button>
+                  ) : (
+                    <Button
+                      colorScheme="green"
+                      size="sm"
+                      onClick={() => handleStatusChange(t.id, InviteStatus.On)}
+                      isLoading={isUpdateLoading}
+                    >
+                      啟用
+                    </Button>
+                  )}
                 </HStack>
               </Box>
             ))}
@@ -92,6 +145,13 @@ export default function createInvite() {
           onClose={() => setIsShowQRCode(false)}
           qrcodeImg={qrcodeImg}
         />
+        <AlertPopup
+          isOpen={isShowAlert}
+          onClose={() => setIsShowAlert(false)}
+          onConfirm={() => handleStatusChange(alertId, InviteStatus.Off)}
+        >
+          停用后此链接将立即失效，是否确认停用？
+        </AlertPopup>
       </Box>
     </Layout>
   )
