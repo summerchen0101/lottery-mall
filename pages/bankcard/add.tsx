@@ -26,9 +26,13 @@ function bankAdd() {
   const { firstBankName } = useFirstBankName()
   const { register, errors, handleSubmit } = useForm<BankCardFormProps>()
   const onSubmit = handleSubmit(async (d) => {
-    await doCreateBankCard({ ...d, name: firstBankName })
-    await router.push('/bankcard')
-    alert.success('新增成功')
+    try {
+      const res = await doCreateBankCard(d)
+      if (res.success) {
+        await router.push('/bankcard')
+        alert.success('新增成功')
+      }
+    } catch (err) {}
   })
   return (
     <Layout>

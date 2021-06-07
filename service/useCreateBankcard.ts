@@ -21,7 +21,7 @@ export default function useCreateBankcard() {
     setIsLoading(true)
     const res = await post<CreateBankcardRes>('user/bankCreate', data)
     setIsLoading(false)
-    return res.data
+    return res
   }
   return {
     isLoading,
