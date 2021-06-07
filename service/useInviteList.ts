@@ -1,7 +1,7 @@
 import useRequest from '@/utils/useRequest'
 import useSWR from 'swr'
 
-interface Invite {
+export interface Invite {
   id: number
   type: number
   name: string
@@ -25,7 +25,7 @@ export default function useInviteList() {
   )
   return {
     inviteList: res?.data,
-    isLoading: isValidating,
+    isLoading: !error && !res,
     isError: error,
     refresh: mutate,
   }

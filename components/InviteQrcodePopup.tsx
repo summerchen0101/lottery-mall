@@ -1,20 +1,13 @@
-import { useBetInfoContext } from '@/context/BetInfoProvider'
-import { useGlobalProvider } from '@/context/GlobalProvider'
-import useBetSuccess from '@/service/useBetSuccess'
 import { Image } from '@chakra-ui/image'
-import { Center, Divider, HStack, Text } from '@chakra-ui/layout'
+import { Center } from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
-import { Spinner } from '@chakra-ui/spinner'
-import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 interface InviteQrcodePopupProps {
   isOpen: boolean
