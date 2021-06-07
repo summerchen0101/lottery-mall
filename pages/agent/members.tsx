@@ -91,7 +91,7 @@ export default function memberList() {
                       colorScheme="red"
                       size="sm"
                       flex="1"
-                      onClick={() => router.push('/agent/bet-records')}
+                      onClick={() => router.push(`/agent/bet-records/${t.id}`)}
                     >
                       今日下单记录
                     </Button>

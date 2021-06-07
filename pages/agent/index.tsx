@@ -26,7 +26,9 @@ function agent() {
             <ListItem onClick={() => router.push('/agent/members')}>
               会员管理
             </ListItem>
-            <ListItem>在线会员</ListItem>
+            <ListItem onClick={() => router.push('/agent/online-members')}>
+              在线会员
+            </ListItem>
             <ListItem>团队充值</ListItem>
             <ListItem>团队提現</ListItem>
             <ListItem>团队下单纪录</ListItem>
