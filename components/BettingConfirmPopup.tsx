@@ -12,7 +12,15 @@ import useHelper from '@/utils/useHelper'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { HStack, Stack, Text } from '@chakra-ui/layout'
+import {
+  Divider,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Spacer,
+  Stack,
+  Text,
+} from '@chakra-ui/layout'
 import {
   Modal,
   ModalBody,
@@ -109,52 +117,49 @@ function BettingConfirmPopup() {
   return (
     <Modal isOpen={visible} onClose={onClose} autoFocus={false} isCentered>
       <ModalOverlay />
-      <ModalContent mx="20px">
-        <ModalHeader justify="center">
-          <HStack>
-            <Text>交易确认</Text>
-            <Tag colorScheme="red" variant="solid">
+      <ModalContent className="modal__content">
+        <ModalHeader justify="center" className="modal__header">
+          <Flex>
+            <Text color="#fff">交易确认</Text>
+            <Spacer />
+            <Tag colorScheme="red" variant="solid" mr="1.75rem">
               抢购倒数：{secToTimer(countdown)}
             </Tag>
-          </HStack>
+          </Flex>
+          <Divider mt="4" />
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          <Text fontWeight="600" fontSize="lg" mb="15px">
-            {goodsInfo?.name}{' '}
+        <ModalBody className="modal__body">
+          <Text color="#fff" textAlign="center" fontSize="xl" mb="15px">
+            {goodsInfo?.name}
           </Text>
-          <Stack>
-            <HStack>
-              <Text>總計金額</Text>
-              <Text color="pink.500" fontSize="2xl" fontWeight="bold">
-                ¥ {totalPrice}
-              </Text>
-            </HStack>
-            <Stack fontSize="sm" color="gray.500" align="flex-end">
-              <HStack justify="space-between">
-                <Text>预估获利：</Text>
-                <Text fontWeight="bold">
-                  ¥ {toCurrency(confirmData?.profit)}
-                </Text>
-              </HStack>
-              <HStack justify="space-between">
-                <Text>可用余额：</Text>
-                <Text fontWeight="bold">¥ {toCurrency(userInfo?.money)}</Text>
-              </HStack>
-            </Stack>
-          </Stack>
+          <SimpleGrid columns={2} spacingY=".5rem" color="#fff">
+            <Text>總計金額：</Text>
+            <Text textAlign="right" color>
+              ¥ {totalPrice}
+            </Text>
+            <Text>预估获利：</Text>
+            <Text textAlign="right">¥ {toCurrency(confirmData?.profit)}</Text>
+            <Text>可用余额：</Text>
+            <Text textAlign="right">¥ {toCurrency(userInfo?.money)}</Text>
+          </SimpleGrid>
         </ModalBody>
 
-        <ModalFooter mt="10px">
-          <HStack>
-            <Button colorScheme="gray" onClick={onClose}>
-              取消
-            </Button>
-            <Button colorScheme="pink" onClick={onSubmit} disabled={isLoading}>
-              确认
-              {isLoading && <Spinner ml="1" />}
-            </Button>
-          </HStack>
+        <ModalFooter className="modal__footer" mt="10px" as={HStack}>
+          <button className="btnbase outline_btn" onClick={onClose}>
+            取消
+          </button>
+          <Button
+            w="100%"
+            borderRadius="25px"
+            colorScheme="brand"
+            h="36px"
+            onClick={onSubmit}
+            disabled={isLoading}
+          >
+            确认
+            {isLoading && <Spinner ml="1" />}
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

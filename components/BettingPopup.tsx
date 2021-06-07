@@ -93,7 +93,7 @@ function BettingPopup() {
       isOpen={visible}
       onClose={handleCancel}
       autoFocus={false}
-      scrollBehavior="inside"
+      // scrollBehavior="inside"
     >
       <ModalOverlay />
       <ModalContent bg="#3a3a3a" mb="0">
@@ -145,7 +145,7 @@ function BettingPopup() {
                 </HStack>
               </HStack>
               <Box>
-                <Text fontWeight="600" color="gray.400" mb="1">
+                <Text fontWeight="600" color="#fff" mb="1">
                   <Text
                     as="span"
                     display="inline-block"
@@ -172,7 +172,7 @@ function BettingPopup() {
                 </Box>
               </Box>
               <Box>
-                <Text fontWeight="600" color="gray.400" mb=".5rem">
+                <Text fontWeight="600" color="#fff" mb=".5rem">
                   <Text
                     as="span"
                     display="inline-block"
@@ -185,11 +185,14 @@ function BettingPopup() {
                   投资金额
                 </Text>
                 <FormControl>
-                  <HStack>
+                  <HStack className="formGroup">
                     <Input
                       ref={priceInput}
                       w="full"
                       borderRadius="sm"
+                      height="36px"
+                      flex="2"
+                      color="#fff"
                       placeholder="请输入投资金额"
                       bg="containerBg.500"
                       borderColor="containerBg.500"
@@ -199,9 +202,11 @@ function BettingPopup() {
                     />
                     <Button
                       w="full"
+                      flex="1"
                       borderRadius="sm"
                       colorScheme="brand"
                       variant="outline"
+                      height="36px"
                       fontSize="0.9375rem"
                       onClick={() => {
                         priceInput.current.value = userInfo?.money + ''
@@ -222,7 +227,7 @@ function BettingPopup() {
                   </Text>
                 </HStack> */}
                 <HStack>
-                  <Text color="gray.500" fontWeight="bold" fontSize="md">
+                  <Text color="gray.400" fontSize="md">
                     余额：
                   </Text>
                   <Text color="brand.500" fontSize="md">
@@ -235,22 +240,15 @@ function BettingPopup() {
         </ModalBody>
 
         <ModalFooter px="15px" py=".8rem" as={HStack}>
-          <Button
-            colorScheme="brand"
-            flex="1"
-            borderRadius="20px"
+          <button
+            className="btnbase primary_btn"
             onClick={() => router.push('/recharge')}
           >
             立即充值
-          </Button>
-          <Button
-            colorScheme="brand"
-            flex="1"
-            borderRadius="20px"
-            onClick={handleSubmit}
-          >
+          </button>
+          <button className="btnbase primary_btn" onClick={handleSubmit}>
             立即抢购
-          </Button>
+          </button>
         </ModalFooter>
       </ModalContent>
     </Modal>
