@@ -4,7 +4,7 @@ import Layout from '@/components/Layout'
 import useActivity from '@/service/useActivity'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Text } from '@chakra-ui/layout'
+import { Box, Center, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
@@ -17,23 +17,21 @@ function activity() {
   return (
     <Layout>
       <HeaderTitleBar back title="優惠活動" />
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box className="layout" flex="1" overflowY="auto">
         {isLoading ? (
-          <Spinner />
+          <Center w="full" h="100%">
+            <Spinner m="20px" />
+          </Center>
         ) : (
           <>
-            <Text color="purple.600" fontSize="lg" fontWeight="600" mb="10px">
+            <Text color="brand.500" fontSize="lg" fontWeight="600" mb="10px">
               {activity?.title}
             </Text>
             <Box
               dangerouslySetInnerHTML={{
                 __html: htmldecode(activity?.content),
               }}
-              bg="white"
-              borderRadius="md"
-              shadow="md"
-              color="gray.500"
-              p="15px"
+              color="#fff"
               minH="550px"
             />
           </>

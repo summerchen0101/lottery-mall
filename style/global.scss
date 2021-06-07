@@ -20,7 +20,12 @@ body {
   background: $base-bg !important;
   color: $base-text-color !important;
   width: 100%;
-  overflow-y: hidden;
+
+}
+
+.layout{
+  padding: 15px 15px 65px 15px;
+  overflow: auto;
 }
 
 

@@ -36,7 +36,7 @@
     width: 100%;
     height: 40px;
     padding: 0 15px;
-    font-size: 1rem;
+    font-size: .9375rem;
     background: #3d4448;
     border-color: #3d4448;
     color: #fff;
@@ -44,7 +44,25 @@
     outline: none;
     -webkit-appearance: none;
     &::placeholder {
-      color: $base-text-color;
+      color: lighten($base-text-color, 10%);
+    }
+    &:focus,&:hover {
+      border-color: $primary-color !important;
+      box-shadow: none !important;
+    }
+  }
+  .formSelect{
+    width: 100%;
+    height: 40px;
+    padding: 0 15px;
+    font-size: .9375rem;
+    background: #3d4448;
+    border-color: #3d4448;
+    border-radius: 0 !important;
+    outline: none;
+    -webkit-appearance: none;
+    &::placeholder {
+      color: lighten($base-text-color, 10%) !important;
     }
     &:focus,&:hover {
       border-color: $primary-color !important;

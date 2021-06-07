@@ -41,7 +41,10 @@ function NewsPopup() {
           {isLoading ? (
             <Spinner />
           ) : (
-            <Stack divider={<StackDivider />} borderColor="#3d4448">
+            <Stack
+              divider={<StackDivider />}
+              borderColor="rgba(255,255,255,.3)"
+            >
               {noticeList?.map((t, i) => (
                 <Text
                   key={i}

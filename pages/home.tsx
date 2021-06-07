@@ -42,7 +42,7 @@ export default function home() {
   }, [router])
   return (
     <Layout>
-      <Box flex="1" overflowY="auto" bg="containerBg.500">
+      <Box flex="1" pb="55px" overflowY="auto" bg="containerBg.500">
         {isLoading ? (
           <Center w="full" h="100%">
             <Spinner m="20px" />

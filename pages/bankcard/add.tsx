@@ -10,7 +10,7 @@ import useAlert from '@/utils/useAlert'
 import { Button } from '@chakra-ui/button'
 import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
-import { Box, Stack } from '@chakra-ui/layout'
+import { Box, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
@@ -37,27 +37,38 @@ function bankAdd() {
   return (
     <Layout>
       <HeaderTitleBar back title="新增银行卡" />
-      <Box flex="1" overflowY="auto" p="20px" pb="50px">
+      <Box flex="1" className="layout">
         <Stack as="form" spacing="12px" onSubmit={onSubmit} noValidate>
-          <FormControl isRequired isInvalid={!!errors.name}>
-            <FormLabel>银行卡姓名</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.name}>
+            <FormLabel color="#fff">
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              银行卡姓名
+            </FormLabel>
             <Input
               name="name"
-              bg="white"
+              placeholder="请输入银行卡姓名"
+              className="formInput"
               ref={register({ required: '不可为空' })}
               defaultValue={firstBankName}
               disabled={!!firstBankName}
             />
             <FieldValidateMessage error={errors.name} />
-            <FormHelperText>
+            <FormHelperText color="gray.400">
               必须与您的银行帐户姓名一致，否则无法进行取款
             </FormHelperText>
           </FormControl>
-          <FormControl isRequired isInvalid={!!errors.bank_id}>
-            <FormLabel>银行名称</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.bank_id}>
+            <FormLabel color="#fff">
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              银行名称
+            </FormLabel>
             <Select
+              className="formSelect"
               name="bank_id"
-              bg="white"
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
             >
@@ -70,38 +81,73 @@ function bankAdd() {
             </Select>
             <FieldValidateMessage error={errors.bank_id} />
           </FormControl>
-          <FormControl isRequired isInvalid={!!errors.bank_name}>
-            <FormLabel>支行名称</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.bank_name}>
             <Input
+              className="formInput"
+              placeholder="支行名称"
               name="bank_name"
-              bg="white"
               ref={register({ required: '不可为空' })}
             />
             <FieldValidateMessage error={errors.bank_name} />
-            <FormHelperText>必须是您的开户支行</FormHelperText>
+            <FormHelperText color="gray.400">必须是您的开户支行</FormHelperText>
           </FormControl>
-          <FormControl isRequired isInvalid={!!errors.account}>
-            <FormLabel>银行帐号</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.account}>
+            <FormLabel color="#fff">
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              银行帐号
+            </FormLabel>
             <Input
+              className="formInput"
               name="account"
-              bg="white"
+              placeholder="请输入银行帐号"
               ref={register({ required: '不可为空' })}
             />
             <FieldValidateMessage error={errors.account} />
-            <FormHelperText>必须输入16~19个数字</FormHelperText>
+            <FormHelperText color="gray.400">
+              必须输入16~19个数字
+            </FormHelperText>
           </FormControl>
-          <FormControl>
-            <FormLabel>开户省份</FormLabel>
-            <Input name="province" bg="white" ref={register} />
-          </FormControl>
-          <FormControl>
-            <FormLabel>开户城市</FormLabel>
-            <Input name="city" bg="white" ref={register} />
-          </FormControl>
+
+          <SimpleGrid columns={2} spacingX="10px">
+            <FormControl className="formGroup">
+              <FormLabel color="#fff">
+                {' '}
+                <Text as="span" color="red.500">
+                  *
+                </Text>{' '}
+                开户省份
+              </FormLabel>
+              <Input
+                name="province"
+                placeholder="请输入开户省份"
+                className="formInput"
+                ref={register}
+              />
+            </FormControl>
+            <FormControl className="formGroup">
+              <FormLabel color="#fff">
+                {' '}
+                <Text as="span" color="red.500">
+                  *
+                </Text>{' '}
+                开户城市
+              </FormLabel>
+              <Input
+                name="city"
+                placeholder="请输入开户城市"
+                className="formInput"
+                ref={register}
+              />
+            </FormControl>
+          </SimpleGrid>
+
           <Button
             type="submit"
+            borderRadius="3px"
             w="full"
-            colorScheme="purple"
+            colorScheme="red"
             disabled={isLoading}
           >
             确认送出

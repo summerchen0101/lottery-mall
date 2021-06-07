@@ -8,7 +8,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/modal'
-import { Box, Text } from '@chakra-ui/layout'
+import { Box, Divider, Text } from '@chakra-ui/layout'
 import useTransfer from '@/utils/useTransfer'
 import { bankcardStatusOpts } from '@/lib/options'
 import { BankCardStatus } from '@/lib/enums'
@@ -30,74 +30,77 @@ function BankcardDetailPopup({
   return (
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
-      <ModalContent mx="20px">
-        <ModalHeader>我的银行信息</ModalHeader>
+      <ModalContent className="modal__content">
+        <ModalHeader className="modal__header">我的银行信息</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody className="modal__body">
           {bankcard && (
             <>
-              <Box borderBottom="1px solid #ccc" py="10px">
-                <Text fontSize="sm" mb="5px">
-                  状态
-                </Text>
-                <Text
-                  fontSize="lg"
-                  fontWeight="600"
-                  color={
-                    bankcard.status === BankCardStatus.On
-                      ? 'pink.500'
-                      : 'gray.500'
-                  }
-                >
-                  {toOptionName(bankcardStatusOpts, bankcard.status)}
-                </Text>
-              </Box>
-              <Box borderBottom="1px solid #ccc" py="10px">
-                <Text fontSize="sm" mb="5px">
-                  银行卡姓名
-                </Text>
-                <Text fontSize="lg" fontWeight="600">
-                  {bankcard.name}
-                </Text>
-              </Box>
-              <Box borderBottom="1px solid #ccc" py="10px">
-                <Text fontSize="sm" mb="5px">
-                  银行名称
-                </Text>
-                <Text fontSize="lg" fontWeight="600">
-                  {bankcard.bank}
-                </Text>
-              </Box>
-              <Box borderBottom="1px solid #ccc" py="10px">
-                <Text fontSize="sm" mb="5px">
-                  支行名称
-                </Text>
-                <Text fontSize="lg" fontWeight="600">
-                  {bankcard.bank_name}
-                </Text>
-              </Box>
-              <Box borderBottom="1px solid #ccc" py="10px">
-                <Text fontSize="sm" mb="5px">
-                  银行帐号
-                </Text>
-                <Text fontSize="lg" fontWeight="600">
-                  {bankcard.account}
-                </Text>
-              </Box>
-              <Box borderBottom="1px solid #ccc" py="10px">
-                <Text fontSize="sm" mb="5px">
-                  开户省份 / 城市
-                </Text>
-                <Text fontSize="lg" fontWeight="600">
-                  {bankcard.province} / {bankcard.city}
-                </Text>
-              </Box>
+              <Text fontSize="sm" mb="5px" color="gray.400">
+                状态
+              </Text>
+              <Text
+                fontSize="md"
+                color={
+                  bankcard.status === BankCardStatus.On
+                    ? 'green.500'
+                    : 'gray.500'
+                }
+              >
+                {toOptionName(bankcardStatusOpts, bankcard.status)}
+              </Text>
+
+              <Divider borderColor="#ccc" py="1" mb="2" />
+
+              <Text fontSize="sm" mb="5px" color="gray.400">
+                银行卡姓名
+              </Text>
+              <Text fontSize="md" color="#fff">
+                {bankcard.name}
+              </Text>
+              <Divider borderColor="#ccc" py="1" mb="2" />
+
+              <Text fontSize="sm" mb="5px" color="gray.400">
+                银行名称
+              </Text>
+              <Text fontSize="md" color="#fff">
+                {bankcard.bank}
+              </Text>
+              <Divider borderColor="#ccc" py="1" mb="2" />
+
+              <Text fontSize="sm" mb="5px" color="gray.400">
+                支行名称
+              </Text>
+              <Text fontSize="md" color="#fff">
+                {bankcard.bank_name}
+              </Text>
+              <Divider borderColor="#ccc" py="1" mb="2" />
+
+              <Text fontSize="sm" mb="5px" color="gray.400">
+                银行帐号
+              </Text>
+              <Text fontSize="md" color="#fff">
+                {bankcard.account}
+              </Text>
+              <Divider borderColor="#ccc" py="1" mb="2" />
+              <Text fontSize="sm" mb="5px" color="gray.400">
+                开户省份 / 城市
+              </Text>
+              <Text fontSize="md" color="#fff">
+                {bankcard.province} / {bankcard.city}
+              </Text>
+              <Divider borderColor="#ccc" py="1" mb="2" />
             </>
           )}
         </ModalBody>
 
-        <ModalFooter>
-          <Button colorScheme="purple" onClick={onClose} w="full">
+        <ModalFooter className="modal__footer ">
+          <Button
+            colorScheme="brand"
+            borderRadius="sm"
+            onClick={onClose}
+            w="full"
+          >
             关闭
           </Button>
         </ModalFooter>

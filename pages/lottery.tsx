@@ -119,7 +119,7 @@ function lottery() {
           </HStack>
         </Flex>
       )}
-      <Box p="10px 15px" flex="1" overflowY="auto">
+      <Box p="10px 15px 65px 15px" flex="1" overflowY="auto">
         <HStack mb="2">
           <HStack
             flex="1"

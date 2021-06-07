@@ -10,12 +10,13 @@ import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { useDisclosure } from '@chakra-ui/hooks'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, Center, Flex, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
 import React, { useState } from 'react'
-
+import { IoAddCircle } from 'react-icons/io5'
+import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 function bankcardList() {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const [currentCard, setCurrentCard] = useState<BankCard>(null)
@@ -30,52 +31,61 @@ function bankcardList() {
   return (
     <Layout>
       <HeaderTitleBar back title="银行卡管理" />
-      <Box flex="1" overflowY="auto" p="20px" pb="50px">
+      <Box flex="1" className="layout">
         {isLoading ? (
-          <Spinner />
+          <Center w="full" h="100%">
+            <Spinner m="20px" />
+          </Center>
         ) : (
           <Stack spacing="15px">
-            <Button
-              colorScheme="pink"
-              w="full"
-              onClick={() => router.push('/bankcard/add')}
-              disabled={bankcardList?.length >= 5}
-            >
-              新增银行卡 (上限5张)
-            </Button>
             {bankcardList?.map((t) => (
               <Stack
                 key={t.id}
-                bg="white"
+                bg="contentBg.500"
                 p="15px"
-                borderRadius="lg"
-                shadow="md"
-                // borderWidth="3px"
-                // borderColor="purple.100"
+                borderRadius=".5rem"
                 onClick={() => handleClickCard(t)}
               >
-                <HStack justify="space-between">
-                  <Text color="gray.900" fontSize="md" fontWeight="600">
-                    {t.name}
-                  </Text>
-                  <Tag
-                    variant="solid"
-                    borderRadius="4px"
-                    colorScheme={
-                      t.status === BankCardStatus.On ? 'pink' : 'gray'
-                    }
-                  >
-                    {toOptionName(bankcardStatusOpts, t.status)}
-                  </Tag>
-                </HStack>
-                <Text fontSize="30px" fontWeight="600" color="purple.600">
+                <Text fontSize="18px" color="gray.400" textAlign="right">
                   {t.account}
                 </Text>
-                <Text color="gray.400" fontSize="sm" fontWeight="600">
-                  {t.bank} / {t.bank_name}
+                <Text color="#fff" fontSize="md" fontWeight="600">
+                  {t.name}
                 </Text>
+
+                <HStack justify="space-between">
+                  <Text color="#fff" fontSize="md" fontWeight="600">
+                    {t.bank} / {t.bank_name}
+                  </Text>
+                  <Flex
+                    alignItems="center"
+                    color={
+                      t.status === BankCardStatus.On ? 'green.500' : 'gray.400'
+                    }
+                  >
+                    <Text as="i" fontSize="20px" lineHeight="24px" mr="1">
+                      <IoIosCheckmarkCircleOutline />
+                    </Text>
+
+                    {toOptionName(bankcardStatusOpts, t.status)}
+                  </Flex>
+                </HStack>
               </Stack>
             ))}
+            <Button
+              leftIcon={<IoAddCircle />}
+              variant="outline"
+              bgColor="transparent"
+              border="1px dashed #a8a8a8"
+              borderRadius=".5rem"
+              padding="2.5rem"
+              w="full"
+              color="#fff"
+              onClick={() => router.push('/bankcard/add')}
+              disabled={bankcardList?.length >= 5}
+            >
+              新增银行卡
+            </Button>
           </Stack>
         )}
       </Box>

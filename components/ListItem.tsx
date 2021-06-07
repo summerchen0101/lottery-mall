@@ -10,25 +10,17 @@ interface ListItemProps {
 export default function ListItem({ children, onClick }: ListItemProps) {
   return (
     <HStack
-      bg="white"
+      bg="contentBg.500"
       h="60px"
       px="15px"
-      borderRadius="md"
-      shadow="md"
       justify="space-between"
-      borderLeftWidth="4px"
-      borderColor="purple.600"
+      borderBottom="1px"
       onClick={onClick}
     >
-      <Text fontSize="lg" fontWeight="600" color="gray.700">
+      <Text fontSize="lg" fontWeight="600" color="#fff">
         {children}
       </Text>
-      <Icon
-        as={HiChevronRight}
-        fontWeight="600"
-        fontSize="23px"
-        color="purple.600"
-      />
+      <Icon as={HiChevronRight} fontWeight="600" fontSize="24px" color="#fff" />
     </HStack>
   )
 }

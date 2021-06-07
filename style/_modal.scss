@@ -1,13 +1,13 @@
 /* ------------------------------Modal-------------------------- */
 .modal__content {
-  margin-left: 0.9375rem;
-  margin-right: 0.9375rem;
+  margin: 0.9375rem;
   background: $container-bg !important;
 }
 .modal__header {
   padding-left: 0.9375rem !important;
   padding-right: 0.9375rem !important;
   color: #fff;
+  text-align: center;
 }
 .modal__body {
   padding-left: 0.9375rem !important;
