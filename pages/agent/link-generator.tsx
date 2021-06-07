@@ -47,7 +47,7 @@ export default function createInvite() {
   })
   return (
     <Layout>
-      <HeaderTitleBar back title="生成链结" />
+      <HeaderTitleBar back backPath="/agent" title="生成链结" />
       <AgentPageTabs />
 
       <Box p="20px" flex="1" overflowY="auto">

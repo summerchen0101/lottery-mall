@@ -48,7 +48,7 @@ export default function createMember() {
   })
   return (
     <Layout>
-      <HeaderTitleBar back title="开户中心" />
+      <HeaderTitleBar back backPath="/agent" title="开户中心" />
       <AgentPageTabs />
 
       <Box p="20px" flex="1" overflowY="auto">
