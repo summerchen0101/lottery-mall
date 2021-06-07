@@ -20,7 +20,7 @@ function agent() {
           <Spinner />
         ) : (
           <Stack spacing="15px">
-            <ListItem onClick={() => router.push('/agent/create')}>
+            <ListItem onClick={() => router.push('/agent/member-create')}>
               开户中心
             </ListItem>
             <ListItem>会员管理</ListItem>

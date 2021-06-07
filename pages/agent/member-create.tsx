@@ -21,7 +21,6 @@ interface MemberFormProps {
   username: string
   password: string
   confirm_password: string
-  lottery_type_id: number
 }
 
 export default function createMember() {
@@ -35,14 +34,16 @@ export default function createMember() {
     reset,
   } = useForm<MemberFormProps>()
   const onSubmit = handleSubmit(async (d) => {
-    await doCreateMember({
+    const res = await doCreateMember({
       type: +d.type,
       username: d.username,
       password: d.password,
       confirm_password: d.confirm_password,
-      lottery_type_id: d.lottery_type_id,
+      lottery_type_id: 1,
     })
-    alert.success('新增成功')
+    if (res.success) {
+      alert.success('新增成功')
+    }
     reset()
   })
   return (
@@ -90,6 +91,7 @@ export default function createMember() {
               <FormLabel>密码</FormLabel>
               <Input
                 name="password"
+                type="password"
                 bg="white"
                 ref={register({
                   required: '不可为空',
@@ -106,11 +108,12 @@ export default function createMember() {
               <FormLabel>确认密码</FormLabel>
               <Input
                 name="confirm_password"
+                type="password"
                 bg="white"
                 ref={register({
                   required: '不可为空',
                   validate: (value) =>
-                    value !== getValues('pass') ? '密码不同' : true,
+                    value !== getValues('password') ? '密码不同' : true,
                 })}
               />
               <FieldValidateMessage error={errors.confirm_password} />
