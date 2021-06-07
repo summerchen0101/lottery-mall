@@ -16,24 +16,35 @@ const HeaderTitleBar: React.FC<{
       // pos="fixed"
       top="0"
       w="100vw"
-      bg="purple.700"
+      bg="containerBg.500"
       color="white"
       h="50px"
       align="center"
       px="15px"
+      display="flex"
+      justifyContent="center"
     >
-      <Text
+      <Box
+        pos="absolute"
+        left="15px"
         as="a"
         hidden={!back}
         onClick={() => (backPath ? router.push(backPath) : router.back())}
       >
         <Icon as={HiArrowLeft} fontSize="20px" />
-      </Text>
-      <Text fontSize="lg" letterSpacing="2px" fontWeight="600">
+      </Box>
+      <Text
+        fontSize="lg"
+        letterSpacing="1px"
+        fontWeight="600"
+        textAlign="center"
+      >
         {title}
       </Text>
-      <Spacer />
-      <Box>{extra}</Box>
+
+      <Box pos="absolute" right="15px">
+        {extra}
+      </Box>
     </HStack>
   )
 }

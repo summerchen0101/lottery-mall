@@ -187,7 +187,9 @@ function lottery() {
           />
         </HStack>
         {isGoodsListLoading ? (
-          <Spinner />
+          <Center w="full" h="50%">
+            <Spinner m="20px" />
+          </Center>
         ) : (
           <Box>
             {goodsList?.map((t) => (

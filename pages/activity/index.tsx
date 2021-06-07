@@ -3,7 +3,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import useActivityList from '@/service/useActivityList'
 import { Image } from '@chakra-ui/image'
-import { Box, Flex, Stack, Text } from '@chakra-ui/layout'
+import { Box, Center, Flex, Spacer, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
@@ -14,16 +14,19 @@ function activityList() {
   return (
     <Layout>
       <HeaderTitleBar title="优惠活动" />
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         {isLoading ? (
-          <Spinner />
+          <Center w="full" h="100%">
+            <Spinner m="20px" />
+          </Center>
         ) : (
           <Stack spacing="15px">
             {activityList?.map((t) => (
               <Flex
                 key={t.id}
-                bg="white"
+                bg="contentBg.500"
                 align="start"
+                p="20px"
                 onClick={() => router.push(`/activity/${t.id}`)}
                 shadow="sm"
                 borderRadius="md"
@@ -34,14 +37,21 @@ function activityList() {
                   boxSize="100px"
                   objectFit="cover"
                 />
-                <Box flex="1" p="10px">
-                  <Text fontSize="lg" color="pink.500" fontWeight="600">
+                <Flex
+                  flex="1"
+                  px="10px"
+                  h="100px"
+                  color="#fff"
+                  flexDir="column"
+                >
+                  <Text fontSize="1.3rem" fontWeight="600">
                     {t.title}
                   </Text>
-                  <Text fontSize="md" noOfLines={2} color="gray.500">
+                  <Spacer />
+                  <Text fontSize=".9375rem" h="3.5rem" noOfLines={2}>
                     {t.summary}
                   </Text>
-                </Box>
+                </Flex>
               </Flex>
             ))}
           </Stack>
