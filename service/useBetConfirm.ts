@@ -1,5 +1,5 @@
 import { ResponseBase } from '@/lib/types'
-import { request } from '@/utils/request'
+import useRequest from '@/utils/useRequest'
 import { useState } from 'react'
 
 export interface BetTarget {
@@ -25,15 +25,12 @@ export type BetConfirmRes = ResponseBase<{
 }>
 
 export default function useBetConfirm() {
+  const { post } = useRequest()
   const [isLoading, setIsLoading] = useState(false)
   const [resData, setResData] = useState<BetConfirmRes>()
   const handler = async (data: BetConfirmReq) => {
     setIsLoading(true)
-    const res = await request<BetConfirmRes>({
-      method: 'post',
-      url: 'lottery/betConfirm',
-      data,
-    })
+    const res = await post<BetConfirmRes>('lottery/betConfirm', data)
     setResData(res)
     setIsLoading(false)
   }

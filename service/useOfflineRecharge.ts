@@ -1,4 +1,4 @@
-import { request } from '@/utils/request'
+import useRequest from '@/utils/useRequest'
 import { useState } from 'react'
 
 export interface OfflineRechargeReq {
@@ -15,15 +15,12 @@ export interface OfflineRechargeRes {
 }
 
 export default function useOfflineRecharge() {
+  const { post } = useRequest()
   const [isLoading, setIsLoading] = useState(false)
   const [resData, setResData] = useState<OfflineRechargeRes>()
   const mutate = async (data: OfflineRechargeReq) => {
     setIsLoading(true)
-    const res = await request<OfflineRechargeRes>({
-      method: 'post',
-      url: '/finance/recharge',
-      data,
-    })
+    const res = await post<OfflineRechargeRes>('/finance/recharge', data)
     setResData(res)
     setIsLoading(false)
     return res

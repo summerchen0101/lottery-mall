@@ -1,4 +1,4 @@
-import { request } from '@/utils/request'
+import useRequest from '@/utils/useRequest'
 import { useState } from 'react'
 
 export interface BetTarget {
@@ -22,15 +22,12 @@ export interface BetActionRes {
 }
 
 export default function useBetAction() {
+  const { post } = useRequest()
   const [isLoading, setIsLoading] = useState(false)
   const [resData, setResData] = useState<BetActionRes>()
   const handler = async (data: BetActionReq) => {
     setIsLoading(true)
-    const res = await request<BetActionRes>({
-      method: 'post',
-      url: 'lottery/betAction',
-      data,
-    })
+    const res = await post<BetActionRes>('lottery/betAction', data)
     setResData(res)
     setIsLoading(false)
   }
