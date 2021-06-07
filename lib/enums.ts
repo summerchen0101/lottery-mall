@@ -14,6 +14,11 @@ export enum BankCardStatus {
   Off = 2,
 }
 
+export enum InviteStatus {
+  On = 1,
+  Off = 2,
+}
+
 export enum RechargeStatus {
   Waiting = 0,
   Success = 1,

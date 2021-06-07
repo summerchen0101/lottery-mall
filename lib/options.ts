@@ -1,6 +1,8 @@
 import {
   BankCardStatus,
   DateRangeType,
+  InviteStatus,
+  MemberType,
   OfflinePayment,
   PasswordType,
   RechargeStatus,
@@ -66,4 +68,12 @@ export const offlinePaymentOpts = [
 export const passTypeOpts = [
   { label: '登入密码', value: PasswordType.Normal },
   { label: '交易密码', value: PasswordType.Trade },
+]
+export const inviteStatusOpts = [
+  { label: '激活', value: InviteStatus.On },
+  { label: '停用', value: InviteStatus.Off },
+]
+export const memberTypeOpts = [
+  { label: '代理', value: MemberType.Agent },
+  { label: '會員', value: MemberType.Member },
 ]
