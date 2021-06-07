@@ -50,3 +50,7 @@ export enum NoticeType {
   News,
   Faq,
 }
+export enum MemberType {
+  Agent = '0',
+  Member = '1',
+}

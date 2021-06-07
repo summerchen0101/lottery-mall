@@ -142,6 +142,9 @@ function my() {
           <Box {...linkItemProps} onClick={() => router.push('/hiring')}>
             人才招聘
           </Box>
+          <Box {...linkItemProps} onClick={() => router.push('/agent')}>
+            代理中心
+          </Box>
         </SimpleGrid>
       </Box>
       <FooterNav />

@@ -6,23 +6,29 @@ import { BankCardCreateRequest } from '@/lib/types'
 import useBankList from '@/service/useBankList'
 import useCreateBankcard from '@/service/useCreateBankcard'
 import useFirstBankName from '@/service/useFirstBankName'
+import useAlert from '@/utils/useAlert'
 import { Button } from '@chakra-ui/button'
 import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { Box, Stack } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { Spinner } from '@chakra-ui/spinner'
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
 type BankCardFormProps = BankCardCreateRequest
 function bankAdd() {
+  const router = useRouter()
+  const alert = useAlert()
   const { handler: doCreateBankCard, isLoading } = useCreateBankcard()
   const { bankList } = useBankList()
   const { firstBankName } = useFirstBankName()
   const { register, errors, handleSubmit } = useForm<BankCardFormProps>()
   const onSubmit = handleSubmit(async (d) => {
     await doCreateBankCard({ ...d, name: firstBankName })
+    await router.push('/bankcard')
+    alert.success('新增成功')
   })
   return (
     <Layout>

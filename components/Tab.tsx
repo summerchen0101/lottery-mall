@@ -1,17 +1,23 @@
-import React from 'react'
-import cs from 'classnames'
-import { Box, BoxProps } from '@chakra-ui/layout'
-const Tab: React.FC<
-  {
-    active?: boolean
-    label: string
-  } & BoxProps
-> = ({ active, label, ...props }) => {
+import { Box } from '@chakra-ui/layout'
+import React, { ReactNode } from 'react'
+
+const Tab: React.FC<{
+  active?: boolean
+  children?: ReactNode
+  onClick?: () => void
+}> = ({ active, children, onClick }) => {
   return (
-    <Box className="nav-item" {...props}>
-      <a className={cs('nav-link', { active })} data-toggle="tab" role="tab">
-        {label}
-      </a>
+    <Box
+      cursor="pointer"
+      borderColor={active ? 'brand.500' : 'transparent'}
+      borderBottomWidth="2px"
+      pb="2"
+      onClick={onClick}
+      color="white"
+      px="3"
+      fontWeight="600"
+    >
+      {children}
     </Box>
   )
 }

@@ -1,11 +1,11 @@
-import { Box, BoxProps } from '@chakra-ui/layout'
+import { HStack } from '@chakra-ui/layout'
 import React from 'react'
 
-const TabGroup: React.FC<BoxProps> = ({ children, ...props }) => {
+const TabGroup = function ({ children, ...props }) {
   return (
-    <Box className="nav nav-tabs d-flex section-padding" {...props}>
+    <HStack justify="space-between" px="5" h="50px">
       {children}
-    </Box>
+    </HStack>
   )
 }
 

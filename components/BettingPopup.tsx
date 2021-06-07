@@ -32,7 +32,7 @@ function BettingPopup() {
   const [, setBetConfirmVisible] = useBetInfoContext().betConfirm
   const [scrollBehavior, setScrollBehavior] = React.useState('inside')
   const [goodsId] = useBetInfoContext().goodsId
-  const [, setTotalPrice] = useBetInfoContext().totalPrice
+  const [totalPrice, setTotalPrice] = useBetInfoContext().totalPrice
   const [odds, setOdds] = useBetInfoContext().odds
   const { userInfo } = useUserInfo()
   const { data: qishuData } = useCurrentQishu()
@@ -93,7 +93,7 @@ function BettingPopup() {
       isOpen={visible}
       onClose={handleCancel}
       autoFocus={false}
-      // scrollBehavior={scrollBehavior}
+      scrollBehavior="inside"
     >
       <ModalOverlay />
       <ModalContent bg="#3a3a3a" mb="0">
@@ -213,8 +213,16 @@ function BettingPopup() {
                 </FormControl>
               </Box>
               <Stack spacing="0" align="flex-end">
+                {/* <HStack>
+                  <Text color="gray.500" fontWeight="bold" fontSize="md">
+                    支付合计：
+                  </Text>
+                  <Text color="pink.500" fontWeight="bold" fontSize="2xl">
+                    ¥ {toCurrency(totalPrice || 0)}
+                  </Text>
+                </HStack> */}
                 <HStack>
-                  <Text color="gray.400" fontSize="md">
+                  <Text color="gray.500" fontWeight="bold" fontSize="md">
                     余额：
                   </Text>
                   <Text color="brand.500" fontSize="md">
