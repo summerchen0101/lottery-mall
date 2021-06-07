@@ -11,10 +11,11 @@ function DateTabGroup({ options }: { options: OptionType<DateRangeType>[] }) {
       {options.map((t, i) => (
         <Tab
           key={i}
-          label={t.label}
           active={t.value === current}
           onClick={() => setCurrent(t.value)}
-        />
+        >
+          {t.label}
+        </Tab>
       ))}
     </TabGroup>
   )

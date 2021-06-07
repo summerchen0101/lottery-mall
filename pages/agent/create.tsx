@@ -1,3 +1,4 @@
+import AgentPageTabs from '@/components/AgentPageTabs'
 import FieldValidateMessage from '@/components/FieldValidateMessage'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
@@ -47,11 +48,7 @@ export default function createMember() {
   return (
     <Layout>
       <HeaderTitleBar back title="开户中心" />
-      <TabGroup justifyContent="space-between">
-        <Tab active>新增用户</Tab>
-        <Tab>生成链结</Tab>
-        <Tab>链结管理</Tab>
-      </TabGroup>
+      <AgentPageTabs />
 
       <Box p="20px" flex="1" overflowY="auto">
         <Box as="form" onSubmit={onSubmit} noValidate>
