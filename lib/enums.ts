@@ -51,6 +51,6 @@ export enum NoticeType {
   Faq,
 }
 export enum MemberType {
-  Agent = '0',
-  Member = '1',
+  Agent = 0,
+  Member = 1,
 }

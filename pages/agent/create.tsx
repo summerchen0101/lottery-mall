@@ -55,12 +55,15 @@ export default function createMember() {
           <Stack spacing="12px">
             <FormControl isRequired isInvalid={!!errors.type}>
               <FormLabel>注册类型</FormLabel>
-              <RadioGroup name="type" defaultValue={MemberType.Agent}>
+              <RadioGroup
+                name="type"
+                defaultValue={MemberType.Agent.toString()}
+              >
                 <Stack direction="row">
-                  <Radio value={MemberType.Agent} ref={register}>
+                  <Radio value={MemberType.Agent.toString()} ref={register}>
                     代理
                   </Radio>
-                  <Radio value={MemberType.Member} ref={register}>
+                  <Radio value={MemberType.Member.toString()} ref={register}>
                     会员
                   </Radio>
                 </Stack>

@@ -1,6 +1,7 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import { MemberType } from '@/lib/enums'
 import useUserInfo from '@/service/useUserInfo'
 import useAlert from '@/utils/useAlert'
 import useService from '@/utils/useService'
@@ -142,9 +143,11 @@ function my() {
           <Box {...linkItemProps} onClick={() => router.push('/hiring')}>
             人才招聘
           </Box>
-          <Box {...linkItemProps} onClick={() => router.push('/agent')}>
-            代理中心
-          </Box>
+          {userInfo?.class === MemberType.Agent && (
+            <Box {...linkItemProps} onClick={() => router.push('/agent')}>
+              代理中心
+            </Box>
+          )}
         </SimpleGrid>
       </Box>
       <FooterNav />
