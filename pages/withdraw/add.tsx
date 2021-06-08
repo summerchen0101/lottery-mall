@@ -45,16 +45,42 @@ function withdrawForm() {
   return (
     <Layout>
       <HeaderTitleBar back title="会员提款" />
-      <Box flex="1" overflowY="auto" p="20px" pb="50px">
-        <Stack as="form" spacing="12px" onSubmit={onSubmit} noValidate>
-          <Text color="purple.600" fontWeight="600" fontSize="lg" mb="1">
-            余额： $ {toCurrency(userInfo?.money)}
+      <Box flex="1" pb="55px">
+        <Box
+          color="#fff"
+          bg="contentBg.500"
+          lineHeight="50px"
+          px="15px"
+          mb="10px"
+        >
+          余额 /
+          <Text
+            ml="2"
+            fontSize="2xl"
+            as="span"
+            color="brand.500"
+            fontWeight="600"
+          >
+            $ {toCurrency(userInfo?.money)}
           </Text>
-          <FormControl isRequired isInvalid={!!errors.user_bank_id}>
-            <FormLabel>银行帐号</FormLabel>
+        </Box>
+        <Stack
+          as="form"
+          px="15px"
+          spacing="12px"
+          onSubmit={onSubmit}
+          noValidate
+        >
+          <FormControl className="formGroup" isInvalid={!!errors.user_bank_id}>
+            <FormLabel color="#fff">
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              银行帐号
+            </FormLabel>
             <Select
               name="user_bank_id"
-              bg="white"
+              className="formSelect"
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
             >
@@ -66,38 +92,56 @@ function withdrawForm() {
             </Select>
             <FieldValidateMessage error={errors.user_bank_id} />
           </FormControl>
-          <FormControl isRequired isInvalid={!!errors.money}>
-            <FormLabel>提款金额</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.money}>
+            <FormLabel color="#fff">
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              提款金额
+            </FormLabel>
             <Input
               name="money"
-              bg="white"
+              placeholder="请输入提款金额"
+              className="formInput"
               ref={register({ required: '不可为空' })}
             />
             <FieldValidateMessage error={errors.money} />
           </FormControl>
-          <FormControl isRequired isInvalid={!!errors.security_pwd}>
-            <FormLabel>提领密码</FormLabel>
+          <FormControl
+            className="formGroup"
+            isInvalid={!!errors.security_pwd}
+            mb="20px"
+          >
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              提领密码
+            </FormLabel>
             <Input
               name="security_pwd"
-              bg="white"
+              className="formInput"
               type="password"
+              placeholder="请输入提领密码"
               ref={register({ required: '不可为空' })}
             />
             <FieldValidateMessage error={errors.security_pwd} />
           </FormControl>
-          <Divider h="2" />
+
           <Button
             type="submit"
             w="full"
-            colorScheme="purple"
+            borderRadius="3px"
+            colorScheme="brand"
             disabled={isLoading}
           >
             确认送出
             {isLoading && <Spinner ml="2" />}
           </Button>
           {count && (
-            <Text color="red.500" fontWeight="600">
-              ★ 本週免費提領剩餘次數：{count}次
+            <Text color="red.500" fontSize="sm">
+              本週免費提領剩餘次數：{count}次
             </Text>
           )}
         </Stack>

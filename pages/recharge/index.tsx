@@ -6,7 +6,7 @@ import { OfflinePayment } from '@/lib/enums'
 import usePaymentList from '@/service/usePaymentList'
 import useUserInfo from '@/service/useUserInfo'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Stack, Text, VStack } from '@chakra-ui/layout'
+import { Box, Center, Stack, Text, VStack } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
@@ -23,7 +23,9 @@ function rechargeIndex() {
       <HeaderTitleBar back title="会员充值" />
       <Box flex="1" overflowY="auto" pb="55px">
         {isLoading ? (
-          <Spinner />
+          <Center w="full" h="100%">
+            <Spinner m="20px" />
+          </Center>
         ) : (
           <Stack spacing="15px">
             <Box color="#fff" bg="contentBg.500" lineHeight="50px" px="15px">

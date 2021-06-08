@@ -8,7 +8,7 @@ import useCodeAmountList from '@/service/useWithdrawRec'
 import useDateRange from '@/utils/useDateRange'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, Flex, HStack, Stack, Text, VStack } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
@@ -34,67 +34,108 @@ function withdrawIndex() {
 
   return (
     <Layout>
-      <HeaderTitleBar back title="提现纪录" />
-      <Box flex="1" overflowY="auto" p="20px" pb="50px">
-        <Stack spacing="15px">
-          <Text color="purple.600" fontWeight="600" fontSize="lg">
-            余额： $ {toCurrency(userInfo?.money)}
-          </Text>
-          <Text color="red.500" fontSize="sm" fontWeight="600">
-            单周限制1次提款，超过次数需额外收取手续费3%。 <br />
-            (详情请查阅GEM公告)
-          </Text>
-          <Button
-            colorScheme="pink"
-            w="full"
-            onClick={() => router.push('/withdraw/add')}
+      <HeaderTitleBar back title="会员提款" />
+      <Box flex="1" overflowY="auto" pb="55px">
+        <Stack spacing="0">
+          <Box
+            color="#fff"
+            bg="contentBg.500"
+            lineHeight="30px"
+            px="15px"
+            py="10px"
           >
-            提款
-          </Button>
-          <Select
-            value={dateRangeType}
-            onChange={(e) =>
-              router.push({
-                pathname: router.pathname,
-                query: { range: e.target.value },
-              })
-            }
-            shadow="sm"
-            bg="white"
-          >
-            {codeAmountDateRangeOpts?.map((t) => (
-              <option key={t.value} value={t.value}>
-                {t.label}
-              </option>
-            ))}
-          </Select>
-
-          {codeAmountList?.map((t) => (
-            <Stack
-              key={t.id}
-              bg="white"
-              p="15px"
-              borderRadius="lg"
-              shadow="md"
-              spacing="1"
+            余额 /{' '}
+            <Text
+              ml="2"
+              fontSize="2xl"
+              as="span"
+              color="brand.500"
+              fontWeight="600"
             >
-              <HStack justify="space-between">
-                <Text color="gray.900" fontSize="md" fontWeight="600">
-                  {t.created_at}
+              $ {toCurrency(userInfo?.money)}
+            </Text>
+            <Button
+              colorScheme="brand"
+              w="full"
+              mt="10px"
+              h="36px"
+              borderRadius="sm"
+              onClick={() => router.push('/withdraw/add')}
+            >
+              提款
+            </Button>
+            <Text color="red.500" fontSize="12px" lineHeight="14px" mt="10px">
+              单周限制1次提款，超过次数需额外收取手续费3%。(详情请查阅GEM公告)
+            </Text>
+          </Box>
+          <Box px="15px" py="10px" bg="containerBg.500">
+            <Flex className="formGroup" align="center">
+              <Text w="50%" color="#fff">
+                提款条件
+              </Text>
+              <Select
+                w="50%"
+                className="formSelect"
+                value={dateRangeType}
+                onChange={(e) =>
+                  router.push({
+                    pathname: router.pathname,
+                    query: { range: e.target.value },
+                  })
+                }
+              >
+                {codeAmountDateRangeOpts?.map((t) => (
+                  <option key={t.value} value={t.value}>
+                    {t.label}
+                  </option>
+                ))}
+              </Select>
+            </Flex>
+          </Box>
+
+          <VStack w="100%" p="10px 15px">
+            {codeAmountList?.map((t) => (
+              <Stack
+                spacing="3px"
+                w="100%"
+                key={t.id}
+                bg="contentBg.500"
+                p="10px"
+                borderRadius="lg"
+                fontSize=".9375rem"
+                color="gray.400"
+              >
+                <HStack justify="space-between">
+                  <Text>{t.created_at}</Text>
+                  <Tag
+                    variant="solid"
+                    borderRadius="4px"
+                    colorScheme={t.status ? 'green' : 'red'}
+                  >
+                    {t.status ? '通过' : '未通过'}
+                  </Tag>
+                </HStack>
+                <Text>
+                  存款金额：
+                  <Text as="span" color="#fff">
+                    {toCurrency(+t.money)}
+                  </Text>
                 </Text>
-                <Tag
-                  variant="solid"
-                  borderRadius="4px"
-                  colorScheme={t.status ? 'pink' : 'gray'}
-                >
-                  {t.status ? '通过' : '未通过'}
-                </Tag>
-              </HStack>
-              <Text>存款金额：{toCurrency(+t.money)}</Text>
-              <Text>提款限制额：{toCurrency(+t.need)}</Text>
-              <Text>累积下单额：{toCurrency(+t.effect)}</Text>
-            </Stack>
-          ))}
+                <Text>
+                  提款限制额：
+                  <Text as="span" color="#fff">
+                    {toCurrency(+t.need)}
+                  </Text>
+                </Text>
+                <Text>
+                  累积下单额：
+                  <Text as="span" color="#fff">
+                    {toCurrency(+t.effect)}
+                  </Text>
+                </Text>
+              </Stack>
+            ))}
+          </VStack>
         </Stack>
       </Box>
       <FooterNav />

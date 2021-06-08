@@ -78,9 +78,6 @@ const login = () => {
           onSubmit={onSubmit}
           noValidate
         >
-          {/* <Heading mb="30px" color="gray.600" align="center">
-            99购商城
-          </Heading> */}
           <Stack spacing=".5rem">
             <FormControl className="formGroup">
               <FormLabel>* 会员账号</FormLabel>

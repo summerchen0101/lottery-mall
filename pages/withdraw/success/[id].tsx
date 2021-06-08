@@ -9,6 +9,7 @@ import Icon from '@chakra-ui/icon'
 import {
   Box,
   Center,
+  Divider,
   Heading,
   HStack,
   Stack,
@@ -27,84 +28,87 @@ function withdrawForm() {
   return (
     <Layout>
       <HeaderTitleBar back title="提款信息" />
-      <Box flex="1" overflowY="auto" p="20px" pb="50px">
+      <Box flex="1" className="layout">
         {isLoading ? (
-          <Spinner />
+          <Center w="full" h="100%">
+            <Spinner m="20px" />
+          </Center>
         ) : (
           <Box
-            bg="white"
-            shadow="md"
-            borderRadius="md"
-            p="6"
-            fontWeight="600"
-            color="gray.500"
+            // bg="contentBg.500"
+            // borderRadius="md"
+            // p="15px"
+            color="#fff"
             mb="20px"
           >
-            <VStack mb="4">
-              <Icon as={HiCheckCircle} fontSize="100px" color="green.500" />
-              <Text fontSize="2xl" color="gray.500">
+            <VStack spacing="0px" mb="4">
+              <Icon as={HiCheckCircle} fontSize="80px" color="green.500" />
+              <Text fontSize="xl" color="green.500">
                 提款成功
               </Text>
             </VStack>
             <Stack>
-              <Box borderBottom="1px solid #ccc" py="5px">
-                <Text fontSize="sm" mb="5px">
+              <Box>
+                <Text fontSize="sm" mb="5px" color="gray.400">
                   订单号
                 </Text>
-                <Text fontSize="lg" fontWeight="600">
+                <Text fontSize="md" fontWeight="600">
                   {info.order_sn}
                 </Text>
+                <Divider borderColor="#ccc" py="1" />
               </Box>
-              <Box borderBottom="1px solid #ccc" py="5px">
-                <Text fontSize="sm" mb="5px">
+              <Box>
+                <Text fontSize="sm" mb="5px" color="gray.400">
                   提款金额
                 </Text>
-                <Text fontSize="2xl" fontWeight="600" color="pink.500">
+                <Text fontSize="md" fontWeight="600" color="pink.500">
                   {toCurrency(+info.money)}
                 </Text>
+                <Divider borderColor="#ccc" py="1" />
               </Box>
-              <Box borderBottom="1px solid #ccc" py="5px">
-                <Text fontSize="sm" mb="5px">
+              <Box>
+                <Text fontSize="sm" mb="5px" color="gray.400">
                   申请时间
                 </Text>
-                <Text fontSize="lg" fontWeight="600">
+                <Text fontSize="md" fontWeight="600">
                   {info.created_at}
                 </Text>
+                <Divider borderColor="#ccc" py="1" />
               </Box>
-              <Box borderBottom="1px solid #ccc" py="5px">
-                <Text fontSize="sm" mb="5px">
+              <Box>
+                <Text fontSize="sm" mb="5px" color="gray.400">
                   持卡人
                 </Text>
-                <Text fontSize="lg" fontWeight="600">
+                <Text fontSize="md" fontWeight="600">
                   {info.name}
                 </Text>
+                <Divider borderColor="#ccc" py="1" />
               </Box>
-              <Box borderBottom="1px solid #ccc" py="5px">
-                <Text fontSize="sm" mb="5px">
+              <Box>
+                <Text fontSize="sm" mb="5px" color="gray.400">
                   收款账户
                 </Text>
-                <Text fontSize="lg" fontWeight="600">
+                <Text fontSize="md" fontWeight="600">
                   {info.account} ({info.bank})
                 </Text>
+                <Divider borderColor="#ccc" py="1" />
               </Box>
             </Stack>
           </Box>
         )}
         <HStack>
-          <Button
-            w="full"
-            colorScheme="purple"
+          <button
+            className="btnbase outline_btn"
             onClick={() => router.push('/my')}
           >
             返回
-          </Button>
-          <Button
-            w="full"
-            colorScheme="pink"
+          </button>
+          <button
+            className="btnbase primary_btn"
             onClick={() => router.push('/finance-rec')}
           >
             财务纪录
-          </Button>
+          </button>
         </HStack>
       </Box>
       <FooterNav />
