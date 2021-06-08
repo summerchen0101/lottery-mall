@@ -147,7 +147,13 @@ const login = () => {
             <VStack pt=".5rem">
               <Text>
                 立即加入 GEM100
-                <Box ml="1" as="span" cursor="pointer" color="#fff">
+                <Box
+                  ml="1"
+                  as="span"
+                  cursor="pointer"
+                  color="#fff"
+                  onClick={() => router.push('/register')}
+                >
                   免费注册
                 </Box>
               </Text>
