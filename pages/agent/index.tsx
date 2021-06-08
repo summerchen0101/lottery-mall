@@ -2,10 +2,7 @@ import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import ListItem from '@/components/ListItem'
-import { NoticeType } from '@/lib/enums'
-import useNoticeList from '@/service/useNoticeList'
 import { Box, Stack } from '@chakra-ui/layout'
-import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 
@@ -13,7 +10,7 @@ function agent() {
   const router = useRouter()
   return (
     <Layout>
-      <HeaderTitleBar back title="代理中心" />
+      <HeaderTitleBar back backPath="/my" title="代理中心" />
       <Box p="20px" flex="1" overflowY="auto">
         <Stack spacing="15px">
           <ListItem onClick={() => router.push('/agent/member-create')}>
