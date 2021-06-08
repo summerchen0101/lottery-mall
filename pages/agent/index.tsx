@@ -32,7 +32,9 @@ function agent() {
             <ListItem onClick={() => router.push('/agent/team-recharge')}>
               团队充值
             </ListItem>
-            <ListItem>团队提現</ListItem>
+            <ListItem onClick={() => router.push('/agent/team-withdraw')}>
+              团队提現
+            </ListItem>
             <ListItem>团队下单纪录</ListItem>
           </Stack>
         )}

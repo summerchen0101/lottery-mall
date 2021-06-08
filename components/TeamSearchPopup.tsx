@@ -98,8 +98,11 @@ function TeamSearchPopup({
             </HStack>
           </Stack>
         </ModalBody>
-        <ModalFooter>
-          <Button type="submit" mt="3" w="full" colorScheme="brand">
+        <ModalFooter as={HStack} mt="3">
+          <Button w="full" colorScheme="gray" onClick={() => onClose()}>
+            取消
+          </Button>
+          <Button type="submit" w="full" colorScheme="brand">
             确认
           </Button>
         </ModalFooter>

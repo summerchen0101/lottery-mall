@@ -1,10 +1,11 @@
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import TeamSearchPopup, { TeamSearchForm } from '@/components/TeamSearchPopup'
+import { InviteStatus } from '@/lib/enums'
 import { rechargeStatusOpts } from '@/lib/options'
-import useTeamRechargeRec, {
-  TeamRechargeRecReq,
-} from '@/service/useTeamRechargeRec'
+import useTeamWithdrawRec, {
+  TeamWithdrawRecReq,
+} from '@/service/useTeamWithdrawRec'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
 import { Box, Center, HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
@@ -15,15 +16,15 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useCallback, useState } from 'react'
 import { BiSearch } from 'react-icons/bi'
 
-export default function teamRechargeRec() {
+export default function teamWithdrawRec() {
   const { toOptionName, toCurrency } = useTransfer()
-  const [searchData, setSearchData] = useState<TeamRechargeRecReq>({
+  const [searchData, setSearchData] = useState<TeamWithdrawRecReq>({
     created_at1: moment().format('YYYY-MM-DD'),
     created_at2: moment().format('YYYY-MM-DD'),
   })
   const [isShowSearch, setIsShowSearch] = useState(false)
   const router = useRouter()
-  const { rechargeList, isLoading, apply, money } = useTeamRechargeRec(
+  const { rechargeList, isLoading, apply, money } = useTeamWithdrawRec(
     searchData,
   )
 
@@ -43,7 +44,7 @@ export default function teamRechargeRec() {
       <HeaderTitleBar
         back
         backPath="/agent"
-        title="团队充值"
+        title="团队提现"
         extra={
           <Icon
             as={BiSearch}
@@ -55,9 +56,9 @@ export default function teamRechargeRec() {
 
       <Box bg="gray.700" color="gray.300" mb="3" px="4" py="2" fontSize="sm">
         <Text>
-          存款時間：{searchData.created_at1} ~ {searchData.created_at2}
+          提现时间：{searchData.created_at1} ~ {searchData.created_at2}
         </Text>
-        <Text>总申请存款余额：{toCurrency(+apply)}</Text>
+        <Text>总申请提现余额：{toCurrency(+apply)}</Text>
         <Text>实收总金额：{toCurrency(+money)}</Text>
       </Box>
 
@@ -99,7 +100,7 @@ export default function teamRechargeRec() {
         <TeamSearchPopup
           isOpen={isShowSearch}
           onClose={() => setIsShowSearch(false)}
-          title="团队充值查询"
+          title="团队提现查询"
           onChange={onSubmit}
         />
       </Box>
