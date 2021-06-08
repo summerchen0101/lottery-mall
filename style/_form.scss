@@ -75,3 +75,12 @@
     }
   }
 }
+
+.react-datepicker__tab-loop {
+  position: absolute;
+  z-index: 9;
+  left:15%;
+  .react-datepicker__triangle {
+    display: none
+  }
+}
