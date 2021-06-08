@@ -9,16 +9,14 @@ interface BarItemProps {
 export default function BarItem({ children, onClick }: BarItemProps) {
   return (
     <Box
-      bg="white"
-      shadow="md"
+      w="100%"
+      bg="contentBg.500"
       px="15px"
       py="15px"
-      borderLeftWidth="4px"
-      borderColor="purple.600"
       borderRadius="md"
       fontWeight="600"
       textAlign="center"
-      color="gray.700"
+      color="#fff"
       fontSize="lg"
       onClick={onClick}
     >

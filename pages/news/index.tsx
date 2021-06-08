@@ -16,33 +16,24 @@ function news() {
   return (
     <Layout>
       <HeaderTitleBar back title="公告" />
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box pb="55px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
-          <Stack spacing="15px">
+          <Stack spacing="0">
             {noticeList?.map((t) => (
               <HStack
-                bg="white"
                 h="60px"
                 px="15px"
-                borderRadius="md"
-                shadow="md"
                 justify="space-between"
+                borderBottom="1px"
                 key={t.id}
-                borderLeftWidth="4px"
-                borderColor="purple.600"
                 onClick={() => router.push(`/news/${t.id}`)}
               >
-                <Text fontSize="lg" fontWeight="600" color="gray.700">
+                <Text fontSize="lg" fontWeight="600" color="#fff">
                   {t.name}
                 </Text>
-                <Icon
-                  as={HiChevronRight}
-                  fontWeight="600"
-                  fontSize="23px"
-                  color="purple.600"
-                />
+                <Icon as={HiChevronRight} fontSize="24px" color="#fff" />
               </HStack>
             ))}
           </Stack>

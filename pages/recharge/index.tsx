@@ -6,7 +6,7 @@ import { OfflinePayment } from '@/lib/enums'
 import usePaymentList from '@/service/usePaymentList'
 import useUserInfo from '@/service/useUserInfo'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Stack, Text } from '@chakra-ui/layout'
+import { Box, Stack, Text, VStack } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
@@ -21,37 +21,52 @@ function rechargeIndex() {
   return (
     <Layout>
       <HeaderTitleBar back title="会员充值" />
-      <Box flex="1" overflowY="auto" p="20px" pb="50px">
+      <Box flex="1" overflowY="auto" pb="55px">
         {isLoading ? (
           <Spinner />
         ) : (
           <Stack spacing="15px">
-            <Text color="purple.600" fontWeight="600" fontSize="xl">
-              余额： $ {toCurrency(userInfo?.money)}
-            </Text>
-            {online?.map((t) => (
-              <BarItem
-                key={t.id}
-                onClick={() =>
-                  router.push({
-                    pathname: '/recharge/online',
-                    query: { id: t.id, name: t.name },
-                  })
-                }
+            <Box color="#fff" bg="contentBg.500" lineHeight="50px" px="15px">
+              余额 /
+              <Text
+                ml="2"
+                fontSize="2xl"
+                as="span"
+                color="brand.500"
+                fontWeight="600"
               >
-                {t.name}
-              </BarItem>
-            ))}
-            {offline[OfflinePayment.Bankcard] && (
-              <BarItem onClick={() => router.push('/recharge/bankcard')}>
-                银行卡
-              </BarItem>
-            )}
-            {offline[OfflinePayment.USDT] && (
-              <BarItem onClick={() => router.push('/recharge/usdt')}>
-                USDT转帐
-              </BarItem>
-            )}
+                $ {toCurrency(userInfo?.money)}
+              </Text>
+            </Box>
+            <Text px="15px" color="#fff">
+              请选择您欲支付方式
+            </Text>
+            <VStack spacing="10px" px="15px">
+              <BarItem>客服激活</BarItem>
+              {online?.map((t) => (
+                <BarItem
+                  key={t.id}
+                  onClick={() =>
+                    router.push({
+                      pathname: '/recharge/online',
+                      query: { id: t.id, name: t.name },
+                    })
+                  }
+                >
+                  {t.name}
+                </BarItem>
+              ))}
+              {offline[OfflinePayment.Bankcard] && (
+                <BarItem onClick={() => router.push('/recharge/bankcard')}>
+                  银行卡
+                </BarItem>
+              )}
+              {offline[OfflinePayment.USDT] && (
+                <BarItem onClick={() => router.push('/recharge/usdt')}>
+                  USDT转帐
+                </BarItem>
+              )}
+            </VStack>
           </Stack>
         )}
       </Box>

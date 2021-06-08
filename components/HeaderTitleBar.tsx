@@ -18,7 +18,7 @@ const HeaderTitleBar: React.FC<{
       w="100vw"
       bg="containerBg.500"
       color="white"
-      h="50px"
+      h="55px"
       align="center"
       px="15px"
       display="flex"
@@ -31,10 +31,10 @@ const HeaderTitleBar: React.FC<{
         hidden={!back}
         onClick={() => (backPath ? router.push(backPath) : router.back())}
       >
-        <Icon as={HiArrowLeft} fontSize="22px" />
+        <Icon as={HiArrowLeft} fontSize="1.5rem" />
       </Box>
       <Text
-        fontSize="lg"
+        fontSize="1.5rem"
         letterSpacing="1px"
         fontWeight="600"
         textAlign="center"
