@@ -34,14 +34,16 @@ const statusColorMap = {
 }
 
 export default function memberList() {
-  const { toOptionName } = useTransfer()
+  const { toOptionName, toCurrency } = useTransfer()
   const [searchData, setSearchData] = useState<TeamRechargeRecReq>({
     created_at1: moment().format('YYYY-MM-DD'),
     created_at2: moment().format('YYYY-MM-DD'),
   })
   const [isShowSearch, setIsShowSearch] = useState(false)
   const router = useRouter()
-  const { rechargeList, isLoading, refresh } = useTeamRechargeRec(searchData)
+  const { rechargeList, isLoading, apply, money } = useTeamRechargeRec(
+    searchData,
+  )
 
   const onSubmit = useCallback(
     async (d: TeamSearchForm & { startDate: Date; endDate: Date }) => {
@@ -69,9 +71,13 @@ export default function memberList() {
         }
       />
 
-      <HStack bg="gray.700" color="gray.200" mb="3" h="40px" px="4">
-        <Text>0</Text>
-      </HStack>
+      <Box bg="gray.700" color="gray.300" mb="3" px="4" py="2" fontSize="sm">
+        <Text>
+          存款時間：{searchData.created_at1} ~ {searchData.created_at2}
+        </Text>
+        <Text>总申请存款余额：{toCurrency(+apply)}</Text>
+        <Text>实收总金额：{toCurrency(+money)}</Text>
+      </Box>
 
       <Box p="20px" flex="1" overflowY="auto">
         {isLoading ? (
@@ -96,7 +102,7 @@ export default function memberList() {
                       <Text>实际金额 / 人民币</Text>
                       <Spacer />
                       <Text fontSize="25px" color="yellow.300">
-                        {t.money}
+                        {toCurrency(+t.money)}
                       </Text>
                     </HStack>
                   </Stack>
