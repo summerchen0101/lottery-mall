@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "12586802",
+      "name": "iOS",
+      "font_class": "iOS",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "1898503",
+      "name": "android",
+      "font_class": "android",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "7239953",
+      "name": "wechat",
+      "font_class": "wechat",
+      "unicode": "e763",
+      "unicode_decimal": 59235
+    },
+    {
       "icon_id": "5634246",
       "name": "money-check-alt",
       "font_class": "deposit",

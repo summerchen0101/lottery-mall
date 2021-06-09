@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2591962 */
-  src: url('iconfont.woff2?t=1622795791814') format('woff2'),
-       url('iconfont.woff?t=1622795791814') format('woff'),
-       url('iconfont.ttf?t=1622795791814') format('truetype');
+  src: url('iconfont.woff2?t=1623239395645') format('woff2'),
+       url('iconfont.woff?t=1623239395645') format('woff'),
+       url('iconfont.ttf?t=1623239395645') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.ic-iOS:before {
+  content: "\e630";
+}
+
+.ic-android:before {
+  content: "\e609";
+}
+
+.ic-wechat:before {
+  content: "\e763";
 }
 
 .ic-deposit:before {
