@@ -70,7 +70,7 @@ function my() {
             </HStack>
           </Flex>
 
-          <HStack w="100%">
+          <HStack w="100%" alignItems="flex-end">
             <Text>会员编号: {userInfo?.uid}</Text>
             <Spacer />
             <Text color="brand.500" fontWeight="600" fontSize="1.2rem">

@@ -55,7 +55,7 @@ function withdrawForm() {
                 <Text fontSize="md" fontWeight="600">
                   {info.order_sn}
                 </Text>
-                <Divider borderColor="#ccc" py="1" />
+                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
               <Box>
                 <Text fontSize="sm" mb="5px" color="gray.400">
@@ -64,7 +64,7 @@ function withdrawForm() {
                 <Text fontSize="md" fontWeight="600" color="pink.500">
                   {toCurrency(+info.money)}
                 </Text>
-                <Divider borderColor="#ccc" py="1" />
+                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
               <Box>
                 <Text fontSize="sm" mb="5px" color="gray.400">
@@ -73,7 +73,7 @@ function withdrawForm() {
                 <Text fontSize="md" fontWeight="600">
                   {info.created_at}
                 </Text>
-                <Divider borderColor="#ccc" py="1" />
+                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
               <Box>
                 <Text fontSize="sm" mb="5px" color="gray.400">
@@ -82,7 +82,7 @@ function withdrawForm() {
                 <Text fontSize="md" fontWeight="600">
                   {info.name}
                 </Text>
-                <Divider borderColor="#ccc" py="1" />
+                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
               <Box>
                 <Text fontSize="sm" mb="5px" color="gray.400">
@@ -91,7 +91,7 @@ function withdrawForm() {
                 <Text fontSize="md" fontWeight="600">
                   {info.account} ({info.bank})
                 </Text>
-                <Divider borderColor="#ccc" py="1" />
+                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
             </Stack>
           </Box>

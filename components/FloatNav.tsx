@@ -37,7 +37,7 @@ export default function FloatNav({ showAppBtn, userInfo }: FloatNavProps) {
   const { serviceLink } = useServiceLink()
 
   return (
-    <VStack position="fixed" right="20px" bottom="65px" spacing="3">
+    <VStack position="fixed" right="15px" bottom="65px" spacing="3">
       {showAppBtn && (
         <Center
           {...iconProps}
