@@ -60,8 +60,8 @@ function pass() {
   return (
     <Layout>
       <HeaderTitleBar back title={toOptionName(passTypeOpts, passType)} />
-      <Box flex="1" overflowY="auto" p="20px">
-        <Text color="gray.500" fontSize="sm" mb="3">
+      <Box flex="1" className="layout">
+        <Text color="#fff" fontSize="md" mb="3">
           您可以在下方修改您的密码, 或直接联系我们的线上客服
         </Text>
         <Stack
@@ -71,32 +71,57 @@ function pass() {
           onReset={() => reset()}
           onSubmit={onSubmit}
         >
-          <FormControl isRequired isInvalid={!!errors.pwd}>
-            <FormLabel>原密码</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.pwd}>
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              原密码
+            </FormLabel>
             <Input
               name="pwd"
               type="password"
-              bg="white"
+              placeholder="请输入原密码"
+              className="formInput"
               ref={register({ required: '不可为空' })}
             />
             <FieldValidateMessage error={errors.pwd} />
           </FormControl>
-          <FormControl isRequired isInvalid={!!errors.new_pwd}>
-            <FormLabel>新密码</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.new_pwd}>
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              新密码
+            </FormLabel>
             <Input
               name="new_pwd"
               type="password"
-              bg="white"
+              placeholder="请输入新密码"
+              className="formInput"
               ref={register({ required: '不可为空' })}
             />
             <FieldValidateMessage error={errors.new_pwd} />
           </FormControl>
-          <FormControl isRequired isInvalid={!!errors.new_pwd_confirm}>
-            <FormLabel>确认新密码</FormLabel>
+          <FormControl
+            className="formGroup"
+            isInvalid={!!errors.new_pwd_confirm}
+            mb="5"
+          >
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              确认新密码
+            </FormLabel>
             <Input
+              placeholder="请输入新密码"
               name="new_pwd_confirm"
               type="password"
-              bg="white"
+              className="formInput"
               ref={register({
                 required: '不可为空',
                 validate: (value) =>
@@ -105,12 +130,13 @@ function pass() {
             />
             <FieldValidateMessage error={errors.new_pwd_confirm} />
           </FormControl>
-          <Divider h="3" />
+
           <HStack>
             <Button
               colorScheme="gray"
-              bg="gray.300"
-              size="lg"
+              borderRadius="3px"
+              bg="transparent"
+              border="1px"
               w="full"
               onClick={() => router.back()}
             >
@@ -125,7 +151,7 @@ function pass() {
             >
               重置
             </Button> */}
-            <Button colorScheme="pink" size="lg" w="full" type="submit">
+            <Button colorScheme="red" borderRadius="3px" w="full" type="submit">
               确认送出
             </Button>
           </HStack>

@@ -1,29 +1,32 @@
 import FooterNav from '@/components/FooterNav'
-import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { MemberType } from '@/lib/enums'
 import useUserInfo from '@/service/useUserInfo'
 import useAlert from '@/utils/useAlert'
 import useService from '@/utils/useService'
 import useTransfer from '@/utils/useTransfer'
-import Icon from '@chakra-ui/icon'
-import { Box, Circle, HStack, SimpleGrid, Text } from '@chakra-ui/layout'
+import {
+  Box,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Spacer,
+  Text,
+  VStack,
+} from '@chakra-ui/layout'
+import { Button, Image } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import { BiArchiveOut, BiDollarCircle, BiNews, BiUser } from 'react-icons/bi'
-import { HiOutlineLogout } from 'react-icons/hi'
+import {
+  IoIosMail,
+  IoIosSettings,
+  IoIosHelpCircleOutline,
+} from 'react-icons/io'
 
 const linkItemProps = {
-  bg: 'gray.200',
-  shadow: 'md',
-  px: '15px',
-  py: '15px',
-  color: 'gray.600',
-  fontWeight: 'bold',
-  fontSize: 'lg',
-  // borderLeftWidth: '5px',
-  // borderColor: 'gray.500',
-  borderRadius: 'sm',
+  py: '2',
+  borderBottom: '1px',
+  borderColor: 'rgba(255,255,255,.2)',
 }
 function my() {
   const { doLogout } = useService()
@@ -38,94 +41,109 @@ function my() {
   }
   return (
     <Layout>
-      <HeaderTitleBar
+      {/* <HeaderTitleBar
         title="我的"
         extra={
           <Icon as={HiOutlineLogout} fontSize="20px" onClick={handleLogout} />
         }
-      />
-      <Box flex="1" overflowY="auto" bg="gray.400">
-        <Box bg="white" p="20px">
-          <Text fontSize="sm" color="gray.500" fontWeight="bold">
-            帐户余额：
-          </Text>
-          <HStack
-            spacing="20px"
-            mb="15px"
-            color="pink.500"
-            fontWeight="bold"
-            fontSize="3xl"
-          >
-            <Text>$ {toCurrency(userInfo?.money)}</Text>
-          </HStack>
+      /> */}
 
-          <HStack justify="space-evenly" mb="-50px">
-            <Circle
-              onClick={() => router.push('/withdraw')}
-              size="70px"
-              shadow="lg"
-              bg="gray.700"
-              color="white"
-              flexDirection="column"
-            >
-              <Icon fontSize="30px" as={BiArchiveOut} />
-              <Text fontSize="10px" fontWeight="600">
-                提现
-              </Text>
-            </Circle>
-            <Circle
-              onClick={() => router.push('/recharge')}
-              size="70px"
-              shadow="lg"
-              bg="gray.700"
-              color="white"
-              flexDirection="column"
-            >
-              <Icon fontSize="30px" as={BiDollarCircle} />
-              <Text fontSize="10px" fontWeight="600">
-                充值
-              </Text>
-            </Circle>
-            <Circle
-              onClick={() => router.push('/news')}
-              size="70px"
-              shadow="lg"
-              bg="gray.700"
-              color="white"
-              flexDirection="column"
-            >
-              <Icon fontSize="30px" as={BiNews} />
-              <Text fontSize="10px" fontWeight="600">
-                讯息
-              </Text>
-            </Circle>
-            <Circle
-              onClick={() => router.push('/profile')}
-              size="70px"
-              shadow="lg"
-              bg="gray.700"
-              color="white"
-              flexDirection="column"
-            >
-              <Icon fontSize="30px" as={BiUser} />
-              <Text fontSize="10px" fontWeight="600">
-                设置
-              </Text>
-            </Circle>
+      <Flex bg="containerBg.500" p="15px">
+        <VStack w="100%" alignItems="flex-start" color="gray.400" spacing="8px">
+          <Flex w="100%">
+            <Text>
+              您好,<Text as="span">{userInfo?.username}</Text>
+            </Text>
+            <Spacer />
+            <HStack>
+              <IoIosMail
+                color="#fff"
+                fontSize="26px"
+                onClick={() => router.push('/news')}
+              />
+              <IoIosSettings
+                color="#fff"
+                fontSize="24px"
+                onClick={() => router.push('/profile')}
+              />
+            </HStack>
+          </Flex>
+
+          <HStack w="100%">
+            <Text>会员编号: {userInfo?.uid}</Text>
+            <Spacer />
+            <Text color="brand.500" fontWeight="600" fontSize="1.2rem">
+              <Box as="span" fontSize="12px" mr="1" color="gray.400">
+                G币
+              </Box>
+              {toCurrency(userInfo?.money)}
+            </Text>
           </HStack>
-        </Box>
+        </VStack>
+      </Flex>
+      <Box flex="1" className="layout">
+        <HStack justify="space-evenly" bg="#b9af9c" p="15px" borderRadius="lg">
+          <Flex
+            onClick={() => router.push('/recharge')}
+            color="white"
+            flexDirection="column"
+            justifyContent="flex-end"
+          >
+            <Image w="2.2rem" h="auto" src="/img/ic-deposit.svg"></Image>
+            <Text fontSize="md" color="#006d00" fontWeight="600">
+              充值
+            </Text>
+          </Flex>
+          <Flex
+            onClick={() => router.push('/withdraw')}
+            color="white"
+            flexDirection="column"
+          >
+            <Image w="2.2rem" h="auto" src="/img/ic-withdraw.svg"></Image>
+            <Text fontSize="md" color="#d60000" fontWeight="600">
+              提现
+            </Text>
+          </Flex>
+        </HStack>
 
         <SimpleGrid
           columns={2}
-          mt="60px"
-          fontSize="xl"
-          color="gray.500"
+          mt="20px"
+          fontSize="lg"
+          color="#fff"
           fontWeight="bold"
-          textAlign="center"
-          p="10px"
-          spacing="15px"
+          p="20px 0"
+          spacingX="15px"
+          spacingY="15px"
         >
-          <Box {...linkItemProps} onClick={() => router.push('/bankcard')}>
+          <HStack {...linkItemProps} onClick={() => router.push('/bankcard')}>
+            <Image w="1.8rem" src="/img/ic-bankcard.png"></Image>
+            <Text>银行卡管理</Text>
+          </HStack>
+          <HStack
+            {...linkItemProps}
+            onClick={() => router.push('/finance-rec')}
+          >
+            <Image w="1.8rem" src="/img/ic-cashrecord.png"></Image>
+            <Text>财务管理</Text>
+          </HStack>
+          <HStack {...linkItemProps} onClick={() => router.push('/bet-rec')}>
+            <Image w="1.8rem" src="/img/ic-betrecord.png"></Image>
+            <Text>下单纪录</Text>
+          </HStack>
+          <HStack {...linkItemProps} onClick={() => router.push('/agent')}>
+            <Image w="1.8rem" src="/img/ic-agent.png"></Image>
+            <Text>代理中心</Text>
+          </HStack>
+          <HStack {...linkItemProps} onClick={() => router.push('/about')}>
+            <Image w="1.8rem" src="/img/ic-about.png"></Image>
+            <Text>GEM介绍</Text>
+          </HStack>
+          <HStack {...linkItemProps} onClick={() => router.push('/hiring')}>
+            <Image w="1.8rem" src="/img/ic-recruit.png"></Image>
+            <Text>人才招聘</Text>
+          </HStack>
+          {/* <Box {...linkItemProps} onClick={() => router.push('/bankcard')}>
             银行卡管理
           </Box>
           <Box {...linkItemProps} onClick={() => router.push('/finance-rec')}>
@@ -147,8 +165,29 @@ function my() {
             <Box {...linkItemProps} onClick={() => router.push('/agent')}>
               代理中心
             </Box>
-          )}
+          )} */}
         </SimpleGrid>
+        <Flex
+          justifyContent="center"
+          align="center"
+          color="gray.400"
+          py="2"
+          mt="5rem"
+          onClick={() => router.push('/faq')}
+        >
+          <IoIosHelpCircleOutline fontSize="20px" />
+          <Text fontSize="md" ml="1">
+            常见问题
+          </Text>
+        </Flex>
+        <Button
+          colorScheme="darkblue"
+          w="100%"
+          borderRadius="3px"
+          onClick={handleLogout}
+        >
+          登出
+        </Button>
       </Box>
       <FooterNav />
     </Layout>

@@ -50,7 +50,7 @@ function BankcardDetailPopup({
                 {toOptionName(bankcardStatusOpts, bankcard.status)}
               </Text>
 
-              <Divider borderColor="#ccc" py="1" mb="2" />
+              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
 
               <Text fontSize="sm" mb="5px" color="gray.400">
                 银行卡姓名
@@ -58,7 +58,7 @@ function BankcardDetailPopup({
               <Text fontSize="md" color="#fff">
                 {bankcard.name}
               </Text>
-              <Divider borderColor="#ccc" py="1" mb="2" />
+              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
 
               <Text fontSize="sm" mb="5px" color="gray.400">
                 银行名称
@@ -66,7 +66,7 @@ function BankcardDetailPopup({
               <Text fontSize="md" color="#fff">
                 {bankcard.bank}
               </Text>
-              <Divider borderColor="#ccc" py="1" mb="2" />
+              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
 
               <Text fontSize="sm" mb="5px" color="gray.400">
                 支行名称
@@ -74,7 +74,7 @@ function BankcardDetailPopup({
               <Text fontSize="md" color="#fff">
                 {bankcard.bank_name}
               </Text>
-              <Divider borderColor="#ccc" py="1" mb="2" />
+              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
 
               <Text fontSize="sm" mb="5px" color="gray.400">
                 银行帐号
@@ -82,14 +82,14 @@ function BankcardDetailPopup({
               <Text fontSize="md" color="#fff">
                 {bankcard.account}
               </Text>
-              <Divider borderColor="#ccc" py="1" mb="2" />
+              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
               <Text fontSize="sm" mb="5px" color="gray.400">
                 开户省份 / 城市
               </Text>
               <Text fontSize="md" color="#fff">
                 {bankcard.province} / {bankcard.city}
               </Text>
-              <Divider borderColor="#ccc" py="1" mb="2" />
+              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
             </>
           )}
         </ModalBody>

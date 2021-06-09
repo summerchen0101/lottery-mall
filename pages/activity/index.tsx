@@ -56,7 +56,7 @@ function activityList() {
                   flexDir="column"
                   justifyContent="center"
                 >
-                  <Text fontSize="1.3rem" mb="1" fontWeight="600">
+                  <Text fontSize="1.2rem" mb="1" fontWeight="600" noOfLines={1}>
                     {t.title}
                   </Text>
 
