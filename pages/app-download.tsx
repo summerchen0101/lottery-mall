@@ -2,9 +2,11 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import TextCopy from '@/components/TextCopy'
 import { Button, ButtonProps } from '@chakra-ui/button'
+import Icon from '@chakra-ui/icon'
 import { Box, Center, Heading, Text, VStack } from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
+import { BiX } from 'react-icons/bi'
 
 const buttonProps: ButtonProps = {
   size: 'lg',
@@ -28,6 +30,15 @@ export default function appDownload() {
   }, [])
   return (
     <Layout>
+      <Icon
+        as={BiX}
+        fontSize="40px"
+        color="gray.500"
+        pos="fixed"
+        top="4"
+        right="4"
+        onClick={() => router.back()}
+      />
       <Center mt="80px" mb="30px">
         <Heading color="white">GEM100</Heading>
       </Center>
