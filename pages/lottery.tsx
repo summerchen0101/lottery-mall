@@ -1,6 +1,7 @@
 import BettingConfirmPopup from '@/components/BettingConfirmPopup'
 import BettingPopup from '@/components/BettingPopup'
 import BettingSuccessPopup from '@/components/BettingSuccessPopup'
+import FloatNav from '@/components/FloatNav'
 import FooterNav from '@/components/FooterNav'
 import GoodsItem from '@/components/GoodsItem'
 import Layout from '@/components/Layout'
@@ -203,6 +204,7 @@ function lottery() {
         )}
       </Box>
       <FooterNav />
+      <FloatNav userInfo={userInfo} showAppBtn />
       <BettingPopup />
       <BettingConfirmPopup />
       <BettingSuccessPopup />

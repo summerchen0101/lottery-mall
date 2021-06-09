@@ -1,3 +1,4 @@
+import FloatNav from '@/components/FloatNav'
 import FooterNav from '@/components/FooterNav'
 import Layout from '@/components/Layout'
 import { MemberType } from '@/lib/enums'
@@ -190,6 +191,7 @@ function my() {
         </Button>
       </Box>
       <FooterNav />
+      <FloatNav userInfo={userInfo} />
     </Layout>
   )
 }
