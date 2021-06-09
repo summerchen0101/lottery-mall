@@ -1,4 +1,5 @@
 import FieldValidateMessage from '@/components/FieldValidateMessage'
+import FloatNav from '@/components/FloatNav'
 import Layout from '@/components/Layout'
 import { useGlobalProvider } from '@/context/GlobalProvider'
 import { LoginRequest } from '@/lib/types'
@@ -30,13 +31,14 @@ import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { BiMobile, BiPhone, BiUser, BiUserCircle } from 'react-icons/bi'
+import service from './service'
 
 type LoginFormProps = LoginRequest & {
   isRemAccPass: boolean
 }
 
 const login = () => {
-  const { jsonEncode, jsonDecode } = useHelper()
+  const { jsonEncode, jsonDecode, openServiceWin } = useHelper()
   const [encodeAccPass, setEncodeAccPass] = useStorage(
     'encodeAccPass',
     '',
@@ -63,17 +65,6 @@ const login = () => {
       router.push({ pathname: '/home', query: { n: 1 } })
     }
   })
-
-  const handleServiceClicked = () => {
-    router.push({
-      pathname: '/service',
-      query: {
-        service: serviceLink
-          .replace('{memberName}', '')
-          .replace('{memberId}', ''),
-      },
-    })
-  }
 
   return (
     <Layout>
@@ -176,7 +167,7 @@ const login = () => {
               <Text
                 cursor="pointer"
                 color="#fff"
-                onClick={handleServiceClicked}
+                onClick={() => openServiceWin(serviceLink)}
               >
                 联系客服
               </Text>
@@ -184,28 +175,7 @@ const login = () => {
           </Stack>
         </Box>
       </VStack>
-      <VStack position="fixed" right="20px" bottom="50px" spacing="3">
-        <IconButton
-          borderRadius="full"
-          aria-label="app"
-          as={BiMobile}
-          color="white"
-          bg="gray.500"
-          boxSize="50px"
-          p="2"
-          onClick={() => router.push('/app-download')}
-        />
-        <IconButton
-          borderRadius="full"
-          aria-label="service"
-          as={BiUser}
-          color="white"
-          bg="gray.500"
-          boxSize="50px"
-          p="2"
-          onClick={handleServiceClicked}
-        />
-      </VStack>
+      <FloatNav showAppBtn />
     </Layout>
   )
 }
