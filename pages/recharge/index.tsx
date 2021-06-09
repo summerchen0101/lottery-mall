@@ -4,6 +4,7 @@ import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { OfflinePayment } from '@/lib/enums'
 import usePaymentList from '@/service/usePaymentList'
+import useServiceLink from '@/service/useServiceLink'
 import useUserInfo from '@/service/useUserInfo'
 import useTransfer from '@/utils/useTransfer'
 import { Box, Center, Stack, Text, VStack } from '@chakra-ui/layout'
@@ -17,6 +18,18 @@ function rechargeIndex() {
   const { userInfo } = useUserInfo()
 
   const { online, offline, isLoading } = usePaymentList()
+  const { serviceLink } = useServiceLink()
+
+  const handleServiceRecharge = () => {
+    router.push({
+      pathname: '/service',
+      query: {
+        service: serviceLink
+          .replace('{memberName}', userInfo?.username)
+          .replace('{memberId}', userInfo?.uid.toString()),
+      },
+    })
+  }
 
   return (
     <Layout>
@@ -44,7 +57,7 @@ function rechargeIndex() {
               请选择您欲支付方式
             </Text>
             <VStack spacing="10px" px="15px">
-              <BarItem>客服激活</BarItem>
+              <BarItem onClick={handleServiceRecharge}>客服激活</BarItem>
               {online?.map((t) => (
                 <BarItem
                   key={t.id}
