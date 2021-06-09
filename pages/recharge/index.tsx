@@ -2,16 +2,24 @@ import BarItem from '@/components/BarItem'
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import { OfflinePayment } from '@/lib/enums'
+import { OfflinePayment, OnlinePayment } from '@/lib/enums'
 import usePaymentList from '@/service/usePaymentList'
 import useServiceLink from '@/service/useServiceLink'
 import useUserInfo from '@/service/useUserInfo'
 import useHelper from '@/utils/useHelper'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Center, Stack, Text, VStack } from '@chakra-ui/layout'
+import { Image } from '@chakra-ui/image'
+import { Box, Center, HStack, Stack, Text, VStack } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
+
+const iconMap = {
+  [OnlinePayment.Alipay]: '/img/ic-item-01.svg',
+  [OnlinePayment.Cloud]: '/img/ic-item-02.svg',
+  [OnlinePayment.USDT]: '/img/ic-item-03.svg',
+  [OnlinePayment.WeChat]: '/img/ic-item-04.svg',
+}
 
 function rechargeIndex() {
   const { toCurrency } = useTransfer()
@@ -61,7 +69,10 @@ function rechargeIndex() {
                     })
                   }
                 >
-                  {t.name}
+                  <HStack>
+                    <Image src={iconMap[t.id]} boxSize="40px" />
+                    <Text>{t.name}</Text>
+                  </HStack>
                 </BarItem>
               ))}
               {offline[OfflinePayment.Bankcard] && (

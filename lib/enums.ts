@@ -41,6 +41,12 @@ export enum OfflinePayment {
   Bankcard = 1,
   USDT = 4,
 }
+export enum OnlinePayment {
+  Alipay = 1,
+  Cloud = 2,
+  WeChat = 6,
+  USDT = 7,
+}
 
 export enum DiscountLogType {
   Normal = 5,
