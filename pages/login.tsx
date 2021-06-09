@@ -4,6 +4,7 @@ import { useGlobalProvider } from '@/context/GlobalProvider'
 import { LoginRequest } from '@/lib/types'
 import useCaptcha from '@/service/useCaptcha'
 import useLogin from '@/service/useLogin'
+import useServiceLink from '@/service/useServiceLink'
 import useHelper from '@/utils/useHelper'
 import useStorage from '@/utils/useStorage'
 import {
@@ -16,6 +17,8 @@ import {
   FormLabel,
   Heading,
   HStack,
+  Icon,
+  IconButton,
   Image,
   Input,
   Spinner,
@@ -26,6 +29,7 @@ import {
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
+import { BiMobile, BiPhone, BiUser, BiUserCircle } from 'react-icons/bi'
 
 type LoginFormProps = LoginRequest & {
   isRemAccPass: boolean
@@ -44,6 +48,7 @@ const login = () => {
   )
   const { register, errors, handleSubmit } = useForm<LoginFormProps>()
   const { handler: doLogin, isLoading } = useLogin()
+  const { serviceLink } = useServiceLink()
   const { setToken } = useGlobalProvider()
   const router = useRouter()
   const { captcha, key, isLoading: isCaptchaLoading, refresh } = useCaptcha()
@@ -58,6 +63,17 @@ const login = () => {
       router.push({ pathname: '/home', query: { n: 1 } })
     }
   })
+
+  const handleServiceClicked = () => {
+    router.push({
+      pathname: '/service',
+      query: {
+        service: serviceLink
+          .replace('{memberName}', '')
+          .replace('{memberId}', ''),
+      },
+    })
+  }
 
   return (
     <Layout>
@@ -157,12 +173,38 @@ const login = () => {
                   免费注册
                 </Box>
               </Text>
-              <Text cursor="pointer" color="#fff">
+              <Text
+                cursor="pointer"
+                color="#fff"
+                onClick={handleServiceClicked}
+              >
                 联系客服
               </Text>
             </VStack>
           </Stack>
         </Box>
+      </VStack>
+      <VStack position="fixed" right="20px" bottom="50px" spacing="3">
+        <IconButton
+          borderRadius="full"
+          aria-label="app"
+          as={BiMobile}
+          color="white"
+          bg="gray.500"
+          boxSize="50px"
+          p="2"
+          onClick={() => router.push('/app-download')}
+        />
+        <IconButton
+          borderRadius="full"
+          aria-label="service"
+          as={BiUser}
+          color="white"
+          bg="gray.500"
+          boxSize="50px"
+          p="2"
+          onClick={handleServiceClicked}
+        />
       </VStack>
     </Layout>
   )
