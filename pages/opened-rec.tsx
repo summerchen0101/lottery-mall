@@ -15,22 +15,23 @@ function openedRec() {
     <Layout>
       <HeaderTitleBar title="结帐纪录" />
       <RecPageTabs />
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box className="layout" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
           <Table size="sm" variant="striped" shadow="md">
-            <Thead bg="purple.600">
+            <Thead bg="brand.500">
               <Tr>
                 <Th
                   fontSize="md"
                   color="white"
                   py="10px"
+                  textAlign="center"
                   borderRight="1px solid #eee"
                 >
                   单号
                 </Th>
-                <Th fontSize="md" color="white">
+                <Th fontSize="md" color="white" textAlign="center">
                   条码数字
                 </Th>
               </Tr>
@@ -55,8 +56,8 @@ function openedRec() {
                       </HStack>
                     </VStack>
                   </Td>
-                  <Td color="purple.600" fontSize="lg">
-                    <HStack>
+                  <Td color="brand.600" fontSize="lg">
+                    <HStack justifyContent="center">
                       {t.value_str.map((t, i) => (
                         <Text key={i}>{t}</Text>
                       ))}

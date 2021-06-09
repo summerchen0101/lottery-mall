@@ -2,17 +2,27 @@ import { UserInfo } from '@/lib/types'
 import useServiceLink from '@/service/useServiceLink'
 import useHelper from '@/utils/useHelper'
 import { IconButton, IconButtonProps } from '@chakra-ui/button'
-import { VStack } from '@chakra-ui/layout'
+import { Image } from '@chakra-ui/image'
+import {
+  Box,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Spacer,
+  Text,
+  VStack,
+} from '@chakra-ui/layout'
+import { Center } from '@chakra-ui/react'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import { BiMobile, BiUser } from 'react-icons/bi'
-
+import { FaMobileAlt } from 'react-icons/fa'
+import { IoIosPhonePortrait } from 'react-icons/io'
 const iconProps: IconButtonProps = {
   borderRadius: 'full',
   color: 'white',
-  bg: 'gray.500',
+  bg: 'rgba(61, 68, 72, 0.5)',
   boxSize: '50px',
-  p: '2',
+  boxShadow: '0 3px 10px rgba(0,0,0,0.6)',
   'aria-label': '',
 }
 
@@ -29,20 +39,23 @@ export default function FloatNav({ showAppBtn, userInfo }: FloatNavProps) {
   return (
     <VStack position="fixed" right="20px" bottom="65px" spacing="3">
       {showAppBtn && (
-        <IconButton
+        <Center
           {...iconProps}
           aria-label="app"
-          as={BiMobile}
           onClick={() => router.push('/app-download')}
-        />
+        >
+          <FaMobileAlt fontSize="28px" />
+        </Center>
       )}
 
-      <IconButton
+      <Box
         {...iconProps}
         aria-label="service"
-        as={BiUser}
+        // as={BiUser}
         onClick={() => openServiceWin(serviceLink, userInfo)}
-      />
+      >
+        <Image src="./img/ic-service.png"></Image>
+      </Box>
     </VStack>
   )
 }

@@ -8,12 +8,22 @@ import { betDateRangeOpts } from '@/lib/options'
 import useBetRecByDate from '@/service/useBetRecByDate'
 import useDateRange from '@/utils/useDateRange'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Center, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
+import {
+  Box,
+  Center,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Spacer,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo, useState } from 'react'
-
+import { IoIosArrowForward } from "react-icons/io";
 function betRec() {
   const router = useRouter()
   const { toCurrency } = useTransfer()
@@ -34,101 +44,110 @@ function betRec() {
   return (
     <Layout>
       <HeaderTitleBar backPath="/lottery" title="下单纪录" />
+
       <RecPageTabs />
-      <Box p="20px" flex="1" overflowY="auto">
-        <Select
-          value={dateRangeType}
-          onChange={(e) =>
-            router.push({
-              pathname: router.pathname,
-              query: { range: e.target.value },
-            })
-          }
-          mb="20px"
-          shadow="lg"
-          bg="white"
-        >
-          {betDateRangeOpts?.map((t) => (
-            <option key={t.value} value={t.value}>
-              {t.label}
-            </option>
-          ))}
-        </Select>
+      <HStack px="15px" className="formGroup" py="10px" mb="10px" borderBottom="1px" borderColor="rgba(255,255,255,.2)">
+          <Text minW="80px" color="#fff">账务区间</Text>>
+          <Select
+            className="formSelect"
+            value={dateRangeType}
+            onChange={(e) =>
+              router.push({
+                pathname: router.pathname,
+                query: { range: e.target.value },
+              })
+            }
+          >
+            {betDateRangeOpts?.map((t) => (
+              <option key={t.value} value={t.value}>
+                {t.label}
+              </option>
+            ))}
+          </Select>
+        </HStack>
+      <Box flex="1" overflowY="auto" pb="110px">
+
         {isLoading ? (
-          <Spinner />
+          <Center w="full" h="100%">
+            <Spinner m="20px" />
+          </Center>
         ) : (
           <>
             <SimpleGrid
+              bg="contentBg.500"
+              w="100%"
               columns={3}
               align="center"
-              bg="white"
-              p="10px"
-              borderRadius="md"
+              p="5px 15px"
               shadow="md"
-              mb="20px"
+              pos="fixed"
+              bottom="55px"
             >
               <Box>
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" color="#fff">
                   总计(实际损益)
                 </Text>
-                <Text fontSize="xl" color="purple.600" fontWeight="600">
+                <Text fontSize="md" color="red.500" fontWeight="600">
                   {dateBetData?.profit}
                 </Text>
               </Box>
               <Box>
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" color="#fff">
                   投资结算
                 </Text>
-                <Text fontSize="xl" color="purple.600" fontWeight="600">
+                <Text fontSize="md" color="red.500" fontWeight="600">
                   {toCurrency(+dateBetData?.win_money)}
                 </Text>
               </Box>
               <Box>
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" color="#fff">
                   交易金额
                 </Text>
-                <Text fontSize="xl" color="pink.500" fontWeight="600">
+                <Text fontSize="md" color="red.500" fontWeight="600">
                   {toCurrency(+dateBetData?.bet_money)}
                 </Text>
               </Box>
             </SimpleGrid>
-            <Stack spacing="15px">
+            <Stack  px="15px">
               {dateBetData?.list.map((t, i) => (
                 <HStack
                   key={i}
-                  bg="white"
+                  bg="contentBg.500"
                   shadow="md"
-                  borderLeftWidth="5px"
-                  borderColor="gray.400"
-                  p="2"
+                  p="10px 15px"
                   fontSize="sm"
-                  color="gray.700"
+                  color="gray.400"
                   borderRadius="md"
                   onClick={() => router.push(`/bet-rec/${t.date}`)}
                 >
-                  <Center w="100px" fontWeight="600">
+                  <SimpleGrid columns={2} w="100%" spacingX="20px"
+                  spacingY="5px">
+                           <Text w="100px" fontWeight="600" color="#fff">
                     {t.date}
-                  </Center>
-                  <Stack spacing="0">
+                  </Text>
+                  <Flex>
+                      投资结算：
+                      <Text as="span"  fontWeight="600" color="pink.500">
+                        {toCurrency(t.win_money)}
+                      </Text>
+                    </Flex>
                     <Text>
                       实际损益：
-                      <Text as="span" fontWeight="600" color="green.500">
+                      <Text as="span"  fontWeight="600" color="green.500">
                         {toCurrency(t.profit)}
                       </Text>
                     </Text>
-                    <Text>
-                      投资节算：
-                      <Text as="span" fontWeight="600" color="pink.500">
-                        {toCurrency(t.win_money)}
-                      </Text>
-                    </Text>
+
                     <Text>
                       交易金额：
-                      <Text as="span" fontWeight="600" color="gray.500">
+                      <Text as="span"  fontWeight="600" color="#fff">
                         {toCurrency(t.bet_money)}
                       </Text>
                     </Text>
-                  </Stack>
+                  </SimpleGrid>
+                  <Spacer/>
+                  <IoIosArrowForward/>
+
                 </HStack>
               ))}
             </Stack>

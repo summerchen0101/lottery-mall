@@ -67,7 +67,7 @@ function register() {
           />
         }
       />
-      <Box flex="1" className="layout" as="form" onSubmit={onSubmit} noValidate>
+      <Box flex="1" p="15px" as="form" onSubmit={onSubmit} noValidate>
         <Stack spacing="12px">
           <FormControl className="formGroup" isInvalid={!!errors.invite}>
             <FormLabel color="#fff">
@@ -78,6 +78,7 @@ function register() {
             </FormLabel>
             <Input
               name="invite"
+              placeholder="请输入邀请码"
               className="formInput"
               ref={register({ required: '不可为空' })}
               defaultValue={router.query?.code?.[0]}
@@ -93,6 +94,7 @@ function register() {
             </FormLabel>
             <Input
               className="formInput"
+              placeholder="请输入会员帐号"
               name="username"
               ref={register({
                 required: '不可为空',
@@ -103,7 +105,7 @@ function register() {
               })}
             />
             <FieldValidateMessage error={errors.username} />
-            <FormHelperText color="yellow.500">
+            <FormHelperText color="yellow.500" fontSize="sm">
               须为7~13个英文或数字组合
             </FormHelperText>
           </FormControl>
@@ -115,6 +117,7 @@ function register() {
               密码
             </FormLabel>
             <Input
+              placeholder="请输入密码"
               className="formInput"
               type="password"
               name="password"
@@ -142,6 +145,7 @@ function register() {
               确认密码
             </FormLabel>
             <Input
+              placeholder="请输入密码"
               className="formInput"
               type="password"
               name="confirm_password"
@@ -181,10 +185,11 @@ function register() {
               <Checkbox
                 size="sm"
                 name="isAgree"
+                colorScheme="brand"
                 ref={register({ required: '需勾选确认' })}
               />
-              <Text fontSize="xs" color="gray.100">
-                我已满成年且同意平台规范进行操作，且同意各项
+              <Text fontSize="sm" color="gray.100">
+                已满成年且同意平台规范进行操作与各项
                 <Text as="span" color="orange.500" ml="1">
                   用户协议
                 </Text>

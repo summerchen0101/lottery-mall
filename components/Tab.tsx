@@ -8,13 +8,16 @@ const Tab: React.FC<{
 }> = ({ active, children, onClick }) => {
   return (
     <Box
+      bg={active ? 'brand.500' : 'contentBg.500'}
       cursor="pointer"
-      borderColor={active ? 'brand.500' : 'transparent'}
-      borderBottomWidth="2px"
-      pb="2"
+      // borderColor={active ? 'brand.500' : 'transparent'}
+      // borderBottomWidth="2px"
+      // pb="2"
+      py="1"
+      borderRadius="1rem"
       onClick={onClick}
       color="white"
-      px="3"
+      px="5"
       fontWeight="600"
     >
       {children}

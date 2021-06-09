@@ -3,7 +3,7 @@ import React from 'react'
 
 const TabGroup = function ({ children, ...props }) {
   return (
-    <HStack justify="space-between" px="5" h="50px">
+    <HStack justify="space-between" px="15px" h="50px">
       {children}
     </HStack>
   )
