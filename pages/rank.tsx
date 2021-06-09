@@ -1,13 +1,13 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import RecPageTabs from '@/components/RecPageTabs'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { DateRangeType } from '@/lib/enums'
 import { rankDateRangeOpts } from '@/lib/options'
 import useRankList from '@/service/useRankList'
 import useDateRange from '@/utils/useDateRange'
-import useService from '@/utils/useService'
-import { Box, HStack, Text, VStack } from '@chakra-ui/layout'
+import { Box } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table'
 import { useRouter } from 'next/dist/client/router'
@@ -24,7 +24,8 @@ function rank() {
   )
   return (
     <Layout>
-      <HeaderTitleBar back title="排行榜" />
+      <HeaderTitleBar title="大盘走势" />
+      <RecPageTabs />
       <Box p="20px" flex="1" overflowY="auto">
         <Select
           value={dateRangeType}

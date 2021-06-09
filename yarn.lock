@@ -4561,6 +4561,11 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+jsbarcode@^3.8.0:
+  version "3.11.4"
+  resolved "https://registry.yarnpkg.com/jsbarcode/-/jsbarcode-3.11.4.tgz#00dfe90329af94269ac0808b0858206aa3a71416"
+  integrity sha512-PHtad17lOl6LOLGK20k5I6P7MabiyHaJY5u5N5TlzC6ZunOR+yFnFnRUoqqOefrYPqO2nuJ1weHzG8B7YYEnHg==
+
 jsesc@^2.5.1:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
@@ -5846,6 +5851,14 @@ rc@^1.2.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-barcode@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-barcode/-/react-barcode-1.4.0.tgz#ebc85ff1b8b49ac4b947b7f3745d684c6c363902"
+  integrity sha512-xDxIc9WUTQPMcwc3kbCVsjh03WiPyynms9OSdsNSh2AAgB6XqMiy9hYWkCNHgdNdvurkvKB6hm25AZHXyQfvlQ==
+  dependencies:
+    jsbarcode "^3.8.0"
+    prop-types "^15.6.2"
 
 react-bootstrap@^1.4.3:
   version "1.4.3"

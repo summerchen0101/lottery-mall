@@ -1,6 +1,7 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
+import RecPageTabs from '@/components/RecPageTabs'
 import { useLoaderProvider } from '@/context/LoaderProvider'
 import { DateRangeType } from '@/lib/enums'
 import { betDateRangeOpts } from '@/lib/options'
@@ -33,6 +34,7 @@ function betRec() {
   return (
     <Layout>
       <HeaderTitleBar backPath="/lottery" title="下单纪录" />
+      <RecPageTabs />
       <Box p="20px" flex="1" overflowY="auto">
         <Select
           value={dateRangeType}
