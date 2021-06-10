@@ -59,14 +59,23 @@ function rechargeForm() {
       <HeaderTitleBar back title={`${router.query.name}充值`} />
       <Box flex="1" overflowY="auto" p="20px" pb="50px">
         <Stack as="form" spacing="12px" onSubmit={onSubmit} noValidate>
-          <Text color="purple.600" fontWeight="600" fontSize="lg" mb="1">
+          {/* <Text color="purple.600" fontWeight="600" fontSize="lg" mb="1">
             余额： $ {toCurrency(userInfo?.money)}
-          </Text>
-          <FormControl isRequired isInvalid={!!errors.payments_branch_id}>
-            <FormLabel>存款媒介</FormLabel>
+          </Text> */}
+          <FormControl
+            className="formGroup"
+            isInvalid={!!errors.payments_branch_id}
+          >
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>
+              存款媒介
+            </FormLabel>
             <Select
               name="payments_branch_id"
-              bg="white"
+              className="formSelect"
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
               // onChange={(e) => setValue('')}
@@ -80,11 +89,17 @@ function rechargeForm() {
             <FieldValidateMessage error={errors.payments_branch_id} />
           </FormControl>
 
-          <FormControl isRequired isInvalid={!!errors.interface}>
-            <FormLabel>支付通道</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.interface}>
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>
+              支付通道
+            </FormLabel>
             <Select
               name="interface"
-              bg="white"
+              className="formSelect"
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
             >
@@ -97,11 +112,18 @@ function rechargeForm() {
             <FieldValidateMessage error={errors.interface} />
           </FormControl>
 
-          <FormControl isRequired isInvalid={!!errors.money}>
-            <FormLabel>存款金额</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.money}>
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>
+              存款金额
+            </FormLabel>
             <Input
               name="money"
-              bg="white"
+              placeholder="请输入存款金额"
+              className="formInput"
               type="number"
               ref={register({
                 required: '不可为空',
@@ -121,8 +143,8 @@ function rechargeForm() {
           {info && (
             <Stack
               p="3"
-              borderRadius="md"
-              bg="pink.600"
+              borderRadius="3px"
+              bg="red.600"
               color="white"
               spacing={1}
             >
@@ -142,11 +164,11 @@ function rechargeForm() {
             </Stack>
           )}
 
-          <Divider h="2" />
           <Button
             type="submit"
             w="full"
-            colorScheme="purple"
+            borderRadius="3px"
+            colorScheme="brand"
             isLoading={isLoading}
           >
             确认送出

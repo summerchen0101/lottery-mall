@@ -64,17 +64,23 @@ function rechargeForm() {
 
   return (
     <Layout>
-      <HeaderTitleBar back title="USDT转帐充值" />
+      <HeaderTitleBar back title="USDT转帐" />
       <Box flex="1" overflowY="auto" p="20px" pb="50px">
         <Stack as="form" spacing="12px" onSubmit={onSubmit} noValidate>
-          <Text color="purple.600" fontWeight="600" fontSize="lg" mb="1">
+          {/* <Text color="purple.600" fontWeight="600" fontSize="lg" mb="1">
             余额： $ {toCurrency(userInfo?.money)}
-          </Text>
-          <FormControl isRequired isInvalid={!!errors.line_id}>
-            <FormLabel>鏈名稱</FormLabel>
+          </Text> */}
+          <FormControl className="formGroup" isInvalid={!!errors.line_id}>
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              鏈名稱
+            </FormLabel>
             <Select
               name="line_id"
-              bg="white"
+              className="formSelect"
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
             >
@@ -85,17 +91,24 @@ function rechargeForm() {
               ))}
             </Select>
             <FieldValidateMessage error={errors.line_id} />
-            <FormHelperText>
+            <FormHelperText color="gray.400">
               必须与您的银行帐户姓名一致，否则会导致无法到帐
             </FormHelperText>
           </FormControl>
 
-          <FormControl isRequired isInvalid={!!errors.money}>
-            <FormLabel>存款金额</FormLabel>
+          <FormControl className="formGroup" isInvalid={!!errors.money}>
+            <FormLabel color="#fff">
+              {' '}
+              <Text as="span" color="red.500">
+                *
+              </Text>{' '}
+              存款金额
+            </FormLabel>
             <Input
               name="money"
               type="number"
-              bg="white"
+              className="formInput"
+              placeholder="请输入存款金额"
               ref={register({
                 required: '不可为空',
                 min: {
@@ -109,15 +122,15 @@ function rechargeForm() {
               })}
             />
             <FieldValidateMessage error={errors.money} />
-            <FormHelperText>
+            <FormHelperText color="gray.400">
               当前汇率: {rate} USDT/CNY (汇率实时波动，仅供参考)
             </FormHelperText>
           </FormControl>
           {info && (
             <Stack
               p="3"
-              borderRadius="md"
-              bg="pink.600"
+              borderRadius="3px"
+              bg="red.600"
               color="white"
               spacing={1}
             >
@@ -130,11 +143,12 @@ function rechargeForm() {
               </Text>
             </Stack>
           )}
-          <Divider h="2" />
+
           <Button
             type="submit"
             w="full"
-            colorScheme="purple"
+            borderRadius="3px"
+            colorScheme="brand"
             isLoading={isLoading}
           >
             确认送出

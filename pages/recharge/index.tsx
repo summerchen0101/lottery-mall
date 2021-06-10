@@ -76,8 +76,11 @@ function rechargeIndex() {
                 >
                   <HStack spacing="20px">
                     <Image src="/img/ic-m-1.png" boxSize="48px" />
-                    <VStack>
+                    <VStack alignItems="flex-start" spacing="0">
                       <Text>支付宝</Text>
+                      <Text fontSize="sm" color="green.500">
+                        支付宝
+                      </Text>
                     </VStack>
                   </HStack>
                 </BarItem>
@@ -93,8 +96,11 @@ function rechargeIndex() {
                 >
                   <HStack spacing="20px">
                     <Image src="/img/ic-m-2.png" boxSize="48px" />
-                    <VStack>
+                    <VStack alignItems="flex-start" spacing="0">
                       <Text>云闪付</Text>
+                      <Text fontSize="sm" color="green.500">
+                        云闪付
+                      </Text>
                     </VStack>
                   </HStack>
                 </BarItem>
@@ -110,8 +116,11 @@ function rechargeIndex() {
                 >
                   <HStack spacing="20px">
                     <Image src="/img/ic-m-3.png" boxSize="48px" />
-                    <VStack>
+                    <VStack alignItems="flex-start" spacing="0">
                       <Text>微信</Text>
+                      <Text fontSize="sm" color="green.500">
+                        微信
+                      </Text>
                     </VStack>
                   </HStack>
                 </BarItem>
@@ -127,8 +136,11 @@ function rechargeIndex() {
                 >
                   <HStack spacing="20px">
                     <Image src="/img/ic-m-4.png" boxSize="48px" />
-                    <VStack>
+                    <VStack alignItems="flex-start" spacing="0">
                       <Text>USDT</Text>
+                      <Text fontSize="sm" color="green.500">
+                        USDT
+                      </Text>
                     </VStack>
                   </HStack>
                 </BarItem>
@@ -138,8 +150,11 @@ function rechargeIndex() {
                 <BarItem onClick={() => router.push('/recharge/bankcard')}>
                   <HStack spacing="20px">
                     <Image src="/img/ic-m-5.png" boxSize="48px" />
-                    <VStack>
-                      <Text>银行卡</Text>
+                    <VStack alignItems="flex-start" spacing="0">
+                      <Text>公司入款</Text>
+                      <Text fontSize="sm" color="#ec7d00">
+                        银行卡
+                      </Text>
                     </VStack>
                   </HStack>
                 </BarItem>
@@ -148,8 +163,11 @@ function rechargeIndex() {
                 <BarItem onClick={() => router.push('/recharge/usdt')}>
                   <HStack spacing="20px">
                     <Image src="/img/ic-m-5.png" boxSize="48px" />
-                    <VStack>
-                      <Text>USDT转帐</Text>
+                    <VStack alignItems="flex-start" spacing="0">
+                      <Text>公司入款</Text>
+                      <Text fontSize="sm" color="#ec7d00">
+                        USDT转帐
+                      </Text>
                     </VStack>
                   </HStack>
                 </BarItem>
