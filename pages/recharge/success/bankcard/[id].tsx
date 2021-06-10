@@ -136,7 +136,7 @@ function rechargeForm() {
             财务纪录
           </Button>
         </HStack>
-        <Box color="white" fontSize="sm" color="gray.400" mt="1">
+        <Box fontSize="sm" color="gray.400" mt="1">
           *本次交易尚未完成,转入上面提供之收款账号方可完成支付流程
         </Box>
       </Box>
