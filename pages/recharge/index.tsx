@@ -14,13 +14,6 @@ import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 
-const iconMap = {
-  [OnlinePayment.Alipay]: '/img/ic-m-1.png',
-  [OnlinePayment.Cloud]: '/img/ic-m-2.png',
-  [OnlinePayment.USDT]: '/img/ic-m-4.png',
-  [OnlinePayment.WeChat]: '/img/ic-m-3.png',
-}
-
 function rechargeIndex() {
   const { toCurrency } = useTransfer()
   const { openServiceWin } = useHelper()
@@ -72,24 +65,75 @@ function rechargeIndex() {
                   </VStack>
                 </HStack>
               </BarItem>
-              {online?.map((t) => (
+              {online[OnlinePayment.Alipay] && (
                 <BarItem
-                  key={t.id}
                   onClick={() =>
                     router.push({
                       pathname: '/recharge/online',
-                      query: { id: t.id, name: t.name },
+                      query: { id: OnlinePayment.Alipay, name: '支付宝' },
                     })
                   }
                 >
                   <HStack spacing="20px">
-                    <Image src={iconMap[t.id]} boxSize="48px" />
+                    <Image src="/img/ic-m-1.png" boxSize="48px" />
                     <VStack>
-                      <Text>{t.name}</Text>
+                      <Text>支付宝</Text>
                     </VStack>
                   </HStack>
                 </BarItem>
-              ))}
+              )}
+              {online[OnlinePayment.Cloud] && (
+                <BarItem
+                  onClick={() =>
+                    router.push({
+                      pathname: '/recharge/online',
+                      query: { id: OnlinePayment.Alipay, name: '云闪付' },
+                    })
+                  }
+                >
+                  <HStack spacing="20px">
+                    <Image src="/img/ic-m-2.png" boxSize="48px" />
+                    <VStack>
+                      <Text>云闪付</Text>
+                    </VStack>
+                  </HStack>
+                </BarItem>
+              )}
+              {online[OnlinePayment.WeChat] && (
+                <BarItem
+                  onClick={() =>
+                    router.push({
+                      pathname: '/recharge/online',
+                      query: { id: OnlinePayment.Alipay, name: '微信' },
+                    })
+                  }
+                >
+                  <HStack spacing="20px">
+                    <Image src="/img/ic-m-3.png" boxSize="48px" />
+                    <VStack>
+                      <Text>微信</Text>
+                    </VStack>
+                  </HStack>
+                </BarItem>
+              )}
+              {online[OnlinePayment.USDT] && (
+                <BarItem
+                  onClick={() =>
+                    router.push({
+                      pathname: '/recharge/online',
+                      query: { id: OnlinePayment.Alipay, name: 'USDT' },
+                    })
+                  }
+                >
+                  <HStack spacing="20px">
+                    <Image src="/img/ic-m-4.png" boxSize="48px" />
+                    <VStack>
+                      <Text>USDT</Text>
+                    </VStack>
+                  </HStack>
+                </BarItem>
+              )}
+
               {offline[OfflinePayment.Bankcard] && (
                 <BarItem onClick={() => router.push('/recharge/bankcard')}>
                   <HStack spacing="20px">
