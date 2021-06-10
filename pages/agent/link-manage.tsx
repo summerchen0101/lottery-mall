@@ -70,7 +70,7 @@ export default function createInvite() {
       <HeaderTitleBar back backPath="/agent" title="链结管理" />
       <AgentPageTabs />
 
-      <Box className="layout" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (

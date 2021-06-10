@@ -29,9 +29,8 @@ export default function hiring() {
           投履地址:
         </Text>
         <Text color="gray.400" fontSize="sm">
-          GEM Ventures Ltd. <br />
-          收件人：Christopher F. Brown，董事9 West 57th Street，49th Floor，New
-          York，NY 10019
+          Attn: Christopher F. Brown, Director 9 West 57th Street, 49th Floor,
+          New York, NY 10019
         </Text>
       </Box>
 

@@ -52,7 +52,7 @@ export default function createMember() {
       <HeaderTitleBar back backPath="/agent" title="开户中心" />
       <AgentPageTabs />
 
-      <Box className="layout" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         <Box as="form" onSubmit={onSubmit} noValidate>
           <Stack spacing="12px">
             <FormControl className="formGroup" isInvalid={!!errors.type}>

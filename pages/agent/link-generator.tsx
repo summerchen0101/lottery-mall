@@ -50,7 +50,7 @@ export default function createInvite() {
       <HeaderTitleBar back backPath="/agent" title="生成链结" />
       <AgentPageTabs />
 
-      <Box className="layout" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         <Box as="form" onSubmit={onSubmit} noValidate>
           <Stack spacing="12px">
             <FormControl className="formGroup" isInvalid={!!errors.name}>

@@ -8,7 +8,15 @@ import useTeamBettingRec, {
 } from '@/service/useTeamBettingRec'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
-import { Box, Center, HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
+import {
+  Box,
+  Center,
+  Flex,
+  HStack,
+  Spacer,
+  Stack,
+  Text,
+} from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import moment from 'moment'
@@ -56,15 +64,18 @@ export default function teamBettingRec() {
         }
       />
 
-      <Box bg="gray.700" color="gray.300" mb="3" px="4" py="2" fontSize="sm">
+      <Box bg="contentBg.500" color="#fff" px="15px" py="10px" fontSize="sm">
         <Text>
-          下单时间：{searchData.created_at1} ~ {searchData.created_at2}
+          {searchData.created_at1} ~ {searchData.created_at2}
         </Text>
-        <Text>总下单：{toCurrency(+bet_money)}</Text>
-        <Text>总收益：{toCurrency(+profit)}</Text>
+        <Flex>
+          <Text>总下单：{toCurrency(+bet_money)}</Text>
+          <Spacer />
+          <Text>总收益：{toCurrency(+profit)}</Text>
+        </Flex>
       </Box>
 
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
@@ -72,16 +83,16 @@ export default function teamBettingRec() {
             <Stack spacing="3">
               {bettingList?.map((t) => (
                 <Box key={t.id} borderRadius="md" overflow="hidden">
-                  <Center bg="yellow.500" h="28px">
+                  <Center bg="#f9c54f" h="28px">
                     <Text color="gray.900" fontWeight="600">
                       下单成功
                     </Text>
                   </Center>
                   <Stack
                     spacing="1"
-                    bg="gray.700"
-                    p="4"
-                    color="gray.300"
+                    bg="contentBg.500"
+                    p="10px 15px"
+                    color="gray.400"
                     fontSize="sm"
                   >
                     <Text>{t.name}</Text>

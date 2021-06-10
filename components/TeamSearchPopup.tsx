@@ -54,12 +54,16 @@ function TeamSearchPopup({
         <ModalHeader className="modal__header">
           <Text>{title}</Text>
         </ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton color="#fff" />
         <ModalBody className="modal__body" color="#fff" lineHeight="24px">
           <Stack spacing="12px">
-            <FormControl isRequired isInvalid={!!errors.type}>
+            <FormControl isInvalid={!!errors.type}>
               <FormLabel>会员查询</FormLabel>
-              <RadioGroup name="type" defaultValue="username">
+              <RadioGroup
+                colorScheme="brand"
+                name="type"
+                defaultValue="username"
+              >
                 <Stack direction="row">
                   <Radio value="username" ref={register}>
                     帐号
@@ -71,40 +75,43 @@ function TeamSearchPopup({
               </RadioGroup>
               <FieldValidateMessage error={errors.type} />
             </FormControl>
-            <FormControl isRequired isInvalid={!!errors.keyword}>
-              <Input name="keyword" ref={register} />
+            <FormControl
+              className="formGroup"
+              isRequired
+              isInvalid={!!errors.keyword}
+            >
+              <Input name="keyword" className="formInput" ref={register} />
               <FieldValidateMessage error={errors.keyword} />
             </FormControl>
             <HStack>
-              <Box flex="1">
+              <Box flex="1" className="formGroup">
                 <Text>開始</Text>
                 <Input
                   as={DatePicker}
                   selected={startDate}
                   onChange={(date) => setStartDate((date as unknown) as Date)}
-                  bg="gray.800"
-                  className="date"
+                  className="formInput"
                 />
               </Box>
-              <Box flex="1">
+              <Box flex="1" className="formGroup">
                 <Text>結束</Text>
                 <Input
                   as={DatePicker}
                   selected={endDate}
                   onChange={(date) => setEndDate((date as unknown) as Date)}
-                  bg="gray.800"
+                  className="formInput"
                 />
               </Box>
             </HStack>
           </Stack>
         </ModalBody>
         <ModalFooter as={HStack} mt="3">
-          <Button w="full" colorScheme="gray" onClick={() => onClose()}>
+          <button className="btnbase outline_btn" onClick={() => onClose()}>
             取消
-          </Button>
-          <Button type="submit" w="full" colorScheme="brand">
+          </button>
+          <button className="btnbase primary_btn " type="submit">
             确认
-          </Button>
+          </button>
         </ModalFooter>
       </ModalContent>
     </Modal>

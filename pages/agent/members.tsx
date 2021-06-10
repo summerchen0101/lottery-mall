@@ -29,6 +29,7 @@ import useAlert from '@/utils/useAlert'
 import useMemberList from '@/service/useMemberList'
 import { useRouter } from 'next/dist/client/router'
 import moment from 'moment'
+import { IoIosArrowForward } from 'react-icons/io'
 const statusColorMap = {
   [InviteStatus.On]: 'green.500',
   [InviteStatus.Off]: 'red.500',
@@ -53,7 +54,7 @@ export default function memberList() {
     <Layout>
       <HeaderTitleBar back backPath="/agent" title="会员管理" />
 
-      <Box className="layout" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
@@ -64,6 +65,8 @@ export default function memberList() {
               </Text>
               {levels.map((t, i) => (
                 <Text
+                  color="brand.500"
+                  fontSize="md"
                   key={t.id}
                   onClick={() =>
                     setLevels((arr) => arr.filter((_t, _i) => _i <= i))
