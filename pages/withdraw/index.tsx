@@ -100,7 +100,7 @@ function withdrawIndex() {
                 w="100%"
                 key={t.id}
                 bg="contentBg.500"
-                p="10px"
+                p="10px 15px"
                 borderRadius="lg"
                 fontSize=".9375rem"
                 color="gray.400"

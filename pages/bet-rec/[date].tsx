@@ -20,57 +20,56 @@ function betRec() {
   return (
     <Layout>
       <HeaderTitleBar back title="下单纪录" />
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box pb="110px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
           <>
             <SimpleGrid
+              bg="contentBg.500"
+              w="100%"
               columns={3}
               align="center"
-              bg="white"
-              p="10px"
-              borderRadius="md"
+              p="5px 15px"
               shadow="md"
-              mb="20px"
+              pos="fixed"
+              bottom="55px"
             >
               <Box>
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" color="#fff">
                   总抢购金额
                 </Text>
-                <Text fontSize="xl" color="purple.600" fontWeight="600">
+                <Text fontSize="md" color="red.500" fontWeight="600">
                   {toCurrency(+betRecData?.bet_money)}
                 </Text>
               </Box>
               <Box>
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" color="#fff">
                   抢购成功(笔)
                 </Text>
-                <Text fontSize="xl" color="purple.600" fontWeight="600">
+                <Text fontSize="md" color="red.500" fontWeight="600">
                   {toCurrency(+betRecData?.win, 0)}
                 </Text>
               </Box>
               <Box>
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" color="#fff">
                   总收益
                 </Text>
-                <Text fontSize="xl" color="pink.500" fontWeight="600">
+                <Text fontSize="md" color="pink.500" fontWeight="600">
                   {toCurrency(+betRecData?.profit)}
                 </Text>
               </Box>
             </SimpleGrid>
-            <Stack spacing="15px">
+            <Stack spacing="15px" p="15px">
               {betRecData?.list.map((t) => (
                 <HStack
                   key={t.id}
                   justify="space-between"
-                  bg="white"
+                  bg="contentBg.500"
                   opacity={t.is_lose_win ? 1 : 0.6}
                   shadow="md"
                   fontWeight="500"
-                  p="10px"
-                  borderLeftWidth="3px"
-                  borderColor="purple.500"
+                  p="10px 15px"
                 >
                   <Image
                     src={`${process.env.apiBaseUrl}/${t.pic_icon}`}
@@ -79,36 +78,38 @@ function betRec() {
                   />
                   <Box flex="1">
                     <Flex justify="space-between">
-                      <Text fontSize="sm" color="gray.600">
+                      <Text fontSize="sm" color="gray.400">
                         {t.lottery}
                       </Text>
                       <Tag
                         variant="solid"
                         borderRadius="4px"
-                        colorScheme={t.is_lose_win ? 'pink' : 'gray'}
+                        colorScheme={t.is_lose_win ? 'green' : 'red'}
                       >
                         {t.is_lose_win ? '抢购成功' : '抢购失败'}
                       </Tag>
                     </Flex>
-                    <Text color="purple.600">{t.name}</Text>
+
+                    <Text color="#fff">{t.name}</Text>
+
                     <HStack justify="space-between">
-                      <Text color="gray.500" fontSize="lg">
-                        ¥ {toCurrency(t.total_price)}
+                      <Text color="#f9c54f" fontSize="sm">
+                        G币 {toCurrency(t.total_price)}
                       </Text>
-                      <Text color="pink.500" fontSize="sm" fontWeight="600">
+                      <Text color="brand.500" fontSize="sm" fontWeight="600">
                         收益：
-                        <Text fontSize="xl" as="span">
+                        <Text fontSize="md" as="span">
                           {toCurrency(t.profit)}
                         </Text>
                       </Text>
                     </HStack>
-                    <HStack justify="space-between">
-                      <Text color="gray.500" fontSize="xs">
-                        订单详情：{t.bet_values}
-                      </Text>
-                      <Text fontSize="xs" color="gray.500">
-                        {t.created_at}
-                      </Text>
+                    <HStack
+                      justify="space-between"
+                      color="gray.400"
+                      alignItems="center"
+                    >
+                      <Text fontSize="sm">订单详情：{t.bet_values}</Text>
+                      <Text fontSize="xs">{t.created_at}</Text>
                     </HStack>
                   </Box>
                 </HStack>

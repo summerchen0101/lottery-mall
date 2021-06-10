@@ -70,48 +70,58 @@ export default function createInvite() {
       <HeaderTitleBar back backPath="/agent" title="链结管理" />
       <AgentPageTabs />
 
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box className="layout" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
-          <Stack spacing="3">
+          <Stack spacing="10px">
             {inviteList?.map((t) => (
               <Box
                 key={t.id}
-                bg="gray.700"
+                bg="contentBg.500"
                 borderRadius="md"
-                p="4"
-                color="gray.200"
+                p="10px 15px"
+                color="gray.400"
               >
-                <HStack>
-                  <Text>{t.name}</Text>
+                <HStack mb="2" alignItems="center">
+                  <Text color="#fff" fontWeight="600">
+                    {t.name}
+                  </Text>
                   <Spacer />
-                  <Text color={statusColorMap[t.status]}>
+                  <Text
+                    color="#fff"
+                    px="2"
+                    bg={statusColorMap[t.status]}
+                    // border="1px"
+                    borderRadius="full"
+                    // borderColor="{statusColorMap[t.status]}"
+                  >
                     {toOptionName(inviteStatusOpts, t.status)}
                   </Text>
                 </HStack>
-                <Text>
+                <Text fontSize="sm">
                   开户类型：
                   {toOptionName(memberTypeOpts, t.type)}
                 </Text>
-                <Text>
+                <Text fontSize="sm">
                   注册链结：
                   {t.invite}
                 </Text>
                 <HStack mt="2">
                   <TextCopy text={t.invite}>
-                    <Button colorScheme="red" size="sm">
+                    <Button colorScheme="brand" size="sm" borderRadius="3px">
                       复制邀请码
                     </Button>
                   </TextCopy>
                   <TextCopy text={`${baseUrl}/${t.invite}`}>
-                    <Button colorScheme="red" size="sm">
+                    <Button colorScheme="brand" size="sm" borderRadius="3px">
                       复制链结
                     </Button>
                   </TextCopy>
                   <Button
-                    colorScheme="red"
+                    colorScheme="brand"
                     size="sm"
+                    borderRadius="3px"
                     onClick={() => handleQrcodeClicked(t.invite)}
                   >
                     QRCode
@@ -120,6 +130,7 @@ export default function createInvite() {
                     <Button
                       colorScheme="red"
                       size="sm"
+                      borderRadius="3px"
                       onClick={() => handleDisableStatus(t.id)}
                       isLoading={isUpdateLoading}
                     >
@@ -129,6 +140,7 @@ export default function createInvite() {
                     <Button
                       colorScheme="green"
                       size="sm"
+                      borderRadius="3px"
                       onClick={() => handleStatusChange(t.id, InviteStatus.On)}
                       isLoading={isUpdateLoading}
                     >

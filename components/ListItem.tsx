@@ -20,7 +20,7 @@ export default function ListItem({ children, onClick }: ListItemProps) {
       <Text fontSize="lg" fontWeight="600" color="#fff">
         {children}
       </Text>
-      <Icon as={HiChevronRight} fontWeight="600" fontSize="24px" color="#fff" />
+      <Icon as={HiChevronRight} fontSize="24px" color="#fff" />
     </HStack>
   )
 }

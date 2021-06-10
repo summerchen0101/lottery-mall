@@ -34,13 +34,7 @@ function withdrawForm() {
             <Spinner m="20px" />
           </Center>
         ) : (
-          <Box
-            // bg="contentBg.500"
-            // borderRadius="md"
-            // p="15px"
-            color="#fff"
-            mb="20px"
-          >
+          <Box color="#fff" mb="20px">
             <VStack spacing="0px" mb="4">
               <Icon as={HiCheckCircle} fontSize="80px" color="green.500" />
               <Text fontSize="xl" color="green.500">
@@ -48,50 +42,45 @@ function withdrawForm() {
               </Text>
             </VStack>
             <Stack>
-              <Box>
+              <Box borderBottom="1px solid rgba(255,255,255,.4)">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   订单号
                 </Text>
                 <Text fontSize="md" fontWeight="600">
                   {info.order_sn}
                 </Text>
-                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
-              <Box>
+              <Box borderBottom="1px solid rgba(255,255,255,.4)">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   提款金额
                 </Text>
                 <Text fontSize="md" fontWeight="600" color="pink.500">
                   {toCurrency(+info.money)}
                 </Text>
-                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
-              <Box>
+              <Box borderBottom="1px solid rgba(255,255,255,.4)">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   申请时间
                 </Text>
                 <Text fontSize="md" fontWeight="600">
                   {info.created_at}
                 </Text>
-                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
-              <Box>
+              <Box borderBottom="1px solid rgba(255,255,255,.4)">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   持卡人
                 </Text>
                 <Text fontSize="md" fontWeight="600">
                   {info.name}
                 </Text>
-                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
-              <Box>
+              <Box borderBottom="1px solid rgba(255,255,255,.4)">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   收款账户
                 </Text>
                 <Text fontSize="md" fontWeight="600">
                   {info.account} ({info.bank})
                 </Text>
-                <Divider borderColor="rgba(255,255,255,.4)" py="1" />
               </Box>
             </Stack>
           </Box>

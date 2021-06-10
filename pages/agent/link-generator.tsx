@@ -50,24 +50,26 @@ export default function createInvite() {
       <HeaderTitleBar back backPath="/agent" title="生成链结" />
       <AgentPageTabs />
 
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box className="layout" flex="1" overflowY="auto">
         <Box as="form" onSubmit={onSubmit} noValidate>
           <Stack spacing="12px">
-            <FormControl isRequired isInvalid={!!errors.name}>
+            <FormControl className="formGroup" isInvalid={!!errors.name}>
               <FormLabel>链结名称</FormLabel>
               <Input
                 name="name"
-                bg="white"
+                className="formInput"
+                placeholder="请输入链结名称"
                 ref={register({
                   required: '不可为空',
                 })}
               />
               <FieldValidateMessage error={errors.name} />
             </FormControl>
-            <FormControl isRequired isInvalid={!!errors.type}>
+            <FormControl className="formGroup" isInvalid={!!errors.type}>
               <FormLabel>開戶类型</FormLabel>
               <RadioGroup
                 name="type"
+                colorScheme="brand"
                 defaultValue={MemberType.Agent.toString()}
               >
                 <Stack direction="row">
@@ -85,7 +87,8 @@ export default function createInvite() {
           <Button
             type="submit"
             w="full"
-            colorScheme="purple"
+            borderRadius="3px"
+            colorScheme="red"
             isLoading={isLoading}
             mt="6"
           >

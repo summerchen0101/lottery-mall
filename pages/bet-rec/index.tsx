@@ -146,7 +146,7 @@ function betRec() {
                     </Text>
                   </SimpleGrid>
                   <Spacer/>
-                  <IoIosArrowForward/>
+                  <IoIosArrowForward fontSize="20px"/>
 
                 </HStack>
               ))}

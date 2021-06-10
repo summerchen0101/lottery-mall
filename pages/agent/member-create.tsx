@@ -15,6 +15,7 @@ import { Box, Stack } from '@chakra-ui/layout'
 import { Radio, RadioGroup } from '@chakra-ui/radio'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { Text } from '@chakra-ui/react'
 
 interface MemberFormProps {
   type: string
@@ -51,13 +52,20 @@ export default function createMember() {
       <HeaderTitleBar back backPath="/agent" title="开户中心" />
       <AgentPageTabs />
 
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box className="layout" flex="1" overflowY="auto">
         <Box as="form" onSubmit={onSubmit} noValidate>
           <Stack spacing="12px">
-            <FormControl isRequired isInvalid={!!errors.type}>
-              <FormLabel>注册类型</FormLabel>
+            <FormControl className="formGroup" isInvalid={!!errors.type}>
+              <FormLabel color="#fff">
+                {' '}
+                <Text as="span" color="red.500">
+                  *
+                </Text>{' '}
+                注册类型
+              </FormLabel>
               <RadioGroup
                 name="type"
+                colorScheme="brand"
                 defaultValue={MemberType.Agent.toString()}
               >
                 <Stack direction="row">
@@ -71,11 +79,18 @@ export default function createMember() {
               </RadioGroup>
               <FieldValidateMessage error={errors.type} />
             </FormControl>
-            <FormControl isRequired isInvalid={!!errors.username}>
-              <FormLabel>会员帐号</FormLabel>
+            <FormControl className="formGroup" isInvalid={!!errors.username}>
+              <FormLabel color="#fff">
+                {' '}
+                <Text as="span" color="red.500">
+                  *
+                </Text>{' '}
+                会员帐号
+              </FormLabel>
               <Input
                 name="username"
-                bg="white"
+                className="formInput"
+                placeholder="请输入会员帐号"
                 ref={register({
                   required: '不可为空',
                   pattern: {
@@ -87,12 +102,19 @@ export default function createMember() {
               <FieldValidateMessage error={errors.username} />
               <FormHelperText>须为7~13个英文或数字组合</FormHelperText>
             </FormControl>
-            <FormControl isRequired isInvalid={!!errors.password}>
-              <FormLabel>密码</FormLabel>
+            <FormControl className="formGroup" isInvalid={!!errors.password}>
+              <FormLabel color="#fff">
+                {' '}
+                <Text as="span" color="red.500">
+                  *
+                </Text>{' '}
+                密码
+              </FormLabel>
               <Input
                 name="password"
                 type="password"
-                bg="white"
+                className="formInput"
+                placeholder="请输入密码"
                 ref={register({
                   required: '不可为空',
                   pattern: {
@@ -104,12 +126,22 @@ export default function createMember() {
               <FieldValidateMessage error={errors.password} />
               <FormHelperText>须为6~20个英文或数字组合</FormHelperText>
             </FormControl>
-            <FormControl isRequired isInvalid={!!errors.confirm_password}>
-              <FormLabel>确认密码</FormLabel>
+            <FormControl
+              className="formGroup"
+              isInvalid={!!errors.confirm_password}
+            >
+              <FormLabel color="#fff">
+                {' '}
+                <Text as="span" color="red.500">
+                  *
+                </Text>{' '}
+                确认密码
+              </FormLabel>
               <Input
                 name="confirm_password"
                 type="password"
-                bg="white"
+                className="formInput"
+                placeholder="请输入密码"
                 ref={register({
                   required: '不可为空',
                   validate: (value) =>
@@ -122,7 +154,8 @@ export default function createMember() {
           <Button
             type="submit"
             w="full"
-            colorScheme="purple"
+            borderRadius="3px"
+            colorScheme="red"
             isLoading={isLoading}
             mt="6"
           >

@@ -34,7 +34,7 @@ function activityList() {
                 key={t.id}
                 bg="contentBg.500"
                 align="start"
-                p="20px"
+                p="10px 15px"
                 onClick={() => router.push(`/activity/${t.id}`)}
                 borderRadius="md"
                 overflow="hidden"

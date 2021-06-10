@@ -2,7 +2,17 @@ import AgentPageTabs from '@/components/AgentPageTabs'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import useInviteList, { Invite } from '@/service/useInviteList'
-import { Box, HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
+import {
+  Box,
+  Divider,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Spacer,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import React, { useCallback, useMemo, useState } from 'react'
 import { InviteStatus } from '@/lib/enums'
@@ -43,13 +53,15 @@ export default function memberList() {
     <Layout>
       <HeaderTitleBar back backPath="/agent" title="会员管理" />
 
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box className="layout" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
           <>
             <HStack divider={<Text mx="2">{'>'}</Text>} mb="2" fontSize="sm">
-              <Text onClick={() => setLevels([])}>首页</Text>
+              <Text fontSize="md" color="#fff" onClick={() => setLevels([])}>
+                首页
+              </Text>
               {levels.map((t, i) => (
                 <Text
                   key={t.id}
@@ -61,36 +73,56 @@ export default function memberList() {
                 </Text>
               ))}
             </HStack>
-            <Stack spacing="3">
+            <Stack spacing="10px">
               {memberList?.map((t) => (
-                <Stack
-                  key={t.id}
-                  bg="gray.700"
-                  borderRadius="md"
-                  p="4"
-                  color="gray.200"
-                  fontSize="sm"
-                >
-                  <Text>
+                <Box bg="contentBg.500" borderRadius="md" p="10px 15px">
+                  <Text color="#fff" fontSize="md" fontWeight="600" mb="2">
                     {t.username}({t.id})
-                    <Text as="span" ml="2">
+                    <Text as="span" ml="1">
                       {toOptionName(memberTypeOpts, t.type)}
                     </Text>
                   </Text>
-                  <Text>下级人数： {t.sub_count}</Text>
-                  <Text>注册时间： {t.created_at}</Text>
-                  <Text>
-                    最后登入： {t.login_time}
-                    <br />({loginDuration(t.login_time)}
-                    天未登入)
-                  </Text>
-                  <Text>个人余额： {t.money}</Text>
-                  <Text>团队余额： {t.money_team}</Text>
-                  <HStack>
+                  <Divider mb="2" borderColor="rgba(255,255,255,.4)" />
+                  <Stack
+                    key={t.id}
+                    color="gray.400"
+                    fontSize="sm"
+                    spacing="4px"
+                    direction={['column']}
+                  >
+                    <Flex>
+                      <Text w="100px">下级人数：</Text>
+                      <Text color="#fff">{t.sub_count}</Text>
+                    </Flex>
+                    <Flex>
+                      <Text w="100px">注册时间：</Text>
+                      <Text color="#fff">{t.created_at}</Text>
+                    </Flex>
+                    <Flex>
+                      <Text w="100px">最后登入：</Text>
+                      <Text color="#fff">
+                        {t.login_time}
+                        <Text as="span" ml="1" color="gray.400">
+                          ({loginDuration(t.login_time)}
+                          天未登入)
+                        </Text>
+                      </Text>
+                    </Flex>
+                    <Flex>
+                      <Text w="100px">个人余额：</Text>
+                      <Text color="#fff">{t.money}</Text>
+                    </Flex>
+                    <Flex>
+                      <Text w="100px">团队余额：</Text>
+                      <Text color="#fff">{t.money_team}</Text>
+                    </Flex>
+                  </Stack>
+                  <HStack w="100%" mt="2">
                     <Button
                       colorScheme="red"
                       size="sm"
                       flex="1"
+                      borderRadius="3px"
                       onClick={() =>
                         router.push({
                           pathname: '/agent/team-betting',
@@ -103,6 +135,7 @@ export default function memberList() {
                     <Button
                       colorScheme="red"
                       size="sm"
+                      borderRadius="3px"
                       flex="1"
                       onClick={() => handleShowSubs(t.username, t.id)}
                       disabled={!t.sub_count}
@@ -110,7 +143,7 @@ export default function memberList() {
                       查看子下级
                     </Button>
                   </HStack>
-                </Stack>
+                </Box>
               ))}
             </Stack>
           </>

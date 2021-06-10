@@ -36,60 +36,65 @@ function BankcardDetailPopup({
         <ModalBody className="modal__body">
           {bankcard && (
             <>
-              <Text fontSize="sm" mb="5px" color="gray.400">
-                状态
-              </Text>
-              <Text
-                fontSize="md"
-                color={
-                  bankcard.status === BankCardStatus.On
-                    ? 'green.500'
-                    : 'gray.500'
-                }
-              >
-                {toOptionName(bankcardStatusOpts, bankcard.status)}
-              </Text>
+              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+                <Text fontSize="sm" mb="5px" color="gray.400">
+                  状态
+                </Text>
+                <Text
+                  fontSize="md"
+                  color={
+                    bankcard.status === BankCardStatus.On
+                      ? 'green.500'
+                      : 'gray.500'
+                  }
+                >
+                  {toOptionName(bankcardStatusOpts, bankcard.status)}
+                </Text>
+              </Box>
+              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+                <Text fontSize="sm" mb="5px" color="gray.400">
+                  银行卡姓名
+                </Text>
+                <Text fontSize="md" color="#fff">
+                  {bankcard.name}
+                </Text>
+              </Box>
 
-              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
+              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+                <Text fontSize="sm" mb="5px" color="gray.400">
+                  银行名称
+                </Text>
+                <Text fontSize="md" color="#fff">
+                  {bankcard.bank}
+                </Text>
+              </Box>
 
-              <Text fontSize="sm" mb="5px" color="gray.400">
-                银行卡姓名
-              </Text>
-              <Text fontSize="md" color="#fff">
-                {bankcard.name}
-              </Text>
-              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
+              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+                <Text fontSize="sm" mb="5px" color="gray.400">
+                  支行名称
+                </Text>
+                <Text fontSize="md" color="#fff">
+                  {bankcard.bank_name}
+                </Text>
+              </Box>
 
-              <Text fontSize="sm" mb="5px" color="gray.400">
-                银行名称
-              </Text>
-              <Text fontSize="md" color="#fff">
-                {bankcard.bank}
-              </Text>
-              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
+              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+                <Text fontSize="sm" mb="5px" color="gray.400">
+                  银行帐号
+                </Text>
+                <Text fontSize="md" color="#fff">
+                  {bankcard.account}
+                </Text>
+              </Box>
 
-              <Text fontSize="sm" mb="5px" color="gray.400">
-                支行名称
-              </Text>
-              <Text fontSize="md" color="#fff">
-                {bankcard.bank_name}
-              </Text>
-              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
-
-              <Text fontSize="sm" mb="5px" color="gray.400">
-                银行帐号
-              </Text>
-              <Text fontSize="md" color="#fff">
-                {bankcard.account}
-              </Text>
-              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
-              <Text fontSize="sm" mb="5px" color="gray.400">
-                开户省份 / 城市
-              </Text>
-              <Text fontSize="md" color="#fff">
-                {bankcard.province} / {bankcard.city}
-              </Text>
-              <Divider borderColor="rgba(255,255,255,.2)" py="1" mb="2" />
+              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+                <Text fontSize="sm" mb="5px" color="gray.400">
+                  开户省份 / 城市
+                </Text>
+                <Text fontSize="md" color="#fff">
+                  {bankcard.province} / {bankcard.city}
+                </Text>
+              </Box>
             </>
           )}
         </ModalBody>

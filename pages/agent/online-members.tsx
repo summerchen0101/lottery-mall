@@ -37,16 +37,16 @@ export default function memberList() {
         extra={
           <Icon
             as={isLoading ? Spinner : BiRefresh}
-            fontSize="20px"
+            fontSize="26px"
             onClick={() => refresh()}
           />
         }
       />
-      <HStack bg="gray.700" color="gray.200" mb="3" h="40px" px="4">
+      <HStack bg="contentBg.500" color="#fff" h="40px" px="4">
         <Text>在线总人数： {total || '-'} 人</Text>
       </HStack>
 
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box className="layout" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
@@ -55,11 +55,11 @@ export default function memberList() {
               {onlineMembers?.map((t) => (
                 <Stack
                   key={t.id}
-                  bg="gray.700"
                   borderRadius="md"
-                  p="4"
-                  color="gray.200"
+                  p="10px 15px"
+                  bg="contentBg.500"
                   fontSize="sm"
+                  color="gray.400"
                 >
                   <Text>
                     {t.username}({t.id})

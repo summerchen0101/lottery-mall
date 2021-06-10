@@ -11,8 +11,8 @@ function agent() {
   return (
     <Layout>
       <HeaderTitleBar back backPath="/my" title="代理中心" />
-      <Box p="20px" flex="1" overflowY="auto">
-        <Stack spacing="15px">
+      <Box flex="1" overflowY="auto">
+        <Stack spacing="0px">
           <ListItem onClick={() => router.push('/agent/member-create')}>
             开户中心
           </ListItem>
