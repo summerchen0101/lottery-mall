@@ -11,7 +11,7 @@ export default function TextCopy({
   const toast = useToast()
   return (
     <CopyToClipboard
-      text={text.toString()}
+      text={text?.toString()}
       onCopy={(text) =>
         toast({
           duration: 2000,

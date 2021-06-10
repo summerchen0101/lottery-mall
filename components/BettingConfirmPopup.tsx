@@ -135,9 +135,7 @@ function BettingConfirmPopup() {
           </Text>
           <SimpleGrid columns={2} spacingY=".5rem" color="#fff">
             <Text>總計金額：</Text>
-            <Text textAlign="right" color>
-              ¥ {totalPrice}
-            </Text>
+            <Text textAlign="right">¥ {totalPrice}</Text>
             <Text>预估获利：</Text>
             <Text textAlign="right">¥ {toCurrency(confirmData?.profit)}</Text>
             <Text>可用余额：</Text>

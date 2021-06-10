@@ -4,18 +4,24 @@ import TextCopy from '@/components/TextCopy'
 import { Button, ButtonProps } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
 import { Image } from '@chakra-ui/image'
-import { Box, Center, Heading, HStack, Text, VStack } from '@chakra-ui/layout'
+import {
+  Box,
+  Center,
+  Heading,
+  HStack,
+  StackProps,
+  Text,
+  VStack,
+} from '@chakra-ui/layout'
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
 import { BiX } from 'react-icons/bi'
 
-const buttonProps: ButtonProps = {
+const buttonProps: StackProps = {
   pos: 'relative',
-  size: 'lg',
   w: '78%',
   h: '70px',
   px: '4',
-  colorScheme: 'brand',
   alignItems: 'center',
   // flexDir: 'column',
   bg: 'transparent',

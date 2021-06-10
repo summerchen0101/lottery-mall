@@ -39,23 +39,23 @@ export default function FloatNav({ showAppBtn, userInfo }: FloatNavProps) {
   return (
     <VStack position="fixed" right="15px" bottom="65px" spacing="3">
       {showAppBtn && (
-        <Center
+        <IconButton
           {...iconProps}
           aria-label="app"
           onClick={() => router.push('/app-download')}
         >
           <FaMobileAlt fontSize="28px" />
-        </Center>
+        </IconButton>
       )}
 
-      <Box
+      <IconButton
         {...iconProps}
         aria-label="service"
         // as={BiUser}
         onClick={() => openServiceWin(serviceLink, userInfo)}
       >
         <Image src="./img/ic-service.png"></Image>
-      </Box>
+      </IconButton>
     </VStack>
   )
 }
