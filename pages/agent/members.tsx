@@ -75,7 +75,12 @@ export default function memberList() {
             </HStack>
             <Stack spacing="10px">
               {memberList?.map((t) => (
-                <Box bg="contentBg.500" borderRadius="md" p="10px 15px">
+                <Box
+                  key={t.id}
+                  bg="contentBg.500"
+                  borderRadius="md"
+                  p="10px 15px"
+                >
                   <Text color="#fff" fontSize="md" fontWeight="600" mb="2">
                     {t.username}({t.id})
                     <Text as="span" ml="1">

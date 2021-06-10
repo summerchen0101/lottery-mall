@@ -48,15 +48,9 @@ function rechargeForm() {
                 <Text fontSize="sm" color="gray.400" mb="5px">
                   汇率
                 </Text>
-<<<<<<< Updated upstream
-                <Text fontSize="2xl" fontWeight="600">
-                  {+info.rate}
-                  <TextCopy text={+info.rate}>
-=======
                 <Text fontSize="md" fontWeight="600">
                   {info.rate}
                   <TextCopy text={info.rate}>
->>>>>>> Stashed changes
                     <Icon as={BiCopyAlt} float="right" fontSize="22px" />
                   </TextCopy>
                 </Text>
