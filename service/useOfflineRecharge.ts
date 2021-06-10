@@ -6,7 +6,7 @@ export interface OfflineRechargeReq {
   money: number
   bank: string
   line_id: string
-  rate: number
+  rate?: number
 }
 
 export interface OfflineRechargeRes {

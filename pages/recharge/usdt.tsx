@@ -25,13 +25,7 @@ function rechargeForm() {
   const { mutate, result, isLoading } = useOfflineRecharge()
   const { toCurrency } = useTransfer()
   const { userInfo } = useUserInfo()
-  const {
-    register,
-    errors,
-    handleSubmit,
-    watch,
-    setValue,
-  } = useForm<RechargeFormProps>()
+  const { register, errors, handleSubmit, watch } = useForm<RechargeFormProps>()
   const router = useRouter()
   const { rate } = useSiteParams()
   const { paymentList } = useOfflinePayment(OfflinePayment.USDT)
@@ -47,14 +41,10 @@ function rechargeForm() {
         money: d.money,
         bank: d.bank,
         line_id: d.line_id,
-        rate: d.rate,
+        rate: +rate,
       })
     } catch (err) {}
   })
-
-  useEffect(() => {
-    rate && setValue('rate', rate)
-  }, [rate])
 
   useEffect(() => {
     if (result?.success) {

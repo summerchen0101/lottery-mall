@@ -90,7 +90,10 @@ function rechargeIndex() {
                   onClick={() =>
                     router.push({
                       pathname: '/recharge/online',
-                      query: { id: OnlinePayment.Alipay, name: '云闪付' },
+                      query: {
+                        id: OnlinePayment.Cloud,
+                        name: '云闪付',
+                      },
                     })
                   }
                 >
@@ -110,7 +113,7 @@ function rechargeIndex() {
                   onClick={() =>
                     router.push({
                       pathname: '/recharge/online',
-                      query: { id: OnlinePayment.Alipay, name: '微信' },
+                      query: { id: OnlinePayment.WeChat, name: '微信' },
                     })
                   }
                 >
@@ -130,7 +133,7 @@ function rechargeIndex() {
                   onClick={() =>
                     router.push({
                       pathname: '/recharge/online',
-                      query: { id: OnlinePayment.Alipay, name: 'USDT' },
+                      query: { id: OnlinePayment.USDT, name: 'USDT' },
                     })
                   }
                 >

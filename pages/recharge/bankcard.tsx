@@ -8,6 +8,7 @@ import useOfflinePayment from '@/service/useOfflinePayment'
 import useOfflineRecharge, {
   OfflineRechargeReq,
 } from '@/service/useOfflineRecharge'
+import useSiteParams from '@/service/useSiteParams'
 import useUserInfo from '@/service/useUserInfo'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
@@ -24,13 +25,7 @@ function rechargeForm() {
   const { mutate, result, isLoading } = useOfflineRecharge()
   const { toCurrency } = useTransfer()
   const { userInfo } = useUserInfo()
-  const {
-    register,
-    errors,
-    handleSubmit,
-    watch,
-    setValue,
-  } = useForm<RechargeFormProps>()
+  const { register, errors, handleSubmit, watch } = useForm<RechargeFormProps>()
   const router = useRouter()
   const { paymentList } = useOfflinePayment(OfflinePayment.Bankcard)
   const info = useMemo(() => {
@@ -45,14 +40,13 @@ function rechargeForm() {
         money: d.money,
         bank: d.bank,
         line_id: d.line_id,
-        rate: d.rate,
       })
     } catch (err) {}
   })
 
   useEffect(() => {
     if (result?.success) {
-      router.push(`/recharge/success/usdt/${result.data}`)
+      router.push(`/recharge/success/bankcard/${result.data}`)
     }
   }, [result])
 
