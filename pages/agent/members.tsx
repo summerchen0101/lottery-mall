@@ -91,7 +91,12 @@ export default function memberList() {
                       colorScheme="red"
                       size="sm"
                       flex="1"
-                      onClick={() => router.push(`/agent/bet-records/${t.id}`)}
+                      onClick={() =>
+                        router.push({
+                          pathname: '/agent/team-betting',
+                          query: { acc: t.username },
+                        })
+                      }
                     >
                       今日下单记录
                     </Button>

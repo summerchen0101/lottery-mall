@@ -18,12 +18,14 @@ import { BiSearch } from 'react-icons/bi'
 
 export default function teamBettingRec() {
   const { toOptionName, toCurrency } = useTransfer()
+
+  const router = useRouter()
   const [searchData, setSearchData] = useState<TeamBettingRecReq>({
     created_at1: moment().format('YYYY-MM-DD'),
     created_at2: moment().format('YYYY-MM-DD'),
+    username: router.query?.acc as string,
   })
   const [isShowSearch, setIsShowSearch] = useState(false)
-  const router = useRouter()
   const { bettingList, isLoading, bet_money, profit, win } = useTeamBettingRec(
     searchData,
   )
