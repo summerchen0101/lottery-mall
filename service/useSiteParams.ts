@@ -21,7 +21,7 @@ export default function useSiteParams() {
     { refreshInterval: 60 * 1000 },
   )
   return {
-    rate: res?.data.usdt_transfer_rate,
+    rate: +res?.data.usdt_transfer_rate,
     marquee: res?.data.marquee,
     video: res?.data.index_youtube,
     isLoading: !error && !res,

@@ -2,19 +2,17 @@ import FieldValidateMessage from '@/components/FieldValidateMessage'
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import bankCodes from '@/lib/bankCodes'
 import { OfflinePayment } from '@/lib/enums'
 import useOfflinePayment from '@/service/useOfflinePayment'
-import useSiteParams from '@/service/useSiteParams'
 import useOfflineRecharge, {
   OfflineRechargeReq,
 } from '@/service/useOfflineRecharge'
-import useUserInfo from '@/service/useUserInfo'
+import useSiteParams from '@/service/useSiteParams'
 import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { FormControl, FormHelperText, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
-import { Box, Divider, Stack, Text } from '@chakra-ui/layout'
+import { Box, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
@@ -24,7 +22,6 @@ type RechargeFormProps = OfflineRechargeReq
 function rechargeForm() {
   const { mutate, result, isLoading } = useOfflineRecharge()
   const { toCurrency } = useTransfer()
-  const { userInfo } = useUserInfo()
   const { register, errors, handleSubmit, watch } = useForm<RechargeFormProps>()
   const router = useRouter()
   const { rate } = useSiteParams()
@@ -41,7 +38,7 @@ function rechargeForm() {
         money: d.money,
         bank: d.bank,
         line_id: d.line_id,
-        rate: +rate,
+        rate,
       })
     } catch (err) {}
   })

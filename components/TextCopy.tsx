@@ -5,13 +5,13 @@ export default function TextCopy({
   text,
   children,
 }: {
-  text: string
+  text: string | number
   children: ReactNode
 }) {
   const toast = useToast()
   return (
     <CopyToClipboard
-      text={text}
+      text={text.toString()}
       onCopy={(text) =>
         toast({
           duration: 2000,

@@ -50,8 +50,8 @@ function rechargeForm() {
                   汇率
                 </Text>
                 <Text fontSize="2xl" fontWeight="600">
-                  {info.rate}
-                  <TextCopy text={info.rate}>
+                  {+info.rate}
+                  <TextCopy text={+info.rate}>
                     <Icon as={BiCopyAlt} float="right" fontSize="22px" />
                   </TextCopy>
                 </Text>
