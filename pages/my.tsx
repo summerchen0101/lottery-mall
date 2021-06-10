@@ -132,10 +132,13 @@ function my() {
             <Image w="1.8rem" src="/img/ic-betrecord.png"></Image>
             <Text>下单纪录</Text>
           </HStack>
-          <HStack {...linkItemProps} onClick={() => router.push('/agent')}>
-            <Image w="1.8rem" src="/img/ic-agent.png"></Image>
-            <Text>代理中心</Text>
-          </HStack>
+          {userInfo?.class === MemberType.Agent && (
+            <HStack {...linkItemProps} onClick={() => router.push('/agent')}>
+              <Image w="1.8rem" src="/img/ic-agent.png"></Image>
+              <Text>代理中心</Text>
+            </HStack>
+          )}
+
           <HStack {...linkItemProps} onClick={() => router.push('/about')}>
             <Image w="1.8rem" src="/img/ic-about.png"></Image>
             <Text>GEM介绍</Text>
