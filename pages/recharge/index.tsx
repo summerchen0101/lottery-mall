@@ -15,10 +15,10 @@ import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 
 const iconMap = {
-  [OnlinePayment.Alipay]: '/img/ic-item-01.svg',
-  [OnlinePayment.Cloud]: '/img/ic-item-02.svg',
-  [OnlinePayment.USDT]: '/img/ic-item-03.svg',
-  [OnlinePayment.WeChat]: '/img/ic-item-04.svg',
+  [OnlinePayment.Alipay]: '/img/ic-m-1.png',
+  [OnlinePayment.Cloud]: '/img/ic-m-2.png',
+  [OnlinePayment.USDT]: '/img/ic-m-4.png',
+  [OnlinePayment.WeChat]: '/img/ic-m-3.png',
 }
 
 function rechargeIndex() {
@@ -55,9 +55,22 @@ function rechargeIndex() {
             <Text px="15px" color="#fff">
               请选择您欲支付方式
             </Text>
-            <VStack spacing="10px" px="15px">
+            <VStack spacing="10px" px="15px" mb="10px">
               <BarItem onClick={() => openServiceWin(serviceLink, userInfo)}>
-                客服激活
+                <HStack spacing="20px">
+                  <Image src="/img/ic-service.png" boxSize="48px" />
+                  <VStack spacing="0" align="flex-start">
+                    <Text>
+                      客服激活
+                      <Text as="span" ml="1" fontWeight="normal" fontSize="sm">
+                        (提供USDT提款)
+                      </Text>
+                    </Text>
+                    <Text fontSize="sm" color="#4284f4">
+                      提供人工充值服务，最低入款金额50元
+                    </Text>
+                  </VStack>
+                </HStack>
               </BarItem>
               {online?.map((t) => (
                 <BarItem
@@ -69,20 +82,32 @@ function rechargeIndex() {
                     })
                   }
                 >
-                  <HStack>
-                    <Image src={iconMap[t.id]} boxSize="40px" />
-                    <Text>{t.name}</Text>
+                  <HStack spacing="20px">
+                    <Image src={iconMap[t.id]} boxSize="48px" />
+                    <VStack>
+                      <Text>{t.name}</Text>
+                    </VStack>
                   </HStack>
                 </BarItem>
               ))}
               {offline[OfflinePayment.Bankcard] && (
                 <BarItem onClick={() => router.push('/recharge/bankcard')}>
-                  银行卡
+                  <HStack spacing="20px">
+                    <Image src="/img/ic-m-5.png" boxSize="48px" />
+                    <VStack>
+                      <Text>银行卡</Text>
+                    </VStack>
+                  </HStack>
                 </BarItem>
               )}
               {offline[OfflinePayment.USDT] && (
                 <BarItem onClick={() => router.push('/recharge/usdt')}>
-                  USDT转帐
+                  <HStack spacing="20px">
+                    <Image src="/img/ic-m-5.png" boxSize="48px" />
+                    <VStack>
+                      <Text>USDT转帐</Text>
+                    </VStack>
+                  </HStack>
                 </BarItem>
               )}
             </VStack>
