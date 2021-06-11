@@ -50,10 +50,13 @@ function my() {
       /> */}
 
       <Flex bg="containerBg.500" p="15px">
-        <VStack w="100%" alignItems="flex-start" color="gray.400" spacing="8px">
+        <VStack w="100%" alignItems="flex-start" color="gray.400" spacing="6px">
           <Flex w="100%">
-            <Text>
-              您好,<Text as="span">{userInfo?.username}</Text>
+            <Text color="#fff" fontSize="md" fontWeight="600">
+              <Text as="span" fontSize="sm" mr="1" fontWeight="normal">
+                您好,
+              </Text>
+              {userInfo?.username}
             </Text>
             <Spacer />
             <HStack>
@@ -71,9 +74,14 @@ function my() {
           </Flex>
 
           <HStack w="100%" alignItems="flex-end">
-            <Text>会员编号: {userInfo?.uid}</Text>
+            <Text>
+              <Text as="span" fontSize="sm">
+                会员编号：
+              </Text>
+              {userInfo?.uid}
+            </Text>
             <Spacer />
-            <Text color="brand.500" fontWeight="600" fontSize="1.2rem">
+            <Text color="brand.500" fontWeight="600" fontSize="xl">
               <Box as="span" fontSize="12px" mr="1" color="gray.400">
                 G币
               </Box>
