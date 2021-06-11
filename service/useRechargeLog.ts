@@ -15,6 +15,7 @@ export default function useRechargeLog(start: string, end: string) {
   )
   return {
     rechargeList: res?.list,
+    total: res?.total,
     isLoading: isValidating,
     isError: error,
     refresh: mutate,

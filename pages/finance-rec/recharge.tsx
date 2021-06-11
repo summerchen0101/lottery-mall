@@ -6,11 +6,17 @@ import { rechargeStatusOpts } from '@/lib/options'
 import useRechargeLog from '@/service/useRechargeLog'
 import useDateRange from '@/utils/useDateRange'
 import useTransfer from '@/utils/useTransfer'
+import Icon from '@chakra-ui/icon'
 import { Box, Center, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
+import {
+  HiDocument,
+  HiOutlineDocument,
+  HiOutlineDocumentText,
+} from 'react-icons/hi'
 
 export default function rechargeRec() {
   const router = useRouter()
@@ -22,7 +28,7 @@ export default function rechargeRec() {
   const { toCurrency, toOptionName } = useTransfer()
 
   const dateRangeObj = useDateRange(dateRangeType)
-  const { rechargeList, isLoading } = useRechargeLog(
+  const { rechargeList, isLoading, total } = useRechargeLog(
     dateRangeObj?.[0].format('YYYY-MM-DD'),
     dateRangeObj?.[1].format('YYYY-MM-DD'),
   )
@@ -34,17 +40,23 @@ export default function rechargeRec() {
   return (
     <Layout>
       <HeaderTitleBar back title="充值纪录" />
-      <Box bg="contentBg.500" color="#fff" px="15px" py="10px" fontSize="sm">
-        <Text>2021-04-25 ~ 2021-06-11</Text>
-        <Text>总笔数 6 笔</Text>
-      </Box>
-      <Box p="15px" flex="1" overflowY="auto">
+      <HStack bg="contentBg.500" color="#fff" px="15px" py="10px" fontSize="sm">
+        <Icon as={HiOutlineDocumentText} fontSize="35px" />
+        <Box>
+          <Text>
+            {dateRangeObj?.[0].format('YYYY-MM-DD')} ~{' '}
+            {dateRangeObj?.[1].format('YYYY-MM-DD')}
+          </Text>
+          <Text>总筆數：{toCurrency(total, 0)} 筆</Text>
+        </Box>
+      </HStack>
+      <Box p="20px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
           <Stack spacing="10px">
             {rechargeList?.map((t) => (
-              <Box borderRadius="md" overflow="hidden">
+              <Box key={t.id} borderRadius="md" overflow="hidden">
                 <Stack
                   key={t.id}
                   bg="contentBg.500"
