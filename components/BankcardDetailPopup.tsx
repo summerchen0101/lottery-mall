@@ -32,11 +32,11 @@ function BankcardDetailPopup({
       <ModalOverlay />
       <ModalContent className="modal__content">
         <ModalHeader className="modal__header">我的银行信息</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton color="#fff" />
         <ModalBody className="modal__body">
           {bankcard && (
             <>
-              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+              <Box borderBottom="1px solid rgba(255,255,255,.2)" py="5px">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   状态
                 </Text>
@@ -51,7 +51,7 @@ function BankcardDetailPopup({
                   {toOptionName(bankcardStatusOpts, bankcard.status)}
                 </Text>
               </Box>
-              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+              <Box borderBottom="1px solid rgba(255,255,255,.2)" py="5px">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   银行卡姓名
                 </Text>
@@ -60,7 +60,7 @@ function BankcardDetailPopup({
                 </Text>
               </Box>
 
-              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+              <Box borderBottom="1px solid rgba(255,255,255,.2)" py="5px">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   银行名称
                 </Text>
@@ -69,7 +69,7 @@ function BankcardDetailPopup({
                 </Text>
               </Box>
 
-              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+              <Box borderBottom="1px solid rgba(255,255,255,.2)" py="5px">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   支行名称
                 </Text>
@@ -78,7 +78,7 @@ function BankcardDetailPopup({
                 </Text>
               </Box>
 
-              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+              <Box borderBottom="1px solid rgba(255,255,255,.2)" py="5px">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   银行帐号
                 </Text>
@@ -87,7 +87,7 @@ function BankcardDetailPopup({
                 </Text>
               </Box>
 
-              <Box borderBottom="1px solid rgba(255,255,255,.4)" py="5px">
+              <Box borderBottom="1px solid rgba(255,255,255,.2)" py="5px">
                 <Text fontSize="sm" mb="5px" color="gray.400">
                   开户省份 / 城市
                 </Text>

@@ -46,7 +46,7 @@ export default function memberList() {
         <Text>在线总人数： {total || '-'} 人</Text>
       </HStack>
 
-      <Box className="layout" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
@@ -55,25 +55,41 @@ export default function memberList() {
               {onlineMembers?.map((t) => (
                 <Stack
                   key={t.id}
+                  bg="contentBg.500"
                   borderRadius="md"
                   p="10px 15px"
-                  bg="contentBg.500"
-                  fontSize="sm"
                   color="gray.400"
+                  w="100%"
+                  fontSize="sm"
                 >
-                  <Text>
-                    {t.username}({t.id})
-                    <Text as="span" ml="2">
+                  <Flex color="#fff" fontSize="md" fontWeight="600">
+                    <Text minW="100px">
+                      {t.username}({t.id})
+                    </Text>
+
+                    <Text as="span">
                       {toOptionName(memberTypeOpts, t.type)}
                     </Text>
-                  </Text>
-                  <Text>
-                    最后登入： {t.login_time}
-                    <br />({loginDuration(t.login_time)}
-                    天未登入)
-                  </Text>
-                  <Text>个人余额： {t.money}</Text>
-                  <Text>登入IP {t.login_ip}</Text>
+                  </Flex>
+                  <Flex>
+                    <Text minW="100px">最后登入：</Text>
+                    <Text color="#fff">
+                      {t.login_time}
+                      <Text color="gray.400" ml="1" as="span">
+                        ({loginDuration(t.login_time)}
+                        天未登入)
+                      </Text>
+                    </Text>
+                  </Flex>
+                  <Flex>
+                    <Text minW="100px">个人余额：</Text>
+                    <Text color="#fff">{t.money}</Text>
+                  </Flex>
+                  <Flex>
+                    <Text minW="100px">登入IP：</Text>
+                    <Text color="#fff">{t.login_ip}</Text>
+                  </Flex>
+
                   <HStack>
                     <Button
                       colorScheme="red"

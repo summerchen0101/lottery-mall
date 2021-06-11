@@ -24,7 +24,7 @@ function rank() {
     <Layout>
       <HeaderTitleBar title="大盘走势" />
       <RecPageTabs />
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (

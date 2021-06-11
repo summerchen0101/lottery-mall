@@ -8,7 +8,7 @@ import { financeRecDateRangeOpts } from '@/lib/options'
 import useFinanceRec from '@/service/useFinanceRec'
 import useDateRange from '@/utils/useDateRange'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Stack } from '@chakra-ui/layout'
+import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
@@ -37,26 +37,35 @@ export default function financeRec() {
   return (
     <Layout>
       <HeaderTitleBar back backPath="/my" title="财务纪录" />
-      <Box p="20px" flex="1" overflowY="auto">
-        <Select
-          value={dateRangeType}
-          onChange={(e) =>
-            router.push({
-              pathname: router.pathname,
-              query: { range: e.target.value },
-            })
-          }
-          mb="20px"
-          shadow="lg"
-          bg="white"
+      <Box flex="1" overflowY="auto">
+        <HStack
+          className="formGroup"
+          p="15px"
+          borderBottom="1px"
+          borderColor="rgba(255,255,255,.2)"
         >
-          {financeRecDateRangeOpts?.map((t) => (
-            <option key={t.value} value={t.value}>
-              {t.label}
-            </option>
-          ))}
-        </Select>
-        <Stack spacing="15px" mt="30px">
+          <Text w="100px" color="#fff">
+            财务区间
+          </Text>
+          <Select
+            value={dateRangeType}
+            className="formSelect"
+            onChange={(e) =>
+              router.push({
+                pathname: router.pathname,
+                query: { range: e.target.value },
+              })
+            }
+          >
+            {financeRecDateRangeOpts?.map((t) => (
+              <option key={t.value} value={t.value}>
+                {t.label}
+              </option>
+            ))}
+          </Select>
+        </HStack>
+
+        <Stack spacing="0px">
           <RecItem
             title="存款总计"
             num={recharge}

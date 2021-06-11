@@ -34,9 +34,9 @@ function BettingSuccessPopup() {
       <ModalContent className="modal__content">
         <ModalHeader className="modal__header">
           <Text>交易成功</Text>
-          <Divider mt="4" />
+          <Divider mt="4" borderColor="rgba(255,255,255,.2)" />
         </ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton color="#fff" />
         <ModalBody className="modal__body" color="#fff" lineHeight="24px">
           {isLoading ? (
             <Spinner />

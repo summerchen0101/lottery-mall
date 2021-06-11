@@ -36,12 +36,12 @@ function openedRec() {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody bg="white">
+            <Tbody bg="#dcdcdc">
               {openedList?.map((t) => (
                 <Tr key={t.id} fontWeight="bold">
                   <Td py="10px">
                     <VStack spacing="0">
-                      <Text color="pink.500">{t.qishu}</Text>
+                      <Text color="#333">{t.qishu}</Text>
                       <Barcode
                         value={t.numbers.join(' ')}
                         height={50}
@@ -49,14 +49,14 @@ function openedRec() {
                         background="transparent"
                         displayValue={false}
                       />
-                      <HStack color="gray.600">
+                      <HStack color="#333">
                         {t.numbers.map((t, i) => (
                           <Text key={i}>{t}</Text>
                         ))}
                       </HStack>
                     </VStack>
                   </Td>
-                  <Td color="brand.600" fontSize="lg">
+                  <Td color="#333" fontSize="lg">
                     <HStack justifyContent="center">
                       {t.value_str.map((t, i) => (
                         <Text key={i}>{t}</Text>

@@ -126,9 +126,9 @@ function BettingConfirmPopup() {
               抢购倒数：{secToTimer(countdown)}
             </Tag>
           </Flex>
-          <Divider mt="4" />
+          <Divider mt="4" borderColor="rgba(255,255,255,.2)" />
         </ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton color="#fff" />
         <ModalBody className="modal__body">
           <Text color="#fff" textAlign="center" fontSize="xl" mb="15px">
             {goodsInfo?.name}

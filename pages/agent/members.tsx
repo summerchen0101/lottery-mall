@@ -84,13 +84,6 @@ export default function memberList() {
                   borderRadius="md"
                   p="10px 15px"
                 >
-                  <Text color="#fff" fontSize="md" fontWeight="600" mb="2">
-                    {t.username}({t.id})
-                    <Text as="span" ml="1">
-                      {toOptionName(memberTypeOpts, t.type)}
-                    </Text>
-                  </Text>
-                  <Divider mb="2" borderColor="rgba(255,255,255,.4)" />
                   <Stack
                     key={t.id}
                     color="gray.400"
@@ -98,30 +91,40 @@ export default function memberList() {
                     spacing="4px"
                     direction={['column']}
                   >
+                    <Flex color="#fff" fontSize="md" fontWeight="600">
+                      <Text minW="100px">
+                        {t.username}({t.id})
+                      </Text>
+
+                      <Text as="span">
+                        {toOptionName(memberTypeOpts, t.type)}
+                      </Text>
+                    </Flex>
+                    <Divider borderColor="rgba(255,255,255,.4)" />
                     <Flex>
-                      <Text w="100px">下级人数：</Text>
+                      <Text minW="100px">下级人数：</Text>
                       <Text color="#fff">{t.sub_count}</Text>
                     </Flex>
                     <Flex>
-                      <Text w="100px">注册时间：</Text>
+                      <Text minW="100px">注册时间：</Text>
                       <Text color="#fff">{t.created_at}</Text>
                     </Flex>
                     <Flex>
-                      <Text w="100px">最后登入：</Text>
+                      <Text minW="100px">最后登入：</Text>
                       <Text color="#fff">
                         {t.login_time}
-                        <Text as="span" ml="1" color="gray.400">
+                        <Text color="gray.400" ml="1" as="span">
                           ({loginDuration(t.login_time)}
                           天未登入)
                         </Text>
                       </Text>
                     </Flex>
                     <Flex>
-                      <Text w="100px">个人余额：</Text>
+                      <Text minW="100px">个人余额：</Text>
                       <Text color="#fff">{t.money}</Text>
                     </Flex>
                     <Flex>
-                      <Text w="100px">团队余额：</Text>
+                      <Text minW="100px">团队余额：</Text>
                       <Text color="#fff">{t.money_team}</Text>
                     </Flex>
                   </Stack>

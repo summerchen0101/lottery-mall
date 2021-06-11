@@ -8,7 +8,15 @@ import useTeamWithdrawRec, {
 } from '@/service/useTeamWithdrawRec'
 import useTransfer from '@/utils/useTransfer'
 import Icon from '@chakra-ui/icon'
-import { Box, Center, HStack, Spacer, Stack, Text } from '@chakra-ui/layout'
+import {
+  Box,
+  Center,
+  Flex,
+  HStack,
+  Spacer,
+  Stack,
+  Text,
+} from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import moment from 'moment'
@@ -54,27 +62,43 @@ export default function teamWithdrawRec() {
         }
       />
 
-      <Box bg="gray.700" color="gray.300" mb="3" px="4" py="2" fontSize="sm">
+      <Box
+        bg="contentBg.500"
+        color="#fff"
+        mb="3"
+        px="15px"
+        py="10px"
+        fontSize="sm"
+      >
         <Text>
           提现时间：{searchData.created_at1} ~ {searchData.created_at2}
         </Text>
-        <Text>总申请提现余额：{toCurrency(+apply)}</Text>
-        <Text>实收总金额：{toCurrency(+money)}</Text>
+        <Flex>
+          <Text>总申请提现余额：{toCurrency(+apply)}</Text>
+          <Spacer />
+          <Text>实收总金额：{toCurrency(+money)}</Text>
+        </Flex>
       </Box>
 
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box p="15px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
           <>
-            <Stack spacing="3">
+            <Stack spacing="10px">
               {rechargeList?.map((t) => (
                 <Box key={t.id} borderRadius="md" overflow="hidden">
-                  <Stack bg="gray.700" p="4" color="gray.300" fontSize="sm">
+                  <Stack
+                    bg="contentBg.500"
+                    p="10px 15px"
+                    color="gray.300"
+                    fontSize="sm"
+                    spacing="5px"
+                  >
                     <HStack>
                       <Text>{t.created_at}</Text>
                       <Spacer />
-                      <Tag colorScheme="red">
+                      <Tag bg="red.500" color="#fff">
                         {toOptionName(rechargeStatusOpts, t.status)}
                       </Tag>
                     </HStack>
@@ -84,12 +108,12 @@ export default function teamWithdrawRec() {
                     <HStack>
                       <Text>实际金额 / 人民币</Text>
                       <Spacer />
-                      <Text fontSize="25px" color="yellow.300">
+                      <Text fontSize="xl" color="yellow.500" fontWeight="600">
                         {toCurrency(+t.money)}
                       </Text>
                     </HStack>
                   </Stack>
-                  <Center bg="gray.600" fontSize="sm" color="gray.300" h="25px">
+                  <Center bg="#535353" fontSize="sm" color="gray.300" h="25px">
                     <Text>订单号：{t.order_sn}</Text>
                   </Center>
                 </Box>
