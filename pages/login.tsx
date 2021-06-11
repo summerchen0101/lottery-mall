@@ -48,7 +48,7 @@ const login = () => {
     () => jsonDecode<{ acc: string; pass: string }>(encodeAccPass),
     [encodeAccPass],
   )
-  const { register, errors, handleSubmit } = useForm<LoginFormProps>()
+  const { register, errors, handleSubmit, setValue } = useForm<LoginFormProps>()
   const { handler: doLogin, isLoading } = useLogin()
   const { serviceLink } = useServiceLink()
   const { setToken } = useGlobalProvider()
@@ -63,6 +63,9 @@ const login = () => {
     if (res?.success) {
       setToken(res?.token)
       router.push({ pathname: '/home', query: { n: 1 } })
+    } else {
+      refresh()
+      setValue('captcha', '')
     }
   })
 
