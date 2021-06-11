@@ -1,5 +1,6 @@
 import { Goods } from '@/lib/types'
 import useHelper from '@/utils/useHelper'
+import { Image } from '@chakra-ui/image'
 import { Box, HStack, Text } from '@chakra-ui/layout'
 import { Chart, Line, Tooltip } from 'bizcharts'
 import numeral from 'numeral'
@@ -66,14 +67,16 @@ function GoodsItem({
         <Text fontSize="10px" px="2" color="#fff">
           目前收益率：
         </Text>
-        <Text
-          fontSize="28px"
-          color="red.500"
-          lineHeight="28px"
-          textAlign="center"
-        >
-          {item.odds}%
-        </Text>
+        <HStack justify="space-around">
+          <Text fontSize="28px" color="red.500" lineHeight="20px">
+            {item.odds}%
+          </Text>
+          <Image
+            src={`${process.env.apiBaseUrl}/${item.pic_icon}`}
+            boxSize="40px"
+            objectFit="cover"
+          />
+        </HStack>
         <Text fontSize="10px" px="2" color="#fff">
           比較上次：
         </Text>
