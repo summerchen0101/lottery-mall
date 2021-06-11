@@ -37,6 +37,7 @@ export default function useDiscountLog(
   )
   return {
     discountList: res?.list,
+    total: res?.total,
     isLoading: isValidating,
     isError: error,
     refresh: mutate,

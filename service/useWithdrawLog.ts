@@ -15,6 +15,7 @@ export default function useWithdrawLog(start: string, end: string) {
   )
   return {
     withdrawList: res?.list,
+    total: res?.total,
     isLoading: isValidating,
     isError: error,
     refresh: mutate,

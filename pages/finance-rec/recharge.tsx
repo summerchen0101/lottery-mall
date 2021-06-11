@@ -1,6 +1,5 @@
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import { usePopupContext } from '@/context/PopupContext'
 import { DateRangeType, RechargeStatus } from '@/lib/enums'
 import { rechargeStatusOpts } from '@/lib/options'
 import useRechargeLog from '@/service/useRechargeLog'
@@ -12,11 +11,7 @@ import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo, useState } from 'react'
-import {
-  HiDocument,
-  HiOutlineDocument,
-  HiOutlineDocumentText,
-} from 'react-icons/hi'
+import { HiOutlineDocumentText } from 'react-icons/hi'
 
 export default function rechargeRec() {
   const router = useRouter()
@@ -47,7 +42,7 @@ export default function rechargeRec() {
             {dateRangeObj?.[0].format('YYYY-MM-DD')} ~{' '}
             {dateRangeObj?.[1].format('YYYY-MM-DD')}
           </Text>
-          <Text>总筆數：{toCurrency(total, 0)} 筆</Text>
+          <Text>总笔数：{toCurrency(total, 0)} 笔</Text>
         </Box>
       </HStack>
       <Box p="20px" flex="1" overflowY="auto">
