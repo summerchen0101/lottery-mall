@@ -6,7 +6,7 @@ import { withdrawStatusOpts } from '@/lib/options'
 import useWithdrawLog from '@/service/useWithdrawLog'
 import useDateRange from '@/utils/useDateRange'
 import useTransfer from '@/utils/useTransfer'
-import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, Center, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
@@ -34,50 +34,55 @@ export default function withdraweRec() {
   return (
     <Layout>
       <HeaderTitleBar back title="提领纪录" />
-      <Box p="20px" flex="1" overflowY="auto">
+      <Box bg="contentBg.500" color="#fff" px="15px" py="10px" fontSize="sm">
+        <Text>2021-04-25 ~ 2021-06-11</Text>
+        <Text>总笔数 6 笔</Text>
+      </Box>
+      <Box p="15px" flex="1" overflowY="auto">
         {isLoading ? (
           <Spinner />
         ) : (
-          <Stack spacing="15px">
+          <Stack spacing="10px">
             {withdrawList?.map((t) => (
-              <Stack
-                key={t.id}
-                bg="white"
-                shadow="md"
-                borderLeftWidth="5px"
-                // borderRightWidth="3px"
-                borderColor="gray.400"
-                p="15px"
-                fontSize="sm"
-                color="gray.700"
-                spacing="5px"
-              >
-                <HStack justify="space-between" fontWeight="bold">
-                  <Text>{t.created_at}</Text>
-                  <Tag
-                    variant="solid"
-                    colorScheme={
-                      t.status === WithdrawStatus.Success ? 'pink' : 'gray'
-                    }
-                  >
-                    {toOptionName(withdrawStatusOpts, t.status)}
-                  </Tag>
-                </HStack>
-                <HStack justify="space-between" fontWeight="bold">
-                  <Text color="gray.500">单号：</Text>
-                  <Text>{t.order_sn}</Text>
-                </HStack>
-                <HStack justify="space-between" fontWeight="bold">
-                  <Text color="gray.500">提领金额：</Text>
-                  <Text color="purple.600" fontSize="lg">
-                    ¥ {t.money}
-                  </Text>
-                </HStack>
-                <HStack justify="space-between" fontWeight="bold">
-                  <Text color="gray.500">类型：</Text>
-                  <Text>{t.description || '-'}</Text>
-                </HStack>
-              </Stack>
+              <Box borderRadius="md" overflow="hidden">
+                <Stack
+                  key={t.id}
+                  bg="contentBg.500"
+                  p="10px 15px"
+                  color="gray.300"
+                  fontSize="sm"
+                  spacing="5px"
+                >
+                  <HStack justify="space-between">
+                    <Text>{t.created_at}</Text>
+                    <Tag
+                      variant="solid"
+                      colorScheme={
+                        t.status === WithdrawStatus.Success ? 'green' : 'red'
+                      }
+                    >
+                      {toOptionName(withdrawStatusOpts, t.status)}
+                    </Tag>
+                  </HStack>
+                  {/* <HStack justify="space-between" fontWeight="bold">
+                    <Text >单号：</Text>
+                    <Text>{t.order_sn}</Text>
+                  </HStack> */}
+                  <HStack justify="space-between" fontWeight="bold">
+                    <Text>类型：</Text>
+                    <Text>{t.description || '-'}</Text>
+                  </HStack>
+                  <HStack justify="space-between" fontWeight="bold">
+                    <Text>提领金额：</Text>
+                    <Text fontSize="xl" color="yellow.500" fontWeight="600">
+                      ¥ {t.money}
+                    </Text>
+                  </HStack>
+                </Stack>
+                <Center bg="#535353" fontSize="sm" color="gray.300" h="25px">
+                  <Text>订单号：{t.order_sn}</Text>
+                </Center>
+              </Box>
             ))}
           </Stack>
         )}

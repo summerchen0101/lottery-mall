@@ -139,13 +139,13 @@ function betRec() {
                     </Text>
                     <Flex>
                       投资结算：
-                      <Text as="span" fontWeight="600" color="pink.500">
+                      <Text as="span" fontWeight="600" color="green.500">
                         {toCurrency(t.win_money)}
                       </Text>
                     </Flex>
                     <Text>
                       实际损益：
-                      <Text as="span" fontWeight="600" color="green.500">
+                      <Text as="span" fontWeight="600" color="brand.500">
                         {toCurrency(t.profit)}
                       </Text>
                     </Text>

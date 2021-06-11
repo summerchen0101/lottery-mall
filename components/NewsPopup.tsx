@@ -36,14 +36,14 @@ function NewsPopup() {
         <ModalHeader textAlign="center" color="#fff">
           交易所公告
         </ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton color="#fff" />
         <ModalBody>
           {isLoading ? (
             <Spinner />
           ) : (
             <Stack
               divider={<StackDivider />}
-              borderColor="rgba(255,255,255,.3)"
+              borderColor="rgba(255,255,255,.2)"
             >
               {noticeList?.map((t, i) => (
                 <Text
