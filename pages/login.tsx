@@ -56,7 +56,10 @@ const login = () => {
     const res = await doLogin({ ...d, ckey: key })
     if (res?.success) {
       setToken(res?.token)
-      router.push({ pathname: '/lottery', query: { n: 1 } })
+      router.push({
+        pathname: (router.query.to as string) || '/lottery',
+        query: { n: 1 },
+      })
     } else {
       refresh()
       setValue('captcha', '')

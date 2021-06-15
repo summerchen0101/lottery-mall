@@ -2,20 +2,18 @@ import FooterNav from '@/components/FooterNav'
 import HomeIconBtn from '@/components/HomeIconBtn'
 import Layout from '@/components/Layout'
 import useSiteParams from '@/service/useSiteParams'
+import useRouterWithAuth from '@/utils/useRouterWithAuth'
 import Icon from '@chakra-ui/icon'
 import { Box, Center, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import { Image } from '@chakra-ui/react'
 import { Spinner } from '@chakra-ui/spinner'
-import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import FastMarquee from 'react-fast-marquee'
 import { BiVolume } from 'react-icons/bi'
 
 export default function home() {
   const { marquee, video, isLoading } = useSiteParams()
-
-  const router = useRouter()
-
+  const { authPush } = useRouterWithAuth()
   return (
     <Layout>
       <Box flex="1" pb="55px" overflowY="auto" bg="containerBg.500">
@@ -25,14 +23,6 @@ export default function home() {
           </Center>
         ) : (
           <>
-            {/* <AspectRatio maxW="full" ratio={16 / 9}>
-              <iframe
-                title="公司影片"
-                src={video}
-                allowFullScreen
-                allow="autoplay"
-              />
-            </AspectRatio> */}
             <Center w="full" h="auto">
               <Image src="/img/banner.png"></Image>
             </Center>
@@ -47,31 +37,31 @@ export default function home() {
               lineHeight="24px"
               color="#fff"
             >
-              <HomeIconBtn onClick={() => router.push('/faq')}>
+              <HomeIconBtn onClick={() => authPush('/faq')}>
                 <Stack align="center" spacing="1">
                   <Image w="2.25rem" h="auto" src="/img/ic-item-01.svg"></Image>
                   <Text>平台规章</Text>
                 </Stack>
               </HomeIconBtn>
-              <HomeIconBtn onClick={() => router.push('/bankcard')}>
+              <HomeIconBtn onClick={() => authPush('/bankcard')}>
                 <Stack align="center" spacing="1">
                   <Image w="2.25rem" h="auto" src="/img/ic-item-02.svg"></Image>
                   <Text>实名资料</Text>
                 </Stack>
               </HomeIconBtn>
-              <HomeIconBtn onClick={() => router.push('/news')}>
+              <HomeIconBtn onClick={() => authPush('/news')}>
                 <Stack align="center" spacing="1">
                   <Image w="2.25rem" h="auto" src="/img/ic-item-03.svg"></Image>
                   <Text>查看公告</Text>
                 </Stack>
               </HomeIconBtn>
-              <HomeIconBtn onClick={() => router.push('/recharge')}>
+              <HomeIconBtn onClick={() => authPush('/recharge')}>
                 <Stack align="center" spacing="1">
                   <Image w="2.25rem" h="auto" src="/img/ic-item-04.svg"></Image>
                   <Text>充值增仓</Text>
                 </Stack>
               </HomeIconBtn>
-              <HomeIconBtn onClick={() => router.push('/lottery')}>
+              <HomeIconBtn onClick={() => authPush('/lottery')}>
                 <Stack align="center" spacing="1">
                   <Image w="2.25rem" h="auto" src="/img/ic-item-05.svg"></Image>
                   <Text>开始投资</Text>
@@ -81,7 +71,7 @@ export default function home() {
                 <Stack
                   align="center"
                   spacing="1"
-                  onClick={() => router.push('/withdraw')}
+                  onClick={() => authPush('/withdraw')}
                 >
                   <Image w="2.25rem" h="auto" src="/img/ic-item-06.svg"></Image>
                   <Text>G币提现</Text>

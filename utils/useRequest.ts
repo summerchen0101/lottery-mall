@@ -1,19 +1,22 @@
 import { useGlobalProvider } from '@/context/GlobalProvider'
-import { useLoaderProvider } from '@/context/LoaderProvider'
 import Axios, { AxiosRequestConfig, Method } from 'axios'
 import { useCallback } from 'react'
 import useErrorHandler from './useErrorHandler'
-import useStorage from './useStorage'
 
 const useRequest = () => {
   const { token } = useGlobalProvider()
   const { apiErrHandler } = useErrorHandler()
-  const { loadingStart, loadingEnd } = useLoaderProvider()
   const request = useCallback(
     async function <
       R extends { success?: boolean; message?: string },
       B extends {} = {}
-    >(method: Method, url: string, data?: B, config?: AxiosRequestConfig) {
+    >(
+      method: Method,
+      url: string,
+      data?: B,
+      config?: AxiosRequestConfig,
+      showErr = true,
+    ) {
       try {
         const res = await Axios.request<R>({
           method,
@@ -33,7 +36,7 @@ const useRequest = () => {
         }
         return res.data
       } catch (err) {
-        apiErrHandler(err)
+        showErr && apiErrHandler(err)
       }
       return null
     },
@@ -43,8 +46,8 @@ const useRequest = () => {
   const get = function <R, B>(url: string, params?: B) {
     return request<R, B>('get', url, null, { params })
   }
-  const post = function <R, B = {}>(url: string, data?: B) {
-    return request<R, B>('post', url, data)
+  const post = function <R, B = {}>(url: string, data?: B, showErr = true) {
+    return request<R, B>('post', url, data, null, showErr)
   }
 
   return {
