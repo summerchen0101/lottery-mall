@@ -28,13 +28,21 @@ function rank() {
         {isLoading ? (
           <Spinner />
         ) : (
-          <Box bg="containerBg.500" py="5" px="2" mb="1">
-            <Chart autoFit height={250} data={chart}>
-              <Line position="date*profit" />
-              <Point position="date*profit" />
-              <Tooltip showCrosshairs />
-            </Chart>
-          </Box>
+          <>
+            <Box bg="containerBg.500" p="2" mb="3">
+              <Chart autoFit height={200} data={chart}>
+                <Line position="date*profit" />
+                <Point position="date*profit" />
+                <Tooltip showCrosshairs />
+              </Chart>
+            </Box>
+            <Box bg="containerBg.500" p="2">
+              <Chart height={100} autoFit data={chart}>
+                <Interval position="date*bet_total" />
+                <Tooltip shared />
+              </Chart>
+            </Box>
+          </>
         )}
       </Box>
       <FooterNav />
