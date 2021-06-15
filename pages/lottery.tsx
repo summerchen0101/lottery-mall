@@ -6,7 +6,9 @@ import FooterNav from '@/components/FooterNav'
 import GoodsItem from '@/components/GoodsItem'
 import Layout from '@/components/Layout'
 import LotteryCountdown from '@/components/LotteryCountdown'
+import NewsPopup from '@/components/NewsPopup'
 import { useBetInfoContext } from '@/context/BetInfoProvider'
+import { usePopupContext } from '@/context/PopupContext'
 import { Goods } from '@/lib/types'
 import useCurrentQishu from '@/service/useCurrentQishu'
 import useGoodsList from '@/service/useGoodsList'
@@ -20,22 +22,14 @@ import { Box, Center, Flex, HStack, Text, VStack } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
-import React, { useRef, useState } from 'react'
-import { BiDollar } from 'react-icons/bi'
-import {
-  HiCurrencyDollar,
-  HiRefresh,
-  HiSearch,
-  HiSpeakerphone,
-  HiSun,
-  HiTrash,
-  HiUpload,
-  HiX,
-} from 'react-icons/hi'
+import React, { useRef, useState, useEffect } from 'react'
+
+import { HiSearch, HiX } from 'react-icons/hi'
 
 function lottery() {
   const [, setBettingVisible] = useBetInfoContext().betting
   const [, setGoodsId] = useBetInfoContext().goodsId
+  const [, setNewsVisible] = usePopupContext('news')
   const [code, setCode] = useState<number>()
   const searchInput = useRef<HTMLInputElement>(null)
   const router = useRouter()
@@ -57,6 +51,12 @@ function lottery() {
     searchInput.current.value = ''
     setCode(null)
   }
+
+  useEffect(() => {
+    if (router.query.n) {
+      setNewsVisible(true)
+    }
+  }, [router])
 
   return (
     <Layout>
@@ -208,6 +208,7 @@ function lottery() {
       <BettingPopup />
       <BettingConfirmPopup />
       <BettingSuccessPopup />
+      <NewsPopup />
     </Layout>
   )
 }

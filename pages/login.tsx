@@ -13,13 +13,9 @@ import {
   Button,
   Center,
   Checkbox,
-  Flex,
   FormControl,
   FormLabel,
-  Heading,
   HStack,
-  Icon,
-  IconButton,
   Image,
   Input,
   Spinner,
@@ -30,8 +26,6 @@ import {
 import { useRouter } from 'next/dist/client/router'
 import React, { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { BiMobile, BiPhone, BiUser, BiUserCircle } from 'react-icons/bi'
-import service from './service'
 
 type LoginFormProps = LoginRequest & {
   isRemAccPass: boolean
@@ -62,7 +56,7 @@ const login = () => {
     const res = await doLogin({ ...d, ckey: key })
     if (res?.success) {
       setToken(res?.token)
-      router.push({ pathname: '/home', query: { n: 1 } })
+      router.push({ pathname: '/lottery', query: { n: 1 } })
     } else {
       refresh()
       setValue('captcha', '')

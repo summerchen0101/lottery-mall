@@ -1,45 +1,21 @@
 import FooterNav from '@/components/FooterNav'
 import HomeIconBtn from '@/components/HomeIconBtn'
 import Layout from '@/components/Layout'
-import NewsPopup from '@/components/NewsPopup'
-import { usePopupContext } from '@/context/PopupContext'
 import useSiteParams from '@/service/useSiteParams'
 import Icon from '@chakra-ui/icon'
+import { Box, Center, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
 import { Image } from '@chakra-ui/react'
-import {
-  AspectRatio,
-  Box,
-  Center,
-  Divider,
-  HStack,
-  SimpleGrid,
-  Stack,
-  Text,
-} from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect } from 'react'
+import React from 'react'
 import FastMarquee from 'react-fast-marquee'
-import {
-  BiArchiveOut,
-  BiBook,
-  BiCartAlt,
-  BiDollarCircle,
-  BiNews,
-  BiStoreAlt,
-  BiUser,
-  BiVolume,
-} from 'react-icons/bi'
+import { BiVolume } from 'react-icons/bi'
 
 export default function home() {
   const { marquee, video, isLoading } = useSiteParams()
-  const [, setNewsVisible] = usePopupContext('news')
+
   const router = useRouter()
-  useEffect(() => {
-    if (router.query.n) {
-      setNewsVisible(true)
-    }
-  }, [router])
+
   return (
     <Layout>
       <Box flex="1" pb="55px" overflowY="auto" bg="containerBg.500">
@@ -147,8 +123,6 @@ export default function home() {
           </>
         )}
       </Box>
-
-      <NewsPopup />
 
       <FooterNav />
     </Layout>
