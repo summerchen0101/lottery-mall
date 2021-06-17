@@ -2,6 +2,9 @@ module.exports = {
   env: {
     apiBaseUrl: process.env.API_BASE_URL,
   },
+  images: {
+    domains: ['mall.thlin168.com'],
+  },
   async rewrites() {
     return [
       {
