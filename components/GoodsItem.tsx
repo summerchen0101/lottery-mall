@@ -1,6 +1,6 @@
 import { Goods } from '@/lib/types'
 import useHelper from '@/utils/useHelper'
-import { Image } from '@chakra-ui/image'
+import Image from 'next/image'
 import { Box, HStack, Text } from '@chakra-ui/layout'
 import { Chart, Line, Tooltip } from 'bizcharts'
 import numeral from 'numeral'
@@ -42,6 +42,7 @@ function GoodsItem({
       </Text>
     )
   }, [diff])
+
   return (
     <HStack
       align="flex-end"
@@ -73,8 +74,9 @@ function GoodsItem({
           </Text>
           <Image
             src={`${process.env.apiBaseUrl}/${item.pic_icon}`}
-            boxSize="40px"
-            objectFit="cover"
+            loading="lazy"
+            width="40px"
+            height="40px"
           />
         </HStack>
         <Text fontSize="10px" px="2" color="#fff">
