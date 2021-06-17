@@ -33,10 +33,11 @@ import {
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState, useCallback } from 'react'
 
 function BettingConfirmPopup() {
   const router = useRouter()
+  const lottery_id = useMemo(() => +router.query.id, [router.query])
   const { toCurrency } = useTransfer()
   const { secToTimer } = useHelper()
   const [, setBetSuccessVisible] = useBetInfoContext().betSuccess
@@ -66,36 +67,37 @@ function BettingConfirmPopup() {
     setVisible(false)
   }
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     try {
       doBetAction({
         bet_list: betTargets,
-        lottery_id: 6,
+        lottery_id,
         goods_id: goodsId,
         qishu: qishuData?.next_qishu,
       })
     } catch (err) {
       console.log(err)
     }
-  }
+  }, [betTargets, goodsId, qishuData, lottery_id])
+
   useEffect(() => {
     setOrderSn(orderSn)
     setBetSuccessVisible(true)
     setVisible(false)
   }, [orderSn])
 
-  const fetchConfirmInfo = async () => {
+  const fetchConfirmInfo = useCallback(async () => {
     try {
       doBetConfirm({
         bet_list: betTargets,
-        lottery_id: 6,
+        lottery_id,
         goods_id: goodsId,
         qishu: qishuData?.next_qishu,
       })
     } catch (err) {
       console.log(err)
     }
-  }
+  }, [betTargets, goodsId, qishuData, lottery_id])
 
   useEffect(() => {
     if (visible) {

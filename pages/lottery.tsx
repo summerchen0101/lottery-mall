@@ -22,9 +22,10 @@ import { Box, Center, Flex, HStack, Text, VStack } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import _ from 'lodash'
 import { useRouter } from 'next/dist/client/router'
-import React, { useRef, useState, useEffect } from 'react'
-
+import React, { useRef, useState, useEffect, useMemo } from 'react'
+import { Button } from '@chakra-ui/react'
 import { HiSearch, HiX } from 'react-icons/hi'
+import useLotteryList from '@/service/useLotteryList'
 
 function lottery() {
   const [, setBettingVisible] = useBetInfoContext().betting
@@ -33,11 +34,13 @@ function lottery() {
   const [code, setCode] = useState<number>()
   const searchInput = useRef<HTMLInputElement>(null)
   const router = useRouter()
+  const lottery_id = useMemo(() => +router.query.id, [router.query])
   const { toCurrency } = useTransfer()
   const { goodsList, isLoading: isGoodsListLoading } = useGoodsList(code)
   const { data: qishuData } = useCurrentQishu()
   const toQishuNo = (qishu: number) => _.takeRight(qishu?.toString(), 2)
   const { userInfo } = useUserInfo()
+  const { lotteryList } = useLotteryList()
 
   const handleGoodsClicked = async (goods: Goods) => {
     setGoodsId(goods.id)
@@ -52,11 +55,23 @@ function lottery() {
     setCode(null)
   }
 
+  const handleLotteryClicked = (id: number) => {
+    router.replace({ pathname: router.pathname, query: { id } })
+  }
+
   useEffect(() => {
     if (router.query.n) {
       setNewsVisible(true)
     }
-  }, [router])
+  }, [router.query.n])
+  useEffect(() => {
+    if (!lottery_id) {
+      router.replace({
+        pathname: router.pathname,
+        query: { id: lotteryList?.[0].id },
+      })
+    }
+  }, [lottery_id, lotteryList])
 
   return (
     <Layout>
@@ -155,6 +170,7 @@ function lottery() {
             </Text>
           </HStack>
         </HStack>
+
         <HStack
           justify="center"
           bg="contentBg.500"
@@ -186,6 +202,18 @@ function lottery() {
             fontSize="xl"
             onClick={handleSearchCode}
           />
+        </HStack>
+        <HStack mb="2">
+          {lotteryList?.map((t) => (
+            <Button
+              key={t.id}
+              colorScheme={lottery_id === t.id ? 'red' : 'brand'}
+              flex={1}
+              onClick={() => handleLotteryClicked(t.id)}
+            >
+              {t.name}
+            </Button>
+          ))}
         </HStack>
         {isGoodsListLoading ? (
           <Center w="full" h="50%">
