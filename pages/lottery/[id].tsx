@@ -56,7 +56,7 @@ function lottery() {
   }
 
   const handleLotteryClicked = (id: number) => {
-    router.replace({ pathname: router.pathname, query: { id } })
+    router.replace(`/lottery/${id}`)
   }
 
   useEffect(() => {
@@ -64,14 +64,6 @@ function lottery() {
       setNewsVisible(true)
     }
   }, [router.query.n])
-  useEffect(() => {
-    if (!lottery_id) {
-      router.replace({
-        pathname: router.pathname,
-        query: { id: lotteryList?.[0].id },
-      })
-    }
-  }, [lottery_id, lotteryList])
 
   return (
     <Layout>
