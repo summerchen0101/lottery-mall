@@ -76,11 +76,11 @@ export const inviteStatusOpts = [
 ]
 export const memberTypeOpts = [
   { label: '代理', value: MemberType.Agent },
-  { label: '會員', value: MemberType.Member },
+  { label: '会员', value: MemberType.Member },
 ]
 
 export const betRecOpts = [
-  { label: '等待結帳', value: BetRecStatus.Pending },
-  { label: '下單成功', value: BetRecStatus.Finish },
-  { label: '已撤銷', value: BetRecStatus.Cancel },
+  { label: '等待结帐', value: BetRecStatus.Pending },
+  { label: '下单成功', value: BetRecStatus.Finish },
+  { label: '已撤销', value: BetRecStatus.Cancel },
 ]

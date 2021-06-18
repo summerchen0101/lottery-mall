@@ -34,6 +34,7 @@ const useRequest = () => {
         const newToken = res.headers.authorization?.replace('Bearer', '')
         if (newToken) {
           setToken(newToken)
+          console.log(newToken)
         }
         if (res.data.success === false) {
           throw Error(res.data?.message || '错误发生')

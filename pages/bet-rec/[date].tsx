@@ -6,9 +6,12 @@ import { BetRecStatus } from '@/lib/enums'
 import { betRecOpts } from '@/lib/options'
 import { BetRec } from '@/lib/types'
 import useBetRec from '@/service/useBetRec'
+import useCancelBet from '@/service/useCancelBet'
+import useAlert from '@/utils/useAlert'
 import useTransfer from '@/utils/useTransfer'
 import { Image } from '@chakra-ui/image'
 import { Box, Flex, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
+import { Spacer, useToast } from '@chakra-ui/react'
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
@@ -16,14 +19,19 @@ import React from 'react'
 
 function betRec() {
   const router = useRouter()
+  const alert = useAlert()
   const { toCurrency, toOptionName } = useTransfer()
   const date = router.query.date as string
   const { loadingSpinner } = useLoaderProvider()
-  const { betRecData, isLoading } = useBetRec(date, date)
-  // const toStatusTag = (item: BetRec) => {
-
-  //   if(item.status)
-  // }
+  const { handler: doCancel } = useCancelBet()
+  const { betRecData, isLoading, refresh } = useBetRec(date, date)
+  const handleBetCancel = async (id: number) => {
+    const res = await doCancel(id)
+    if (res.success) {
+      alert.warning('删单成功')
+      refresh()
+    }
+  }
   return (
     <Layout>
       <HeaderTitleBar back title="下单纪录" />
@@ -73,7 +81,7 @@ function betRec() {
                   key={t.id}
                   justify="space-between"
                   bg="contentBg.500"
-                  opacity={t.is_lose_win ? 1 : 0.6}
+                  // opacity={t.status === BetRecStatus.Finish ? 1 : 0.6}
                   shadow="md"
                   fontWeight="500"
                   p="10px 15px"
@@ -84,24 +92,37 @@ function betRec() {
                     objectFit="cover"
                   />
                   <Box flex="1">
-                    <Flex justify="space-between">
+                    <HStack>
                       <Text fontSize="sm" color="gray.400">
                         {t.lottery}
                       </Text>
-                      <Tag
-                        variant="solid"
-                        borderRadius="4px"
-                        colorScheme={t.is_lose_win ? 'green' : 'red'}
+                      <Spacer />
+
+                      <Text
+                        color={t.is_lose_win ? 'green.500' : 'gray.300'}
+                        fontSize="sm"
                       >
                         {t.status === BetRecStatus.Finish
                           ? t.is_lose_win
                             ? '抢购成功'
                             : '抢购失败'
                           : toOptionName(betRecOpts, t.status)}
-                      </Tag>
-                    </Flex>
-
-                    <Text color="#fff">{t.name}</Text>
+                      </Text>
+                    </HStack>
+                    <HStack mt="2">
+                      <Text color="#fff">{t.name}</Text>
+                      <Spacer />
+                      {t.status === BetRecStatus.Pending && (
+                        <Tag
+                          variant="solid"
+                          borderRadius="4px"
+                          colorScheme="red"
+                          onClick={() => handleBetCancel(t.id)}
+                        >
+                          撤单
+                        </Tag>
+                      )}
+                    </HStack>
 
                     <HStack justify="space-between">
                       <Text color="#f9c54f" fontSize="sm">
