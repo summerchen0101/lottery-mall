@@ -1,5 +1,6 @@
 import useStorage from '@/utils/useStorage'
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import store from 'store2'
 
 type ContextState = {
   orderSn: string
@@ -12,7 +13,10 @@ const GlobalContext = createContext<ContextState>(null)
 
 const GlobalProvider: React.FC = ({ children }) => {
   const [orderSn, setOrderSn] = useState('')
-  const [token, setToken] = useStorage('token', '')
+  const [token, setToken] = useState(store.session.get('token'))
+  useEffect(() => {
+    store.session.set('token', token)
+  }, [token])
   return (
     <GlobalContext.Provider
       value={{

@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 import useErrorHandler from './useErrorHandler'
 
 const useRequest = () => {
-  const { token } = useGlobalProvider()
+  const { token, setToken } = useGlobalProvider()
   const { apiErrHandler } = useErrorHandler()
   const request = useCallback(
     async function <
@@ -31,6 +31,10 @@ const useRequest = () => {
           },
           ...config,
         })
+        const newToken = res.headers.authorization?.replace('Bearer', '')
+        if (newToken) {
+          setToken(newToken)
+        }
         if (res.data.success === false) {
           throw Error(res.data?.message || '错误发生')
         }
