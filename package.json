@@ -32,7 +32,7 @@
     "qrcode": "^1.4.4",
     "react": "^16.13.1",
     "react-barcode": "^1.4.0",
-    "react-bootstrap": "^1.4.3",
+    "react-bootstrap": "^1.6.1",
     "react-copy-to-clipboard": "^5.0.3",
     "react-csv": "^2.0.3",
     "react-datepicker": "^4.1.1",
