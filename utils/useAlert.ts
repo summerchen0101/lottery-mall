@@ -5,6 +5,8 @@ function useAlert() {
   return {
     success: (msg: string) =>
       toast({ status: 'success', title: msg, duration: 2000 }),
+    warning: (msg: string) =>
+      toast({ status: 'warning', title: msg, duration: 2000 }),
   }
 }
 
