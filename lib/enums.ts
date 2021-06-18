@@ -65,3 +65,8 @@ export enum MemberType {
   Agent = 0,
   Member = 1,
 }
+export enum BetRecStatus {
+  Pending = 0,
+  Finish = 1,
+  Cancel = 2,
+}

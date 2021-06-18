@@ -2,6 +2,9 @@ import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import { useLoaderProvider } from '@/context/LoaderProvider'
+import { BetRecStatus } from '@/lib/enums'
+import { betRecOpts } from '@/lib/options'
+import { BetRec } from '@/lib/types'
 import useBetRec from '@/service/useBetRec'
 import useTransfer from '@/utils/useTransfer'
 import { Image } from '@chakra-ui/image'
@@ -13,10 +16,14 @@ import React from 'react'
 
 function betRec() {
   const router = useRouter()
-  const { toCurrency } = useTransfer()
+  const { toCurrency, toOptionName } = useTransfer()
   const date = router.query.date as string
   const { loadingSpinner } = useLoaderProvider()
   const { betRecData, isLoading } = useBetRec(date, date)
+  // const toStatusTag = (item: BetRec) => {
+
+  //   if(item.status)
+  // }
   return (
     <Layout>
       <HeaderTitleBar back title="下单纪录" />
@@ -86,7 +93,11 @@ function betRec() {
                         borderRadius="4px"
                         colorScheme={t.is_lose_win ? 'green' : 'red'}
                       >
-                        {t.is_lose_win ? '抢购成功' : '抢购失败'}
+                        {t.status === BetRecStatus.Finish
+                          ? t.is_lose_win
+                            ? '抢购成功'
+                            : '抢购失败'
+                          : toOptionName(betRecOpts, t.status)}
                       </Tag>
                     </Flex>
 
