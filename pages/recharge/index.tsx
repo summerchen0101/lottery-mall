@@ -65,94 +65,32 @@ function rechargeIndex() {
                   </VStack>
                 </HStack>
               </BarItem>
-              {online[OnlinePayment.Alipay] && (
+              {online.map((t) => (
                 <BarItem
+                  key={t.id}
                   onClick={() =>
                     router.push({
                       pathname: '/recharge/online',
-                      query: { id: OnlinePayment.Alipay, name: '支付宝' },
+                      query: { id: t.id, name: t.name },
                     })
                   }
                 >
                   <HStack spacing="20px">
-                    <Image src="/img/ic-m-1.png" boxSize="48px" />
+                    <Image src={`/img/ic-m-${t.id}.png`} w="48px" />
                     <VStack alignItems="flex-start" spacing="0">
-                      <Text>支付宝</Text>
+                      <Text>{t.name}</Text>
                       <Text fontSize="sm" color="green.500">
-                        支付宝
+                        {t.name}
                       </Text>
                     </VStack>
                   </HStack>
                 </BarItem>
-              )}
-              {online[OnlinePayment.Cloud] && (
-                <BarItem
-                  onClick={() =>
-                    router.push({
-                      pathname: '/recharge/online',
-                      query: {
-                        id: OnlinePayment.Cloud,
-                        name: '云闪付',
-                      },
-                    })
-                  }
-                >
-                  <HStack spacing="20px">
-                    <Image src="/img/ic-m-2.png" boxSize="48px" />
-                    <VStack alignItems="flex-start" spacing="0">
-                      <Text>云闪付</Text>
-                      <Text fontSize="sm" color="green.500">
-                        云闪付
-                      </Text>
-                    </VStack>
-                  </HStack>
-                </BarItem>
-              )}
-              {online[OnlinePayment.WeChat] && (
-                <BarItem
-                  onClick={() =>
-                    router.push({
-                      pathname: '/recharge/online',
-                      query: { id: OnlinePayment.WeChat, name: '微信' },
-                    })
-                  }
-                >
-                  <HStack spacing="20px">
-                    <Image src="/img/ic-m-3.png" boxSize="48px" />
-                    <VStack alignItems="flex-start" spacing="0">
-                      <Text>微信</Text>
-                      <Text fontSize="sm" color="green.500">
-                        微信
-                      </Text>
-                    </VStack>
-                  </HStack>
-                </BarItem>
-              )}
-              {online[OnlinePayment.USDT] && (
-                <BarItem
-                  onClick={() =>
-                    router.push({
-                      pathname: '/recharge/online',
-                      query: { id: OnlinePayment.USDT, name: 'USDT' },
-                    })
-                  }
-                >
-                  <HStack spacing="20px">
-                    <Image src="/img/ic-m-4.png" boxSize="48px" />
-                    <VStack alignItems="flex-start" spacing="0">
-                      <Text>USDT</Text>
-                      <Text fontSize="sm" color="green.500">
-                        USDT
-                      </Text>
-                    </VStack>
-                  </HStack>
-                </BarItem>
-              )}
+              ))}
 
               {offline[OfflinePayment.Bankcard] && (
                 <BarItem onClick={() => router.push('/recharge/bankcard')}>
                   <HStack spacing="20px">
-                    <Image src="/img/ic-m-5.png" boxSize="48px" />
+                    <Image src="/img/ic-m-10.png" w="48px" />
                     <VStack alignItems="flex-start" spacing="0">
                       <Text>公司入款</Text>
                       <Text fontSize="sm" color="#ec7d00">
@@ -165,7 +103,7 @@ function rechargeIndex() {
               {offline[OfflinePayment.USDT] && (
                 <BarItem onClick={() => router.push('/recharge/usdt')}>
                   <HStack spacing="20px">
-                    <Image src="/img/ic-m-5.png" boxSize="48px" />
+                    <Image src="/img/ic-m-10.png" w="48px" />
                     <VStack alignItems="flex-start" spacing="0">
                       <Text>公司入款</Text>
                       <Text fontSize="sm" color="#ec7d00">

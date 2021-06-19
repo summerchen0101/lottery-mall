@@ -1,15 +1,15 @@
-import { OfflinePayment, OnlinePayment } from '@/lib/enums'
+import { OfflinePayment } from '@/lib/enums'
 import useRequest from '@/utils/useRequest'
 import useSWR from 'swr'
 
-interface OnlinePaymentItem {
+interface OnlinePayment {
   id: number
   name: string
 }
 interface PaymentListRes {
   success: boolean
   data: {
-    online: OnlinePaymentItem[]
+    online: OnlinePayment[]
     offline: Record<OfflinePayment, boolean>
   }
 }
@@ -22,10 +22,7 @@ export default function usePaymentList() {
   )
   return {
     offline: res?.data.offline,
-    online: res?.data.online.reduce((obj, next) => {
-      obj[next.id] = next
-      return obj
-    }, {}) as Record<OnlinePayment, OnlinePaymentItem>,
+    online: res?.data.online,
     isLoading: !error && !res,
     isError: error,
     refresh: mutate,
