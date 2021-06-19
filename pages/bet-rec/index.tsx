@@ -2,7 +2,6 @@ import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import RecPageTabs from '@/components/RecPageTabs'
-import { useLoaderProvider } from '@/context/LoaderProvider'
 import { DateRangeType } from '@/lib/enums'
 import { betDateRangeOpts } from '@/lib/options'
 import useBetRecByDate from '@/service/useBetRecByDate'
@@ -17,17 +16,15 @@ import {
   Spacer,
   Stack,
   Text,
-  VStack,
 } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
 function betRec() {
   const router = useRouter()
   const { toCurrency } = useTransfer()
-  const { loadingSpinner } = useLoaderProvider()
   const dateRangeType = useMemo(
     () =>
       ((router.query.range as unknown) as DateRangeType) ?? DateRangeType.Today,
@@ -166,7 +163,6 @@ function betRec() {
         )}
       </Box>
       <FooterNav />
-      {loadingSpinner}
     </Layout>
   )
 }

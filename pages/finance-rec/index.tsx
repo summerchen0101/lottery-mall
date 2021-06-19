@@ -2,20 +2,18 @@ import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import RecItem from '@/components/RecItem'
-import { useLoaderProvider } from '@/context/LoaderProvider'
 import { DateRangeType, DiscountLogType } from '@/lib/enums'
 import { financeRecDateRangeOpts } from '@/lib/options'
 import useFinanceRec from '@/service/useFinanceRec'
 import useDateRange from '@/utils/useDateRange'
 import useTransfer from '@/utils/useTransfer'
-import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/layout'
+import { Box, HStack, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useState } from 'react'
 
 export default function financeRec() {
   const router = useRouter()
-  const { loadingSpinner } = useLoaderProvider()
   const [dateRangeType, setDateRangeType] = useState(DateRangeType.Today)
   const { toCurrency } = useTransfer()
   const [startM, endM] = useDateRange(dateRangeType)
@@ -115,7 +113,6 @@ export default function financeRec() {
         </Stack>
       </Box>
       <FooterNav />
-      {loadingSpinner}
     </Layout>
   )
 }

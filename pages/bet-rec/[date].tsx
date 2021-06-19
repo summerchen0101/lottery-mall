@@ -1,17 +1,15 @@
 import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
-import { useLoaderProvider } from '@/context/LoaderProvider'
 import { BetRecStatus } from '@/lib/enums'
 import { betRecOpts } from '@/lib/options'
-import { BetRec } from '@/lib/types'
 import useBetRec from '@/service/useBetRec'
 import useCancelBet from '@/service/useCancelBet'
 import useAlert from '@/utils/useAlert'
 import useTransfer from '@/utils/useTransfer'
 import { Image } from '@chakra-ui/image'
-import { Box, Flex, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
-import { Spacer, useToast } from '@chakra-ui/react'
+import { Box, HStack, SimpleGrid, Stack, Text } from '@chakra-ui/layout'
+import { Spacer } from '@chakra-ui/react'
 import { Spinner } from '@chakra-ui/spinner'
 import { Tag } from '@chakra-ui/tag'
 import { useRouter } from 'next/dist/client/router'
@@ -22,7 +20,6 @@ function betRec() {
   const alert = useAlert()
   const { toCurrency, toOptionName } = useTransfer()
   const date = router.query.date as string
-  const { loadingSpinner } = useLoaderProvider()
   const { handler: doCancel } = useCancelBet()
   const { betRecData, isLoading, refresh } = useBetRec(date, date)
   const handleBetCancel = async (id: number) => {
@@ -151,7 +148,6 @@ function betRec() {
         )}
       </Box>
       <FooterNav />
-      {loadingSpinner}
     </Layout>
   )
 }
