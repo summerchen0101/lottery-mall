@@ -159,14 +159,26 @@ function BettingPopup() {
                 </Text>
                 <Box bg="containerBg.500" p="2" mb="1">
                   <Chart autoFit height={200} data={chart}>
-                    <Line position="date*profit" />
-                    <Point position="date*profit" />
+                    <Line
+                      position="date*profit"
+                      style={{
+                        lineWidth: 1,
+                        stroke: '#e60f0f',
+                      }}
+                    />
+                    <Point
+                      position="date*profit"
+                      style={{
+                        r: 3,
+                        stroke: 'white',
+                      }}
+                    />
                     <Tooltip showCrosshairs />
                   </Chart>
                 </Box>
                 <Box bg="containerBg.500" p="2">
                   <Chart height={100} autoFit data={chart}>
-                    <Interval position="date*bet_total" />
+                    <Interval position="date*bet_total" color="#e60f0f" />
                     <Tooltip shared />
                   </Chart>
                 </Box>

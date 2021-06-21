@@ -89,7 +89,13 @@ function GoodsItem({
       </Box>
       <Box w="full">
         <Chart autoFit height={100} data={chart}>
-          <Line position="date*profit" />
+          <Line
+            position="date*profit"
+            style={{
+              lineWidth: 1,
+              stroke: '#e60f0f',
+            }}
+          />
           {/* <Point position="year*value" /> */}
           <Tooltip showCrosshairs />
         </Chart>

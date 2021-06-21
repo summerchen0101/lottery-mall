@@ -14,10 +14,8 @@ interface RankChartRes {
   data: RankChart[]
 }
 
-export default function useRankChart() {
+export default function useRankChart(lottery_id: number) {
   const { post } = useRequest()
-  const router = useRouter()
-  const lottery_id = useMemo(() => +router.query.id, [router.query])
   const { data: res, error, mutate, isValidating } = useSWR<RankChartRes>(
     lottery_id && ['/lottery/chart', lottery_id],
     (url, lottery_id) => post(url, { lottery_id }),

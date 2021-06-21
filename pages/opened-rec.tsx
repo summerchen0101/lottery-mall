@@ -2,20 +2,40 @@ import FooterNav from '@/components/FooterNav'
 import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import RecPageTabs from '@/components/RecPageTabs'
+import useLotteryList from '@/service/useLotteryList'
 import useOpenedRec from '@/service/useOpenedRec'
 import { Box, HStack, Text, VStack } from '@chakra-ui/layout'
+import { Select } from '@chakra-ui/react'
 import { Spinner } from '@chakra-ui/spinner'
 import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
 import Barcode from 'react-barcode'
 
 function openedRec() {
-  const { openedList, isLoading } = useOpenedRec()
+  const { lotteryList } = useLotteryList()
+  const [lotteryId, setLotteryId] = useState(lotteryList?.[0].id)
+  const { openedList, isLoading } = useOpenedRec(lotteryId)
+
+  useEffect(() => {
+    setLotteryId(lotteryList?.[0].id)
+  }, [lotteryList])
   return (
     <Layout>
       <HeaderTitleBar title="结帐纪录" />
       <RecPageTabs />
       <Box className="layout" flex="1" overflowY="auto">
+        <Select
+          value={lotteryId}
+          onChange={(e) => setLotteryId(+e.target.value)}
+          mb="3"
+        >
+          {lotteryList?.map((t) => (
+            <option key={t.id} value={t.id}>
+              {t.name}
+            </option>
+          ))}
+        </Select>
         {isLoading ? (
           <Spinner />
         ) : (
