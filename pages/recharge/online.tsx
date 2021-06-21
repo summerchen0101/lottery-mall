@@ -12,9 +12,8 @@ import useTransfer from '@/utils/useTransfer'
 import { Button } from '@chakra-ui/button'
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
-import { Box, Divider, Stack, Text } from '@chakra-ui/layout'
+import { Box, Stack, Text } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/select'
-import { Spinner } from '@chakra-ui/spinner'
 import { useRouter } from 'next/dist/client/router'
 import React, { useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
@@ -54,6 +53,14 @@ function rechargeForm() {
     }
   }, [result])
 
+  useEffect(() => {
+    setValue('payments_branch_id', paymentBranchs?.[0]?.id || '')
+  }, [paymentBranchs])
+
+  useEffect(() => {
+    setValue('interface', paymentChannels?.[0]?.interface || '')
+  }, [paymentChannels])
+
   return (
     <Layout>
       <HeaderTitleBar back title={`${router.query.name}充值`} />
@@ -78,7 +85,6 @@ function rechargeForm() {
               className="formSelect"
               ref={register({ required: '不可为空' })}
               placeholder="请选择"
-              // onChange={(e) => setValue('')}
             >
               {paymentBranchs?.map((t) => (
                 <option key={t.id} value={t.id}>
