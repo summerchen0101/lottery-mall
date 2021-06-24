@@ -34,11 +34,12 @@ deploy-master:
   stage: deploy
   #when: manual
   script:
-    - rsync -rav --delete -e 'ssh -p 2222' ./ $SERVER_TOKEN:${WEB_ROOT}${CI_PROJECT_NAME}
-    #- rsync -rv --exclude-from 'deploy/exclude.txt' --delete -e 'ssh -p 2222 -o ConnectTimeout=180' ./ $SERVER_TOKEN:${WEB_ROOT}${CI_PROJECT_NAME}
+    - rsync -rv --exclude-from 'deploy/exclude.txt' --delete -e 'ssh -p 2222' ./ $SERVER_TOKEN:${WEB_ROOT}${CI_PROJECT_NAME}
     - ssh $SERVER_TOKEN -p2222 -t "/home/laradock/.nvm/versions/node/v15.5.1/bin/pm2 restart mall-mobile"
   only:
     - master
+  tags:
+    - blockchain
   before_script:
     - apk add --no-cache rsync openssh
     - mkdir -p ~/.ssh
