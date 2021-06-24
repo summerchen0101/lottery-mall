@@ -1,13 +1,11 @@
-import HeaderTitleBar from '@/components/HeaderTitleBar'
 import Layout from '@/components/Layout'
 import TextCopy from '@/components/TextCopy'
-import { Button, ButtonProps } from '@chakra-ui/button'
 import Icon from '@chakra-ui/icon'
 import { Image } from '@chakra-ui/image'
+import useSiteParams from '@/service/useSiteParams'
 import {
   Box,
   Center,
-  Heading,
   HStack,
   StackProps,
   Text,
@@ -33,6 +31,7 @@ const buttonProps: StackProps = {
 
 export default function appDownload() {
   const router = useRouter()
+  const { iosUrl } = useSiteParams()
   const website = useMemo(() => {
     if (process.browser) {
       return `${location.protocol}//${location.host}`
@@ -69,12 +68,7 @@ export default function appDownload() {
         <VStack spacing="5">
           <HStack
             {...buttonProps}
-            onClick={() =>
-              window.open(
-                'https://www.akoya-jp.com/down?pckId=3cb1a355ea734eb880641d2514e04020',
-                'IOS APP',
-              )
-            }
+            onClick={() => window.open(iosUrl, 'IOS APP')}
           >
             <Box
               as="i"

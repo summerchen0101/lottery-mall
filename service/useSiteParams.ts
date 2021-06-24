@@ -10,6 +10,7 @@ interface SiteParamsRes {
     usdt_transfer_rate: string
     marquee: string
     index_youtube: string
+    ios_url: string
   }
 }
 
@@ -24,6 +25,7 @@ export default function useSiteParams() {
     rate: +res?.data.usdt_transfer_rate,
     marquee: res?.data.marquee,
     video: res?.data.index_youtube,
+    iosUrl: res?.data.ios_url,
     isLoading: !error && !res,
     isError: error,
     refresh: mutate,
