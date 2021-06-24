@@ -48,7 +48,7 @@ deploy-master:
   stage: deploy
   #when: manual
   script:
-    - rsync -rv --exclude-from 'deploy/exclude.txt' --delete -e 'ssh -p 2222' ./ $SERVER_TOKEN:${WEB_ROOT}${CI_PROJECT_NAME}
+    - rsync -rv --exclude-from 'deploy/exclude.txt' --delete -e 'ssh -p 2222 -o ConnectTimeout=180' ./ $SERVER_TOKEN:${WEB_ROOT}${CI_PROJECT_NAME}
     - ssh $SERVER_TOKEN -p2222 -t "/home/laradock/.nvm/versions/node/v15.5.1/bin/pm2 restart mall-mobile"
   only:
     - master
