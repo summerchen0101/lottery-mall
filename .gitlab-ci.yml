@@ -17,7 +17,7 @@ deploy-dev:
   stage: deploy
   script:
     - rsync -rv --exclude-from 'deploy/exclude.txt' --delete -e 'ssh -p 2222' ./ $SERVER_TOKEN_TEST:${WEB_ROOT}lottery/${CI_PROJECT_NAME}
-    - ssh $SERVER_TOKEN_TEST -t "/home/laradock/.nvm/versions/node/v13.13.0/bin/pm2 restart lottery-mall-mobile"
+    - ssh $SERVER_TOKEN_TEST -p2222 -t "/home/laradock/.nvm/versions/node/v13.13.0/bin/pm2 restart lottery-mall-mobile"
   only:
     - dev
   before_script:
