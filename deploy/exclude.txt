@@ -1,0 +1,7 @@
+.git
+.gitignore
+.gitlab-ci.yml
+.DS_Store
+.project
+.vscode/
+deploy/
