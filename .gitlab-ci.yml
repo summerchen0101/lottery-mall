@@ -31,7 +31,7 @@ deploy-dev:
 build-master:
   image: node:12
   stage: build
-  when: manual
+  #when: manual
   script:
     - export API_BASE_URL=https://shop-pro.com/api
     - npm install
@@ -41,14 +41,15 @@ build-master:
   artifacts:
     expire_in: 1 week
     paths:
-      - dist
+      - ./
 
 deploy-master:
   image: alpine
   stage: deploy
-  when: manual
+  #when: manual
   script:
-    - rsync -rav --delete -e 'ssh -p 2222' dist/ $SERVER_TOKEN:$WEB_ROOT${CI_PROJECT_NAME}
+    - rsync -rv --exclude-from 'deploy/exclude.txt' --delete -e 'ssh -p 2222' ./ $SERVER_TOKEN:${WEB_ROOT}${CI_PROJECT_NAME}
+    - ssh $SERVER_TOKEN -p2222 -t "/home/laradock/.nvm/versions/node/v15.5.1/bin/pm2 restart mall-mobile"
   only:
     - master
   before_script:
