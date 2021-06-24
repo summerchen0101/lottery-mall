@@ -5,3 +5,4 @@
 .project
 .vscode/
 deploy/
+node_modules
