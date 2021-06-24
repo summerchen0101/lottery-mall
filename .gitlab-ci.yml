@@ -37,7 +37,7 @@ build-master:
   stage: build
   #when: manual
   script:
-    - export API_BASE_URL=https://shop-pro.com/api
+    - export API_BASE_URL=https://api.shop-pro.com
     - npm install
     - npm run build
   only:
