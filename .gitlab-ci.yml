@@ -7,6 +7,8 @@ build-dev:
     - npm run build
   only:
     - dev
+  tags:
+    - blockchain
   artifacts:
     expire_in: 1 week
     paths:
@@ -20,6 +22,8 @@ deploy-dev:
     - ssh $SERVER_TOKEN_TEST -p2222 -t "/home/laradock/.nvm/versions/node/v13.13.0/bin/pm2 restart lottery-mall-mobile"
   only:
     - dev
+  tags:
+    - blockchain
   before_script:
     - apk add --no-cache rsync openssh
     - mkdir -p ~/.ssh
@@ -28,6 +32,22 @@ deploy-dev:
     - echo "$SSH_KNOWN_HOSTS_TEST" > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
+build-master:
+  image: node:12
+  stage: build
+  #when: manual
+  script:
+    - export API_BASE_URL=https://shop-pro.com/api
+    - npm install
+    - npm run build
+  only:
+    - master
+  tags:
+    - blockchain
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - ./
 
 deploy-master:
   image: alpine
