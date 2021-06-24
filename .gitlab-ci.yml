@@ -6,7 +6,7 @@ build-dev:
     - npm install
     - npm run build
   only:
-    - master
+    - dev
   artifacts:
     expire_in: 1 week
     paths:
@@ -19,7 +19,7 @@ deploy-dev:
     - rsync -rv --exclude-from 'deploy/exclude.txt' --delete -e 'ssh -p 2222' ./ $SERVER_TOKEN_TEST:${WEB_ROOT}lottery/${CI_PROJECT_NAME}
     - ssh $SERVER_TOKEN_TEST -t "/home/laradock/.nvm/versions/node/v13.13.0/bin/pm2 restart lottery-mall-mobile"
   only:
-    - master
+    - dev
   before_script:
     - apk add --no-cache rsync openssh
     - mkdir -p ~/.ssh
