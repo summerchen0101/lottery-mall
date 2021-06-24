@@ -6,7 +6,7 @@ module.exports = {
     apiBaseUrl: process.env.API_BASE_URL,
   },
   images: {
-    domains: ['mall.thlin168.com', 'mall-api.ms5149514.com'],
+    domains: [process.env.SITE_DOMAIN],
   },
   async rewrites() {
     return [
