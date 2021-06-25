@@ -27,7 +27,7 @@ const useRequest = () => {
             return (status >= 200 && status < 300) || status === 422
           },
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token ? `Bearer ${token}` : undefined,
           },
           ...config,
         })
