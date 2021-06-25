@@ -3,7 +3,6 @@ build-dev:
   stage: build
   script:
     - export API_BASE_URL=https://mall-api.ms5149514.com
-    - export SITE_DOMAIN=mall.thlin168.com
     - npm install
     - npm run build
   only:
@@ -39,7 +38,6 @@ build-master:
   #when: manual
   script:
     - export API_BASE_URL=https://api.shop-pro.cc
-    - export SITE_DOMAIN=shop-pro.cc
     - npm install
     - npm run build
   only:
