@@ -54,7 +54,7 @@ export default function FloatNav({ showAppBtn, userInfo }: FloatNavProps) {
         // as={BiUser}
         onClick={() => openServiceWin(serviceLink, userInfo)}
       >
-        <Image src="./img/ic-service.png"></Image>
+        <Image src="/img/ic-service.png"></Image>
       </IconButton>
     </VStack>
   )
