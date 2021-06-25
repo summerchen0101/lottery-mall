@@ -72,7 +72,7 @@ function BettingPopup() {
   }
 
   useEffect(() => {
-    chart && setOdds(+_.takeRight(chart)?.[0]?.profit)
+    chart && setOdds(+_.takeRight(chart)?.[0]?.profit || 0)
   }, [chart])
 
   // 结帐倒数时间即关闭弹窗

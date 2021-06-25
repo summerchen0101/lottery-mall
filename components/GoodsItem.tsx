@@ -18,7 +18,9 @@ function GoodsItem({
     () => item.chart.map((t) => ({ ...t, profit: +t.profit })),
     [item.chart],
   )
-  const lastOdds = useMemo(() => +chart?.[chart.length - 2]?.profit, [chart])
+  const lastOdds = useMemo(() => +chart?.[chart.length - 2]?.profit || 0, [
+    chart,
+  ])
   const diff = useMemo(() => numeral(item.odds).subtract(lastOdds).value(), [
     lastOdds,
   ])
