@@ -6,7 +6,7 @@ module.exports = {
     apiBaseUrl: process.env.API_BASE_URL,
   },
   images: {
-    domains: ['mall.thlin168.com', 'shop-pro.cc'],
+    domains: ['mall.thlin168.com', 'shop-pro.cc', 'lottery-mall.vercel.app'],
   },
   async rewrites() {
     return [
