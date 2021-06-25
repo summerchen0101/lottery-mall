@@ -7,6 +7,7 @@ module.exports = {
   },
   images: {
     domains: [
+      'test.thlin168.com',
       'mall.thlin168.com',
       'mall-api.ms5149514.com',
       'shop-pro.cc',
