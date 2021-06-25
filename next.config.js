@@ -10,8 +10,8 @@ module.exports = {
       'test.thlin168.com',
       'mall.thlin168.com',
       'mall-api.ms5149514.com',
+      'api.shop-pro.cc',
       'shop-pro.cc',
-      'lottery-mall.vercel.app',
     ],
   },
   async rewrites() {
