@@ -1,3 +1,11 @@
+stages:
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
 build-dev:
   image: node:12
   stage: build
