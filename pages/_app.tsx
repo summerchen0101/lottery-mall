@@ -1,6 +1,5 @@
 import BetInfoProvider from '@/context/BetInfoProvider'
 import GlobalProvider from '@/context/GlobalProvider'
-import PaginationProvider from '@/context/PaginationProvider'
 import PopupProvider from '@/context/PopupContext'
 import theme from '@/lib/theme'
 import '@/style/global.scss'
@@ -13,11 +12,9 @@ const MyApp = ({ Component, props }) => {
     <GlobalProvider>
       <ChakraProvider theme={theme}>
         <PopupProvider>
-          <PaginationProvider>
-            <BetInfoProvider>
-              <Component {...props} />
-            </BetInfoProvider>
-          </PaginationProvider>
+          <BetInfoProvider>
+            <Component {...props} />
+          </BetInfoProvider>
         </PopupProvider>
       </ChakraProvider>
     </GlobalProvider>
